@@ -10,7 +10,7 @@ jobs:
  Build:
   runs-on: ubuntu-latest
   steps:
-   - uses: actions/checkout
+   - uses: actions/checkout@v3
 
    - name: Install Packages
      run: npm install
@@ -20,7 +20,7 @@ jobs:
  Test:
   runs-on: ubuntu-latest
   steps:
-   - uses: actions/checkout
+   - uses: actions/checkout@v3
 
    - name: Install Packages
      run: npm install
