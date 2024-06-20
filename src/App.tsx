@@ -1,10 +1,10 @@
 import React from 'react';
-import image from "./asset/images/home-page-dealflow-4.jpg"
-import { LazyLoadImage } from "react-lazy-load-image-component"
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import AppRoutes from './Routes';
 
 const App: React.FC = () => (
   <div className="">
-    
+    <AppRoutes />
   </div>
 );
 

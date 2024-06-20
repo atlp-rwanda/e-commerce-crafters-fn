@@ -1,11 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
+import useAuthHeader from 'react-auth-kit/hooks/useAuthUser';
+import { Outlet, useNavigate } from 'react-router-dom';
+import Logout from '../services/Logout';
+import Sidebar from '../Components/dashboard/Sidebar';
 
-const admin = () => {
+function Admin() {
+  const navigate = useNavigate();
+  const userData: any = useAuthUser();
+
+  useEffect(() => {
+    if (userData.role !== 'admin') {
+      navigate(`/${userData.role}`);
+    }
+  }, [navigate]);
+  const handelLogout = Logout();
   return (
-    <div>
-      
+    <div className="w-full h-screen flex flex-row">
+      <Sidebar />
+      <Outlet />
+
     </div>
-  )
+  );
 }
 
-export default admin
+export default Admin;
