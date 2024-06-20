@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
               </p>
             </div>
             <div className="footer-links max-w-md">
-              <p className='mb-6 font-bold'>Links</p>
+              <p className='mb-10 font-bold'>Links</p>
               <ul className="grid grid-cols-2 gap-2">
                 <li><a href="/" className="text-white hover:underline">Home</a></li>
                 <li><a href="/" className="text-white hover:underline">Products</a></li>
@@ -26,7 +26,7 @@ const Footer: React.FC = () => {
               </ul>
             </div>
             <div className="footer-contact">
-              <p className='mb-6 font-bold'>Contact</p>
+              <p className='mb-10 font-bold'>Contact</p>
               <p>Tel: 07******10</p>
               <p>Email: <a href="mailto:team.crafters@gmail.com" className="text-white hover:underline">team.crafters@gmail.com</a></p>
             </div>
