@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import axios from 'axios';
 import React, { useState } from 'react';
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
