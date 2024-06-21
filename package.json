@@ -47,7 +47,10 @@
     "@babel/preset-typescript": "^7.24.7",
     "@types/dotenv": "^8.2.0",
     "@types/jwt-decode": "^3.1.0",
+<<<<<<< HEAD
     "@types/react-loader-spinner": "^4.0.0",
+=======
+>>>>>>> 1a6a9586f92c62ed2248a9d48cb2ea374325e3a8
     "@typescript-eslint/eslint-plugin": "^7.13.1",
     "@typescript-eslint/parser": "^7.13.1",
     "babel-loader": "^9.1.3",
