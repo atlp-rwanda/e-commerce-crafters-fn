@@ -5,7 +5,7 @@ const webpack = require('webpack');
 
 module.exports = (env) => {
   const isProduction = env.NODE_ENV === 'production';
-  const dotenvFilename = isProduction ? '.env.production' : '.env.development';
+  const dotenvFilename = '.env';
 
   return {
     entry: './src/index.tsx',
@@ -50,6 +50,7 @@ module.exports = (env) => {
       }),
       new Dotenv({
         path: dotenvFilename,
+        systemvars: true
       }),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(env.NODE_ENV),
