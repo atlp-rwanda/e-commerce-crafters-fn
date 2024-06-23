@@ -29,15 +29,10 @@ const AuthApiSlice = apiSlice.injectEndpoints({
         url: `/verfiy-email?token=${token}`,
       }),
     }),
-    selectProducts: builder.query<any[], void>({
-      query: () => ({
-        url: '/readAllProducts',
-      }),
-    }),
   }),
 });
 
 export const {
-  useLoginMutation, useVerifyCodeMutation, useRegisterMutation, useVerifyEmailQuery, useSelectProductsQuery,
+  useLoginMutation, useVerifyCodeMutation, useRegisterMutation, useVerifyEmailQuery
 } = AuthApiSlice;
 export default AuthApiSlice;

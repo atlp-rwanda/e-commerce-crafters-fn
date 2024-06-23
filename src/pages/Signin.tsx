@@ -16,6 +16,7 @@ const Signin: React.FC = () => {
   const [err, setErr] = useState<boolean>(false);
 
   const [login, { isLoading }] = useLoginMutation();
+
   const validationFunc = (e: any) => {
     e.preventDefault();
     if (email.trim() === '') {
@@ -78,7 +79,7 @@ const Signin: React.FC = () => {
   };
 
   const loginWithGoogle = () => {
-    const googleAuthUrl = 'https://e-commerce-crafters-bn-6aiy.onrender.com/auth/google';
+    const googleAuthUrl = `${process.env.GOOGLE_AUTH_URL}`
     window.location.href = googleAuthUrl;
   };
   return (

@@ -57,7 +57,7 @@ const SignUp: React.FC = () => {
   };
 
   const loginWithGoogle = () => {
-    const googleAuthUrl = 'https://e-commerce-crafters-bn-6aiy.onrender.com/auth/google';
+    const googleAuthUrl = `${process.env.GOOGLE_AUTH_URL}`;
     window.open(googleAuthUrl, '_self');
   };
   return (
@@ -113,6 +113,10 @@ const SignUp: React.FC = () => {
               </defs>
             </svg>
             <span className="text-[#828282] font-[400] text-[18px]">Sign Up with Google</span>
+          </div>
+            <div className="flex flex-row gap-[4px] items-center justify-center">
+            <span className=" text-black">Already have an account? </span>
+            <a href="/login" className=" text-secondary"> login</a>
           </div>
         </form>
 
