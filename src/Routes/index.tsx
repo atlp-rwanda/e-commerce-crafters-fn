@@ -22,6 +22,7 @@ import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Singlepage from "../pages/singlePage";
 
+
 const AppRoutes: React.FC = () => (
   <div>
     <Routes>
@@ -52,5 +53,6 @@ const AppRoutes: React.FC = () => (
     </Routes>
   </div>
 );
+
 
 export default AppRoutes;
