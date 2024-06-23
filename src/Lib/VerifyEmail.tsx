@@ -8,9 +8,7 @@ function VerifyEmail() {
   const getQueryParams = (search: string) => new URLSearchParams(search);
   const queryParams = getQueryParams(location.search);
   const token = queryParams.get('token');
-  const {
-    data, isLoading, isError, error,
-  } = useVerifyEmailQuery(token || '');
+  const {data, isLoading, isError, error,} = useVerifyEmailQuery(token || '');
   if (isLoading) {
     return (
       <div className="w-full h-screen flex items-center justify-center">

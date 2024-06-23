@@ -16,6 +16,7 @@ const Signin: React.FC = () => {
   const [err, setErr] = useState<boolean>(false);
 
   const [login, { isLoading }] = useLoginMutation();
+
   const validationFunc = (e: any) => {
     e.preventDefault();
     if (email.trim() === '') {

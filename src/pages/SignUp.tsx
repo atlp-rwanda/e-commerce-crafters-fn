@@ -114,6 +114,10 @@ const SignUp: React.FC = () => {
             </svg>
             <span className="text-[#828282] font-[400] text-[18px]">Sign Up with Google</span>
           </div>
+            <div className="flex flex-row gap-[4px] items-center justify-center">
+            <span className=" text-black">Already have an account? </span>
+            <a href="/login" className=" text-secondary"> login</a>
+          </div>
         </form>
 
       </div>
