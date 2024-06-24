@@ -10,6 +10,7 @@ import VerifyEmail from '../Lib/VerifyEmail';
 import AuthGoogle from '../Lib/authgoogle';
 import AuthOutlet from '@auth-kit/react-router/AuthOutlet'
 import Users from '../pages/users';
+import Singlepage from '../pages/singlePage';
 
 
 const AppRoutes: React.FC = () => {
@@ -21,6 +22,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/2fa" element={<VerifyCode />} />
         <Route path="/verifyemail" element={<VerifyEmail />} />
         <Route path="/authgoogle" element={<AuthGoogle />} />
+        <Route path="/singleproduct" element={<Singlepage />} />
         <Route element={<AuthOutlet fallbackPath='/login' />}>
           <Route path="/admin" element={<Admin />}>
             <Route index element={<Users />} />
@@ -29,6 +31,7 @@ const AppRoutes: React.FC = () => {
 
           </Route>
           <Route path="/buyer" element={<Buyer />} />
+          
           <Route path="/vendor" element={<Seller />} />
         </Route>
       </Routes>
