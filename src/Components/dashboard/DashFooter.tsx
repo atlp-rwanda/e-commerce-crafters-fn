@@ -2,10 +2,10 @@ import React from 'react'
 
 const DashFooter = () => {
   return (
-    <div className=' fixed bg-black md:bg-red-500 text-white  bottom-0 w-full'>
-      Footer
-    </div>
-  )
+    <footer className="bg-gray-100 py-4 text-center text-sm text-gray-600">
+      Crafters Online Shop &copy; 2024
+    </footer>
+  );
 }
 
 export default DashFooter

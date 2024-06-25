@@ -3,7 +3,7 @@ import Logout from '../services/Logout'
 import useAuthUser from "react-auth-kit/hooks/useAuthUser"
 import { Outlet, useNavigate } from 'react-router-dom'
 import Sidebar from '../Components/dashboard/Sidebar'
-import AdminNav from '../Components/dashboard/AdminNav'
+import DashHeader from '../Components/dashboard/AdminHeader'
 import DashFooter from '../Components/dashboard/DashFooter'
 
 const Admin = () => {
@@ -19,7 +19,7 @@ const Admin = () => {
     <div className='w-full h-screen flex flex-row'>
       <Sidebar />
       <div className='flex flex-col flex-grow'>
-        <AdminNav />
+        <DashHeader />
         <div className='flex-grow bg-gray-200 pt-10'>
           <Outlet />
         </div>
