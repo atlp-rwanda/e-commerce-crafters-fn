@@ -107,7 +107,7 @@ const Review: React.FC = () => {
 
   return (
     <div className="p-4 flex justify-center">
-      <div className="w-4/5 py-4">
+      <div className="md:w-4/5 w-full p-5 py-4">
         <h1 className="text-4xl font-extrabold">Review</h1>
         <div className="w-4/5 flex flex-col gap-3 justify-center">
           <div className="flex  pt-4 justify-between">
@@ -128,10 +128,10 @@ const Review: React.FC = () => {
             </div>
           </div>
           {showContent && (
-            <div className="ml-9 md:ml-4 py-4">
-              <div className="bg-[#F9FAFB] mt-7 p-2.5 grid grid-cols-2 justify-between w-3/5 md:w-full">
-                <p className="md:w-3/4 w-fu">How will you rate this product?</p>
-                <div className="mr-4">
+            <div className="ml-9 md:ml-0 py-4">
+              <div className="bg-[#F9FAFB] mt-7 p-2.5 grid md:grid-cols-2 grid-cols-1 justify-between w-3/5 md:w-full">
+                <p className="md:w-3/4 w-full">How will you rate this product?</p>
+                <div className="mr-0 md:mr-4">
                   <StarRating
                     rating={rating}
                     onRatingChange={handleRatingChange}
@@ -159,14 +159,14 @@ const Review: React.FC = () => {
                   onChange={handleInputChange}
                   placeholder="Any feedback you would like to give your account manager..."
                 ></textarea>
-                <button className="bg-blue-900 text-white font-extrabold p-3 w-1/2 rounded-lg ">
+                <button className="bg-blue-900 text-white font-extrabold p-3 md:w-1/2 w-full rounded-lg ">
                   Submit Feedback
                 </button>
               </form>
             </div>
           )}
           {reviews.map((review) => (
-            <div key={review.id} className="grid grid-cols-10  mb-4">
+            <div key={review.id} className="grid grid-cols-10  gap-8 mb-4">
               <div className="col-span-1 flex justify-center items-baseline">
                 <span className="bg-gray-500 rounded-full p-8   w-8 h-8 text-4xl text-center flex justify-center items-center font-bold text-[#C9974C]">
                   {review.id}

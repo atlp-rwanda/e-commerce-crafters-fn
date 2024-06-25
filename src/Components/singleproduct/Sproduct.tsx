@@ -40,7 +40,7 @@ const Sproduct = () => {
       };
     return (
         <div className='flex justify-center md:flex-row flex-col'>
-            <div className='flex justify-center gap-5 md:flex-row w-4/5 flex-col'>
+            <div className='flex justify-center gap-5 md:flex-row md:w-4/5 w=full  flex-col'>
                 <div className="grid grid-cols-1 justify-center p-5 gap-y-5 items-center md:w-[70%]">
                     <div className=' flex justify-center items-center relative'>
                         <img src={selectedImage} alt="Selected product"  className=' min-w-[320px] max-w-[100%]  sm:h-[300px] w-full md:w-[95%]-[80%]: h-[200px] md:h-[400px] object-cover'/>
@@ -77,8 +77,8 @@ const Sproduct = () => {
                     </div>
                    
                 </div>
-                <div className='w-1/3'>
-                <div className='flex flex-col gap-6 mt-10 '>
+                <div className='md:w-1/3 w-full '>
+                <div className='flex flex-col gap-6 p-5 mt-10 '>
                    <h1> <span className=' text-[#E4A951]'>Stock</span> :  <span className=' font-extrabold text-blue-700'>IHAHIRO</span></h1>
                    <h1 className='font-extrabold text-xl'> Rollex watch</h1>
                    <div className='bg-[#D9D9D9] p-2 rounded-md text-sm w-28 text-center font-bold'> 24 IN STOCK</div>
@@ -89,7 +89,7 @@ const Sproduct = () => {
                    </div>
                    <div className='flex gap-4 justify-center'>
 								
-								<div className="flex   gap-4  border-2 justify-around items-center w-1/2 rounded-lg p-2 md:w-2/5 bg-[#F7F7F7] font-bold">
+								<div className="flex   gap-4  border-2 justify-around items-center w-1/2 rounded-lg p-2 md:w-3/5 bg-[#F7F7F7] font-bold">
                                 <h3 className="">Quantity</h3>
 									<div
 										className="countersection textsection"
@@ -105,7 +105,7 @@ const Sproduct = () => {
 										<FontAwesomeIcon icon={faPlus} />
 									</div>
 								</div>
-                                <div className="flex   gap-4   border-2 justify-around items-center w-1/2 rounded-lg p-2 md:w-2/5 bg-[#F7F7F7] font-bold">
+                                <div className="flex   gap-4   border-2 justify-around items-center w-1/2 rounded-lg p-2 md:w-3/5 bg-[#F7F7F7] font-bold">
                                 <h3 className="">size</h3>
 									<div
 										className=" "
