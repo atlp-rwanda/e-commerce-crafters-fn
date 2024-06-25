@@ -1,5 +1,4 @@
 import { configureStore, Action } from '@reduxjs/toolkit';
-import AuthSlice from './features/AuthSlice';
 import { ThunkAction } from 'redux-thunk';
 import productsImagesReducer from './features/ProductsImagesSlice';
 
