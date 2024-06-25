@@ -233,6 +233,11 @@ const Sidebar = () => {
     navigate(data.location);
   };
   const handelLogout = Logout();
+  const handleNavigate = (data: any) => {
+    setActive(data.id);
+    navigate(data.location);
+  };
+  const handelLogout = Logout();
 
   return (
     <div className="flex flex-col gap-[40px] bg-primary p-4">
@@ -315,5 +320,7 @@ const Sidebar = () => {
     </div>
   );
 };
+
+export default Sidebar;
 
 export default Sidebar;

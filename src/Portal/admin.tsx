@@ -10,11 +10,11 @@ const Admin = () => {
   const navigate = useNavigate()
   const userData: any = useAuthUser()
   useEffect(() => {
-    if (userData.role !== "admin") {
-      navigate(`/${userData.role}`)
-      return
+    if (userData.role !== 'admin') {
+      navigate(`/${userData.role}`);
     }
-  }, [navigate])
+  }, [navigate]);
+  const handelLogout = Logout();
   return (
     <div className='w-full h-screen flex flex-row'>
       <Sidebar />
@@ -26,7 +26,7 @@ const Admin = () => {
         <DashFooter />
       </div>
     </div>
-  )
+  );
 }
 
-export default Admin
+export default Admin;
