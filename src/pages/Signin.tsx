@@ -58,7 +58,7 @@ const Signin: React.FC = () => {
             navigate('/buyer');
           } else if (response.user.role === 'vendor') {
             navigate('/vendor');
-          } else if (response.user.role = 'admin') {
+          } else if (response.user.role === 'admin') {
             navigate('/admin');
           }
         } else {
