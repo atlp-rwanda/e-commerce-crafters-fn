@@ -9,7 +9,8 @@ import VerifyCode from '../pages/VerifyCode';
 import VerifyEmail from '../Lib/VerifyEmail';
 import AuthGoogle from '../Lib/authgoogle';
 import AuthOutlet from '@auth-kit/react-router/AuthOutlet'
-import Users from '../pages/users';
+import Users from '../pages/Users';
+import Products from '../pages/productsPage';
 
 
 const AppRoutes: React.FC = () => {
@@ -21,6 +22,7 @@ const AppRoutes: React.FC = () => {
         <Route path="/2fa" element={<VerifyCode />} />
         <Route path="/verifyemail" element={<VerifyEmail />} />
         <Route path="/authgoogle" element={<AuthGoogle />} />
+        <Route path="/products" element={<Products />} />
         <Route element={<AuthOutlet fallbackPath='/login' />}>
           <Route path="/admin" element={<Admin />}>
             <Route index element={<Users />} />

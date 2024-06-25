@@ -1,13 +1,17 @@
-import { configureStore } from '@reduxjs/toolkit';
-import AuthSlice from './features/AuthSlice';
-import { apiSlice } from './features/ApiSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import categoryReducer from "./features/productsPage/categorySlice";
+import paginationReducer from "./features/productsPage/paginationSlice";
+import { apiSlice } from "./features/ApiSlice";
 
 export const store = configureStore({
-    reducer: {
-      [apiSlice.reducerPath]:apiSlice.reducer
-    },
-    middleware: (getDefaultMiddelware)=> getDefaultMiddelware().concat(apiSlice.middleware)
-  });
-  
-  export type RootState = ReturnType<typeof store.getState>;
-  export type AppDispatch = typeof store.dispatch;
+  reducer: {
+    [apiSlice.reducerPath]: apiSlice.reducer,
+    category: categoryReducer,
+    pagination: paginationReducer,
+  },
+  middleware: (getDefaultMiddelware) =>
+    getDefaultMiddelware().concat(apiSlice.middleware),
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
