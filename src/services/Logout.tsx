@@ -5,7 +5,7 @@ const Logout = () => {
     const signOut = useSignOut()
    return  ()=>{
         signOut()
-        window.location.href="login"
+        window.location.href="/login"
     }
 }
 

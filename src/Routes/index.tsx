@@ -9,7 +9,11 @@ import VerifyCode from '../pages/VerifyCode';
 import VerifyEmail from '../Lib/VerifyEmail';
 import AuthGoogle from '../Lib/authgoogle';
 import AuthOutlet from '@auth-kit/react-router/AuthOutlet'
-import Users from '../pages/users';
+import Users from '../pages/Users';
+import AdminHome from '../pages/Admin/AdminHome';
+import Sellers from '../pages/Sellers';
+import Analytics from '../pages/Analytics';
+import Settings from '../pages/Settings';
 
 
 const AppRoutes: React.FC = () => {
@@ -21,18 +25,19 @@ const AppRoutes: React.FC = () => {
         <Route path="/2fa" element={<VerifyCode />} />
         <Route path="/verifyemail" element={<VerifyEmail />} />
         <Route path="/authgoogle" element={<AuthGoogle />} />
-        <Route element={<AuthOutlet fallbackPath='/login' />}>
+        <Route element={<AuthOutlet fallbackPath="/login" />}>
           <Route path="/admin" element={<Admin />}>
-            <Route index element={<Users />} />
-            <Route path='users' element={<Users />} />
-    
-
+            <Route index element={<AdminHome />} />
+            <Route path="users" element={<Users />} />
+            <Route path="sellers" element={<Sellers />} />
+            <Route path="analytics" element={<Analytics />} />
+            <Route path="settings" element={<Settings />} />
+            
           </Route>
           <Route path="/buyer" element={<Buyer />} />
           <Route path="/vendor" element={<Seller />} />
         </Route>
       </Routes>
-
     </div>
   );
 }
