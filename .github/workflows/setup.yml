@@ -1,4 +1,4 @@
-name: Setup and coverage bagde
+name: Setup and coverage badge
 
 on:
   push:
@@ -7,11 +7,11 @@ on:
   pull_request:
     branches:
       - ft-analytics
-  workflow_dispatch:    
+  workflow_dispatch:
 
 jobs:
   build:
-   runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -22,7 +22,7 @@ jobs:
         run: npm run build
 
   test-and-coverage:
-   runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -31,7 +31,15 @@ jobs:
 
       - name: Run Tests with Coverage
         run: npm test -- --coverage
-        
+
+      - name: List coverage directory
+        run: ls -la coverage
+
+      - name: Upload Coverage to Codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
       - name: List coverage directory
         run: ls -la coverage  
 
