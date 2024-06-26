@@ -24,6 +24,9 @@ jobs:
 
       - name: Run Tests with Coverage
         run: npm test -- --coverage
+        
+      - name: List coverage directory
+        run: ls -la coverage  
 
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v2
