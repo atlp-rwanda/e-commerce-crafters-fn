@@ -7,7 +7,7 @@ describe("Test component", () => {
     render(<Check />);
 
     const heading = screen.getByText(
-      /If you want to part of the program click button below/i
+      /If you want to part of the program click button belows/i
     );
     expect(heading).toBeTruthy();
 
