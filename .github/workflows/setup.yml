@@ -3,10 +3,10 @@ name: Setup and coverage bagde
 on:
   push:
     branches:
-      - feature-branch
+      - ft-analytics
   pull_request:
     branches:
-      - feature-branch
+      - ft-analytics
   workflow_dispatch:    
 
 jobs:
