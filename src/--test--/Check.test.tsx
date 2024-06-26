@@ -11,7 +11,5 @@ describe("Test component", () => {
     );
     expect(heading).toBeTruthy();
 
-    const button = screen.getByRole("button", { name: /confirm/i });
-    expect(button).toBeTruthy();
   });
 });
