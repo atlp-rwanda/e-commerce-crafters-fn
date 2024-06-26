@@ -1,3 +1,4 @@
+
 import { configureStore, Action } from '@reduxjs/toolkit';
 import { ThunkAction } from 'redux-thunk';
 import categoryReducer from './productsPage/categorySlice';
@@ -9,6 +10,9 @@ import { productReducer } from './Action/Reducer/singleproductSlice';
 import contactReducer from './HomePage/contactSlice';
 import productsImagesReducer from './HomePage/ProductsImagesSlice';
 import popularProductsReducer from './HomePage/PopularProductsSlice';
+import AuthSlice from "./features/AuthSlice";
+import OrderStatusSlice from "./features/analyticSlice";
+
 
 export const store = configureStore({
   reducer: {
@@ -21,11 +25,17 @@ export const store = configureStore({
     product: productReducer,
     popularProducts: popularProductsReducer,
     contact: contactReducer,
+
+    orderStatus: OrderStatusSlice,
+
   },
   middleware: (getDefaultMiddelware) =>
     getDefaultMiddelware().concat(apiSlice.middleware),
 });
-  
+
   export type RootState = ReturnType<typeof store.getState>;
   export type AppDispatch = typeof store.dispatch;
   export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>;
+
+
+

@@ -1,6 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import AuthOutlet from "@auth-kit/react-router/AuthOutlet";
+
 import Signin from "../pages/Signin";
 import SignUp from "../pages/SignUp";
 import Admin from "../Portal/admin";
@@ -10,6 +11,7 @@ import VerifyCode from "../pages/VerifyCode";
 import VerifyEmail from "../Lib/VerifyEmail";
 import AuthGoogle from "../Lib/authgoogle";
 import Users from "../pages/Users";
+
 import Sellers from "../pages/Sellers";
 import Analytics from "../pages/Analytics";
 import Settings from "../pages/Settings";
@@ -21,7 +23,6 @@ import { OrderTrackingPage } from "../pages/orderTrackingPage";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Singlepage from "../pages/singlePage";
-
 
 const AppRoutes: React.FC = () => (
   <div>
@@ -53,6 +54,5 @@ const AppRoutes: React.FC = () => (
     </Routes>
   </div>
 );
-
 
 export default AppRoutes;
