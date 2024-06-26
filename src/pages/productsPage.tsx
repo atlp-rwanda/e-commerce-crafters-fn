@@ -9,7 +9,7 @@ import ProductCard from "../Components/ProductsPage/productCard";
 import Pagination from "../Components/ProductsPage/pagination";
 
 interface Product {
-  id: string;
+  productId: string;
   name: string;
   price: number;
   image: string;
@@ -149,7 +149,9 @@ const Products = () => {
             </ul>
           </div>
 
-          <div className=" grid grid-cols-3 gap-[30px] w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] w-full">
+
+
             {isLoading ? (
               "Loading..."
             ) : filteredProducts?.length === 0 ? (
@@ -161,7 +163,7 @@ const Products = () => {
             ) : (
               <>
                 {currentProducts?.map((product: Product, index: number) => {
-                  return <ProductCard key={product.id} product={product} />;
+                  return <ProductCard key={product.productId} product={product} />;
                 })}
               </>
             )}

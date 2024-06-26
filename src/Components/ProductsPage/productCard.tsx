@@ -1,7 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 interface Product {
-  id: string;
+  productId: string;
   name: string;
   price: number;
   image: string;
@@ -13,8 +14,17 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+  const navigate = useNavigate();
+
+  const handleCardClick = () => {
+    navigate(`/product/${product.productId}`);
+  };
+
   return (
-    <div className="flex flex-col w-full gap-[10px] lift-on-hover transition-transform duration-300 cursor-pointer fade-in">
+    <div
+      className="flex flex-col w-full gap-[10px] lift-on-hover transition-transform duration-300 cursor-pointer fade-in"
+      onClick={handleCardClick}
+    >
       <div className="w-full h-[30vh] rounded-[12px] ">
         <img
           src={product.image}
