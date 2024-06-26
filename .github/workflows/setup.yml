@@ -3,11 +3,11 @@ name: Setup and coverage badge
 on:
   push:
     branches:
-      - ft-analytics
+      - '*'
   pull_request:
     branches:
-      - ft-analytics
-  workflow_dispatch:
+      - '*'
+
 
 jobs:
   build:
@@ -40,10 +40,4 @@ jobs:
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
-      - name: List coverage directory
-        run: ls -la coverage  
 
-      - name: Upload Coverage to Codecov
-        uses: codecov/codecov-action@v2
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
