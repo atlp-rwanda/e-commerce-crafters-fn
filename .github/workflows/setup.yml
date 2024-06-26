@@ -1,6 +1,12 @@
 name: Setup and coverage bagde
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - feature-branch
+  pull_request:
+    branches:
+      - feature-branch
 
 jobs:
   build:
