@@ -13,8 +13,11 @@ describe("Test component", () => {
 
     const button = screen.getByRole("button", { name: /confirm/i });
     expect(button).toBeTruthy();
+  });
 
+  test("Greetings", () => {
+    render(<Check />);
+    const secondHeading = screen.getByText(/hello there/i);
+    expect(secondHeading).toBeTruthy();
   });
 });
-
-
