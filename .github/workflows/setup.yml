@@ -4,7 +4,7 @@ on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+  runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
@@ -15,7 +15,7 @@ jobs:
         run: npm run build
 
   test-and-coverage:
-    runs-on: ubuntu-latest
+  runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
 
