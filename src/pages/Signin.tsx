@@ -67,13 +67,16 @@ const Signin: React.FC = () => {
         }
       }
     } catch (error: any) {
-      if (error.data.message === 'Invalid credentials. Try again') {
+      if (error.data && error.data.message === 'Invalid credentials. Try again') {
         setError('Invalid credentials. Try again');
         setErr(true);
       }
-      if (error.data.message === 'User not found') {
+      if (error.data && error.data.message === 'User not found') {
         setError('Invalid credentials. Try again');
         setErr(true);
+      } else{
+        setError("Something is wrong , Try again later")
+        setErr(false)
       }
     }
   };
@@ -84,7 +87,6 @@ const Signin: React.FC = () => {
   };
   return (
     <div className="w-full h-screen flex flex-col justify-between items-center ">
-
       <div className="flex flex-col gap-[8px] items-center w-full md:w-[60%] lg:w-[40%]  p-2">
         <svg width="150" height="49" viewBox="0 0 150 49" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clipPath="url(#clip0_459_1870)">
