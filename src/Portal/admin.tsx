@@ -28,7 +28,7 @@ const Admin = () => {
         <DashFooter />
       </div>
     </div>
-  );
+  )
 }
 
 export default Admin;
