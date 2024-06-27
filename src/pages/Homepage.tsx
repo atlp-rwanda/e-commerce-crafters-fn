@@ -5,6 +5,7 @@ import ContactSection from '../Components/Homepage/ContactSection';
 import HeroSection from '../Components/Homepage/HeroSection';
 import BestDeals from '../Components/Homepage/BestDeals';
 import AboutCrafters from '../Components/Homepage/AboutCrafters'
+import PopularProducts from '../Components/Homepage/PopularProducts';
 
 
 const Homepage: React.FC = () => {
@@ -12,6 +13,7 @@ const Homepage: React.FC = () => {
     <div>
       <Header />
       <HeroSection />
+      <PopularProducts />
       <AboutCrafters />
       <BestDeals />
       <ContactSection />
