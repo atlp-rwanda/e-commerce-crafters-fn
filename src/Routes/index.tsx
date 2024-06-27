@@ -10,6 +10,7 @@ import VerifyCode from '../pages/VerifyCode';
 import VerifyEmail from '../Lib/VerifyEmail';
 import AuthGoogle from '../Lib/authgoogle';
 import Users from '../pages/Users';
+import { OrderTrackingPage } from '../pages/orderTrackingPage';
 
 
 const AppRoutes: React.FC = () => (
@@ -30,6 +31,7 @@ const AppRoutes: React.FC = () => (
         <Route path="/vendor" element={<Seller />} />
 
       </Route>
+      <Route path='/order-tracking' element={<OrderTrackingPage/>}/>
     </Routes>
 
   </div>
