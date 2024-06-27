@@ -18,6 +18,7 @@ interface Product {
 
 const Products = () => {
   const dispatch = useDispatch();
+  const searchTerm = useSelector((state: RootState) => state.search);
   const activeCategory: string | null = useSelector(
     (state: RootState) => state.category.activeCategory
   );
@@ -35,9 +36,13 @@ const Products = () => {
 
   const filteredProducts = activeCategory
     ? products?.filter(
-        (product: Product) => product.category === activeCategory
+        (product: Product) =>
+          product.category === activeCategory &&
+          product.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
-    : products;
+    : products?.filter((product: Product) =>
+        product.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
 
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -112,26 +117,26 @@ const Products = () => {
     <div className="flex flex-col">
       <Navbar />
       <div className="flex flex-col gap-[20px] px-10 p-6">
-        <div className="flex flex-row justify-between items-center">
+        <div className="flex flex-col-reverse gap-4 justify-between items-center md:flex-row">
           <div className="flex flex-row gap-[14px] items-center font-outfit">
             <span
-              className="text-[18px] text-gray-400 hover:text-primary cursor-pointer"
+              className="text-base text-gray-400 hover:text-primary cursor-pointer md:text-[18px]"
               onClick={() => dispatch(setActiveCategory(null))}
             >
               Products
             </span>
             <span className="text-black font-[800]">/</span>
-            <span className="text-black font-[800]">
+            <span className="text-base text-black font-[800] md:text-[18px]">
               {activeCategory || "All Products"}
             </span>
           </div>
           <Search />
         </div>
 
-        <div className="flex flex-row gap-[20px]">
-          <div className="flex flex-col gap-[10px] w-1/4">
+        <div className="flex flex-col gap-[20px] md:flex-row">
+          <div className="flex flex-col gap-[10px] w-full md:w-1/4">
             <h1 className="text-[16px] font-[700]">Categories</h1>
-            <ul className="flex flex-col gap-[4px]">
+            <ul className="flex gap-4 flex-row overflow-auto md:flex-col gap-2 custom-scrollbar">
               {categories.map((item) => {
                 const isActive = activeCategory === item.value;
                 return (
@@ -149,9 +154,7 @@ const Products = () => {
             </ul>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-[30px] w-full">
-
-
+          <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-[30px] w-full ">
             {isLoading ? (
               "Loading..."
             ) : filteredProducts?.length === 0 ? (
@@ -163,7 +166,9 @@ const Products = () => {
             ) : (
               <>
                 {currentProducts?.map((product: Product, index: number) => {
-                  return <ProductCard key={product.productId} product={product} />;
+                  return (
+                    <ProductCard key={product.productId} product={product} />
+                  );
                 })}
               </>
             )}

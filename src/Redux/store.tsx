@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import categoryReducer from "./features/productsPage/categorySlice";
 import paginationReducer from "./features/productsPage/paginationSlice";
+import searchReducer from "./features/productsPage/searchSlice";
 import { apiSlice } from "./features/ApiSlice";
 
 export const store = configureStore({
@@ -8,6 +9,7 @@ export const store = configureStore({
     [apiSlice.reducerPath]: apiSlice.reducer,
     category: categoryReducer,
     pagination: paginationReducer,
+    search: searchReducer
   },
   middleware: (getDefaultMiddelware) =>
     getDefaultMiddelware().concat(apiSlice.middleware),
