@@ -14,11 +14,13 @@ import Sellers from '../pages/Sellers';
 import Analytics from '../pages/Analytics';
 import Settings from '../pages/Settings';
 import AdminHome from '../pages/Admin/AdminHome';
+import Homepage from '../pages/Homepage';
 
 
 const AppRoutes: React.FC = () => (
   <div>
     <Routes>
+      <Route path="" element={<Homepage />} />
       <Route path="/login" element={<Signin />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/2fa" element={<VerifyCode />} />
