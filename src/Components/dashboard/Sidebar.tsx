@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Logout from "../../services/Logout";
 
 const Sidebar = () => {
+  const location = useLocation();
+  const pathName = location.pathname
   const navigate = useNavigate();
   const [active, setActive] = useState<string>("001");
   const Navlinks = [
@@ -235,7 +237,7 @@ const Sidebar = () => {
   const handelLogout = Logout();
 
   return (
-    <div className="flex flex-col gap-[40px] bg-primary p-4">
+    <div className="fixed h-[100vh] flex flex-col gap-[40px] bg-primary p-4 w-[15%]">
       <div>
         <svg
           width="150"
@@ -280,7 +282,7 @@ const Sidebar = () => {
               onClick={() => handleNavigate(item)}
               key={index}
               className={` cursor-pointer flex flex-row gap-[10px] items-center p-2 rounded-[12px] ${
-                active === item.id ? "bg-secondary" : ""
+                pathName === item.location    ? "bg-secondary" : ""
               }`}
             >
               {item.icon}

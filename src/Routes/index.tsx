@@ -13,6 +13,7 @@ import Users from '../pages/Users';
 import Sellers from '../pages/Sellers';
 import Analytics from '../pages/Analytics';
 import Settings from '../pages/Settings';
+import AdminHome from '../pages/Admin/AdminHome';
 
 
 const AppRoutes: React.FC = () => (
@@ -25,7 +26,7 @@ const AppRoutes: React.FC = () => (
       <Route path="/authgoogle" element={<AuthGoogle />} />
       <Route element={<AuthOutlet fallbackPath="/login" />}>
         <Route path="/admin" element={<Admin />}>
-          <Route index element={<Users />} />
+          <Route index element={<AdminHome />} />
           <Route path="users" element={<Users />} />
           <Route path="sellers" element={<Sellers />} />
           <Route path="analytics" element={<Analytics />} />

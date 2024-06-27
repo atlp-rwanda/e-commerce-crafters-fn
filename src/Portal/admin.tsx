@@ -14,13 +14,15 @@ const Admin = () => {
       navigate(`/${userData.role}`);
     }
   }, [navigate]);
-  const handelLogout = Logout();
   return (
-    <div className='w-full h-screen flex flex-row'>
-      <Sidebar />
-      <div className='flex flex-col flex-grow'>
+    <div className="w-full h-screen flex flex-row">
+      <div className='w-[15%] relative flex'>
+        <Sidebar />
+      </div>
+
+      <div className="flex flex-col w-[85%]">
         <DashHeader />
-        <div className='flex-grow bg-gray-200 pt-10'>
+        <div className="flex-grow bg-gray-100 pt-[20vh]">
           <Outlet />
         </div>
         <DashFooter />

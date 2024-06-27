@@ -1,9 +1,14 @@
 import React from "react";
-import AdminCard from "../../Components/dashboard/AdminCard";
+import WeeklyReport from "../../Components/dashboard/analytics/WeeklyReport";
+import AdminHeader from "../../Components/dashboard/AdminHeader";
 
 function AdminHome() {
   return (
-      <div className=" font-bold text-lg text-center">Admin Home Page</div>
+    <>
+      <div className="">
+        <WeeklyReport />
+      </div>
+    </>
   );
 }
 
