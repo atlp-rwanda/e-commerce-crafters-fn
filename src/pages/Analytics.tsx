@@ -39,7 +39,6 @@ const Analytics: React.FC = () => {
 
   return (
     <div className="font-poppins">
-      <h1>Order Statuses:</h1>
       <OrderStatus statusCounts={statusCounts} />
       {/* <SellingReport/> */}
     </div>
