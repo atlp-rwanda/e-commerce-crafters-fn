@@ -18,17 +18,24 @@ import Homepage from "../pages/Homepage";
 import Products from "../pages/ProductsPage";
 import SingleProduct from "../pages/SingleProduct";
 import { OrderTrackingPage } from "../pages/orderTrackingPage";
+import Cart from "../pages/Cart";
+import Checkout from "../pages/Checkout";
+import Singlepage from "../pages/singlePage";
 
 const AppRoutes: React.FC = () => (
   <div>
     <Routes>
       <Route path="" element={<Homepage />} />
       <Route path="/login" element={<Signin />} />
+      <Route path="/checkout" element={<Checkout />} />
+      <Route path="/cart" element={<Cart />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/2fa" element={<VerifyCode />} />
       <Route path="/verifyemail" element={<VerifyEmail />} />
       <Route path="/authgoogle" element={<AuthGoogle />} />
       <Route path="/products" element={<Products />} />
+      <Route path="/singleproduct" element={<Singlepage />} />
+
       <Route path="/product/:id" element={<SingleProduct />} />
       <Route path="/order-tracking" element={<OrderTrackingPage />} />
       <Route element={<AuthOutlet fallbackPath="/login" />}>
