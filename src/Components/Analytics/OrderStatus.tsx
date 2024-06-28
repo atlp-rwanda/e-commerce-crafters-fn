@@ -13,9 +13,17 @@ interface OrderStatusProps {
 }
 
 const OrderStatus: React.FC<OrderStatusProps> = ({ statusCounts }) => {
-  const colors = ["#FFC632", "#ED3333", "#17BF6B"];
+  const colors = ["#FFC632", "#17BF6B", "#ED3333"];
 
-  const data = Object.entries(statusCounts).map(([status, value], index) => ({
+
+  let statusCount = {
+    pending: statusCounts.pending,
+    delivered: statusCounts.delivered,
+    cancelled: statusCounts.cancelled,
+  };
+  console.log(statusCount);
+
+  const data = Object.entries(statusCount).map(([status, value], index) => ({
     name: status,
     value,
     color: colors[index % colors.length],
@@ -39,7 +47,7 @@ const OrderStatus: React.FC<OrderStatusProps> = ({ statusCounts }) => {
                 data={data}
                 innerRadius={"60"}
                 outerRadius={"80"}
-                paddingAngle={5}
+                paddingAngle={0}
                 dataKey="value"
               >
                 {data.map((item) => (
