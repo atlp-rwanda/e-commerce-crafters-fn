@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import logo from "../../asset/images/logo1.png";
 import i18n from "../../Lib/i18n";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 const Header: React.FC = () => {
   let currentLanguage = localStorage.getItem("lng") || "ENG";
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -33,9 +34,9 @@ const Header: React.FC = () => {
             </a>
           </li>
           <li>
-            <a href="/" className="hover:text-gray-300">
+            <Link to='/products' className="hover:text-gray-300">
               Products
-            </a>
+            </Link>
           </li>
           <li>
             <a href="/" className="hover:text-gray-300">

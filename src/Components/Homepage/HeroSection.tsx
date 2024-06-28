@@ -58,7 +58,7 @@ const HeroSection: React.FC = () => {
           <img
             src={images[currentImageIndex]}
             alt="Home Images"
-            className="w-full max-w-md mx-auto h-60"
+            className="w-full ml-10 p-4 h-60"
           />
         )}
       </div>
