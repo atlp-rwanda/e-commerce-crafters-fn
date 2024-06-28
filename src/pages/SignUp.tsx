@@ -6,7 +6,7 @@ import {
   useRegisterMutation,
   useVerifyEmailQuery,
 } from "../Redux/features/AuthSlice";
-import EmailSent from "../Components/modal/EmailSent";
+import EmailSent from "../Components/Modal/EmailSent";
 import { useLocation } from "react-router-dom";
 import { Puff } from "react-loader-spinner";
 
