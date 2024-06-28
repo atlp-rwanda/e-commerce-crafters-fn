@@ -1,10 +1,12 @@
 import { configureStore, Action } from '@reduxjs/toolkit';
 import { ThunkAction } from 'redux-thunk';
 import productsImagesReducer from './features/ProductsImagesSlice';
+import popularProductsReducer from './features/PopularProductsSlice';
 
 export const store = configureStore({
     reducer: {
-      productsImages: productsImagesReducer
+      productsImages: productsImagesReducer,
+      popularProducts: popularProductsReducer
     }
   });
   
