@@ -1,5 +1,6 @@
 import React from "react";
 import profile from "../asset/images/profile.png";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -36,9 +37,9 @@ const Navbar = () => {
           </svg>
         </div>
         <div className="flex flex-row gap-[40px] text-white font-outfit">
-          <a href="">Home</a>
+          <Link to="/">Home</Link>
           <a href="">About Us</a>
-          <a href="">Products</a>
+          <Link to="/products">Products</Link>
           <a href="">Contact Us</a>
         </div>
       </div>

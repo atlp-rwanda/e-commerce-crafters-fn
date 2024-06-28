@@ -41,7 +41,7 @@ i18n.use(initReactI18next).init({
         Home: "Home",
         Products: "Products",
         "About Us": "About Us",
-        "Contact Us": "Contact Us",
+
         Contact: "Contact",
         Tel: "Tel",
         Email: "Email",
@@ -85,7 +85,7 @@ i18n.use(initReactI18next).init({
         Home: "Accueil",
         Products: "Produits",
         "About Us": "À propos de nous",
-        "Contact Us": "Contactez-nous",
+
         Contact: "Contact",
         Tel: "Tel",
         Email: "Email",
@@ -129,7 +129,7 @@ i18n.use(initReactI18next).init({
         Home: "Ahabanza",
         Products: "Ibicuruzwa",
         "About Us": "Ibyacu",
-        "Contact Us": "Twandikire",
+
         Contact: "Amakuru",
         Tel: "Tel",
         Email: "Imeyili",
