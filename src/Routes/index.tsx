@@ -15,6 +15,8 @@ import Analytics from '../pages/Analytics';
 import Settings from '../pages/Settings';
 import AdminHome from '../pages/Admin/AdminHome';
 import Homepage from '../pages/Homepage';
+import Cart from '../pages/Cart';
+import Checkout from '../pages/Checkout';
 
 
 const AppRoutes: React.FC = () => (
@@ -22,6 +24,8 @@ const AppRoutes: React.FC = () => (
     <Routes>
       <Route path="" element={<Homepage />} />
       <Route path="/login" element={<Signin />} />
+        <Route path="/checkout" element={<Checkout/>} />
+        <Route path="/cart" element={<Cart/>} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/2fa" element={<VerifyCode />} />
       <Route path="/verifyemail" element={<VerifyEmail />} />
