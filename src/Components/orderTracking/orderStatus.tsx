@@ -10,7 +10,7 @@ interface OrderStatusProps {
   }
   
   const OrderStatus: React.FC<OrderStatusProps> = ({ orderId, currentStatus }) => {
-    const statuses = ["Pending", "Processing", "Shipped", "Delivered"];
+    const statuses = ["pending", "processing", "shipped", "delivered"];
   
     const { data, error, isLoading } = useGetOrderQuery({ orderId });
   
@@ -36,13 +36,13 @@ interface OrderStatusProps {
         {statuses.map((status, index) => (
           <div key={status} className="flex items-center">
             <div className="flex flex-col items-center relative">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getStatusClass(status)}`}>
-                {index <= currentStatusIndex && <FontAwesomeIcon icon={faCheck} className="text-white" />}
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getStatusClass(status)} z-10`}>
+              <FontAwesomeIcon icon={faCheck} className="text-white" />
               </div>
               <span className="mt-2 text-sm">{status}</span>
               {index < statuses.length - 1 && (
                 <div
-                  className={`absolute top-5 transform -translate-y-1/2 left-12 w-24 h-1 ${getLineClass(index)}`}
+                  className={`absolute top-5 transform -translate-y-1/2 left-10 w-24 h-1 ${getLineClass(index)}`}
                 ></div>
               )}
             </div>

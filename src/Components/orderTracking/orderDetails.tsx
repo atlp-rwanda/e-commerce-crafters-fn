@@ -25,7 +25,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ orderId }) => {
     
     return(
         <>
-            <div className="border-b pb-8 pl-10">
+            <div className="border-b pb-8 ">
                 <div className="font-poppins font-bold pb-8">
                     <p>Order #{orderId}</p>
                 </div>
