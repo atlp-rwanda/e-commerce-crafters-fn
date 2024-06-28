@@ -18,7 +18,7 @@ const HeroSection: React.FC = () => {
     if (images && images.length > 0) {
       const interval = setInterval(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 1000);
+      }, 3000);
 
       return () => clearInterval(interval);
     }
@@ -41,29 +41,31 @@ const HeroSection: React.FC = () => {
           {t("to get started")}{" "}
         </p>
         <div className="flex flex-row gap-[10px]">
-
-        <button className="bg-secondary  w-full py-4 rounded-lg font-outfit">
-          {t("Shop Now")}
-        </button>
-        <button className="bg-[#08447D]  w-full py-4 rounded-lg font-outfit">
-          {t("Contact Us")}
-        </button>
-      </div>
+          <button className="bg-secondary  w-full py-4 rounded-lg font-outfit">
+            {t("Shop Now")}
+          </button>
+          <button className="bg-[#08447D]  w-full py-4 rounded-lg font-outfit">
+            {t("Contact Us")}
+          </button>
         </div>
-      <div className="w-full lg:w-1/2">
-        {loading && <div>Loading...</div>}
-        {error && <div>Error: {error}</div>}
-        {!loading && !error && (!images || images.length === 0) && (
-          <div>No images found.</div>
-        )}
+      </div>
 
-        {images && images.length > 0 && (
-          <img
-            src={images[currentImageIndex]}
-            alt="Home Images"
-            className=""
-          />
-        )}
+      <div className="w-full lg:w-1/2">
+        <div className="w-[500px] h-[400px]">
+          {loading && <div>Loading...</div>}
+          {error && <div>Error: {error}</div>}
+          {!loading && !error && (!images || images.length === 0) && (
+            <div>No images found.</div>
+          )}
+
+          {images && images.length > 0 && (
+            <img
+              src={images[currentImageIndex]}
+              alt="Home Images"
+              className="w-full h-full object-cover rounded-lg"
+            />
+          )}
+        </div>
       </div>
     </section>
   );
