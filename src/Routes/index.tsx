@@ -17,6 +17,7 @@ import AdminHome from '../pages/Admin/AdminHome';
 import Homepage from '../pages/Homepage';
 import Products from '../pages/ProductsPage';
 import SingleProduct from '../pages/SingleProduct';
+import { OrderTrackingPage } from '../pages/orderTrackingPage';
 
 
 const AppRoutes: React.FC = () => (
@@ -30,6 +31,7 @@ const AppRoutes: React.FC = () => (
       <Route path="/authgoogle" element={<AuthGoogle />} />
       <Route path="/products" element={<Products />} />
       <Route path="/product/:id" element={<SingleProduct />} />
+      <Route path="/order-tracking" element={<OrderTrackingPage />} />
       <Route element={<AuthOutlet fallbackPath="/login" />}>
         <Route path="/admin" element={<Admin />}>
           <Route index element={<AdminHome />} />
