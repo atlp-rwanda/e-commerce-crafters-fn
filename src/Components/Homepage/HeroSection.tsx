@@ -27,12 +27,12 @@ const HeroSection: React.FC = () => {
   console.log("Images from state:", images);
   const { t } = useTranslation();
   return (
-    <section className="bg-primary text-white text-xl p-24 flex gap-40 space-x-40 font-poppins">
-      <div>
-        <h1 className="text-4xl font-bold mb-8">
+    <section className="bg-primary text-white text-xl px-[10px] py-[15vh] h-[100vh]  md:px-[50px] lg:px-[100px] flex gap-[20px] space-x-40 font-poppins">
+      <div className=" w-full lg:w-1/2 flex flex-col gap-[20px]">
+        <h1 className=" text-[30px] font-[800]">
           <span className="text-secondary">CRAFTERS</span> ONLINE SHOP
         </h1>
-        <p className="mb-8">
+        <p className="text-[16px] font-poppins">
           {" "}
           {t("Welcome")}
           <a href="#" className="text-secondary font-bold">
@@ -40,14 +40,17 @@ const HeroSection: React.FC = () => {
           </a>{" "}
           {t("to get started")}{" "}
         </p>
-        <button className="bg-secondary px-6 py-2 rounded-lg mr-16">
+        <div className="flex flex-row gap-[10px]">
+
+        <button className="bg-secondary  w-full py-4 rounded-lg font-outfit">
           {t("Shop Now")}
         </button>
-        <button className="bg-blue-900 px-6 py-2 rounded-lg">
+        <button className="bg-[#08447D]  w-full py-4 rounded-lg font-outfit">
           {t("Contact Us")}
         </button>
       </div>
-      <div className="">
+        </div>
+      <div className="w-full lg:w-1/2">
         {loading && <div>Loading...</div>}
         {error && <div>Error: {error}</div>}
         {!loading && !error && (!images || images.length === 0) && (
@@ -58,7 +61,7 @@ const HeroSection: React.FC = () => {
           <img
             src={images[currentImageIndex]}
             alt="Home Images"
-            className="w-full ml-10 p-4 h-60"
+            className=""
           />
         )}
       </div>

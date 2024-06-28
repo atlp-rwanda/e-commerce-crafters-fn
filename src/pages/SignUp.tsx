@@ -57,7 +57,7 @@ const SignUp: React.FC = () => {
       }
       console.log(response);
     } catch (error: any) {
-      if (error.data.Message === "Email already exists") {
+      if (error.data && error.data.Message === "Email already exists") {
         setError("Email has been taken");
         setIsEmpty("email");
       }
@@ -147,7 +147,7 @@ const SignUp: React.FC = () => {
                     </div>
                   </div>
                   <a
-                    href="/signup"
+                    href="/login"
                     className="p-3 px-4 rounded-[6px] text-white font-outfit bg-primary"
                   >
                     Continue To login
@@ -187,7 +187,7 @@ const SignUp: React.FC = () => {
                   </div>
                 </div>
                 <a
-                  href="/login"
+                  href="/signup"
                   className="p-3 px-4 rounded-[6px] text-white font-outfit bg-primary"
                 >
                   Back To Sign Up
