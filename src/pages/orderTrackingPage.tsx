@@ -2,6 +2,7 @@ import React from "react";
 import OrderDetails from "../Components/orderTracking/orderDetails";
 import { ContactInfo } from "../Components/orderTracking/contactInfo";
 import { OrderProductDetails } from "../Components/orderTracking/orderProductDetails";
+import Navbar from "../Components/navBar";
 
 export const OrderTrackingPage = () => {
 
@@ -16,6 +17,7 @@ export const OrderTrackingPage = () => {
 
     return (
         <>
+            <Navbar/>
             <div className="flex flex-col gap-20 h-screen p-4 lg:p-20 overflow-y-auto">
                 <div className="order-details-container">
                     <OrderDetails
