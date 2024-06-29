@@ -1,13 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
-// Define the type for the slice state
 interface PopularProductsState {
   products: Array<any>;
   loading: boolean;
   error: string;
 }
 
-// Define a thunk that fetches the popular products
 export const fetchPopularProducts = createAsyncThunk(
   'popularProducts/fetchPopularProducts',
   async () => {
@@ -20,14 +18,12 @@ export const fetchPopularProducts = createAsyncThunk(
   }
 );
 
-// Define the initial state of the slice
 const initialState: PopularProductsState = {
   products: [],
   loading: false,
   error: '',
 };
 
-// Create the slice
 const popularProductsSlice = createSlice({
   name: 'popularProducts',
   initialState,
