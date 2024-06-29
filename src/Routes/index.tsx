@@ -21,6 +21,7 @@ import { OrderTrackingPage } from "../pages/orderTrackingPage";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Singlepage from "../pages/singlePage";
+import Forgotpassword from "../Lib/ForgotPasword";
 
 const AppRoutes: React.FC = () => (
   <div>
@@ -30,11 +31,12 @@ const AppRoutes: React.FC = () => (
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="/forgot-password" element={<Forgotpassword />} />
       <Route path="/2fa" element={<VerifyCode />} />
       <Route path="/verifyemail" element={<VerifyEmail />} />
       <Route path="/authgoogle" element={<AuthGoogle />} />
-      <Route path="/products" element={<Products />} />
       <Route path="/singleproduct" element={<Singlepage />} />
+      <Route path="/products" element={<Products />} />
 
       <Route path="/product/:id" element={<SingleProduct />} />
       <Route path="/order-tracking" element={<OrderTrackingPage />} />
