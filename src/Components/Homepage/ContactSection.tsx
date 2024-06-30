@@ -28,17 +28,17 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
   };
 
   return (
-    <section className="pl-64 py-16 bg-gray-100 flex justify-center font-poppins text-xl">
-      <div className='flex-grow md:w-1/2'>
-        <h2 className="text-primary text-4xl font-bold mb-4">Get In Touch With Us</h2>
-        <h2 className="text-secondary text-3xl mb-16">We Are Here To Help</h2>
+    <section className="px-8 md:px-64 py-16 bg-gray-100 flex flex-col md:flex-row justify-center font-poppins text-base md:text-xl">
+      <div className="w-full md:w-1/2 mb-8 md:mb-0">
+        <h2 className="text-primary text-3xl md:text-4xl font-bold mb-4">Get In Touch With Us</h2>
+        <h2 className="text-secondary text-2xl md:text-3xl mb-16">We Are Here To Help</h2>
         <div className="flex flex-col">
-          <div className="md:w-1/2 mb-4 md:mb-0">
-            <div className="flex flex-grow items-center space-x-8 mb-16">
+          <div className="w-full mb-4 md:mb-0">
+            <div className="flex items-center space-x-4 mb-16">
               <i className="fas fa-phone text-primary"></i>
-              <p className='text-primary'>If you have an urgent business concern please contact us at 07********0</p>
+              <p className="text-primary text-sm md:text-base">If you have an urgent business concern please contact us at 07********0</p>
             </div>
-            <div className="bg-primary flex justify-center space-x-4 mt-4 p-4 text-white text-3xl w-full max-w-md rounded-xl ">
+            <div className="bg-primary flex justify-center space-x-4 mt-4 p-4 text-white text-2xl md:text-3xl w-full max-w-md rounded-xl">
               <a href="#"><i className="fab fa-facebook mr-4"></i></a>
               <a href="#"><i className="fab fa-twitter mr-4"></i></a>
               <a href="#"><i className="fab fa-linkedin mr-4"></i></a>
@@ -47,8 +47,8 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
           </div>
         </div>
       </div>
-      <div className="md:w-1/2 text-lg">
-        <h2 className="text-secondary text-3xl font-bold mb-16">Send Us Message</h2>
+      <div className="w-full md:w-1/2 text-base md:text-lg">
+        <h2 className="text-secondary text-2xl md:text-3xl font-bold mb-16">Send Us Message</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input
@@ -77,7 +77,7 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
             ></textarea>
           </div>
           <button
-            className="bg-primary flex justify-center space-x-4 mt-4 p-4 text-white text-xl w-full max-w-md rounded-xl"
+            className="bg-primary mt-4 p-4 text-white text-lg md:text-xl w-full rounded-xl"
             type="submit"
           >
             Send Message
@@ -97,7 +97,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
-  sendMessage: (messageData: { name: string; email: string; content: string }) => dispatch(sendMessage(messageData)), // Changed message to content
+  sendMessage: (messageData: { name: string; email: string; content: string }) => dispatch(sendMessage(messageData)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ContactSection);

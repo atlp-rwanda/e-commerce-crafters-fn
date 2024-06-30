@@ -18,32 +18,37 @@ const HeroSection: React.FC = () => {
                 setCurrentImageIndex(prevIndex => (prevIndex + 1) % images.length);
             }, 1000);
 
-            return() => clearInterval(interval);
+            return () => clearInterval(interval);
         }
     }, [images]);
 
     console.log("Images from state:", images);
 
     return (
-        <section className="bg-primary text-white text-xl p-24 flex gap-40 space-x-40 font-poppins">
-            <div>
-                <h1 className="text-4xl font-bold mb-8">
+        <section className="bg-primary text-white text-xl sm:text-sm p-24 sm:p-6 md:p-12 lg:p-24 flex flex-col md:flex-row gap-8 md:gap-20 lg:gap-40 font-poppins">
+            <div className="mb-8 md:mb-0 md:w-1/2">
+                <h1 className="text-4xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-8">
                     <span className='text-secondary'>CRAFTERS</span> ONLINE SHOP
                 </h1>
-                <p className="mb-8">Welcome to our online store! Whether you're a buyer looking for 
-                 great <br /> deals or a seller wanting to showcase your products, our platform <br />
-                 offers you the opportunity to connect and thrive. Explore our wide <br /> range of products and
-                 create an account <a href="#" className='text-secondary font-bold'>here</a> to get started. </p>
-                <button className="bg-secondary px-6 py-2 rounded-lg mr-16">Shop Now</button>
-                <button className="bg-blue-900 px-6 py-2 rounded-lg">Contact Us</button>
+                <p className="mb-8 text-base sm:text-sm md:text-base">
+                    Welcome to our online store! Whether you're a buyer looking for 
+                    great <br className="hidden md:inline" /> deals or a seller wanting to showcase your products, our platform <br className="hidden md:inline" />
+                    offers you the opportunity to connect and thrive. Explore our wide <br className="hidden md:inline" /> range of products and
+                    create an account <a href="#" className='text-secondary font-bold'>here</a> to get started.
+                </p>
+                <div>
+                    <button className="bg-secondary px-6 py-2 rounded-lg mr-4 mb-4 md:mb-0">Shop Now</button>
+                    <button className="bg-blue-900 px-6 py-2 rounded-lg">Contact Us</button>
+                </div>
             </div>
-            <div className="">
+            
+            <div className="md:w-1/2 flex justify-center">
                 {loading && <div>Loading...</div>}
                 {error && <div>Error: {error}</div>}
                 {!loading && !error && (!images || images.length === 0) && <div>No images found.</div>}
-
+                
                 {images && images.length > 0 && (
-                    <img src={images[currentImageIndex]} alt="Home Images" className="w-full max-w-md mx-auto h-60" />
+                    <img src={images[currentImageIndex]} alt="Home Images" className="w-full sm:w-auto max-w-md h-60 sm:h-36 md:h-60" />
                 )}
             </div>
         </section>
