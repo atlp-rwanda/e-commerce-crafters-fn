@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../Redux/store";
-import { fetchImages } from "../../Redux/features/ProductsImagesSlice";
 import { useTranslation } from "react-i18next";
+import { fetchImages } from "../../Redux/HomePage/ProductsImagesSlice";
+
 const HeroSection: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
   const { images, loading, error } = useSelector(
