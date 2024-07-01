@@ -29,7 +29,7 @@ export const ContactInfo: React.FC<ContactInfoProps> = ({
 
   return (
     <>
-      <div className="flex flex-col gap-12 lg:flex-row justify-between border-b pb-8  font-outfit pl-10 lg:pl-0 lg:pr-20">
+      <div className="flex flex-col gap-12 lg:flex-row justify-between border-b pb-8  font-outfit pl-10 lg:pl-0">
         <div className="delivery-address ">
           <h3 className="font-bold pb-2 font-poppins">Delivery Address</h3>
           <p className="text-gray-300">
