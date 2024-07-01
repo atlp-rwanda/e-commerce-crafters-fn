@@ -9,33 +9,36 @@ import Seller from '../Portal/Seller';
 import VerifyCode from '../pages/VerifyCode';
 import VerifyEmail from '../Lib/VerifyEmail';
 import AuthGoogle from '../Lib/authgoogle';
-import Users from '../pages/Users';
+
+import Users from '../pages/users';
+import Products from '../pages/productsPage';
 import Singlepage from '../pages/singlePage';
 
+const AppRoutes: React.FC = () => {
+  return (
+    <div>
+      <Routes>
+        <Route path="/login" element={<Signin />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/2fa" element={<VerifyCode />} />
+        <Route path="/verifyemail" element={<VerifyEmail />} />
+      
+        <Route path="/authgoogle" element={<AuthGoogle />} />
+        <Route path="/products" element={<Products />} />
+        <Route path="/product/:id" element={<Singlepage />} />
+        <Route element={<AuthOutlet fallbackPath='/login' />}>
+          <Route path="/admin" element={<Admin />}>
+            <Route index element={<Users />} />
+            <Route path='users' element={<Users />} />
+    
 
-const AppRoutes: React.FC = () => (
-  <div>
-    <Routes>
-      <Route path="/login" element={<Signin />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/2fa" element={<VerifyCode />} />
-      <Route path="/verifyemail" element={<VerifyEmail />} />
-      <Route path="/singleproduct" element={<Singlepage />} />
-      <Route path="/authgoogle" element={<AuthGoogle />} />
-      <Route element={<AuthOutlet fallbackPath="/login" />}>
-        <Route path="/admin" element={<Admin />}>
-          <Route index element={<Users />} />
-          
-          <Route path="users" element={<Users />} />
-          <Route path="users" element={<Users />} />
+          </Route>
+          <Route path="/buyer" element={<Buyer />} />
+          <Route path="/vendor" element={<Seller />} />
         </Route>
-        <Route path="/buyer" element={<Buyer />} />
-        <Route path="/vendor" element={<Seller />} />
-
-      </Route>
-    </Routes>
+      </Routes>
 
   </div>
-);
+);}
 
 export default AppRoutes;

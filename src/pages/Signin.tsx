@@ -1,10 +1,10 @@
-import axios from 'axios';
-import React, { useState } from 'react';
+import axios from 'axios'
+import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import AuthButton from '../Constants/AuthButton'
+import Input from '../Constants/Input'
+import { useLoginMutation } from '../Redux/features/AuthSlice'
 import useSignIn from 'react-auth-kit/hooks/useSignIn';
-import { useNavigate } from 'react-router-dom';
-import AuthButton from '../Constants/AuthButton';
-import Input from '../Constants/Input';
-import { useLoginMutation } from '../Redux/features/AuthSlice';
 
 const Signin: React.FC = () => {
   const navigate = useNavigate();
