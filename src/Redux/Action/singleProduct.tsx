@@ -26,7 +26,7 @@ export const addToCart = createAsyncThunk(
   'cart/addToCart',
   async (cartItem: { userId: string; productId: string; quantity: number; price: number }) => {
     try {
-      const apiUrl = 'http://localhost:5000/addcart';
+      const apiUrl = 'https://e-commerce-crafters-bn-6aiy.onrender.com/addcart';
       const response = await axios.post(apiUrl, cartItem);
       return response.data;
     } catch (error) {

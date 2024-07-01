@@ -9,7 +9,7 @@ import mainproduct3 from "../../asset/images/products/f8c69bc0404ff0b6158cab028a
 import heart from "../../asset/images/products/heart_.png";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
-
+import { addToWishlist } from '../../Redux/Action/wishlist';
 const Sproduct: React.FC = () => {
     const dispatch = useDispatch();
     const product = useSelector((state: any) => state.product.product);
@@ -28,10 +28,28 @@ const Sproduct: React.FC = () => {
         setSelectedImage(image);
     };
 
-    const toggleWishlist = () => {
-        setIsWishlist(!isWishlist);
-    };
+    // const toggleWishlist = () => {
+    //     setIsWishlist(!isWishlist);
+    // };
 
+    const toggleWishlist = () => {
+        const userId = localStorage.getItem('userId');
+  
+        if (!userId) {
+            console.error('User ID not found in localStorage');
+            return;
+        }
+
+        const wishlistItem = {
+            userId,
+            productId: product.productId,
+            price: product.price,
+        };
+
+        dispatch(addToWishlist(wishlistItem) as any)
+            .then(() => setIsWishlist(true))
+            .catch((err: any) => console.error('Error adding to wishlist:', err));
+    };
     const subtractQuantity = () => {
         if (quantity > 1) {
             setQuantity(quantity - 1);
@@ -54,16 +72,17 @@ const Sproduct: React.FC = () => {
 
     const handleAddToCart = () => {
         const userId = localStorage.getItem('userId');
+  
         if (!userId) {
             console.error('User ID not found in localStorage');
             return;
         }
-
+console.log("hhhhhhhh",product.productId)
         const cartItem = {
             userId,
-            productId: "9856d575-03ee-43dd-b6f1-acf57ec42bc2",
+            productId : product.productId,
             quantity,
-            price: product.price,
+            price: product.price ,
         };
         dispatch(addToCart(cartItem) as any);
     };
@@ -101,7 +120,7 @@ const Sproduct: React.FC = () => {
                         </div>
                     </div>
                     <div className="grid grid-cols-4 gap-1">
-                        {[mainproduct1, mainproduct2, mainproduct3, mainproduct4].map((image, index) => (
+                        {[product.image, mainproduct2, mainproduct3, mainproduct4].map((image, index) => (
                             <img
                                 key={index}
                                 src={image}
@@ -123,11 +142,11 @@ const Sproduct: React.FC = () => {
 												<span className="text-base text-gray-900 font-bold  tracking-[-0.30px] w-auto">
 													
 													{product.price && product.discount
-														? (product.price - (product.price * product.discount/100))
+														? ((product.price - (product.price * product.discount/100))*quantity)
 														: product.price}
 												</span>
 												<span className="text-base text-[#AFBACA] line-through tracking-[-0.30px] w-auto">
-													{product.discount ? `${product.price}` : null}
+													{product.discount ? `${(product.price)*quantity}` : null}
 												</span>
                                                 <span className='bg-[#D9D9D9] ml-4 p-1 px-3 rounded-md text-sm'>frw</span>
                                                 </div>

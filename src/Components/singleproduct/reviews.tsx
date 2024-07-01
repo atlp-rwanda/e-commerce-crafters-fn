@@ -20,6 +20,14 @@ const Review: React.FC = () => {
     feedback: '',
     ratingScore: 0,
   });
+  const [visibleReviews, setVisibleReviews] = useState(3); 
+  const showMore = () => {
+    setVisibleReviews((prev) => prev + 3);
+  };
+
+  const showLess = () => {
+    setVisibleReviews(3);
+  };
   const [ratingScore, setRating] = useState(3);
   const rows = 4;
 
@@ -126,23 +134,35 @@ const Review: React.FC = () => {
               </form>
             </div>
           )}
-        {reviews.map((review,index) => (
+      {reviews.slice(0, visibleReviews).map((review, index) => (
         <div key={review.ratingId} className="grid grid-cols-10 gap-8 mb-4">
           <div className="col-span-1 flex justify-center items-baseline">
-            <span className="bg-gray-500 rounded-full p-8 w-8 h-8 text-4xl text-center flex justify-center items-center font-bold text-[#C9974C]">
-            {index + 1}
+            <span className="bg-gray-500 rounded-full p-8 w-4 h-4 text-4xl text-center flex justify-center items-center font-bold text-[#C9974C]">
+              {index + 1}
             </span>
           </div>
           <div className="col-span-9 gap-y-4 flex flex-col items-baseline">
             <span className="text-[#C9974C] text-xl font-bold">{review.name}</span>
             <div className="flex gap-1">
-            <StarRating rating={review.ratingScore ? Number(review.ratingScore) : 0} />
+              <StarRating rating={review.ratingScore ? Number(review.ratingScore) : 0} />
             </div>
             <data>{new Date(review.createdAt).toLocaleDateString()}</data>
             <p>{review.feedback}</p>
           </div>
         </div>
       ))}
+      <div className="flex justify-start mt-4">
+        {visibleReviews < reviews.length && (
+          <button onClick={showMore} className="mr-2 px-4 py-2 bg-blue-500 text-white rounded">
+            Show More
+          </button>
+        )}
+        {visibleReviews > 3 && (
+          <button onClick={showLess} className="px-4 py-2 bg-red-500 text-white rounded">
+            Show Less
+          </button>
+        )}
+      </div>
         </div>
       </div>
     </div>
