@@ -6,6 +6,7 @@ import SimilProduct from "../Components/singleproduct/similaryProduct";
 
     return ( 
         <div>
+          
          <Sproduct/>
          <Reviews/>
          <SimilProduct/>

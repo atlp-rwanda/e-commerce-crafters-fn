@@ -34,7 +34,7 @@ const Review: React.FC = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:5000/getfeedback/1b4a20ca-0d75-4bfb-8c66-147ea41ae8e1')
+    fetch('http://localhost:5000/getfeedback/10ac05ed-9a26-416d-a491-2aa3d1d46b25')
       .then(response => response.json())
       .then(data => setReviews(data.ratings.reverse()))
       .catch(error => console.error('Error fetching reviews:', error));
