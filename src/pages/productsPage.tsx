@@ -23,7 +23,7 @@ const Products = () => {
     (state: RootState) => state.category.activeCategory
   );
   const { data: products, isLoading, isError } = useSelectProductsQuery();
-  // console.log(products)
+   console.log(products)
   const productsPerPage = 9;
   const currentPage = useSelector(
     (state: RootState) => state.pagination.currentPage

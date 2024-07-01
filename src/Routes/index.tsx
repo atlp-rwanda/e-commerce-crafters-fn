@@ -10,7 +10,7 @@ import VerifyCode from '../pages/VerifyCode';
 import VerifyEmail from '../Lib/VerifyEmail';
 import AuthGoogle from '../Lib/authgoogle';
 
-import Users from '../pages/users';
+import Users from '../pages/Users';
 import Products from '../pages/productsPage';
 import Singlepage from '../pages/singlePage';
 
