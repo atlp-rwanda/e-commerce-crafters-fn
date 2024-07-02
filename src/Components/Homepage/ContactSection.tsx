@@ -53,7 +53,6 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
               <a href="#"><i className="fab fa-twitter mr-4"></i></a>
               <a href="#"><i className="fab fa-linkedin mr-4"></i></a>
               <a href="#"><i className="fab fa-instagram mr-4"></i></a>
->>>>>>> 8714478 (added integration on contact)
             </div>
           </div>
         </div>
