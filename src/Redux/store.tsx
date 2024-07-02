@@ -9,9 +9,7 @@ import searchReducer from './productsPage/searchSlice';
 import { apiSlice } from './features/ApiSlice';
 import { reviewReducer } from './Action/Reducer/Review';
 import { productReducer,cartReducer } from './Action/Reducer/singleproductSlice';
-import contactReducer from './HomePage/contactSlice';
-import productsImagesReducer from './HomePage/ProductsImagesSlice';
-import popularProductsReducer from './HomePage/PopularProductsSlice';
+
 
 
 export const store = configureStore({
