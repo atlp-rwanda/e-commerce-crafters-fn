@@ -39,8 +39,8 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
         </h2>
         <h2 className="text-secondary text-3xl mb-16">We Are Here To Help</h2>
         <div className="flex flex-col">
-          <div className="md:w-1/2 mb-4 md:mb-0">
-            <div className="flex flex-grow items-center space-x-8 mb-16">
+          <div className="w-full mb-4 md:mb-0">
+            <div className="flex items-center space-x-4 mb-16">
               <i className="fas fa-phone text-primary"></i>
 <<<<<<< HEAD
               <p className="text-primary">
@@ -48,23 +48,7 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
                 07********0
               </p>
             </div>
-            <div className="bg-primary flex justify-center space-x-4 mt-4 p-4 text-white text-3xl w-full max-w-md rounded-xl ">
-              <a href="#">
-                <i className="fab fa-facebook mr-4"></i>
-              </a>
-              <a href="#">
-                <i className="fab fa-twitter mr-4"></i>
-              </a>
-              <a href="#">
-                <i className="fab fa-linkedin mr-4"></i>
-              </a>
-              <a href="#">
-                <i className="fab fa-instagram mr-4"></i>
-              </a>
-=======
-              <p className='text-primary'>If you have an urgent business concern please contact us at 07********0</p>
-            </div>
-            <div className="bg-primary flex justify-center space-x-4 mt-4 p-4 text-white text-3xl w-full max-w-md rounded-xl ">
+            <div className="bg-primary flex justify-center space-x-4 mt-4 p-4 text-white text-2xl md:text-3xl w-full max-w-md rounded-xl">
               <a href="#"><i className="fab fa-facebook mr-4"></i></a>
               <a href="#"><i className="fab fa-twitter mr-4"></i></a>
               <a href="#"><i className="fab fa-linkedin mr-4"></i></a>
@@ -107,7 +91,7 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
             ></textarea>
           </div>
           <button
-            className="bg-primary flex justify-center space-x-4 mt-4 p-4 text-white text-xl w-full max-w-md rounded-xl"
+            className="bg-primary mt-4 p-4 text-white text-lg md:text-xl w-full rounded-xl"
             type="submit"
           >
             Send Message

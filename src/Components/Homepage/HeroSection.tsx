@@ -21,9 +21,9 @@ const HeroSection: React.FC = () => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
       }, 3000);
 
-      return () => clearInterval(interval);
-    }
-  }, [images]);
+            return () => clearInterval(interval);
+        }
+    }, [images]);
 
   console.log("Images from state:", images);
   const { t } = useTranslation();

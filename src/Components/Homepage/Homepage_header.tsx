@@ -4,15 +4,15 @@ import i18n from "../../Lib/i18n";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 const Header: React.FC = () => {
-  let currentLanguage = localStorage.getItem("lng") || "ENG";
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState(currentLanguage);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState('ENG');
 
   const handleLanguageChange = (language: string) => {
     setSelectedLanguage(language);
     setIsDropdownOpen(false);
-    localStorage.setItem("lng", language);
-    i18n.changeLanguage(language);
+    setIsMenuOpen(false); 
+    console.log(`Language changed to: ${language}`);
   };
   const { t } = useTranslation();
 
