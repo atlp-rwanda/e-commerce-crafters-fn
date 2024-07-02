@@ -1,5 +1,10 @@
 import { configureStore, Action } from '@reduxjs/toolkit';
 import { ThunkAction } from 'redux-thunk';
+<<<<<<< HEAD
+=======
+import productsImagesReducer from './features/ProductsImagesSlice';
+import popularProductsReducer from './features/PopularProductsSlice';
+>>>>>>> 9b21acb (solved merge conflicts)
 import categoryReducer from './productsPage/categorySlice';
 import paginationReducer from './productsPage/paginationSlice';
 import searchReducer from './productsPage/searchSlice';
@@ -35,6 +40,7 @@ export const store = configureStore({
     category: categoryReducer,
     pagination: paginationReducer,
     search: searchReducer,
+<<<<<<< HEAD
     productsImages: productsImagesReducer,
     similarProducts:similarScile,
 
@@ -46,6 +52,9 @@ export const store = configureStore({
 =======
     cart: cartReducer
 >>>>>>> 4440817 (redux the cart)
+=======
+    popularProducts: popularProductsReducer,
+>>>>>>> 9b21acb (solved merge conflicts)
   },
 
   middleware: (getDefaultMiddelware) =>
