@@ -22,7 +22,7 @@ const Admin = () => {
 
       <div className="flex flex-col w-[85%]">
         <DashHeader />
-        <div className="flex-grow bg-gray-100 pt-[20vh]">
+        <div className="flex-grow p-4 bg-gray-100 pt-[20vh]">
           <Outlet />
         </div>
         <DashFooter />

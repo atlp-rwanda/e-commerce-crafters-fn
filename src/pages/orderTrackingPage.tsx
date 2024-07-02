@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import { ContactInfo } from "../Components/OrderTracking/contactInfo";
 import OrderDetails from "../Components/OrderTracking/orderDetails";
 import { OrderProductDetails } from "../Components/OrderTracking/orderProductDetails";
@@ -11,14 +11,12 @@ export const OrderTrackingPage = () => {
   const email = "bernice@example.com";
   const contactName = "bernice";
   const address = "Kigali, Kicukiro";
-  const products = [
-    { productName: "Nike Shoes", quantity: 3, price: 100, total: 300 },
-  ];
+  const [orderStatus, setOrderStatus] = useState('pending');
 
   return (
     <>
       <Navbar />
-      <div className="flex flex-col gap-20 h-screen p-4 lg:p-20 overflow-y-auto">
+      <div className="flex flex-col gap-20 h-screen p-10 lg:p-20">
         <div className="order-details-container">
           <OrderDetails orderId={orderId} />
         </div>
@@ -32,8 +30,8 @@ export const OrderTrackingPage = () => {
           />
         </div>
 
-        <div className="order-products-details-container">
-          <OrderProductDetails products={products} orderId={orderId} />
+        <div className="pb-10">
+          <OrderProductDetails orderId={orderId} />
         </div>
       </div>
     </>
