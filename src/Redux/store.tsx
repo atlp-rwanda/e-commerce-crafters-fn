@@ -4,6 +4,7 @@ import categoryReducer from './productsPage/categorySlice';
 import paginationReducer from './productsPage/paginationSlice';
 import searchReducer from './productsPage/searchSlice';
 import { apiSlice } from './features/ApiSlice';
+<<<<<<< HEAD
 import { productReducer } from './Reducer/singleproductSlice';
 import { reviewReducer } from './Reducer/Review';
 import wishlistslice from './Reducer/wishlistslice';
@@ -11,6 +12,10 @@ import wishlistslice from './Reducer/wishlistslice';
 
 
 
+=======
+import { reviewReducer } from './Action/Reducer/Review';
+import { productReducer,cartReducer } from './Action/Reducer/singleproductSlice';
+>>>>>>> 4440817 (redux the cart)
 import contactReducer from './HomePage/contactSlice';
 import productsImagesReducer from './HomePage/ProductsImagesSlice';
 import popularProductsReducer from './HomePage/PopularProductsSlice';
@@ -35,8 +40,12 @@ export const store = configureStore({
 
     popularProducts: popularProductsReducer,
     contact: contactReducer,
+<<<<<<< HEAD
     wishlist:wishlistSlice
     
+=======
+    cart: cartReducer
+>>>>>>> 4440817 (redux the cart)
   },
 
   middleware: (getDefaultMiddelware) =>

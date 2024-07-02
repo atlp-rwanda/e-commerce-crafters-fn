@@ -11,18 +11,18 @@ const Payment = () => {
           <div className="Mots w-full flex justify-between mb-5">
             <input
               type="text"
-              className="name first w-[49%] h-[35px] rounded-[7px] bg-gray-300 pl-[15px]"
+              className="name first w-[49%] h-[35px] rounded-[7px] bg-gray-200 pl-[15px]"
               placeholder="First Name"
             />
             <input
               type="text"
-              className="name second w-[49%] h-[35px] rounded-[7px] bg-gray-300 pl-[15px]"
+              className="name second w-[49%] h-[35px] rounded-[7px] bg-gray-200 pl-[15px]"
               placeholder="Second Name"
             />
           </div>
           <div className="email w-full mb-5">
             <input
-              className="w-full h-[35px] rounded-[7px] bg-gray-300 pl-[15px]"
+              className="w-full h-[35px] rounded-[7px] bg-gray-200 pl-[15px]"
               type="email"
               placeholder="Email Address"
             />
@@ -30,24 +30,24 @@ const Payment = () => {
           <div className="contacts w-full flex justify-between mb-5">
             <input
               type="numbers"
-              className="contact number w-[49%] h-[35px] rounded-[7px] bg-gray-300 pl-[15px]"
+              className="contact number w-[49%] h-[35px] rounded-[7px] bg-gray-200 pl-[15px]"
               placeholder="Phone Number"
             />
             <input
               type="text"
-              className="contact street w-[49%] h-[35px] rounded-[7px] bg-gray-300 pl-[15px]"
+              className="contact street w-[49%] h-[35px] rounded-[7px] bg-gray-200 pl-[15px]"
               placeholder="Street"
             />
           </div>
           <div className="location w-full flex justify-between mb-5">
             <select
-              className="w-[49%] h-[35px] rounded-[7px] bg-gray-300 pl-[15px]"
+              className="w-[49%] h-[35px] rounded-[7px] bg-gray-200 pl-[15px]"
               name="Country"
               id=""
               title="Country"
             ></select>
             <select
-              className="w-[49%] h-[35px] rounded-[7px] bg-gray-300 pl-[15px]"
+              className="w-[49%] h-[35px] rounded-[7px] bg-gray-200 pl-[15px]"
               name="City"
               id=""
               title="City"
@@ -55,7 +55,7 @@ const Payment = () => {
           </div>
           <div className="delivery w-full mb-5">
             <select
-              className="w-full h-[35px] rounded-[7px] bg-gray-300 pl-[15px]"
+              className="w-full h-[35px] rounded-[7px] bg-gray-200 pl-[15px]"
               name="delivery"
               id=""
               title="delivery"
