@@ -1,18 +1,16 @@
 import React from "react";
-import Sproduct from "../Components/singleproduct/Sproduct";
-import Reviews from "../Components/singleproduct/reviews";
-import SimilProduct from "../Components/singleproduct/similaryProduct";
-import Navbar from "../Components/navBar";
- const Singlepage = () =>{
+import Reviews from "../Components/SingleProduct/reviews";
+import Sproduct from "../Components/SingleProduct/Sproduct";
+import SimilProduct from "../Components/SingleProduct/similaryProduct";
 
-    return ( 
-        <div>
-           <Navbar />
-         <Sproduct/>
-         <Reviews/>
-         <SimilProduct/>
-        </div>
-     );
-}
+const Singlepage = () => {
+  return (
+    <div>
+      <Sproduct />
+      <Reviews />
+      <SimilProduct />
+    </div>
+  );
+};
 
-export default Singlepage ;
+export default Singlepage;

@@ -1,15 +1,13 @@
 import React from "react";
 import { UseDispatch, useDispatch } from "react-redux";
-import { setSearchTerm } from "../../Redux/features/productsPage/searchSlice";
-
+import { setSearchTerm } from "../../Redux/productsPage/searchSlice";
 
 const Search = () => {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch();
-
-    const searchChange = (event: any) => {
-        dispatch(setSearchTerm(event.target.value));
-    }
+  const searchChange = (event: any) => {
+    dispatch(setSearchTerm(event.target.value));
+  };
 
   return (
     <div className="py-1 rounded-[12px] px-4 bg-gray-100 flex flex-row gap-[10px] items-center md:p-2">
