@@ -2,6 +2,7 @@ import { configureStore, Action } from '@reduxjs/toolkit';
 import { ThunkAction } from 'redux-thunk';
 import productsImagesReducer from './features/ProductsImagesSlice';
 import popularProductsReducer from './features/PopularProductsSlice';
+import contactReducer from './features/contactSlice';
 import categoryReducer from './productsPage/categorySlice';
 import paginationReducer from './productsPage/paginationSlice';
 import searchReducer from './productsPage/searchSlice';
@@ -15,6 +16,7 @@ export const store = configureStore({
     pagination: paginationReducer,
     search: searchReducer,
     popularProducts: popularProductsReducer,
+    contact: contactReducer,
   },
   middleware: (getDefaultMiddelware) =>
     getDefaultMiddelware().concat(apiSlice.middleware),
