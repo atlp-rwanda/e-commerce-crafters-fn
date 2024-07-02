@@ -4,7 +4,11 @@ import { ThunkAction } from 'redux-thunk';
 =======
 import productsImagesReducer from './features/ProductsImagesSlice';
 import popularProductsReducer from './features/PopularProductsSlice';
+<<<<<<< HEAD
 >>>>>>> 9b21acb (solved merge conflicts)
+=======
+import contactReducer from './features/contactSlice';
+>>>>>>> b0bc8b9 (solved merge conflicts)
 import categoryReducer from './productsPage/categorySlice';
 import paginationReducer from './productsPage/paginationSlice';
 import searchReducer from './productsPage/searchSlice';
@@ -47,6 +51,7 @@ export const store = configureStore({
     popularProducts: popularProductsReducer,
     contact: contactReducer,
 <<<<<<< HEAD
+<<<<<<< HEAD
     wishlist:wishlistSlice
     
 =======
@@ -55,6 +60,8 @@ export const store = configureStore({
 =======
     popularProducts: popularProductsReducer,
 >>>>>>> 9b21acb (solved merge conflicts)
+=======
+>>>>>>> b0bc8b9 (solved merge conflicts)
   },
 
   middleware: (getDefaultMiddelware) =>
