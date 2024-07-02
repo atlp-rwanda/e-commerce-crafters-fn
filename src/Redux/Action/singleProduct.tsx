@@ -42,6 +42,18 @@ export const addToCart = createAsyncThunk(
   }
 );
 
+export const fetchCart = createAsyncThunk(
+  "cart/viewCart",
+async(userId: string) => {
+  try {
+    const apiUrl =`http://localhost:5000/products/${userId}`;
+    const response = await axios.get(apiUrl);
+    return response.data
+  }catch(error: any) {
+    return rejectWithValue(error.message)
+  }
+})
+
 export const fetchProductDetails = createAsyncThunk(
   "product/fetchProductDetails",
   async (_, { rejectWithValue }) => {
