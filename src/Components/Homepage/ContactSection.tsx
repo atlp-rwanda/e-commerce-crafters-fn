@@ -1,18 +1,3 @@
-<<<<<<< HEAD
-import React from "react";
-import { useTranslation } from "react-i18next";
-const ContactSection: React.FC = () => {
-  const { t } = useTranslation();
-  return (
-    <section className="pl-64 py-16 bg-gray-100 flex justify-center font-poppins text-xl">
-      <div className="flex-grow md:w-1/2">
-        <h2 className="text-primary text-4xl font-bold mb-4">
-          {t("Get In Touch With Us")}
-        </h2>
-        <h2 className="text-secondary text-3xl mb-16">
-          {t("We Are Here To Help")}
-        </h2>
-=======
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { sendMessage } from '../../Redux/features/contactSlice';
@@ -58,7 +43,6 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
               <a href="#"><i className="fab fa-twitter mr-4"></i></a>
               <a href="#"><i className="fab fa-linkedin mr-4"></i></a>
               <a href="#"><i className="fab fa-instagram mr-4"></i></a>
->>>>>>> 8714478 (added integration on contact)
             </div>
           </div>
         </div>
@@ -73,35 +57,19 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
               className="w-full p-2 border rounded"
               value={name}
               onChange={(e) => setName(e.target.value)}
->>>>>>> 8714478 (added integration on contact)
             />
           </div>
           <div className="mb-4">
             <input
               type="email"
-<<<<<<< HEAD
-              placeholder={t("Your Email")}
-              className="w-full p-2 border rounded"
-=======
               placeholder="Your Email"
               className="w-full p-2 border rounded"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
->>>>>>> 8714478 (added integration on contact)
             />
           </div>
           <div className="mb-4">
             <textarea
-<<<<<<< HEAD
-              placeholder={t("Your Message")}
-              className="w-full p-2 border rounded"
-            ></textarea>
-          </div>
-          <button className="bg-primary flex justify-center space-x-4 mt-4 p-4 text-white text-xl w-full max-w-md rounded-xl ">
-            {t("Send Message")}
-          </button>
-        </form>
-=======
               placeholder="Your Message"
               className="w-full p-2 border rounded"
               value={content} 
@@ -118,7 +86,6 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
         {status === 'loading' && <p>Sending...</p>}
         {status === 'succeeded' && <p>Message sent successfully!</p>}
         {status === 'failed' && <p>Error: {error}</p>}
->>>>>>> 8714478 (added integration on contact)
       </div>
     </section>
   );
