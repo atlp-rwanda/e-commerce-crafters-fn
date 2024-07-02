@@ -18,57 +18,43 @@ const HeroSection: React.FC = () => {
     if (images && images.length > 0) {
       const interval = setInterval(() => {
         setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-      }, 3000);
+      }, 1000);
 
-      return () => clearInterval(interval);
-    }
-  }, [images]);
+            return () => clearInterval(interval);
+        }
+    }, [images]);
 
-  console.log("Images from state:", images);
-  const { t } = useTranslation();
-  return (
-    <section className="bg-primary text-white text-xl px-[10px] py-[15vh] h-[100vh]  md:px-[50px] lg:px-[100px] flex gap-[20px] space-x-40 font-poppins">
-      <div className=" w-full lg:w-1/2 flex flex-col gap-[20px]">
-        <h1 className=" text-[30px] font-[800]">
-          <span className="text-secondary">CRAFTERS</span> ONLINE SHOP
-        </h1>
-        <p className="text-[16px] font-poppins">
-          {" "}
-          {t("Welcome")}
-          <a href="#" className="text-secondary font-bold">
-            {t("here")}
-          </a>{" "}
-          {t("to get started")}{" "}
-        </p>
-        <div className="flex flex-row gap-[10px]">
-          <button className="bg-secondary  w-full py-4 rounded-lg font-outfit">
-            {t("Shop Now")}
-          </button>
-          <button className="bg-[#08447D]  w-full py-4 rounded-lg font-outfit">
-            {t("Contact Us")}
-          </button>
-        </div>
-      </div>
+    console.log("Images from state:", images);
 
-      <div className="w-full lg:w-1/2">
-        <div className="w-[500px] h-[400px]">
-          {loading && <div>Loading...</div>}
-          {error && <div>Error: {error}</div>}
-          {!loading && !error && (!images || images.length === 0) && (
-            <div>No images found.</div>
-          )}
-
-          {images && images.length > 0 && (
-            <img
-              src={images[currentImageIndex]}
-              alt="Home Images"
-              className="w-full h-full object-cover rounded-lg"
-            />
-          )}
-        </div>
-      </div>
-    </section>
-  );
+    return (
+        <section className="bg-primary text-white text-xl sm:text-sm p-24 sm:p-6 md:p-12 lg:p-24 flex flex-col md:flex-row gap-8 md:gap-20 lg:gap-40 font-poppins">
+            <div className="mb-8 md:mb-0 md:w-1/2">
+                <h1 className="text-4xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-8">
+                    <span className='text-secondary'>CRAFTERS</span> ONLINE SHOP
+                </h1>
+                <p className="mb-8 sm:text-sm md:text-lg">
+                    Welcome to our online store! Whether you're a buyer looking for 
+                    great <br className="hidden md:inline" /> deals or a seller wanting to showcase your products, our platform <br className="hidden md:inline" />
+                    offers you the opportunity to connect and thrive. Explore our wide <br className="hidden md:inline" /> range of products and
+                    create an account <a href="#" className='text-secondary font-bold'>here</a> to get started.
+                </p>
+                <div>
+                    <button className="bg-secondary px-6 py-2 rounded-lg mr-4 mb-4 md:mb-0 md:text-lg">Shop Now</button>
+                    <button className="bg-blue-900 px-6 py-2 rounded-lg md:text-lg">Contact Us</button>
+                </div>
+            </div>
+            
+            <div className="md:w-1/2 flex justify-center">
+                {loading && <div>Loading...</div>}
+                {error && <div>Error: {error}</div>}
+                {!loading && !error && (!images || images.length === 0) && <div>No images found.</div>}
+                
+                {images && images.length > 0 && (
+                    <img src={images[currentImageIndex]} alt="Home Images" className="w-full sm:w-auto max-w-md h-60 sm:h-36 md:h-60" />
+                )}
+            </div>
+        </section>
+    );
 };
 
 export default HeroSection;
