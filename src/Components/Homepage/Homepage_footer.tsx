@@ -20,9 +20,9 @@ const Footer: React.FC = () => {
             <p className='mb-4 md:mb-10 font-bold'>Links</p>
             <ul className="grid grid-cols-2 gap-2">
               <li><a href="/" className="text-white hover:underline">Home</a></li>
-              <li><a href="/" className="text-white hover:underline">Products</a></li>
-              <li><a href="/" className="text-white hover:underline">About Us</a></li>
-              <li><a href="/" className="text-white hover:underline">Contact Us</a></li>
+              <li><a href="/products" className="text-white hover:underline">Products</a></li>
+              <li><a href="#AboutCrafters" className="text-white hover:underline">About Us</a></li>
+              <li><a href="#ContactSection" className="text-white hover:underline">Contact Us</a></li>
             </ul>
           </div>
           <div className="footer-contact">
