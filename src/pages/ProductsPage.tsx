@@ -7,6 +7,9 @@ import Search from "../Components/ProductsPage/searchProduct";
 import { useSelectProductsQuery } from "../Redux/productsPage/productSlice";
 import ProductCard from "../Components/ProductsPage/productCard";
 import Pagination from "../Components/ProductsPage/pagination";
+import Header from "../Components/Homepage/Homepage_header";
+import Footer from "../Components/Homepage/Homepage_footer";
+import LoadingFrame from "../Constants/frameLoader";
 
 interface Product {
   productId: string;
@@ -116,7 +119,7 @@ const Products = () => {
   return (
     <div className="flex flex-col">
       <Navbar />
-      <div className="flex flex-col gap-[20px] px-10 p-6">
+      <div className="flex flex-col gap-[20px] px-10 p-6 mb-20">
         <div className="flex flex-col-reverse gap-4 justify-between items-center md:flex-row">
           <div className="flex flex-row gap-[14px] items-center font-outfit">
             <span
@@ -135,7 +138,7 @@ const Products = () => {
 
         <div className="flex flex-col gap-[20px] md:flex-row">
           <div className="flex flex-col gap-[10px] w-full md:w-1/4">
-            <h1 className="text-[16px] font-[700]">Categories</h1>
+            <h1 className="text-[16px] font-[700] md:text-lg">Categories</h1>
             <ul className="flex gap-4 flex-row overflow-auto md:flex-col custom-scrollbar">
               {categories.map((item) => {
                 const isActive = activeCategory === item.value;
@@ -144,7 +147,7 @@ const Products = () => {
                     key={item.id}
                     className={`text-[14px] font-outfit text-gray-500 ${
                       isActive ? "text-secondary" : "hover:text-primary"
-                    } cursor-pointer`}
+                    } cursor-pointer md:text-lg`}
                     onClick={() => handleCategoryClick(item.value)}
                   >
                     {item.label}
@@ -156,10 +159,12 @@ const Products = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3 gap-[30px] w-full ">
             {isLoading ? (
-              "Loading..."
+              Array.from({ length: 9 }).map((_, index) => (
+                <LoadingFrame key={index} />
+              ))
             ) : filteredProducts?.length === 0 ? (
-              <div className=" flex justify-center items-center col-span-2">
-                <h2 className="text-2xl font-poppins text-secondary">
+              <div className=" flex justify-center items-center col-span-2 lg:col-span-3">
+                <h2 className="text-lg font-poppins text-secondary md:text-xl lg:text-2xl">
                   No Products Available
                 </h2>
               </div>
@@ -179,6 +184,7 @@ const Products = () => {
           productsPerPage={productsPerPage}
         />
       </div>
+      <Footer />
     </div>
   );
 };
