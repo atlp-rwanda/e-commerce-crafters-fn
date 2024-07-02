@@ -13,14 +13,29 @@ interface Review {
   updatedAt: string;
 }
 
-const Review: React.FC = () => {
+
+const Review: React.FC= () => {
   const [showContent, setShowContent] = useState(false);
   const [reviewFeedback, setReviewFeedback] = useState({
     name: '',
     feedback: '',
     ratingScore: 0,
   });
-  const [visibleReviews, setVisibleReviews] = useState(3); 
+  const [visibleReviews, setVisibleReviews] = useState(3);
+  const [ratingScore, setRating] = useState(3);
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [reviewSubmitted, setReviewSubmitted] = useState(false);
+
+  const dispatch = useDispatch();
+  const { loading: isLoading, error } = useSelector((state: any) => state.reviews);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/getfeedback/10ac05ed-9a26-416d-a491-2aa3d1d46b25')
+      .then(response => response.json())
+      .then(data => setReviews(data.ratings.reverse()))
+      .catch(error => console.error('Error fetching reviews:', error));
+  }, [reviewSubmitted]);
+
   const showMore = () => {
     setVisibleReviews((prev) => prev + 3);
   };
@@ -28,19 +43,6 @@ const Review: React.FC = () => {
   const showLess = () => {
     setVisibleReviews(3);
   };
-  const [ratingScore, setRating] = useState(3);
-  const rows = 4;
-
-  const [reviews, setReviews] = useState<Review[]>([]);
-
-  useEffect(() => {
-    fetch('http://localhost:5000/getfeedback/10ac05ed-9a26-416d-a491-2aa3d1d46b25')
-      .then(response => response.json())
-      .then(data => setReviews(data.ratings.reverse()))
-      .catch(error => console.error('Error fetching reviews:', error));
-  }, []);
-  const dispatch = useDispatch();
-  const { loading: isLoading, error } = useSelector((state: any) => state.reviews);
 
   const toggleContent = () => {
     setShowContent(!showContent);
@@ -66,7 +68,14 @@ const Review: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(submitReview(reviewFeedback) as any);
+    dispatch(submitReview(reviewFeedback) as any).then(() => {
+      setReviewFeedback({
+        name: '',
+        feedback: '',
+        ratingScore: 0,
+      });
+      setReviewSubmitted(true);
+    });
   };
 
   return (
@@ -117,7 +126,7 @@ const Review: React.FC = () => {
                 />
                 <textarea
                   name="feedback"
-                  rows={rows}
+                  rows={4}
                   className="block mt-5 p-2.5 w-full text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                   value={reviewFeedback.feedback}
                   onChange={handleInputChange}
@@ -134,35 +143,35 @@ const Review: React.FC = () => {
               </form>
             </div>
           )}
-      {reviews.slice(0, visibleReviews).map((review, index) => (
-        <div key={review.ratingId} className="grid grid-cols-10 gap-8 mb-4">
-          <div className="col-span-1 flex justify-center items-baseline">
-            <span className="bg-gray-500 rounded-full p-8 w-4 h-4 text-4xl text-center flex justify-center items-center font-bold text-[#C9974C]">
-              {index + 1}
-            </span>
-          </div>
-          <div className="col-span-9 gap-y-4 flex flex-col items-baseline">
-            <span className="text-[#C9974C] text-xl font-bold">{review.name}</span>
-            <div className="flex gap-1">
-              <StarRating rating={review.ratingScore ? Number(review.ratingScore) : 0} />
+          {reviews.slice(0, visibleReviews).map((review, index) => (
+            <div key={review.ratingId} className="grid grid-cols-10 gap-8 mb-4">
+              <div className="col-span-1 flex justify-center items-baseline">
+                <span className="bg-gray-500 rounded-full p-8 w-4 h-4 text-4xl text-center flex justify-center items-center font-bold text-[#C9974C]">
+                  {index + 1}
+                </span>
+              </div>
+              <div className="col-span-9 gap-y-4 flex flex-col items-baseline">
+                <span className="text-[#C9974C] text-xl font-bold">{review.name}</span>
+                <div className="flex gap-1">
+                  <StarRating rating={review.ratingScore ? Number(review.ratingScore) : 0} />
+                </div>
+                <data>{new Date(review.createdAt).toLocaleDateString()}</data>
+                <p>{review.feedback}</p>
+              </div>
             </div>
-            <data>{new Date(review.createdAt).toLocaleDateString()}</data>
-            <p>{review.feedback}</p>
+          ))}
+          <div className="flex justify-start mt-4">
+            {visibleReviews < reviews.length && (
+              <button onClick={showMore} className="mr-2 px-4 py-2 bg-blue-500 text-white rounded">
+                Show More
+              </button>
+            )}
+            {visibleReviews > 3 && (
+              <button onClick={showLess} className="px-4 py-2 bg-red-500 text-white rounded">
+                Show Less
+              </button>
+            )}
           </div>
-        </div>
-      ))}
-      <div className="flex justify-start mt-4">
-        {visibleReviews < reviews.length && (
-          <button onClick={showMore} className="mr-2 px-4 py-2 bg-blue-500 text-white rounded">
-            Show More
-          </button>
-        )}
-        {visibleReviews > 3 && (
-          <button onClick={showLess} className="px-4 py-2 bg-red-500 text-white rounded">
-            Show Less
-          </button>
-        )}
-      </div>
         </div>
       </div>
     </div>

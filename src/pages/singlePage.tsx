@@ -1,14 +1,19 @@
 import React from "react";
-import Reviews from "../Components/SingleProduct/reviews";
-import Sproduct from "../Components/SingleProduct/Sproduct";
-import SimilProduct from "../Components/SingleProduct/similaryProduct";
+import Reviews from "../Components/singleproduct/reviews";
+import Sproduct from "../Components/singleproduct/Sproduct";
+import SimilProduct from "../Components/singleproduct/similaryProduct";
+import Header from "../Components/Homepage/Homepage_header";
+import Footer from "../Components/Homepage/Homepage_footer";
 
 const Singlepage = () => {
+  const productId =""
   return (
     <div>
-      <Sproduct />
-      <Reviews />
-      <SimilProduct />
+      <Header />
+      <Sproduct  />
+      <Reviews  />
+      <SimilProduct productId={productId} />
+      <Footer />
     </div>
   );
 };

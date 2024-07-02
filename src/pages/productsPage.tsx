@@ -1,10 +1,10 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setActiveCategory } from "../Redux/features/productsPage/categorySlice";
+import { setActiveCategory } from "../Redux/productsPage/categorySlice";
 import { RootState } from "../Redux/store";
 import Navbar from "../Components/navBar";
 import Search from "../Components/ProductsPage/searchProduct";
-import { useSelectProductsQuery } from "../Redux/features/productsPage/productSlice";
+import { useSelectProductsQuery } from "../Redux/productsPage/productSlice";
 import ProductCard from "../Components/ProductsPage/productCard";
 import Pagination from "../Components/ProductsPage/pagination";
 
@@ -23,7 +23,7 @@ const Products = () => {
     (state: RootState) => state.category.activeCategory
   );
   const { data: products, isLoading, isError } = useSelectProductsQuery();
-   console.log(products)
+  // console.log(products)
   const productsPerPage = 9;
   const currentPage = useSelector(
     (state: RootState) => state.pagination.currentPage
@@ -136,7 +136,7 @@ const Products = () => {
         <div className="flex flex-col gap-[20px] md:flex-row">
           <div className="flex flex-col gap-[10px] w-full md:w-1/4">
             <h1 className="text-[16px] font-[700]">Categories</h1>
-            <ul className="flex gap-4 flex-row overflow-auto md:flex-col gap-2 custom-scrollbar">
+            <ul className="flex gap-4 flex-row overflow-auto md:flex-col custom-scrollbar">
               {categories.map((item) => {
                 const isActive = activeCategory === item.value;
                 return (

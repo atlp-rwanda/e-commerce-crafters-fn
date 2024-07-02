@@ -14,6 +14,8 @@ import wishlistslice from './Reducer/wishlistslice';
 import contactReducer from './HomePage/contactSlice';
 import productsImagesReducer from './HomePage/ProductsImagesSlice';
 import popularProductsReducer from './HomePage/PopularProductsSlice';
+import wishlistSlice from './Reducer/wishlistslice';
+
 
 export const store = configureStore({
   reducer: {
@@ -29,7 +31,8 @@ export const store = configureStore({
     productsImages: productsImagesReducer,
 
     popularProducts: popularProductsReducer,
-    contact: contactReducer
+    contact: contactReducer,
+    wishlist:wishlistSlice
     
   },
 

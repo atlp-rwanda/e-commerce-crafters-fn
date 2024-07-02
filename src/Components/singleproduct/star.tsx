@@ -1,6 +1,6 @@
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import React from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 interface StarRatingProps {
   rating: number;
@@ -8,7 +8,11 @@ interface StarRatingProps {
   clickable?: boolean;
 }
 
-const StarRating: React.FC<StarRatingProps> = ({ rating, onRatingChange, clickable = false }) => {
+const StarRating: React.FC<StarRatingProps> = ({
+  rating,
+  onRatingChange,
+  clickable = false,
+}) => {
   const validRating = Math.min(Math.max(rating, 0), 5);
 
   const handleClick = (index: number) => {
@@ -21,16 +25,16 @@ const StarRating: React.FC<StarRatingProps> = ({ rating, onRatingChange, clickab
     <FontAwesomeIcon
       key={index}
       icon={faStar}
-      className={index < validRating ? 'text-orange-500 cursor-pointer' : 'text-gray-300 cursor-pointer'}
+      className={
+        index < validRating
+          ? "text-orange-500 cursor-pointer"
+          : "text-gray-300 cursor-pointer"
+      }
       onClick={() => handleClick(index)}
     />
   ));
 
-  return (
-    <div className="flex space-x-1">
-      {stars}
-    </div>
-  );
+  return <div className="flex space-x-1">{stars}</div>;
 };
 
 export default StarRating;
