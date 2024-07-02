@@ -1,5 +1,8 @@
 import { configureStore, Action } from '@reduxjs/toolkit';
 import { ThunkAction } from 'redux-thunk';
+import productsImagesReducer from './features/ProductsImagesSlice';
+import popularProductsReducer from './features/PopularProductsSlice';
+import contactReducer from './features/contactSlice';
 import categoryReducer from './productsPage/categorySlice';
 import paginationReducer from './productsPage/paginationSlice';
 import searchReducer from './productsPage/searchSlice';
@@ -10,6 +13,7 @@ import contactReducer from './HomePage/contactSlice';
 import productsImagesReducer from './HomePage/ProductsImagesSlice';
 import popularProductsReducer from './HomePage/PopularProductsSlice';
 
+
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
@@ -17,8 +21,6 @@ export const store = configureStore({
     category: categoryReducer,
     pagination: paginationReducer,
     search: searchReducer,
-    reviews: reviewReducer,
-    product: productReducer,
     popularProducts: popularProductsReducer,
     contact: contactReducer,
     cart: cartReducer
