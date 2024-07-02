@@ -1,6 +1,7 @@
 import { configureStore, Action } from '@reduxjs/toolkit';
 import { ThunkAction } from 'redux-thunk';
 import productsImagesReducer from './features/ProductsImagesSlice';
+import popularProductsReducer from './features/PopularProductsSlice';
 import categoryReducer from './productsPage/categorySlice';
 import paginationReducer from './productsPage/paginationSlice';
 import searchReducer from './productsPage/searchSlice';
@@ -13,6 +14,7 @@ export const store = configureStore({
     category: categoryReducer,
     pagination: paginationReducer,
     search: searchReducer,
+    popularProducts: popularProductsReducer,
   },
   middleware: (getDefaultMiddelware) =>
     getDefaultMiddelware().concat(apiSlice.middleware),
