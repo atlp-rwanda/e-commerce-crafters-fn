@@ -8,7 +8,7 @@ function Seller() {
   const navigate = useNavigate();
   const userData: any = useAuthUser();
   useEffect(() => {
-    if (userData.role !== 'vendor') {
+    if (!userData || userData.role !== 'vendor') {
       navigate(`/${userData.role}`);
     }
   }, [navigate]);
