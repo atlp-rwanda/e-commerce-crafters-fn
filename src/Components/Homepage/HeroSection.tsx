@@ -32,15 +32,15 @@ const HeroSection: React.FC = () => {
                 <h1 className="text-4xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-8">
                     <span className='text-secondary'>CRAFTERS</span> ONLINE SHOP
                 </h1>
-                <p className="mb-8 text-base sm:text-sm md:text-base">
+                <p className="mb-8 sm:text-sm md:text-lg">
                     Welcome to our online store! Whether you're a buyer looking for 
                     great <br className="hidden md:inline" /> deals or a seller wanting to showcase your products, our platform <br className="hidden md:inline" />
                     offers you the opportunity to connect and thrive. Explore our wide <br className="hidden md:inline" /> range of products and
                     create an account <a href="#" className='text-secondary font-bold'>here</a> to get started.
                 </p>
                 <div>
-                    <button className="bg-secondary px-6 py-2 rounded-lg mr-4 mb-4 md:mb-0">Shop Now</button>
-                    <button className="bg-blue-900 px-6 py-2 rounded-lg">Contact Us</button>
+                    <button className="bg-secondary px-6 py-2 rounded-lg mr-4 mb-4 md:mb-0 md:text-lg">Shop Now</button>
+                    <button className="bg-blue-900 px-6 py-2 rounded-lg md:text-lg">Contact Us</button>
                 </div>
             </div>
             

@@ -29,18 +29,23 @@ const Header: React.FC = () => {
             </a>
           </li>
           <li>
-            <a href="/" className="hover:text-gray-300">
+            <a href="#AboutCrafters" className="hover:text-gray-300">
               About Us
             </a>
           </li>
           <li>
-            <a href="/" className="hover:text-gray-300">
+            <a href="/products" className="hover:text-gray-300">
               Products
             </a>
           </li>
           <li>
-            <a href="/" className="hover:text-gray-300">
+            <a href="#ContactSection" className="hover:text-gray-300">
               Contact Us
+            </a>
+          </li>
+          <li>
+            <a href="/login" className="hover:text-gray-300">
+              Login
             </a>
           </li>
         </ul>

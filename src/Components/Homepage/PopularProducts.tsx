@@ -33,10 +33,10 @@ const PopularProducts: React.FC = () => {
         {displayProducts.map((product) => (
           <div key={product.id} className="rounded-lg shadow-md p-4">
             <img src={product.image} alt={product.name} className="w-full h-48 sm:h-36 md:h-48 object-contain mb-4" />
-            <p className="text-sm sm:text-sm text-gray-500">{product.category}</p>
-            <h3 className="text-lg sm:text-sm text-secondary">{product.name}</h3>
+            <p className="md:text-lg sm:text-sm text-gray-500">{product.category}</p>
+            <h3 className="md:text-xl sm:text-lg text-secondary">{product.name}</h3>
             <div className="flex justify-between items-center mt-2">
-              <p className="text-lg sm:text-sm font-semibold text-gray-900">{product.price} Rwf</p>
+              <p className="md:text-xl sm:text-lg font-semibold text-gray-900">{product.price} Rwf</p>
               <button className="text-secondary fas fa-shopping-cart text-xl sm:text-xl"></button>
             </div>
           </div>
