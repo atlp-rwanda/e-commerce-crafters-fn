@@ -6,7 +6,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchProductDetails, addToCart } from "../../Redux/Action/singleProduct";
 import { addToWishlist, removeFromWishlist, fetchWishlist } from "../../Redux/Action/wishlist";
 
-const Sproduct: React.FC  = () => {
+
+const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
   const dispatch = useDispatch();
   const product = useSelector((state: any) => state.product.product);
   const status = useSelector((state: any) => state.product.status);
@@ -19,11 +20,12 @@ const Sproduct: React.FC  = () => {
 
   useEffect(() => {
     const userId = localStorage.getItem('userId');
-    dispatch(fetchProductDetails() as any);
+    // @ts-ignore
+    dispatch(fetchProductDetails(productId) as any); 
     if (userId) {
       dispatch(fetchWishlist(userId) as any);
     }
-  }, [dispatch]);
+  }, [dispatch, productId]);
 
   useEffect(() => {
     if (product.image && product.image.length > 0) {

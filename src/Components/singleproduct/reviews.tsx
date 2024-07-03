@@ -3,20 +3,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import StarRating from './star';
 import { submitReview } from '../../Redux/Action/singleProduct';
 
+
 interface Review {
   ratingId: string;
   ratingScore: string | null;
   feedback: string;
-  productId: string;
+
   name: string;
   createdAt: string;
   updatedAt: string;
 }
 
+interface ReviewFeedback {
+  name: string;
+  feedback: string;
+  ratingScore: number;
+}
 
-const Review: React.FC= () => {
+const Review: React.FC<{ productId: string }> = ({ productId }) => {
   const [showContent, setShowContent] = useState(false);
-  const [reviewFeedback, setReviewFeedback] = useState({
+  const [reviewFeedback, setReviewFeedback] = useState<ReviewFeedback>({
     name: '',
     feedback: '',
     ratingScore: 0,
@@ -30,9 +36,9 @@ const Review: React.FC= () => {
   const { loading: isLoading, error } = useSelector((state: any) => state.reviews);
 
   useEffect(() => {
-    fetch('http://localhost:5000/getfeedback/10ac05ed-9a26-416d-a491-2aa3d1d46b25')
+    fetch(`http://localhost:5000/getfeedback/${productId}`)
       .then(response => response.json())
-      .then(data => setReviews(data.ratings.reverse()))
+      .then(data => setReviews(data.ratings))
       .catch(error => console.error('Error fetching reviews:', error));
   }, [reviewSubmitted]);
 
@@ -68,16 +74,21 @@ const Review: React.FC= () => {
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(submitReview(reviewFeedback) as any).then(() => {
-      setReviewFeedback({
-        name: '',
-        feedback: '',
-        ratingScore: 0,
+    if (productId) {
+      const reviewPayload = {
+        productId,
+        data: reviewFeedback,
+      };
+      dispatch(submitReview(reviewPayload) as any).then(() => {
+        setReviewFeedback({
+          name: '',
+          feedback: '',
+          ratingScore: 0,
+        });
+        setReviewSubmitted(true);
       });
-      setReviewSubmitted(true);
-    });
+    }
   };
-
   return (
     <div className="p-4 flex justify-center">
       <div className="md:w-4/5 w-full p-5 py-4">

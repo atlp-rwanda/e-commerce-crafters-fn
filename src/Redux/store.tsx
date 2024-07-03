@@ -15,6 +15,8 @@ import contactReducer from './HomePage/contactSlice';
 import productsImagesReducer from './HomePage/ProductsImagesSlice';
 import popularProductsReducer from './HomePage/PopularProductsSlice';
 import wishlistSlice from './Reducer/wishlistslice';
+import SimilarProduct from '../Components/singleproduct/similaryProduct';
+import similarScile from './Reducer/similarScile';
 
 
 export const store = configureStore({
@@ -29,6 +31,7 @@ export const store = configureStore({
     pagination: paginationReducer,
     search: searchReducer,
     productsImages: productsImagesReducer,
+    similarProducts:similarScile,
 
     popularProducts: popularProductsReducer,
     contact: contactReducer,

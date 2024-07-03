@@ -4,15 +4,20 @@ import Sproduct from "../Components/singleproduct/Sproduct";
 import SimilProduct from "../Components/singleproduct/similaryProduct";
 import Header from "../Components/Homepage/Homepage_header";
 import Footer from "../Components/Homepage/Homepage_footer";
+import { useParams } from "react-router-dom";
 
 const Singlepage = () => {
-  const productId =""
+  const { id } = useParams();
+
+	const productId = id || 'no api';
+
+  
   return (
     <div>
       <Header />
-      <Sproduct  />
-      <Reviews  />
-      <SimilProduct productId={productId} />
+      <Sproduct productId={productId}  />
+      <Reviews productId={productId}  />
+      <SimilProduct productId={productId}/>
       <Footer />
     </div>
   );

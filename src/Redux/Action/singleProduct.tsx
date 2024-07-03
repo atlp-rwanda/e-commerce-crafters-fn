@@ -1,11 +1,32 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
+
+type ReviewData = {
+  name: string;
+  feedback: string;
+  ratingScore: number;
+};
+
+export interface Product {
+  productId: string;
+  name: string;
+  price: number;
+  image: string;
+  category: string;
+}
+
+export interface ProductState {
+  products: Product[];
+  status: 'idle' | 'loading' | 'succeeded' | 'failed';
+  error: string | null;
+}
+
 export const submitReview = createAsyncThunk(
   'reviews/submitReview',
-  async (data: { name: string; feedback: string; ratingScore: number }, { rejectWithValue }) => {
+  async ({ productId, data }: { productId: string; data: ReviewData }, { rejectWithValue }) => {
     try {
-      const apiUrl = `https://e-commerce-crafters-bn-6aiy.onrender.com/addfeedback/10ac05ed-9a26-416d-a491-2aa3d1d46b25`;
+      const apiUrl = `https://e-commerce-crafters-bn-6aiy.onrender.com/addfeedback/${productId}`;
       const token = localStorage.getItem('token');
       const config = {
         headers: {
@@ -14,8 +35,8 @@ export const submitReview = createAsyncThunk(
       };
 
       const response = await axios.post(apiUrl, data, config);
-      return response.data; 
-    } catch (error:any) {
+      return response.data;
+    } catch (error: any) {
       return rejectWithValue(error.message);
     }
   }
@@ -38,9 +59,9 @@ export const addToCart = createAsyncThunk(
 
 export const fetchProductDetails = createAsyncThunk(
   'product/fetchProductDetails',
-  async (_, { rejectWithValue }) => {
+  async (productId, { rejectWithValue }) => {
     try {
-      const apiUrl = `http://localhost:5000/readProduct/10ac05ed-9a26-416d-a491-2aa3d1d46b25`;
+      const apiUrl = `http://localhost:5000/readProduct/${productId}`;
       const response = await axios.get(apiUrl);
       return response.data;
     } catch (error:any) {
@@ -51,10 +72,23 @@ export const fetchProductDetails = createAsyncThunk(
 
 export const fetchReviews = createAsyncThunk(
   'product/fetchProductDetails',
-  async (_, { rejectWithValue }) => {
+  async (productId, { rejectWithValue }) => {
     try {
-      const apiUrl = `http://localhost:5000/getfeedback/10ac05ed-9a26-416d-a491-2aa3d1d46b25`;
+      const apiUrl = `http://localhost:5000/getfeedback/${productId}`;
       const response = await axios.get(apiUrl);
+      return response.data;
+    } catch (error:any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const fetchSimilarProducts = createAsyncThunk(
+  'products/fetchSimilarProducts',
+  async (productId: string, { rejectWithValue }) => {
+    try {
+      const apiUrl = `http://localhost:5000/similarproducts/${productId}`;
+      const response = await axios.get<Product[]>(apiUrl);
       return response.data;
     } catch (error:any) {
       return rejectWithValue(error.message);

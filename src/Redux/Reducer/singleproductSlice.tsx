@@ -29,6 +29,7 @@ interface CartState {
 }
 
 interface ProductState {
+  similarProducts: any;
   product: any;
   status: string;
   error: string | null;
@@ -44,6 +45,7 @@ const initialProductState: ProductState = {
   product: {},
   status: 'idle',
   error: null,
+  similarProducts: undefined
 };
 
 const initialState: CartState = {
