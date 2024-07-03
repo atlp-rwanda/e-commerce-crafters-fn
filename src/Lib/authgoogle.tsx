@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import useSignIn from 'react-auth-kit/hooks/useSignIn';
-import { jwtDecode } from 'jwt-decode';
+import React, { useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
+import { jwtDecode } from "jwt-decode";
 
 const AuthGoogle: React.FC = () => {
   const navigate = useNavigate();
@@ -12,8 +12,8 @@ const AuthGoogle: React.FC = () => {
 
   useEffect(() => {
     const queryParams = getQueryParams(location.search);
-    const token = queryParams.get('token');
-    const userDataString = queryParams.get('user');
+    const token = queryParams.get("token");
+    const userDataString = queryParams.get("user");
     const userData = userDataString ? JSON.parse(userDataString) : null;
 
     if (token) {
@@ -21,29 +21,28 @@ const AuthGoogle: React.FC = () => {
       const sign = signIn({
         auth: {
           token,
-          type: 'Bearer',
+          type: "Bearer",
         },
         userState: userData,
       });
 
       if (sign) {
-        if (decodedToken.role === 'vendor') {
-          navigate('/vendor');
-        } else if (decodedToken.role === 'buyer') {
-          navigate('/buyer');
+        if (decodedToken.role === "vendor") {
+          navigate("/vendor");
+        } else if (decodedToken.role === "buyer") {
+          navigate("/buyer");
         } else {
-          navigate('/admin');
+          navigate("/admin");
         }
       }
     } else {
-      console.log('no token found');
+      console.log("no token found");
     }
   }, [location.search, navigate, signIn]);
 
   return (
     <div className="w-full flex items-center justify-center h-screen">
       <span>Loading..</span>
-
     </div>
   );
 };
