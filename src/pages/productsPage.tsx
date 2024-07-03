@@ -22,7 +22,6 @@ const Products = () => {
   const activeCategory: string | null = useSelector(
     (state: RootState) => state.category.activeCategory
   );
-  // @ts-ignore
   const { data: products, isLoading, isError } = useSelectProductsQuery();
   // console.log(products)
   const productsPerPage = 9;
