@@ -79,7 +79,7 @@ const Signin: React.FC = () => {
         setError("Invalid credentials. Try again");
         setErr(true);
       } else {
-        setError("Something is wrong , Try again later");
+        setError("Invalid credentials, Try again");
         setErr(false);
       }
     }
@@ -161,6 +161,7 @@ const Signin: React.FC = () => {
             value={password}
             onChange={(value) => setPassword(value)}
           />
+          <a href="/forgot-password" className="text-[16px] font-[600] text-primary text-end">Forgot Password?</a>
           <AuthButton isLoading={!!isLoading} label="Sign In" />
 
           <div
