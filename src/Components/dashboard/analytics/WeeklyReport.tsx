@@ -64,8 +64,8 @@ const data = [
 const WeeklyReport = () => {
   return (
     <div
-      style={{ width: "400px", height: "200px" }}
-      className="flex ml-10 text-xs  rounded-lg shadow-2xl border-gray-400 bg-white"
+      style={{width: '100%', height: '100%'}}
+      className="flex ml-10 text-xs  rounded-lg shadow-2xl border-gray-400 bg-white w-full h-full"
     >
       <ResponsiveContainer width="99%" height="100%">
         <BarChart

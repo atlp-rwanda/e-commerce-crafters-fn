@@ -13,7 +13,7 @@ const InteractionCard: React.FC<CardProps> = ({ data }) => {
         </h1>
       </div>
       <div>
-        <div className="flex p-2 rounded-[6px] bg-gray-100">{data.icons}</div>
+        <div className="flex p-2 rounded-[6px] bg-gray-100">{data.icon}</div>
       </div>
     </div>
   );
