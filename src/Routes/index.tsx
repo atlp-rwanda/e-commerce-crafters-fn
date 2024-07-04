@@ -25,6 +25,7 @@ import Singlepage from "../pages/singlePage";
 const AppRoutes: React.FC = () => (
   <div>
     <Routes>
+      
       <Route path="" element={<Homepage />} />
       <Route path="/login" element={<Signin />} />
       <Route path="/checkout" element={<Checkout />} />
