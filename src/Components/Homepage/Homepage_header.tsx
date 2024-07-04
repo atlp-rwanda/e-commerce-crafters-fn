@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import logo from "../../asset/images/logo1.png";
-import i18n from "../../Lib/i18n";
 import { useTranslation } from "react-i18next";
+
+const placeholderProfilePicture = "https://tse1.mm.bing.net/th?id=OIP.hCfHyL8u8XAbreXuaiTMQgHaHZ&pid=Api";
+
 const Header: React.FC = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -10,17 +12,17 @@ const Header: React.FC = () => {
   const handleLanguageChange = (language: string) => {
     setSelectedLanguage(language);
     setIsDropdownOpen(false);
-    setIsMenuOpen(false); 
-    console.log(`Language changed to: ${language}`);
+    setIsMenuOpen(false);
   };
+
   const { t } = useTranslation();
 
   return (
-    <header className="bg-primary text-xl text-white pl-24 pt-8 pb-8 sm:pl-12 sm:pt-6 sm:pb-6 md:pl-24 md:pt-8 md:pb-8 flex items-center justify-between font-poppins border-b-2 border-border relative">
+    <header className="bg-primary text-xl text-white pl-24 pt-8 pb-8 sm:pl-12 sm:pt-6 sm:pb-6 md:pl-24 md:pt-8 md:pb-8 flex items-center justify-between font-outfit border-b-2 border-border relative">
       <div className="flex items-center">
         <img src={logo} alt="CRAFTERS Logo" className="h-12 sm:h-10" />
       </div>
-      
+
       <nav className="hidden lg:flex">
         <ul className="flex space-x-8">
           <li>
@@ -43,17 +45,19 @@ const Header: React.FC = () => {
               Contact Us
             </a>
           </li>
-          <li>
-            <a href="/login" className="hover:text-gray-300">
-              Login
-            </a>
-          </li>
         </ul>
       </nav>
 
       <div className="hidden lg:flex items-center space-x-8 pr-24">
         <a href="#"><i className="text-2xl fas fa-shopping-cart"></i></a>
         <a href="#"><i className="text-2xl fas fa-heart"></i></a>
+        
+        <div className="flex items-center space-x-4">
+          <img src={placeholderProfilePicture} alt="User Profile" className="w-10 h-10 rounded-full" />
+          <span className="text-sm">Philbert</span>
+          <i className="fas fa-chevron-down ml-2"></i>
+        </div>
+
         <div className="relative">
           <button onClick={() => setIsDropdownOpen(!isDropdownOpen)} className="flex items-center">
             {selectedLanguage}

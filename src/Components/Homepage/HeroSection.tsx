@@ -27,12 +27,12 @@ const HeroSection: React.FC = () => {
     console.log("Images from state:", images);
 
     return (
-        <section className="bg-primary text-white text-xl sm:text-sm p-24 sm:p-6 md:p-12 lg:p-24 flex flex-col md:flex-row gap-8 md:gap-20 lg:gap-40 font-poppins">
+        <section className="bg-primary text-white text-xl sm:text-sm p-24 sm:p-6 md:p-12 lg:p-24 flex flex-col md:flex-row gap-8 md:gap-20 lg:gap-40 font-outfit">
             <div className="mb-8 md:mb-0 md:w-1/2">
                 <h1 className="text-4xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-8">
                     <span className='text-secondary'>CRAFTERS</span> ONLINE SHOP
                 </h1>
-                <p className="mb-8 sm:text-sm md:text-lg">
+                <p className="mb-8 sm:text-sm md:text-xl">
                     Welcome to our online store! Whether you're a buyer looking for 
                     great <br className="hidden md:inline" /> deals or a seller wanting to showcase your products, our platform <br className="hidden md:inline" />
                     offers you the opportunity to connect and thrive. Explore our wide <br className="hidden md:inline" /> range of products and
