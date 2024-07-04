@@ -39,7 +39,6 @@ const AppRoutes: React.FC = () => {
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/forgot-password" element={<Forgotpassword />} />
       <Route path="/2fa" element={<VerifyCode />} />
       <Route path="/verifyemail" element={<VerifyEmail />} />
       <Route path="/authgoogle" element={<AuthGoogle />} />
