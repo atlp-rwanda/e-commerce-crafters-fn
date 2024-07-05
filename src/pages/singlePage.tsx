@@ -1,6 +1,6 @@
 import React from "react";
-import Reviews from "../Components/singleproduct/reviews";
-import Sproduct from "../Components/singleproduct/Sproduct";
+import Reviews from "../Components/SingleProduct/reviews";
+import Sproduct from "../Components/SingleProduct/Sproduct";
 import SimilProduct from "../Components/singleproduct/similaryProduct";
 import Header from "../Components/Homepage/Homepage_header";
 import Footer from "../Components/Homepage/Homepage_footer";
@@ -14,11 +14,15 @@ const Singlepage = () => {
   
   return (
     <div>
-      <Header />
-      <Sproduct productId={productId}  />
-      <Reviews productId={productId}  />
-      <SimilProduct productId={productId}/>
-      <Footer />
+      {/* <Header /> */}
+      <div className="flex flex-col justify-center w-full">
+
+    <Sproduct productId={productId} />
+    <Reviews productId={productId} />
+    <SimilProduct productId={productId} />
+ 
+</div>
+      {/* <Footer /> */}
     </div>
   );
 };

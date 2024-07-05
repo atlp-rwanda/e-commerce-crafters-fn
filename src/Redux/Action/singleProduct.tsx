@@ -1,5 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 type ReviewData = {
@@ -33,10 +35,35 @@ export const submitReview = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       };
+      
 
       const response = await axios.post(apiUrl, data, config);
+      const SuccessMessage = response.data.message || 'Failed to add to cart';
+      const existingToastId = toast.isActive("successful added review");
+      if (!existingToastId) {
+        toast.success(SuccessMessage, {
+          toastId: "successful added review", 
+          style: {
+            width: "auto", 
+            backgroundColor: "#FFFFFF",
+            color: "green", 
+          },
+        });
+      }
       return response.data;
     } catch (error: any) {
+      const errorMessage = error.response?.data?.message || 'Failed to add to review';
+      const existingToastId = toast.isActive("error to add review");
+      if (!existingToastId) {
+        toast.error(errorMessage, {
+          toastId: "error to add review", 
+          style: {
+            width: "auto", 
+            backgroundColor: "#FFFFFF",
+            color: "#FF6347", 
+          },
+        });
+      }
       return rejectWithValue(error.message);
     }
   }
@@ -49,9 +76,38 @@ export const addToCart = createAsyncThunk(
     try {
       const apiUrl = 'https://e-commerce-crafters-bn-6aiy.onrender.com/addcart';
       const response = await axios.post(apiUrl, cartItem);
+      
+      const existingToastId = toast.isActive("error to add cart");
+
+      if (!existingToastId) {
+        toast.success(response.data.message, {
+          toastId: "added successfull", 
+          style: {
+            width: "auto", 
+            backgroundColor: "#FFFFFF",
+            color: "green", 
+          },
+        });
+      }
       return response.data;
-    } catch (error) {
-     
+    } catch (error:any) {
+      const errorMessage = error.response?.data?.message || 'Failed to add to cart';
+      const existingToastId = toast.isActive("error to add cart");
+
+      if (!existingToastId) {
+        toast.error(errorMessage, {
+          toastId: "error to add cart ", 
+          style: {
+            width: "auto", 
+            backgroundColor: "#FFFFFF",
+            color: "#FF6347", 
+          },
+        });
+      }
+   
+  
+  
+
       throw Error('Failed to add to cart');
     }
   }
