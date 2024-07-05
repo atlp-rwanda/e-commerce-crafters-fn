@@ -48,7 +48,7 @@ export const submitReview = createAsyncThunk(
             backgroundColor: "#FFFFFF",
             color: "green", 
           },
-        });
+        })
       }
       return response.data;
     } catch (error: any) {

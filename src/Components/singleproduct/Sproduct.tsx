@@ -8,6 +8,8 @@ import { addToWishlist, removeFromWishlist, fetchWishlist } from "../../Redux/Ac
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import "./product.css"
+import { toast } from "react-toastify";
+
 
 
 
@@ -21,7 +23,7 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
   const [isWishlist, setIsWishlist] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
   const [size, setSize] = useState<number>(1);
-  // const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [ isLoadingCart, setLoadingCart] = useState<boolean>(false)
 
   useEffect(() => {
     const userId = localStorage.getItem('userId');
@@ -58,31 +60,40 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
       console.error('User ID not found in localStorage');
       return;
     }
-  
+
     const wishlistItem = {
       userId,
       productId: product.productId,
       price: product.price,
     };
-  
+
+   
+
     if (isWishlist) {
-     
       dispatch(removeFromWishlist({ userId, productId: product.productId }) as any)
         .then(() => {
-          setIsWishlist(false); 
-          console.log("Wishlist removed successfully");
+          
+          toast.success("Wishlist removed successfully");
+          dispatch(fetchWishlist(userId) as any); 
         })
-        .catch((err: any) => console.error('Error removing from wishlist:', err));
+        .catch((err: any) => {
+          
+          console.error('Error removing from wishlist:', err);
+        });
     } else {
-     
       dispatch(addToWishlist(wishlistItem) as any)
         .then(() => {
-          setIsWishlist(true); 
-          console.log("Wishlist added successfully");
+          
+          toast.success("Wishlist added successfully");
+          dispatch(fetchWishlist(userId) as any); 
         })
-        .catch((err: any) => console.error('Error adding to wishlist:', err));
+        .catch((err: any) => {
+          
+          console.error('Error adding to wishlist:', err);
+        });
     }
   };
+
   
   
 
@@ -119,15 +130,21 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
       quantity,
       price: product.price,
     };
+    
+    setLoadingCart(true);
+    
     dispatch(addToCart(cartItem) as any)
     .then(() => {
-      // toast.success('Item added to cart!');
+      setLoadingCart(false);
+   
     })
     .catch((err: any) => {
+      setLoadingCart(false);
       console.error('Error adding to cart:', err);
-      // toast.error('Failed to add item to cart.');
+     
     });
   };
+
 
   if (status === 'loading') {
     return<div className='flex justify-center md:flex-row lg:flex-col items-center flex-col'>
@@ -244,7 +261,7 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
                 </button>
               </div>
             </div>
-            <button onClick={handleAddToCart} className='bg-[#E4A951] p-3 rounded-lg w-full'>Add to Cart</button>
+            <button onClick={handleAddToCart} className='bg-[#E4A951] p-3 rounded-lg w-full'>{isLoadingCart ? 'Adding ...' : 'Add to Cart'}</button>
           </div>
         </div>
       </div>

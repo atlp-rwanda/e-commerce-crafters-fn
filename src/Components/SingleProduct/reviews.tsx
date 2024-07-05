@@ -84,7 +84,7 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
           feedback: '',
           ratingScore: 0,
         });
-        // Update reviews after submission
+        
         fetch(`http://localhost:5000/getfeedback/${productId}`)
           .then(response => response.json())
           .then(data => setReviews(data.ratings))
@@ -99,7 +99,7 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
         <h1 className="text-4xl font-extrabold">Review</h1>
         <div className="w-full flex flex-col gap-3 justify-center">
           <div className="flex pt-4 justify-between">
-            <div>{isLoading ? <Skeleton width={50} /> : `${reviews.length} Reviews`}</div>
+            <div>{isLoading ? <Skeleton width={50} /> : `${reviews.length ||0} Reviews`}</div>
             <div className="flex">
               <div className="flex flex-col">
                 <div className="flex gap-1">
