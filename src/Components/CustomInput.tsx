@@ -9,13 +9,15 @@ interface CustomInputProps {
  labelStyles: string;
  inputStyles: string;
  iconStyles?: string;
- handleChange: ChangeEventHandler<
+ handleChange?: ChangeEventHandler<
   HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
  >;
  options?: { value: string; label: string }[];
  rows?: number;
  accept?: string;
  multiple?: boolean;
+ register?: any;
+ disable?: boolean;
 }
 
 const CustomInput: React.FC<CustomInputProps> = ({
@@ -32,22 +34,31 @@ const CustomInput: React.FC<CustomInputProps> = ({
  rows,
  accept,
  multiple,
+ register,
+ disable = false,
 }) => {
  const renderInput = () => {
   switch (type) {
    case "textarea":
     return (
      <textarea
+      {...register}
       id={inputId}
       placeholder={placeholder}
       className={inputStyles}
       onChange={handleChange}
       rows={rows || 3}
+      disabled={disable}
      />
     );
    case "select":
     return (
-     <select id={inputId} className={inputStyles} onChange={handleChange}>
+     <select
+      id={inputId}
+      className={inputStyles}
+      disabled={disable}
+      onChange={handleChange}
+     >
       {options?.map((option) => (
        <option key={option.value} value={option.value}>
         {option.label}
@@ -58,22 +69,26 @@ const CustomInput: React.FC<CustomInputProps> = ({
    case "file":
     return (
      <input
+      {...register}
       id={inputId}
       type='file'
       className={inputStyles}
       onChange={handleChange}
       accept={accept}
       multiple={multiple}
+      disabled={disable}
      />
     );
    default:
     return (
      <input
+      {...register}
       id={inputId}
       type={type}
       placeholder={placeholder}
       className={inputStyles}
       onChange={handleChange}
+      disabled={disable}
      />
     );
   }

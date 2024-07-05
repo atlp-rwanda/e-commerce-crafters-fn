@@ -23,11 +23,11 @@ interface TabButtonProps {
  children: ReactNode;
 }
 
-const Settings: React.FC<SettingsProps> = ({ children, className }) => {
+const UserSettings: React.FC<SettingsProps> = ({ children, className }) => {
  const [activeTab, setActiveTab] = useState(children[0]?.props.label);
  const handleActiveTab = useCallback(setActiveTab, []);
  return (
-  <main className={className}>
+  <section className={className}>
    <nav className='flex flex-row'>
     {Children.map(children, (child) => {
      if (isValidElement<TabProps>(child)) {
@@ -50,7 +50,7 @@ const Settings: React.FC<SettingsProps> = ({ children, className }) => {
       isValidElement<TabProps>(child) && child.props.label === activeTab
     )}
    </>
-  </main>
+  </section>
  );
 };
 const TabButton: React.FC<TabButtonProps> = ({
@@ -59,7 +59,7 @@ const TabButton: React.FC<TabButtonProps> = ({
  children,
 }) => (
  <button
-  className={`sm:py-1 sm:px-2 sm:text-sm md:text-lg  py-2 px-6  font-outfit hover:bg-sky-50 transition-colors duration-500 ${
+  className={`py-1 px-2 text-sm md:text-lg  sm:py-2 sm:px-3  font-outfit hover:bg-sky-50 transition-colors duration-500 ${
    isActive ? "border-b-2 border-third text-third" : "text-border"
   }`}
   onClick={onClick}
@@ -68,5 +68,4 @@ const TabButton: React.FC<TabButtonProps> = ({
  </button>
 );
 
-const Tab: React.FC<TabProps> = ({ children }) => <>{children}</>;
-export { Tab, Settings as default };
+export { UserSettings as default };

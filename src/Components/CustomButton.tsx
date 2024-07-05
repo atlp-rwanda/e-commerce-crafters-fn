@@ -1,17 +1,28 @@
-import React, { MouseEventHandler } from "react";
+import React, { MouseEventHandler, ReactNode } from "react";
 
 const CustomButton = ({
  title,
  handleClick,
  buttonStyles,
+ disable = false,
+ buttonType,
+ spinner,
 }: {
  title: string;
- handleClick: MouseEventHandler;
+ handleClick?: MouseEventHandler;
  buttonStyles: string;
+ disable?: boolean;
+ buttonType?: "submit" | "reset" | "button" | undefined;
+ spinner?: ReactNode;
 }) => {
  return (
-  <button className={buttonStyles} onClick={handleClick}>
-   {title}
+  <button
+   type={buttonType}
+   className={buttonStyles}
+   disabled={disable}
+   onClick={handleClick}
+  >
+   {disable ? spinner : title}
   </button>
  );
 };
