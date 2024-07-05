@@ -4,6 +4,7 @@ import CartTotals from "../Components/Cart/CartTotals";
 import useFetch from "../Components/Checkout/UseFetch";
 import Footer from "../Components/Homepage/Homepage_footer";
 import Header from "../Components/Homepage/Homepage_header";
+import { useTranslation } from "react-i18next";
 
 const Cart = () => {
   const {
@@ -41,13 +42,13 @@ const Cart = () => {
   const handleDelete = (id: number) => {
     setCartItems((products) => products.filter((item) => item.id !== id));
   };
-
+  const { t } = useTranslation();
   return (
     <>
       <Header />
       <div className="w-[90%] mx-auto my-[50px] p-4">
         <h1 className="text-xl font-semibold ml-10">
-          Shopping Cart{" "}
+          {t("Shopping Cart")}{" "}
           <span className="bg-gray-200 py-[4px] px-4 font-bold rounded-lg">
             0{cartItems.length}
           </span>
