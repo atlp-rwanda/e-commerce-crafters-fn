@@ -13,7 +13,7 @@ import AuthGoogle from "../Lib/authgoogle";
 import Users from "../pages/Users";
 
 import Sellers from "../pages/Sellers";
-import Analytics from "../pages/Analytics";
+
 import Settings from "../pages/Settings";
 import AdminHome from "../pages/Admin/AdminHome";
 import Homepage from "../pages/Homepage";
@@ -30,6 +30,7 @@ const AppRoutes: React.FC = () => (
       <Route path="" element={<Homepage />} />
       <Route path="/login" element={<Signin />} />
       <Route path="/checkout" element={<Checkout />} />
+
       <Route path="/cart" element={<Cart />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/2fa" element={<VerifyCode />} />
@@ -45,7 +46,7 @@ const AppRoutes: React.FC = () => (
           <Route index element={<AdminHome />} />
           <Route path="users" element={<Users />} />
           <Route path="sellers" element={<Sellers />} />
-          <Route path="analytics" element={<Analytics />} />
+
           <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="/buyer" element={<Buyer />} />

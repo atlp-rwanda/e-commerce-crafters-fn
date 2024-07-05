@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { Key } from "react";
 
 interface DeliveryAddress {
   city: string;
@@ -13,6 +14,8 @@ interface Product {
 }
 
 interface Order {
+  color: string | undefined;
+  name: Key | null | undefined;
   createdAt: string;
   deliveryAddress: DeliveryAddress;
   expectedDeliveryDate: string | null;

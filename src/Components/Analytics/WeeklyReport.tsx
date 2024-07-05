@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Bar,
   BarChart,
@@ -10,64 +10,44 @@ import {
   YAxis,
 } from "recharts";
 
-const data = [
-  {
-    name: "Monday",
-    Expense: 4000,
-    Income: 2400,
-    amt: 2400,
-  },
-  {
-    name: "Tuesday",
-    Expense: 3000,
-    Income: 1398,
-    amt: 2210,
-  },
-  {
-    name: "Wednesday",
-    Expense: 2000,
-    Income: 9800,
-    amt: 2290,
-  },
-  {
-    name: "Thurday",
-    Expense: 2780,
-    Income: 3908,
-    amt: 2000,
-  },
-  {
-    name: "Friday",
-    Expense: 1890,
-    Income: 4800,
-    amt: 2181,
-  },
-  {
-    name: "Saturday",
-    Expense: 2390,
-    Income: 3800,
-    amt: 2500,
-  },
-  {
-    name: "Sunday",
-    Expense: 3490,
-    Income: 4300,
-    amt: 2100,
-  },
-  {
-    name: "August",
-    Expense: 3490,
-    Income: 4300,
-    amt: 2100,
-  },
-  
-];
+import { AppDispatch, RootState } from "../../Redux/store";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { fetchWeeklyReport } from "../../Redux/Analytic/WeeklySellingSlice";
+
 
 const WeeklyReport = () => {
+
+  const dispatch: AppDispatch = useDispatch();
+  const { weeklySales, isLoading, error } = useSelector(
+    (state: RootState) => state.weeklyReport
+  );
+
+  useEffect(() => {
+  dispatch(fetchWeeklyReport())
+  }, [dispatch])
+  
+  const data = weeklySales.map((day) => ({
+    name: day.day,
+      TotalSales:day.totalSales
+  }))
+
   return (
     <div
-      style={{ width: "50%", height: "400px" }}
-      className="flex m-auto mt-80 text-xs  rounded-lg shadow-2xl border-gray-400"
+      style={{ width: "40%", height: "350px" }}
+      className="flex  flex-col m-auto mt-80 text-xs  rounded-lg shadow-2xl border-gray-400"
     >
+      <div className="py-2 pl-10 relative">
+        <h2 className="font-bold text-lg">Reports</h2>
+        <span className="flex gap-2 mt-3">
+          <div className=" bg-[#37C9EE] w-3 h-3 inline-block rounded-full " />
+          <span>Weekly report</span>
+          <img
+            src="https://static.vecteezy.com/system/resources/previews/026/622/025/original/add-category-icon-symbol-design-illustration-vector.jpg" className="w-5 h-5 absolute top-3 right-2"
+            alt="category-icon"
+          />
+        </span>
+      </div>
       <ResponsiveContainer width="99%" height="100%">
         <BarChart
           width={500}
@@ -85,8 +65,7 @@ const WeeklyReport = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="Income" fill="#C9974C" background={{ fill: "#eee" }} />
-          <Bar dataKey="Expense" fill="#013362" />
+          <Bar dataKey="TotalSales" fill="#013362" barSize={30} />
         </BarChart>
       </ResponsiveContainer>
     </div>

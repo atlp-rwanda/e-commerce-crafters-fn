@@ -11,7 +11,12 @@ import contactReducer from './HomePage/contactSlice';
 import productsImagesReducer from './HomePage/ProductsImagesSlice';
 import popularProductsReducer from './HomePage/PopularProductsSlice';
 import AuthSlice from "./features/AuthSlice";
-import OrderStatusSlice from "./features/analyticSlice";
+import OrderStatusSlice from './Analytic/orderStatusSlice';
+import sellingReportReducer from "./Analytic/SellingReportSlice";
+import WeeklySellingReducer from './Analytic/WeeklySellingSlice';
+import TopProductReducer from "../Components/Analytics/TopProduct";
+
+
 
 
 export const store = configureStore({
@@ -27,7 +32,9 @@ export const store = configureStore({
     contact: contactReducer,
 
     orderStatus: OrderStatusSlice,
-
+    sellingReport: sellingReportReducer,
+    weeklyReport: WeeklySellingReducer,
+    // topProduct:TopProductReducer
   },
   middleware: (getDefaultMiddelware) =>
     getDefaultMiddelware().concat(apiSlice.middleware),

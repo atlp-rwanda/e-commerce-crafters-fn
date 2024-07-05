@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   PieChart,
   Pie,
@@ -7,14 +7,46 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+import { AppDispatch, RootState } from "../../Redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchOrders } from "../../Redux/Analytic/orderStatusSlice";
 
 interface OrderStatusProps {
   statusCounts: { [key: string]: number };
 }
 
-const OrderStatus: React.FC<OrderStatusProps> = ({ statusCounts }) => {
+const OrderStatus: React.FC = () => {
   const colors = ["#FFC632", "#17BF6B", "#ED3333"];
 
+  const dispatch: AppDispatch = useDispatch();
+  const { isLoading, data, error } = useSelector(
+    (state: RootState) => state.orderStatus
+  );
+  const [statusCounts, setStatusCounts] = useState<{ [key: string]: number }>(
+    {}
+  );
+
+  useEffect(() => {
+    dispatch(fetchOrders());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (data) {
+      const counts: { [key: string]: number } = {};
+      data.forEach((order) => {
+        counts[order.status] = (counts[order.status] || 0) + 1;
+      });
+      setStatusCounts(counts);
+    }
+  }, [data]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error fetching orders</div>;
+  }
 
   let statusCount = {
     pending: statusCounts.pending,
@@ -23,12 +55,11 @@ const OrderStatus: React.FC<OrderStatusProps> = ({ statusCounts }) => {
   };
   console.log(statusCount);
 
-  const data = Object.entries(statusCount).map(([status, value], index) => ({
+  const datas = Object.entries(statusCount).map(([status, value], index) => ({
     name: status,
     value,
     color: colors[index % colors.length],
   }));
-
 
   return (
     <div className="mt-80 font-poppins">
@@ -44,13 +75,13 @@ const OrderStatus: React.FC<OrderStatusProps> = ({ statusCounts }) => {
                 contentStyle={{ background: "white", borderRadius: "5px" }}
               />
               <Pie
-                data={data}
+                data={datas}
                 innerRadius={"60"}
                 outerRadius={"80"}
                 paddingAngle={0}
                 dataKey="value"
               >
-                {data.map((item) => (
+                {datas.map((item) => (
                   <Cell key={item.name} fill={item.color} />
                 ))}
               </Pie>
@@ -68,7 +99,7 @@ const OrderStatus: React.FC<OrderStatusProps> = ({ statusCounts }) => {
             </span>
             <span className="flex justify-center items-center">
               <span className=" bg-[#ED3333] w-4 h-4 inline-block rounded-full " />
-              <span className="pl-2">cancelled</span>
+              <span className="pl-2 ">cancelled</span>
             </span>
           </div>
         </div>
@@ -78,5 +109,3 @@ const OrderStatus: React.FC<OrderStatusProps> = ({ statusCounts }) => {
 };
 
 export default OrderStatus;
-
-
