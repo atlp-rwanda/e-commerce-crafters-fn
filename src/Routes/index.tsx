@@ -1,7 +1,5 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import AuthOutlet from "@auth-kit/react-router/AuthOutlet";
-
 import Signin from "../pages/Signin";
 import SignUp from "../pages/SignUp";
 import Admin from "../Portal/admin";
@@ -11,49 +9,32 @@ import VerifyCode from "../pages/VerifyCode";
 import VerifyEmail from "../Lib/VerifyEmail";
 import AuthGoogle from "../Lib/authgoogle";
 import Users from "../pages/Users";
+import AuthOutlet from "@auth-kit/react-router/AuthOutlet";
+import Analytics from "../pages/Analytics";
+import Test from "../pages/Check";
 
-import Sellers from "../pages/Sellers";
-
-import Settings from "../pages/Settings";
-import AdminHome from "../pages/Admin/AdminHome";
-import Homepage from "../pages/Homepage";
-import Products from "../pages/ProductsPage";
-import SingleProduct from "../pages/SingleProduct";
-import { OrderTrackingPage } from "../pages/orderTrackingPage";
-import Cart from "../pages/Cart";
-import Checkout from "../pages/Checkout";
-import Singlepage from "../pages/singlePage";
-
-const AppRoutes: React.FC = () => (
-  <div>
-    <Routes>
-      <Route path="" element={<Homepage />} />
-      <Route path="/login" element={<Signin />} />
-      <Route path="/checkout" element={<Checkout />} />
-
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/2fa" element={<VerifyCode />} />
-      <Route path="/verifyemail" element={<VerifyEmail />} />
-      <Route path="/authgoogle" element={<AuthGoogle />} />
-      <Route path="/products" element={<Products />} />
-      <Route path="/singleproduct" element={<Singlepage />} />
-
-      <Route path="/product/:id" element={<SingleProduct />} />
-      <Route path="/order-tracking" element={<OrderTrackingPage />} />
-      <Route element={<AuthOutlet fallbackPath="/login" />}>
-        <Route path="/admin" element={<Admin />}>
-          <Route index element={<AdminHome />} />
-          <Route path="users" element={<Users />} />
-          <Route path="sellers" element={<Sellers />} />
-
-          <Route path="settings" element={<Settings />} />
+const AppRoutes: React.FC = () => {
+  return (
+    <div>
+      <Routes>
+        <Route path="/login" element={<Signin />} />
+        <Route path="/analytics" element={<Analytics />} />
+        <Route path="/test" element={<Test />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/2fa" element={<VerifyCode />} />
+        <Route path="/verifyemail" element={<VerifyEmail />} />
+        <Route path="/authgoogle" element={<AuthGoogle />} />
+        <Route element={<AuthOutlet fallbackPath="/login" />}>
+          <Route path="/admin" element={<Admin />}>
+            <Route index element={<Users />} />
+            <Route path="users" element={<Users />} />
+          </Route>
+          <Route path="/buyer" element={<Buyer />} />
+          <Route path="/vendor" element={<Seller />} />
         </Route>
-        <Route path="/buyer" element={<Buyer />} />
-        <Route path="/vendor" element={<Seller />} />
-      </Route>
-    </Routes>
-  </div>
-);
+      </Routes>
+    </div>
+  );
+};
 
 export default AppRoutes;
