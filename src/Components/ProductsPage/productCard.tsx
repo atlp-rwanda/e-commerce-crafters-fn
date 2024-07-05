@@ -33,16 +33,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         />
       </div>
       <div className="flex flex-col gap-[4px] pl-2 pb-2">
-        <span className="text-sm text-gray-600 font-outfit md:text-base">
+        <span className="text-sm text-gray-600 font-outfit md:text-lg">
           {product.category}
         </span>
         <div className="flex flex-row justify-between ">
           <div className="flex flex-col">
-            <h1 className="text-sm font-[700] font-outfit text-secondary md:text-base">
+            <h1 className="text-sm font-[700] font-outfit text-secondary md:text-lg">
               {product.name}
             </h1>
             <div className="flex flex-row items-center gap-[10px]">
-              <span className="font-outfit font-[600] text-sm md:text-base">
+              <span className="font-outfit font-[600] text-sm md:text-lg">
                 {" "}
                 {product.price}
               </span>
