@@ -5,7 +5,7 @@ const AboutCrafters: React.FC = () => {
     "https://www.vocso.com/blog/wp-content/uploads/2022/02/eCommerce-Website-Features-1920-x-1080.jpg";
   const { t } = useTranslation();
   return (
-    <section className="py-16 px-6 sm:px-12 md:px-24 bg-white font-outfit text-lg md:text-xl" id="about-crafters">
+    <section className="py-16 px-6 sm:px-12 md:px-24 bg-white font-outfit text-lg md:text-xl h-screen mt-96" id="about-crafters">
       <h2 className="text-2xl sm:text-3xl font-bold mb-8"> ABOUT <span className='text-secondary'> CRAFTERS </span></h2>
       <div className="container flex flex-col md:flex-row gap-8 md:gap-20">
         <div className="flex-none w-full md:w-1/3 mb-8">

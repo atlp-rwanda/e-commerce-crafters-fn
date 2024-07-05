@@ -27,12 +27,12 @@ const HeroSection: React.FC = () => {
     console.log("Images from state:", images);
 
     return (
-        <section className="bg-primary text-white text-xl sm:text-sm p-24 sm:p-6 md:p-12 lg:p-24 flex flex-col md:flex-row gap-8 md:gap-20 lg:gap-40 font-outfit">
-            <div className="mb-8 md:mb-0 md:w-1/2">
+        <section className="bg-primary text-white text-xl sm:text-sm p-24 sm:p-6 md:p-12 lg:p-24 flex flex-col md:flex-row gap-8 md:gap-20 lg:gap-40 font-outfit h-screen mt-24">
+            <div className="mt-8 mb-16 md:mb-0 md:w-1/2">
                 <h1 className="text-4xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-8">
                     <span className='text-secondary'>CRAFTERS</span> ONLINE SHOP
                 </h1>
-                <p className="mb-8 sm:text-sm md:text-xl">
+                <p className="mb-16 sm:text-sm md:text-xl">
                     Welcome to our online store! Whether you're a buyer looking for 
                     great <br className="hidden md:inline" /> deals or a seller wanting to showcase your products, our platform <br className="hidden md:inline" />
                     offers you the opportunity to connect and thrive. Explore our wide <br className="hidden md:inline" /> range of products and
@@ -44,7 +44,7 @@ const HeroSection: React.FC = () => {
                 </div>
             </div>
             
-            <div className="md:w-1/2 flex justify-center">
+            <div className=" mt-24 md:w-1/2 flex justify-center">
                 {loading && <div>Loading...</div>}
                 {error && <div>Error: {error}</div>}
                 {!loading && !error && (!images || images.length === 0) && <div>No images found.</div>}

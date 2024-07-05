@@ -22,7 +22,7 @@ const PopularProducts: React.FC = () => {
   const displayProducts = products.slice(0, 10);
 
   return (
-    <section className="py-16 px-6 sm:px-12 md:px-24 font-outfit bg-white">
+    <section className="py-16 px-6 sm:px-12 md:px-24 font-outfit bg-white h-screen">
       <div className="mb-8">
         <div className="flex items-center">
           <div className="w-24 h-2 bg-secondary mr-4"></div>
