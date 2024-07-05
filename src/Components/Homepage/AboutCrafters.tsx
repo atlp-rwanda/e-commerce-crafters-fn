@@ -6,7 +6,7 @@ const AboutCrafters: React.FC = () => {
   const { t } = useTranslation();
   return (
     <section
-      className="py-16 px-6 sm:px-12 md:px-24 bg-white font-poppins text-lg md:text-xl"
+      className="py-16 px-6 sm:px-12 md:px-24 bg-bgwhite font-poppins text-lg md:text-xl"
       id="about-crafters"
     >
       <h2 className="text-2xl sm:text-3xl font-bold mb-8">
@@ -22,7 +22,7 @@ const AboutCrafters: React.FC = () => {
           />
         </div>
         <div>
-          <p className="text-gray-700 text-base sm:text-lg md:text-xl sm:text-sm">
+          <p className="text-textprimary text-base sm:text-lg md:text-xl sm:text-sm">
             {t("AboutUs")}
           </p>
         </div>
