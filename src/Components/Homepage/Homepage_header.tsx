@@ -31,7 +31,7 @@ const Header: React.FC = () => {
             </a>
           </li>
           <li>
-            <a href="#AboutCrafters" className="hover:text-gray-300">
+            <a href="#about-crafters" className="hover:text-gray-300">
               About Us
             </a>
           </li>
@@ -41,7 +41,7 @@ const Header: React.FC = () => {
             </a>
           </li>
           <li>
-            <a href="#ContactSection" className="hover:text-gray-300">
+            <a href="#contact-us" className="hover:text-gray-300">
               Contact Us
             </a>
           </li>

@@ -4,7 +4,7 @@ import { setActiveCategory } from "../Redux/productsPage/categorySlice";
 import { RootState } from "../Redux/store";
 import Navbar from "../Components/navBar";
 import Search from "../Components/ProductsPage/searchProduct";
-import { useSelectProductsQuery } from "../Redux/productsPage/productSlice";
+import { useAllProductsQuery } from "../Redux/productsPage/productSlice";
 import ProductCard from "../Components/ProductsPage/productCard";
 import Pagination from "../Components/ProductsPage/pagination";
 import Header from "../Components/Homepage/Homepage_header";
@@ -25,7 +25,7 @@ const Products = () => {
   const activeCategory: string | null = useSelector(
     (state: RootState) => state.category.activeCategory
   );
-  const { data: products, isLoading, isError } = useSelectProductsQuery({});
+  const { data: products, isLoading, isError } = useAllProductsQuery({});
   // console.log(products)
   const productsPerPage = 9;
   const currentPage = useSelector(

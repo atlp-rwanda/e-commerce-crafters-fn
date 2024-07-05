@@ -1,10 +1,66 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import profile from "../asset/images/profile.png";
+import Bag from "../asset/images/Bag.svg";
+import logout from "../asset/images/logout.svg";
+import profileIcon from "../asset/images/profileIcon.svg";
+import downArrow from "../asset/images/downArrow.svg";
+import upArrow from "../asset/images/upArrow.svg";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+import { useCartsQuery, useWishlistsQuery } from "../Redux/productsPage/productSlice";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
+  const userToken = Cookies.get("_auth");
+  const userDataName = Cookies.get("_auth_state");
+  const userData = userDataName ? JSON.parse(userDataName) : null;
+  const isLoggedIn = !!userToken;
+  const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const handleDropDown = () => {
+    setIsOpen(!isOpen);
+  };
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
+  const handleLogout = () => {
+    Cookies.remove("_auth_state");
+    Cookies.remove("_auth_type");
+    Cookies.remove("_auth");
+    navigate("/");
+  };
+
+  const userId = userData.userId;
+  const {data: carts} = useCartsQuery({});
+  // console.log(carts)
+  const { data: wishlists} = useWishlistsQuery({});
+  // console.log(wishlists)
+  const userWishlists = wishlists ? wishlists.filter((wishlist: any) => wishlist.userId === userId) : [];
+  const wishlistsNumber = userWishlists.length;
+  const userCarts = carts ? carts.filter((cart: any) => cart.userId === userId) : [];
+  const cartsNumber = userCarts.length;
+
+
   return (
-    <div className="flex flex-row items-center justify-between bg-primary p-6 px-10">
+    <div className="relative flex flex-row items-center justify-between bg-primary p-6 px-10">
       <div className="flex flex-row items-center gap-[40px]">
         <div>
           <svg
@@ -38,9 +94,9 @@ const Navbar = () => {
         </div>
         <div className="flex flex-row gap-[40px] text-white font-outfit">
           <Link to="/">Home</Link>
-          <a href="">About Us</a>
+          <Link to="/#about-crafters">About Us</Link>
           <Link to="/products">Products</Link>
-          <a href="">Contact Us</a>
+          <Link to="/#contact-us">Contact Us</Link>
         </div>
       </div>
       <div className="flex flex-row items-center gap-[40px]">
@@ -60,7 +116,7 @@ const Navbar = () => {
             />
           </svg>
           <div className=" absolute top-[-10px] left-[10px] p-1 min-h-[25px] min-w-[25px] flex items-center justify-center rounded-full bg-secondary">
-            <span className="text-white text-[12px]">04</span>
+            <span className="text-white text-[12px]">{cartsNumber}</span>
           </div>
         </a>
         <a href="" className="relative">
@@ -87,29 +143,81 @@ const Navbar = () => {
           </svg>
 
           <div className=" absolute top-[-10px] left-[10px] p-1 min-h-[25px] min-w-[25px] flex items-center justify-center rounded-full bg-secondary">
-            <span className="text-white text-[12px]">04</span>
+            <span className="text-white text-[12px]">{wishlistsNumber}</span>
           </div>
         </a>
 
         <div className="flex flex-row gap-[10px] items-center">
-          <div className="w-[50px] h-[50px]">
-            <img src={profile} className="w-full h-full object-cover" alt="" />
+          <div className="w-[50px] h-[50px] rounded-full overflow-hidden">
+            <img
+              src={userData.profile}
+              className="w-full h-full object-cover"
+              alt=""
+            />
           </div>
-          <div className="cursor-pointer">
-            <svg
-              width="15"
-              height="15"
-              viewBox="0 0 24 15"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fill-rule="evenodd"
-                clip-rule="evenodd"
-                d="M13.6952 13.6944C13.2265 14.1625 12.591 14.4255 11.9285 14.4255C11.266 14.4255 10.6306 14.1625 10.1619 13.6944L0.731878 4.26771C0.263108 3.79872 -0.000156211 3.16272 6.95392e-08 2.49962C0.00015635 1.83653 0.26372 1.20065 0.732711 0.731879C1.2017 0.263109 1.8377 -0.000156211 2.5008 6.95389e-08C3.1639 0.00015635 3.79977 0.263721 4.26854 0.732712L11.9285 8.39271L19.5885 0.732712C20.0598 0.27709 20.6912 0.0248021 21.3467 0.030187C22.0022 0.035572 22.6294 0.298198 23.0931 0.761502C23.5569 1.22481 23.8201 1.85172 23.8261 2.50721C23.8321 3.1627 23.5804 3.79433 23.1252 4.26605L13.6969 13.696L13.6952 13.6944Z"
-                fill="white"
-              />
-            </svg>
+          <div
+            className="cursor-pointer"
+            onClick={handleDropDown}
+            ref={dropdownRef}
+          >
+            {isOpen ? (
+              <>
+                <img src={upArrow} alt="" />
+                {isLoggedIn && (
+                  <div className="absolute z-50 flex flex-col top-full mt-2 right-2 h-62 bg-[#012F5A] rounded-l-[20px] mb-4 border-2 border-[#ffffff3e] fade-in">
+                    <div className="flex flex-row gap-4 bg-[#0E3F6D] rounded-tl-[20px] p-7">
+                      <div className="w-[60px] h-[60px] rounded-full overflow-hidden">
+                        <img
+                          src={userData.profile}
+                          alt="profilePic"
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="font-outfit text-lg text-white gap-2">
+                        <p className="text-xl font-semibold">{userData.name}</p>
+                        <p className="text-gray-200">{userData.email}</p>
+                      </div>
+                    </div>
+                    <div className="flex flex-col space-y-6 mb-4 p-8">
+                      <div
+                        className="flex flex-row gap-6 hover:scale-105 transition-transform duration-200"
+                        onClick={() =>
+                          navigate(
+                            userData.role === "vendor" ? "/vendor" : "/buyer"
+                          )
+                        }
+                      >
+                        <img src={profileIcon} alt="" />
+                        <p className="font-outfit text-lg text-white">
+                          Profile
+                        </p>
+                      </div>
+                      {userData.role === "vendor" && (
+                        <div className="flex flex-row gap-6 hover:scale-105 transition-transform duration-200"
+                        onClick={() => navigate("/sellerDashboard")}
+                        >
+                          <img src={Bag} alt="" />
+                          <p className="font-outfit text-lg text-white">
+                            My Shop
+                          </p>
+                        </div>
+                      )}
+                      <div
+                        className="flex flex-row gap-6 hover:scale-105 transition-transform duration-200"
+                        onClick={handleLogout}
+                      >
+                        <img src={logout} alt="" />
+                        <p className="font-outfit text-lg text-white">Logout</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </>
+            ) : (
+              <>
+                <img src={downArrow} alt="/" />
+              </>
+            )}
           </div>
         </div>
       </div>
