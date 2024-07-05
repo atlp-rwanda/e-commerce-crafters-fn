@@ -10,12 +10,14 @@ import VerifyCode from '../pages/VerifyCode';
 import VerifyEmail from '../Lib/VerifyEmail';
 import AuthGoogle from '../Lib/authgoogle';
 import Users from '../pages/Users';
+import Chat from '../pages/chat/Chat';
 
 
 const AppRoutes: React.FC = () => (
   <div>
     <Routes>
       <Route path="/login" element={<Signin />} />
+      <Route path="/chat" element={<Chat />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/2fa" element={<VerifyCode />} />
       <Route path="/verifyemail" element={<VerifyEmail />} />
