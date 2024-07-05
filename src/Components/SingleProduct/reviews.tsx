@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import StarRating from './star';
 import { submitReview } from '../../Redux/Action/singleProduct';
-
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 interface Review {
   ratingId: string;
   ratingScore: string | null;
   feedback: string;
-
   name: string;
   createdAt: string;
   updatedAt: string;
@@ -30,7 +30,6 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
   const [visibleReviews, setVisibleReviews] = useState(3);
   const [ratingScore, setRating] = useState(3);
   const [reviews, setReviews] = useState<Review[]>([]);
-  const [reviewSubmitted, setReviewSubmitted] = useState(false);
 
   const dispatch = useDispatch();
   const { loading: isLoading, error } = useSelector((state: any) => state.reviews);
@@ -40,10 +39,10 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
       .then(response => response.json())
       .then(data => setReviews(data.ratings))
       .catch(error => console.error('Error fetching reviews:', error));
-  }, [reviewSubmitted]);
+  }, [productId]);
 
   const showMore = () => {
-    setVisibleReviews((prev) => prev + 3);
+    setVisibleReviews(prev => prev + 3);
   };
 
   const showLess = () => {
@@ -85,17 +84,22 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
           feedback: '',
           ratingScore: 0,
         });
-        setReviewSubmitted(true);
+        // Update reviews after submission
+        fetch(`http://localhost:5000/getfeedback/${productId}`)
+          .then(response => response.json())
+          .then(data => setReviews(data.ratings))
+          .catch(error => console.error('Error fetching reviews:', error));
       });
     }
   };
+
   return (
-    <div className="p-4 flex justify-center">
+    <div className='flex justify-center md:flex-col items-center lg:flex-col flex-col'>
       <div className="md:w-4/5 w-full p-5 py-4">
         <h1 className="text-4xl font-extrabold">Review</h1>
-        <div className="w-4/5 flex flex-col gap-3 justify-center">
+        <div className="w-full flex flex-col gap-3 justify-center">
           <div className="flex pt-4 justify-between">
-            <div>{reviews.length} Reviews</div>
+            <div>{isLoading ? <Skeleton width={50} /> : `${reviews.length} Reviews`}</div>
             <div className="flex">
               <div className="flex flex-col">
                 <div className="flex gap-1">
@@ -108,12 +112,12 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
                   Leave my review
                 </div>
               </div>
-              <span>4 rates</span>
+              <span> {isLoading ? <Skeleton width={50} /> : `4 rates`}</span>
             </div>
           </div>
           {showContent && (
-            <div className="ml-9 md:ml-0 py-4">
-              <div className="bg-[#F9FAFB] mt-7 p-2.5 grid md:grid-cols-2 grid-cols-1 justify-between w-3/5 md:w-full">
+            <div className=" md:ml-0 py-4">
+              <div className="bg-[#F9FAFB] mt-7 p-2.5 grid md:grid-cols-2 grid-cols-1 justify-between w- md:w-full">
                 <p className="md:w-3/4 w-full">How will you rate this product?</p>
                 <div className="mr-0 md:mr-4">
                   <StarRating
@@ -154,25 +158,44 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
               </form>
             </div>
           )}
-          {reviews.slice(0, visibleReviews).map((review, index) => (
-            <div key={review.ratingId} className="grid grid-cols-10 gap-8 mb-4">
-              <div className="col-span-1 flex justify-center items-baseline">
-                <span className="bg-gray-500 rounded-full p-8 w-4 h-4 text-4xl text-center flex justify-center items-center font-bold text-[#C9974C]">
-                  {index + 1}
-                </span>
-              </div>
-              <div className="col-span-9 gap-y-4 flex flex-col items-baseline">
-                <span className="text-[#C9974C] text-xl font-bold">{review.name}</span>
-                <div className="flex gap-1">
-                  <StarRating rating={review.ratingScore ? Number(review.ratingScore) : 0} />
+          {isLoading ? (
+            Array(visibleReviews).fill(0).map((_, index) => (
+              <div key={index} className="grid grid-cols-10 gap-8 mb-4">
+                <div className="col-span-2 flex justify-center items-baseline">
+                  <Skeleton circle={true} height={64}  width={64} />
                 </div>
-                <data>{new Date(review.createdAt).toLocaleDateString()}</data>
-                <p>{review.feedback}</p>
+                <div className="col-span-8 gap-y-4 flex flex-col items-baseline">
+
+                  <Skeleton width="60vw" height={24} />
+                  <div className="flex gap-4">
+                    <Skeleton width="70vw" height={24} />
+                  </div>
+                  <Skeleton width="60vw" height={20} />
+                  <Skeleton count={3} />
+                </div>
               </div>
-            </div>
-          ))}
+            ))
+          ) : (
+            reviews.slice(0, visibleReviews).map((review, index) => (
+              <div key={review.ratingId} className="grid grid-cols-10 gap-8 mb-4">
+                <div className="col-span-2 flex justify-center items-baseline">
+                  <span className="bg-gray-500 rounded-full md:p-8 md:w-4 w-4 p-4 h-4 md:h-4 md:text-4xl  text-md  text-center flex justify-center items-center font-bold text-[#C9974C]">
+                    {index + 1}
+                  </span>
+                </div>
+                <div className="col-span-8 gap-y-4 flex flex-col items-baseline">
+                  <span className="text-[#C9974C] text-xl font-bold">{review.name}</span>
+                  <div className="flex gap-1">
+                    <StarRating rating={review.ratingScore ? Number(review.ratingScore) : 0} />
+                  </div>
+                  <data>{new Date(review.createdAt).toLocaleDateString()}</data>
+                  <p>{review.feedback}</p>
+                </div>
+              </div>
+            ))
+          )}
           <div className="flex justify-start mt-4">
-            {visibleReviews < reviews.length && (
+            {visibleReviews < reviews.length  && (
               <button onClick={showMore} className="mr-2 px-4 py-2 bg-blue-500 text-white rounded">
                 Show More
               </button>
