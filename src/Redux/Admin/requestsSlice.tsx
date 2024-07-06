@@ -1,58 +1,34 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { approveVendor, rejectVendor } from "./requestsActions";
+import { apiSlice } from "../features/ApiSlice";
+import Cookies from "js-cookie";
 
-
-
-
-interface RequestsState {
-  approvedVendors: string[];
-  rejectedVendors: string[];
-  status: "idle" | "loading" | "succeeded" | "failed";
-  error: string | null;
-}
-
-const initialState: RequestsState = {
-  approvedVendors: [],
-  rejectedVendors: [],
-  status: "idle",
-  error: null,
-};
-
-const requestsSlice = createSlice({
-  name: "requests",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(approveVendor.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(
-        approveVendor.fulfilled,
-        (state, action: PayloadAction<string>) => {
-          state.status = "succeeded";
-          state.approvedVendors.push(action.payload);
-        }
-      )
-      .addCase(approveVendor.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message || null;
-      })
-      .addCase(rejectVendor.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(
-        rejectVendor.fulfilled,
-        (state, action: PayloadAction<string>) => {
-          state.status = "succeeded";
-          state.rejectedVendors.push(action.payload);
-        }
-      )
-      .addCase(rejectVendor.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message || null;
-      });
-  },
+const RequestsSlice = apiSlice.injectEndpoints({
+  endpoints: (builder) => ({
+    approve: builder.mutation({
+      query: (userId) => {
+        const token = Cookies.get("_auth");
+        return {
+          url: `/approve-vendor/${userId}`,
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
+    reject: builder.mutation({
+        query: (userId) => {
+        const token = Cookies.get("_auth");
+        return {
+          url: `/reject-vendor/${userId}`,
+          method: "PUT",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        };
+      },
+    }),
+  }),
 });
 
-export default requestsSlice.reducer;
+export const { useApproveMutation, useRejectMutation } = RequestsSlice;
+export default RequestsSlice;
