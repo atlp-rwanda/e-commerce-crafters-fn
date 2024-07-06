@@ -8,9 +8,11 @@ import paginationReducer from './productsPage/paginationSlice';
 import searchReducer from './productsPage/searchSlice';
 import { apiSlice } from './features/ApiSlice';
 import { reviewReducer } from './Action/Reducer/Review';
-import { productReducer,cartReducer } from './Action/Reducer/singleproductSlice';
-
-
+import { productReducer, cartReducer } from './Action/Reducer/singleproductSlice';
+import sellingReportReducer from "./Analytic/SellingReportSlice";
+import WeeklySellingReducer from "./Analytic/WeeklySellingSlice";
+import OrderStatusSlice from "./Analytic/orderStatusSlice";
+import requestsReducer from './Admin/requestsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -21,7 +23,11 @@ export const store = configureStore({
     search: searchReducer,
     popularProducts: popularProductsReducer,
     contact: contactReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    orderStatus: OrderStatusSlice,
+    sellingReport: sellingReportReducer,
+    weeklyReport: WeeklySellingReducer,
+    requests: requestsReducer,
   },
   middleware: (getDefaultMiddelware) =>
     getDefaultMiddelware().concat(apiSlice.middleware),

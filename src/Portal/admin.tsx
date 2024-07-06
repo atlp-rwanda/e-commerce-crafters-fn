@@ -15,14 +15,14 @@ const Admin = () => {
     }
   }, [navigate]);
   return (
-    <div className="w-full h-screen flex flex-row">
-      <div className='w-[15%] relative flex'>
+    <div className=" w-full h-screen flex flex-row">
+      <div className='hidden lg:w-[15%] relative lg:flex'>
         <Sidebar />
       </div>
 
-      <div className="flex flex-col w-[85%]">
+      <div className="w-full lg:flex flex-col ">
         <DashHeader />
-        <div className="flex-grow p-4 bg-gray-100 pt-[20vh]">
+        <div className=" justify-center flex flex-grow p-4 bg-gray-100  lg:ml-[70px] pt-[10vh] xl:ml-[20px]">
           <Outlet />
         </div>
         <DashFooter />

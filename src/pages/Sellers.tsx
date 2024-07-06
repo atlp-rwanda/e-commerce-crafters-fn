@@ -1,22 +1,26 @@
 import React from "react";
-import UserTable from "../Components/dashboard/SellerTable";
+import SellerTable from "../Components/dashboard/SellerTable";
+import { useSelectSellersQuery } from "../Redux/Admin/sellersSlice";
+import { Circles } from "react-loader-spinner";
 
 const Sellers = () => {
-   const listUsers = [
-     { id: 1, name: "seller001", email: "u@email.com" },
-     { id: 1, name: "seller001", email: "u@email.com" },
-     { id: 1, name: "seller001", email: "u@email.com" },
-     { id: 1, name: "seller001", email: "u@email.com" },
-     { id: 1, name: "seller001", email: "u@email.com" },
-     { id: 1, name: "seller001", email: "u@email.com" },
-     
-   ];
-  return (
-  // <div className=" font-bold text-lg text-center">Sellers Page</div>
-  <UserTable users={listUsers} onRemove={function (id: number): void {
-    throw new Error("Function not implemented.");
-  }} />
-)
-};
+  const { data: sellers, isLoading, isError } = useSelectSellersQuery({});
+  if (isLoading) return (
+    <div className="flex justify-center items-center h-screen">
+      <Circles
+        visible
+        height="80"
+        width="80"
+        color="#C9974C"
+        ariaLabel="circles-loading"
+        wrapperStyle={{}}
+        wrapperClass="circles-wrapper"
+      />
+    </div>
+  );
+  if (isError) return <div>Error loading sellers.</div>;
+  return <SellerTable users={sellers} />;
+ 
+}
 
 export default Sellers;

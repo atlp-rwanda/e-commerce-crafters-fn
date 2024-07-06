@@ -21,6 +21,7 @@ import { OrderTrackingPage } from "../pages/orderTrackingPage";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Singlepage from "../pages/singlePage";
+import Requests from "../pages/Requests";
 
 const AppRoutes: React.FC = () => (
   <div>
@@ -44,6 +45,7 @@ const AppRoutes: React.FC = () => (
           <Route path="users" element={<Users />} />
           <Route path="sellers" element={<Sellers />} />
           <Route path="analytics" element={<Analytics />} />
+          <Route path="requests" element={<Requests />} />
           <Route path="settings" element={<Settings />} />
         </Route>
         <Route path="/buyer" element={<Buyer />} />
