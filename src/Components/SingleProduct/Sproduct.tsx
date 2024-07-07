@@ -12,8 +12,9 @@ import {
   fetchProductDetails,
   addToCart,
 } from "../../Redux/Action/singleProduct";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
-const Sproduct: React.FC = () => {
+const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
   const dispatch = useDispatch();
   const product = useSelector((state: any) => state.product.product);
   const status = useSelector((state: any) => state.product.status);
@@ -23,8 +24,10 @@ const Sproduct: React.FC = () => {
   const [quantity, setQuantity] = useState<number>(1);
   const [size, setSize] = useState<number>(1);
 
+  const userData:any = useAuthUser()
+
   useEffect(() => {
-    dispatch(fetchProductDetails() as any);
+    dispatch(fetchProductDetails( productId ) as any);
   }, [dispatch]);
 
   const handleImageClick = (image: string) => {
@@ -56,15 +59,15 @@ const Sproduct: React.FC = () => {
   };
 
   const handleAddToCart = () => {
-    const userId = localStorage.getItem("userId");
+    const userId = userData ? userData.userId : "";
     if (!userId) {
       console.error("User ID not found in localStorage");
       return;
     }
 
     const cartItem = {
-      userId,
-      productId: "9856d575-03ee-43dd-b6f1-acf57ec42bc2",
+      userId: userId ,
+      productId: productId,
       quantity,
       price: product.price,
     };

@@ -1,7 +1,9 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+// import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 
 type ReviewData = {
@@ -28,7 +30,7 @@ export const submitReview = createAsyncThunk(
   'reviews/submitReview',
   async ({ productId, data }: { productId: string; data: ReviewData }, { rejectWithValue }) => {
     try {
-      const apiUrl = `https://e-commerce-crafters-bn-6aiy.onrender.com/addfeedback/${productId}`;
+      const apiUrl = `https://http://localhost:5000/products/addfeedback/${productId}`;
       const token = localStorage.getItem('token');
       const config = {
         headers: {
@@ -74,7 +76,7 @@ export const addToCart = createAsyncThunk(
   'cart/addToCart',
   async (cartItem: { userId: string; productId: string; quantity: number; price: number }) => {
     try {
-      const apiUrl = 'https://e-commerce-crafters-bn-6aiy.onrender.com/addcart';
+      const apiUrl = "http://localhost:5000/addcart";
       const response = await axios.post(apiUrl, cartItem);
       
       const existingToastId = toast.isActive("error to add cart");
@@ -127,10 +129,12 @@ async(userId: string) => {
 
 export const fetchProductDetails = createAsyncThunk(
   'product/fetchProductDetails',
-  async (productId, { rejectWithValue }) => {
+  async (productId:string, { rejectWithValue }) => {
     try {
       const apiUrl = `http://localhost:5000/readProduct/${productId}`;
+      
       const response = await axios.get(apiUrl);
+      console.log("response")
       return response.data;
     } catch (error:any) {
       return rejectWithValue(error.message);
@@ -139,7 +143,7 @@ export const fetchProductDetails = createAsyncThunk(
 );
 
 export const fetchReviews = createAsyncThunk(
-  'product/fetchProductDetails',
+  'product/fetchProductDetail',
   async (productId, { rejectWithValue }) => {
     try {
       const apiUrl = `http://localhost:5000/getfeedback/${productId}`;
@@ -163,3 +167,7 @@ export const fetchSimilarProducts = createAsyncThunk(
     }
   }
 );
+
+function rejectWithValue(message: any): any {
+  throw new Error('Function not implemented.');
+}

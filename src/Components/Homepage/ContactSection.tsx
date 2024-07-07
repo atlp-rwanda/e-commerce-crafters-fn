@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import { RootState, AppDispatch } from "../../Redux/store";
 import { sendMessage } from "../../Redux/HomePage/contactSlice";
+import { useTranslation } from "react-i18next";
 
 interface Props {
   status: "idle" | "loading" | "succeeded" | "failed";
