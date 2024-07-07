@@ -5,7 +5,7 @@ import Logout from "../../services/Logout";
 
 const Sidebar = () => {
   const location = useLocation();
-  const pathName = location.pathname
+  const pathName = location.pathname;
   const navigate = useNavigate();
   const [active, setActive] = useState<string>("001");
   const Navlinks = [
@@ -323,7 +323,7 @@ const Sidebar = () => {
               onClick={() => handleNavigate(item)}
               key={index}
               className={` cursor-pointer flex flex-row gap-[10px] items-center p-2 rounded-[12px] ${
-                pathName === item.location    ? "bg-secondary" : ""
+                pathName === item.location ? "bg-secondary" : ""
               }`}
             >
               {item.icon}

@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from "react";
 
-import mainproduct1 from "../../asset/images/products/0ce8299f7b1c845d575f949b244ea238.jpg";
-import mainproduct2 from "../../asset/images/products/529d198d51183b1643323dd26b8db71d (1).jpg";
-import mainproduct4 from "../../asset/images/products/529d198d51183b1643323dd26b8db71d.jpg";
-import mainproduct3 from "../../asset/images/products/f8c69bc0404ff0b6158cab028ac8e632.jpg";
-import heart from "../../asset/images/products/heart_.png";
+import mainproduct1 from "../../asset/images/Products/0ce8299f7b1c845d575f949b244ea238.jpg";
+import mainproduct2 from "../../asset/images/Products/529d198d51183b1643323dd26b8db71d (1).jpg";
+import mainproduct4 from "../../asset/images/Products/529d198d51183b1643323dd26b8db71d.jpg";
+import mainproduct3 from "../../asset/images/Products/f8c69bc0404ff0b6158cab028ac8e632.jpg";
+import heart from "../../asset/images/Products/heart_.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProductDetails, addToCart } from "../../Redux/Action/singleProduct";
+import {
+  fetchProductDetails,
+  addToCart,
+} from "../../Redux/Action/singleProduct";
 
 const Sproduct: React.FC = () => {
   const dispatch = useDispatch();

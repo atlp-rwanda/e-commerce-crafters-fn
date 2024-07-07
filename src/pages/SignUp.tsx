@@ -6,9 +6,11 @@ import {
   useRegisterMutation,
   useVerifyEmailQuery,
 } from "../Redux/features/AuthSlice";
-import EmailSent from "../Components/Modal/EmailSent";
+
 import { useLocation } from "react-router-dom";
 import { Puff } from "react-loader-spinner";
+import EmailSent from "../Components/Modal/EmailSent";
+import { useTranslation } from "react-i18next";
 
 const SignUp: React.FC = () => {
   const [name, setName] = useState<string>("");
@@ -60,6 +62,8 @@ const SignUp: React.FC = () => {
       if (error.data && error.data.Message === "Email already exists") {
         setError("Email has been taken");
         setIsEmpty("email");
+      } else {
+        setError("Something get wrong, Try again later");
       }
       console.log(error);
     }
@@ -94,14 +98,14 @@ const SignUp: React.FC = () => {
       }
     }
   }, [token, data, isSuccess, verificationAttempted]);
-
+  const { t } = useTranslation();
   return (
     <div className="w-full h-screen flex flex-col justify-between items-center ">
       {modal ? <EmailSent email={email} /> : ""}
 
       {token ? (
         <div className="w-full z-50 h-screen top-0  absolute flex items-center justify-center bg-black/20">
-          <div className="p-4 bg-white rounded-[12px] w-1/4 flex items-center justify-center min-h-40">
+          <div className="p-4 bg-white rounded-[12px] w-full md:w-[1/2] lg:w-1/4 flex items-center justify-center min-h-40">
             {token && isVerifying && !verificationAttempted && (
               <Puff
                 visible
@@ -241,11 +245,11 @@ const SignUp: React.FC = () => {
 
         <div className="flex flex-col gap-[2px] items-center">
           <span className="font-[600] text-[28px] text-[#333333] font-outfit">
-            Sign Up
+            {t("Sign Up")}
           </span>
           <span className="text-[18px] font-[300] text-[#A3A2A2] font-outfit">
             {" "}
-            Enter your credentials
+            {t("Enter your credentials")}
           </span>
         </div>
         <span className="text-red-500 text-[14px] font-outfit">{errorr}</span>
@@ -257,29 +261,29 @@ const SignUp: React.FC = () => {
         >
           <Input
             error={isEmpty === "name" ? true : !!(false || err)}
-            label="Enter Your Name"
+            label={t("Enter Your Name")}
             type="text"
-            placeholder="Enter your name"
+            placeholder={t("Enter Your Name")}
             value={name}
             onChange={(value) => setName(value)}
           />
           <Input
             error={isEmpty === "email" ? true : !!(false || err)}
-            label="Enter Your Email"
+            label={t("Enter Your Email")}
             type="email"
-            placeholder="Enter your email addres"
+            placeholder={t("Enter your email address")}
             value={email}
             onChange={(value) => setEmail(value)}
           />
           <Input
             error={isEmpty === "password" ? true : !!(false || err)}
-            label="Enter Your Password"
+            label={t("Enter Your Password")}
             type="password"
-            placeholder="Enter your password"
+            placeholder={t("Enter your password")}
             value={password}
             onChange={(value) => setPassword(value)}
           />
-          <AuthButton isLoading={!!isLoading} label="Sign Up" />
+          <AuthButton isLoading={!!isLoading} label={t("Sign Up")} />
 
           <div
             onClick={loginWithGoogle}
@@ -326,14 +330,16 @@ const SignUp: React.FC = () => {
               </defs>
             </svg>
             <span className="text-[#828282] font-[400] text-[18px]">
-              Sign Up with Google
+              {t("Sign Up with Google")}
             </span>
           </div>
           <div className="flex flex-row gap-[4px] items-center justify-center">
-            <span className=" text-black">Already have an account? </span>
+            <span className=" text-black">
+              {t("Already have an account")}?{" "}
+            </span>
             <a href="/login" className=" text-secondary">
               {" "}
-              login
+              {t("Login")}
             </a>
           </div>
         </form>
@@ -348,4 +354,3 @@ const SignUp: React.FC = () => {
 };
 
 export default SignUp;
-

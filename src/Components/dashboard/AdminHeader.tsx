@@ -3,6 +3,8 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import { useLocation } from "react-router-dom";
 import Logout from "../../services/Logout";
+import { useTranslation } from "react-i18next";
+
 
 const AdminHeader = () => {
   const [currentDateTime, setCurrentDateTime] = useState("");
@@ -44,13 +46,15 @@ const AdminHeader = () => {
       setPageTitle("Dashboard Page");
     }
   }, [pathName]);
+  
+  const { t } = useTranslation();
 
   return (
     <div className=" z-50 bg-primary w-full flex lg:bg-white shadow-md py-4 px-6 justify-between items-center fixed lg:w-[78%] lg:ml-[9%] xl:h-[10vh] xl:w-[82%] xl:ml-[5%] ">
       <div className="hidden lg:flex items-center xl:flex">
         <div className="flex flex-col">
           <span className="text-gray-600 mr-4 font-bold text-lg">
-            Administration
+            {t("Administration")}
           </span>
           <span className="text-gray-500  text-sm">{currentDateTime}</span>
         </div>
@@ -149,7 +153,7 @@ const AdminHeader = () => {
           </div>
           <div className="flex flex-col">
             <span className="font-medium">{userData?.name}</span>
-            <span className="text-xs text-gray-500">Administrator</span>
+            <span className="text-xs text-gray-500">{t("Administrator")}</span>
           </div>
         </div>
       </div>
