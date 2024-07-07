@@ -95,7 +95,7 @@ const SellerTable: React.FC<SellerTableProps> = ({ users }) => {
         <nav className="block">
           <ul className="flex pl-0 list-none rounded space-x-2">
             {Array.from(Array(totalPages).keys()).map((pageNumber) => (
-              <li key={pageNumber} className="relative block">
+              <li key={pageNumber} className="block">
                 <button
                   className={`${
                     currentPage === pageNumber + 1

@@ -8,7 +8,7 @@ const Users = () => {
   const { data: users, isLoading, isError } = useSelectUsersQuery({});
 
   if (isLoading) return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="flex justify-center items-center h-[90%]">
       <Circles
         visible
         height="80"
@@ -20,7 +20,22 @@ const Users = () => {
       />
     </div>
   );
-  if (isError) return <div>Error loading users.</div>;
+  if (isError) return (
+    <div className="flex justify-center items-center  h-[90%]">
+      <div className="text-center">
+        <p className="text-red-600 font-semibold">
+          An error occurred while loading users. Please try again
+          later.
+        </p>
+        <button
+          className="mt-3 px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary"
+          onClick={() => window.location.reload()}
+        >
+          Retry
+        </button>
+      </div>
+    </div>
+  );
 
   return <SellerTable users={users} />;
 

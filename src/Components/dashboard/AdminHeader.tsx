@@ -133,7 +133,7 @@ const AdminHeader = () => {
           </div>
         </div>
       </div>
-      <div className="text-white lg:flex justify-center lg:text-gray-600 font-bold text-lg uppercase">
+      <div className="text-white lg:flex justify-center lg:text-gray-600 font-bold text-lg uppercase lg:w-[90%]">
         {pageTitle}
       </div>
       <div className="flex">

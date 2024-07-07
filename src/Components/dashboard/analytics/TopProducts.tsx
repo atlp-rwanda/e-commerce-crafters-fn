@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSellingReport } from "../../../Redux/Analytic/SellingReportSlice";
 import { AppDispatch, RootState } from "../../../Redux/store";
+import { Circles } from "react-loader-spinner";
 
 
 const TopProduct: React.FC = () => {
@@ -15,11 +16,37 @@ const TopProduct: React.FC = () => {
   }, [dispatch]);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center h-24">
+        <Circles
+          visible
+          height="80"
+          width="80"
+          color="#C9974C"
+          ariaLabel="circles-loading"
+          wrapperStyle={{}}
+          wrapperClass="circles-wrapper"
+        />
+      </div>
+    );
   }
 
   if (error) {
-    return <p>Error: {error}</p>;
+    return (
+      <div className="flex justify-center items-center  h-[90%]">
+        <div className="text-center">
+          <p className="text-red-600 font-semibold">
+            An error occurred. Please try again
+          </p>
+          <button
+            className="mt-3 px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary"
+            onClick={() => window.location.reload()}
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
   }
 
   const data = topProducts.map((product) => ({

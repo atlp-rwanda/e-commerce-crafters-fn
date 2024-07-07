@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelectRequestsQuery } from "../../Redux/Admin/sellersSlice";
+import { Circles } from "react-loader-spinner";
 
 
 interface Seller {
@@ -41,9 +42,17 @@ const VendorRequestList: React.FC = () => {
         <tbody>
           {isLoading ? (
             <tr>
-              <td colSpan={2} className="text-center py-4">
-                Loading...
-              </td>
+              <div className="flex justify-center items-center h-24">
+                <Circles
+                  visible
+                  height="80"
+                  width="80"
+                  color="#C9974C"
+                  ariaLabel="circles-loading"
+                  wrapperStyle={{}}
+                  wrapperClass="circles-wrapper"
+                />
+              </div>
             </tr>
           ) : (
             sellers.slice(0, 6).map((seller: Seller, index: number) => (

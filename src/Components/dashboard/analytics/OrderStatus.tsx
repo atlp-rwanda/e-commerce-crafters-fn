@@ -11,6 +11,7 @@ import {
 } from "recharts";
 import { fetchOrders } from "../../../Redux/Analytic/orderStatusSlice";
 import { AppDispatch } from "../../../Redux/store";
+import { Circles } from "react-loader-spinner";
 
 interface OrderStatusProps {
   statusCounts: { [key: string]: number };
@@ -42,11 +43,37 @@ const OrderStatus: React.FC = () => {
   }, [data]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center">
+        <Circles
+          visible
+          height="80"
+          width="80"
+          color="#C9974C"
+          ariaLabel="circles-loading"
+          wrapperStyle={{}}
+          wrapperClass="circles-wrapper"
+        />
+      </div>
+    );
   }
 
   if (error) {
-    return <div>Error fetching orders</div>;
+    return(
+    <div className="flex justify-center items-center  h-[90%]">
+      <div className="text-center">
+        <p className="text-red-600 font-semibold">
+          An error occurred. Please try again
+        </p>
+        <button
+          className="mt-3 px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary"
+          onClick={() => window.location.reload()}
+        >
+          Retry
+        </button>
+      </div>
+      </div>
+    );
   }
 
   let statusCount = {

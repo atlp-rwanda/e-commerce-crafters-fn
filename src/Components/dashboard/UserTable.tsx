@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useSelectUsersQuery } from "../../Redux/Admin/usersSlice";
+import { Circles } from "react-loader-spinner";
 
 interface User {
   name: string;
@@ -73,11 +74,17 @@ const UserTable: React.FC = () => {
         </thead>
         {isLoading ? (
           <tbody>
-            <tr>
-              <td colSpan={2} className="text-center py-4">
-                Loading...
-              </td>
-            </tr>
+            <div className="flex justify-center items-center h-24">
+              <Circles
+                visible
+                height="80"
+                width="80"
+                color="#C9974C"
+                ariaLabel="circles-loading"
+                wrapperStyle={{}}
+                wrapperClass="circles-wrapper"
+              />
+            </div>
           </tbody>
         ) : (
           <tbody>

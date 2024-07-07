@@ -6,7 +6,7 @@ import {
 import { Circles } from "react-loader-spinner";
 
 interface SellerData {
-  id: number;
+  sellerId: string;
   userId: string;
   storeName: string;
   address: {
@@ -73,7 +73,7 @@ const RequestsTable: React.FC<SellerTableProps> = ({ sellers }) => {
   return (
     <div className="w-full bg-white rounded-lg shadow-md overflow-hidden lg:mb-12 xl:ml-[5%] mt-3">
       {sellers.length === 0 ? (
-        <div className=" items-center p-4 text-center text-gray-600 font-semibold">
+        <div className=" items-center p-4 text-center text-secondary font-semibold">
           No requests present
         </div>
       ) : (
@@ -91,7 +91,7 @@ const RequestsTable: React.FC<SellerTableProps> = ({ sellers }) => {
             </thead>
             <tbody>
               {currentSellers.map((seller, index) => (
-                <tr key={seller.id}>
+                <tr key={seller.sellerId}>
                   <td className="px-4 py-2 text-left">
                     {String(indexOfFirstSeller + index + 1).padStart(2, "0")}
                   </td>
@@ -185,7 +185,7 @@ const RequestsTable: React.FC<SellerTableProps> = ({ sellers }) => {
             <nav className="block">
               <ul className="flex pl-0 list-none rounded space-x-2">
                 {Array.from(Array(totalPages).keys()).map((pageNumber) => (
-                  <li key={pageNumber} className="relative block">
+                  <li key={pageNumber} className="block">
                     <button
                       className={`${
                         currentPage === pageNumber + 1
