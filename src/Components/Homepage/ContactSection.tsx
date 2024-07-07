@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { sendMessage } from '../../Redux/features/contactSlice';
 import { RootState, AppDispatch } from '../../Redux/store';
+import { useTranslation } from "react-i18next";
 
 interface Props {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
@@ -13,6 +14,7 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [content, setContent] = useState(''); 
+  const { t } = useTranslation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,13 +32,22 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
   return (
     <section className="px-8 md:px-64 py-16 bg-gray-100 flex flex-col md:flex-row justify-center font-outfit md:text-xl md:space-x-40 h-screen mt-24">
       <div className="w-full md:w-1/2 mb-8 md:mb-0">
-        <h2 className="text-primary text-3xl md:text-4xl font-bold mb-4">Get In Touch With Us</h2>
-        <h2 className="text-secondary text-2xl md:text-3xl mb-16">We Are Here To Help</h2>
+        <h2 className="text-textprimary text-3xl md:text-4xl font-bold mb-4">
+          {t("Get In Touch With Us")}
+        </h2>
+        <h2 className="text-secondary text-2xl md:text-3xl mb-16">
+          {t("We Are Here To Help")}
+        </h2>
         <div className="flex flex-col">
           <div className="w-full mb-4 md:mb-0">
             <div className="flex items-center space-x-4 mb-16">
               <i className="fas fa-phone text-primary"></i>
-              <p className="text-primary sm:text-sm md:text-2xl">If you have an urgent business concern please contact us at 07********0</p>
+              <p className="text-textprimary sm:text-sm md:text-xl">
+                {t(
+                  "If you have an urgent business concern please contact us at"
+                )}
+                07********0
+              </p>
             </div>
             <div className="bg-primary flex justify-center space-x-6 mt-4 p-4 text-white text-2xl md:text-3xl w-full max-w-md rounded-xl">
               <a href="#"><i className="fab fa-facebook mr-4"></i></a>
