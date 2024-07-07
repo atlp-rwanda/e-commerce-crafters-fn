@@ -1,10 +1,32 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useGetAllMessageQuery } from '../../Redux/features/ChatSlice'
+import { useGetAllMessageQuery, useSendMessageMutation } from '../../Redux/features/ChatSlice'
+import axios from 'axios'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
+import SentImage from './SentImage'
 
 const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
     const { data, error, isLoading } = useGetAllMessageQuery({})
     const [newMessage, setNewMessage] = useState<string>("")
+    const [image, setImage] = useState<string>("")
     const [messages, setMessage] = useState<any>([])
+
+    const [sendMessage, { isLoading: loading, isError: errorr, isSuccess }] = useSendMessageMutation()
+
+    const handleImage = async () => {
+        const formData = new FormData();
+        formData.append('file', image);
+        formData.append('upload_preset', 'e-commerce');
+
+        try {
+            const response = await axios.post(
+                'https://api.cloudinary.com/v1_1/dnefzcfv6/image/upload',
+                formData
+            );
+            console.log(response.data.secure_url);
+        } catch (error) {
+            console.error('Error uploading the image', error);
+        }
+    };
 
 
     const myId = "bca80aa7-5759-4793-9988-270396d36612"
@@ -29,23 +51,39 @@ const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
         }
     }, [messages]);
 
-    const handelSubmit = () => {
+    const handelSubmit = async () => {
+        try {
+            const newMessageObject = {
+                id: messages.length + 1,
+                content: newMessage,
+                sender: myId,
+                receiver: selectedUser.userId,
+                createdAt: Date.now(),
+            }
+            const response = await sendMessage(newMessageObject)
+            if (response) {
+                setMessage([...messages, newMessageObject])
+            }
+            setNewMessage('')
+        } catch (error) {
+            console.log(error)
 
-        const newMessageObject = {
-            id: messages.length + 1,
-            content: newMessage,
-            sender: myId,
-            receiver: selectedUser.userId,
-            createdAt: Date.now(),
         }
-        setMessage([...messages, newMessageObject])
-        setNewMessage('')
-
     }
 
-    const filterMessage = messages.filter((mess: any, index: number) => (mess.sender === myId && mess.receiver === selectedUser?.userId) || (mess.sender === selectedUser?.userId && mess.receiver === myId))
+    const filteredMessages = messages
+        .filter((mess: any) =>
+            (mess.sender === myId && mess.receiver === selectedUser?.userId) ||
+            (mess.sender === selectedUser?.userId && mess.receiver === myId)
+        )
+        .sort((a: any, b: any) => {
+            const timeA = typeof a.createdAt === 'string' ? new Date(a.createdAt).getTime() : a.createdAt;
+            const timeB = typeof b.createdAt === 'string' ? new Date(b.createdAt).getTime() : b.createdAt;
+            return timeA - timeB;
+        });
+
     return (
-        <div className='w-full flex flex-col justify-between rounded-[12px] bg-white p-2 h-[80vh]'>
+        <div className='w-full relative flex flex-col justify-between rounded-[12px] bg-white p-2 h-[80vh]'>
             {!selectedUser.name ? (
                 <>
                     <div className='w-full h-full  items-center justify-center flex flex-col'>
@@ -74,22 +112,34 @@ const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
 
                     <div className='w-full p-2 flex flex-col  overflow-y-scroll   h-full'>
                         {isLoading ? ("lofing") : (<>
-                            {filterMessage.length < 1 && (
+                            {filteredMessages.length < 1 && (
                                 <div className='flex flex-col py-10 gap-[10px]'>
                                     <span className='text-center text-[24px] font-outfit'>Hey there! 😊</span>
                                     <h1 className='text-center font-outfit'>No conversations here. Start chatting with a vendor to get started! 🗣️</h1>
                                 </div>
                             )}
-                            {filterMessage.map((message: any, index: number) => {
-                                const isLastMessage: any = index === filterMessage.length - 1;
+                            {filteredMessages.map((message: any, index: number) => {
+                                const isLastMessage: any = index === filteredMessages.length - 1;
                                 return (
                                     <div ref={isLastMessage ? lastMessage : null} key={index} className={` flex flex-col ${message.sender === myId ? "ml-auto" : "mr-auto"} `}>
-                                        <div className={`p-2 mb-2 min-w-[100px] flex flex-col max-w-[500px] rounded-[6px] ${message.sender === myId ? "ml-auto bg-primary" : "mr-auto bg-gray-50"}`}>
+                                        {message.imageUrl == null ? (
+                                            <div className={`p-2 mb-2 min-w-[100px] flex flex-col max-w-[500px] rounded-[6px] ${message.sender === myId ? "ml-auto bg-primary" : "mr-auto bg-gray-50"}`}>
 
-                                            <span className={`text-[14px] font-outfit ${message.sender === myId ? "text-white" : ""}`}>{message?.content}</span>
-                                            <span className={`text-[12px] font-outfit ${message.sender === myId ? "text-end text-white/40" : " opacity-70"}`}>{message.createdAt}</span>
+                                                <span className={`text-[14px] font-outfit ${message.sender === myId ? "text-white" : ""}`}>{message?.content}</span>
+                                                <span className={`text-[12px] font-outfit ${message.sender === myId ? "text-end text-white/40" : " opacity-70"}`}>{new Date(message.createdAt).getHours() + ":" + new Date(message.createdAt).getMinutes()}</span>
 
-                                        </div>
+                                            </div>
+                                        ) : (
+                                            <div className='flex flex-col bg-gray-50'>
+                                                <div className='w-[200px] h-[150px] rounded-[4px] cursor-pointer'>
+                                                    <LazyLoadImage src={message.imageUrl[0]} className='w-full h-full object-cover rounded-[4px]' />
+                                                </div>
+                                                <span className={` p-1 text-[14px] font-outfit ${message.sender === myId ? "text-black" : ""}`}>{message?.content}</span>
+                                                <span className={` px-1 text-[12px] font-outfit ${message.sender === myId ? "text-end text-primary" : " opacity-70"}`}>{new Date(message.createdAt).getHours() + ":" + new Date(message.createdAt).getMinutes()}</span>
+
+                                            </div>
+                                        )}
+
                                     </div>
                                 )
                             })}
@@ -97,19 +147,26 @@ const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
 
 
                     </div>
+                    {image !== "" ? (
+                        <div className='w-[400px] h-[400px] bottom-2 absolute'>
+                            <SentImage image={image} />
+                        </div>
+                    ) : ("")}
+
                     <div className='flex flex-row justify-between p-2  gap-[10px]'>
                         <div className='flex flex-row gap-[10px] items-center'>
                             <div><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M17.2063 8.84652L9.90459 16.1482C8.27742 17.7754 5.63923 17.7754 4.01204 16.1482C2.38486 14.521 2.38486 11.8829 4.01204 10.2557L10.7885 3.47921C11.9275 2.34018 13.7743 2.34018 14.9133 3.47921C16.0523 4.61824 16.0523 6.46497 14.9133 7.60401L8.41868 14.0986C7.76778 14.7495 6.7125 14.7495 6.06163 14.0986C5.41076 13.4478 5.41075 12.3924 6.06163 11.7416L12.0567 5.74656" stroke="black" stroke-linecap="round" />
                             </svg>
                             </div>
-                            <div><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <label htmlFor="selectfile" className=' cursor-pointer'><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.49999 18.3334H12.5C16.6667 18.3334 18.3333 16.6667 18.3333 12.5V7.50002C18.3333 3.33335 16.6667 1.66669 12.5 1.66669H7.49999C3.33332 1.66669 1.66666 3.33335 1.66666 7.50002V12.5C1.66666 16.6667 3.33332 18.3334 7.49999 18.3334Z" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round" />
                                 <path d="M7.50001 8.33333C8.42051 8.33333 9.16668 7.58714 9.16668 6.66667C9.16668 5.74619 8.42051 5 7.50001 5C6.57954 5 5.83334 5.74619 5.83334 6.66667C5.83334 7.58714 6.57954 8.33333 7.50001 8.33333Z" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round" />
                                 <path d="M2.22504 15.7917L6.33337 13.0334C6.9917 12.5917 7.9417 12.6417 8.53334 13.1501L8.80834 13.3917C9.45834 13.9501 10.5083 13.9501 11.1583 13.3917L14.625 10.4167C15.275 9.8584 16.325 9.8584 16.975 10.4167L18.3333 11.5834" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
 
-                            </div>
+                            </label>
+                            <input id='selectfile' className=' hidden' type="file" onChange={(e: any) => setImage(e.target.files[0])} />
                         </div>
                         <textarea value={newMessage} onChange={(e) => setNewMessage(e.target.value)} placeholder='Enter message here' className='p-2 h-[45px] bg-gray-50 border-2 outline-none w-full rounded-[8px]' />
                         <button onClick={handelSubmit} className='p-2'><svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">

@@ -3,6 +3,13 @@ import { apiSlice } from "./ApiSlice";
 
 const chatSlice = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
+        sendMessage: builder.mutation({
+            query: (data) => ({
+                url: "/chat",
+                method: "POST",
+                body: data
+            })
+        }),
         getVendor: builder.query({
             query: (id) => `/get-vendor/${id}`
         }),
@@ -16,7 +23,7 @@ const chatSlice = apiSlice.injectEndpoints({
     })
 })
 
-export const {useGetVendorQuery,useGetAllVendorsQuery,useGetAllMessageQuery } = chatSlice
+export const {useGetVendorQuery,useGetAllVendorsQuery,useGetAllMessageQuery,useSendMessageMutation } = chatSlice
 
 export default chatSlice
 
