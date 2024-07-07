@@ -1,5 +1,4 @@
 import { apiSlice } from "../features/ApiSlice";
-
 const productApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     AllProducts: builder.query({
