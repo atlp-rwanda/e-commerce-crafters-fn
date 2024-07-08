@@ -37,7 +37,7 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
   useEffect(() => {
     fetch(`http://localhost:5000/getfeedback/${productId}`)
       .then(response => response.json())
-      .then(data => setReviews(data.ratings))
+      .then(data => setReviews(data.ratings || []))  // Ensure default to empty array
       .catch(error => console.error('Error fetching reviews:', error));
   }, [productId]);
 
@@ -84,10 +84,10 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
           feedback: '',
           ratingScore: 0,
         });
-        
+
         fetch(`http://localhost:5000/getfeedback/${productId}`)
           .then(response => response.json())
-          .then(data => setReviews(data.ratings))
+          .then(data => setReviews(data.ratings || []))  // Ensure default to empty array
           .catch(error => console.error('Error fetching reviews:', error));
       });
     }
@@ -99,7 +99,7 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
         <h1 className="text-4xl font-extrabold">Review</h1>
         <div className="w-full flex flex-col gap-3 justify-center">
           <div className="flex pt-4 justify-between">
-            <div>{isLoading ? <Skeleton width={50} /> : `${reviews.length ||0} Reviews`}</div>
+            <div>{isLoading ? <Skeleton width={50} /> : `${reviews.length || 0} Reviews`}</div>
             <div className="flex">
               <div className="flex flex-col">
                 <div className="flex gap-1">
@@ -112,11 +112,11 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
                   Leave my review
                 </div>
               </div>
-              <span> {isLoading ? <Skeleton width={50} /> : `4 rates`}</span>
+              <span>{isLoading ? <Skeleton width={50} /> : `4 rates`}</span>
             </div>
           </div>
           {showContent && (
-            <div className=" md:ml-0 py-4">
+            <div className="md:ml-0 py-4">
               <div className="bg-[#F9FAFB] mt-7 p-2.5 grid md:grid-cols-2 grid-cols-1 justify-between w- md:w-full">
                 <p className="md:w-3/4 w-full">How will you rate this product?</p>
                 <div className="mr-0 md:mr-4">
@@ -129,7 +129,7 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
               </div>
               <form
                 onSubmit={handleFormSubmit}
-                className="py-4 flex flex-col items-center gap-4 justify-center w-3/5 md:w-full"
+                className="py-4 flex flex-col items-center gap-4 justify-center md:w-3/5 w-full"
               >
                 <input
                   type="text"
@@ -162,10 +162,9 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
             Array(visibleReviews).fill(0).map((_, index) => (
               <div key={index} className="grid grid-cols-10 gap-8 mb-4">
                 <div className="col-span-2 flex justify-center items-baseline">
-                  <Skeleton circle={true} height={64}  width={64} />
+                  <Skeleton circle={true} height={64} width={64} />
                 </div>
                 <div className="col-span-8 gap-y-4 flex flex-col items-baseline">
-
                   <Skeleton width="60vw" height={24} />
                   <div className="flex gap-4">
                     <Skeleton width="70vw" height={24} />
@@ -179,7 +178,7 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
             reviews.slice(0, visibleReviews).map((review, index) => (
               <div key={review.ratingId} className="grid grid-cols-10 gap-8 mb-4">
                 <div className="col-span-2 flex justify-center items-baseline">
-                  <span className="bg-gray-500 rounded-full md:p-8 md:w-4 w-4 p-4 h-4 md:h-4 md:text-4xl  text-md  text-center flex justify-center items-center font-bold text-[#C9974C]">
+                  <span className="bg-gray-500 rounded-full md:p-8 md:w-4 w-4 p-4 h-4 md:h-4 md:text-4xl text-md text-center flex justify-center items-center font-bold text-[#C9974C]">
                     {index + 1}
                   </span>
                 </div>
@@ -195,7 +194,7 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
             ))
           )}
           <div className="flex justify-start mt-4">
-            {visibleReviews < reviews.length  && (
+            {visibleReviews < (reviews.length || 0) && (
               <button onClick={showMore} className="mr-2 px-4 py-2 bg-blue-500 text-white rounded">
                 Show More
               </button>

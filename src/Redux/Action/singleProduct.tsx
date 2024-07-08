@@ -1,5 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import Cookies from 'js-cookie';
 // import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -30,8 +31,9 @@ export const submitReview = createAsyncThunk(
   'reviews/submitReview',
   async ({ productId, data }: { productId: string; data: ReviewData }, { rejectWithValue }) => {
     try {
-      const apiUrl = `https://http://localhost:5000/products/addfeedback/${productId}`;
-      const token = localStorage.getItem('token');
+      const apiUrl = `http://localhost:5000/addfeedback/${productId}`;
+      const token = Cookies.get('token');
+      console.log("poooooooooooooo",token)
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,

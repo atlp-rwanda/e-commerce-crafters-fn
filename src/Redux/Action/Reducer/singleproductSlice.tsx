@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchProductDetails, addToCart, fetchCart } from "../singleProduct";
+import { fetchProductDetails, addToCart } from "../singleProduct";
 
 interface Review {
   id: number;
@@ -81,8 +81,7 @@ const cartSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(
-        addToCart.pending, (state) => {
+      .addCase(addToCart.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -93,28 +92,9 @@ const cartSlice = createSlice({
           state.items.push(action.payload);
         }
       )
-      .addCase(
-        addToCart.rejected, (state, action) => {
+      .addCase(addToCart.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to add to cart";
-      })
-      .addCase(
-        fetchCart.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(
-        fetchCart.fulfilled,
-        (state, action: PayloadAction<Review[]>) => {
-          state.loading = false;
-          state.reviews = action.payload;
-          console.log("mmmm", state.reviews);
-        }
-      )
-      .addCase(
-        fetchCart.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || "Failed to fetch reviews";
       });
   },
 });
