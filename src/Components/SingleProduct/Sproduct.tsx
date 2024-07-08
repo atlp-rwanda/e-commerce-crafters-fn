@@ -24,7 +24,7 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
   const product = useSelector((state: any) => state.product.product);
   const status = useSelector((state: any) => state.product.status);
   const error = useSelector((state: any) => state.product.error);
-  const wishlist = useSelector((state: any) => state.wishlist.items.wishlist);
+  const wishlist = useSelector((state: any) => state.Wishlist.items);
   const [selectedImage, setSelectedImage] = useState<string>(product.image ? product.image[0] : '');
   const [isWishlist, setIsWishlist] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
@@ -281,5 +281,3 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
 };
 
 export default Sproduct;
-
-

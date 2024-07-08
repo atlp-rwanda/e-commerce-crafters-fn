@@ -6,6 +6,7 @@ import Logout from "../../services/Logout";
 import Bag from "../../asset/images/Bag.svg";
 import logout from "../../asset/images/logout.svg";
 import profileIcon from "../../asset/images/profileIcon.svg";
+import i18n from "../../Lib/i18n";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import {
@@ -17,7 +18,8 @@ const Header: React.FC = () => {
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false);
   const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("ENG");
+  let currentLanguage = localStorage.getItem("lang") || "ENG";
+  const [selectedLanguage, setSelectedLanguage] = useState(currentLanguage);
   const userData: any = useAuthUser();
   const { t } = useTranslation();
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -32,6 +34,8 @@ const Header: React.FC = () => {
     setSelectedLanguage(language);
     setIsLanguageDropdownOpen(false);
     setIsMenuOpen(false);
+    localStorage.setItem("lang", language);
+    i18n.changeLanguage(language);
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -91,22 +95,22 @@ const Header: React.FC = () => {
           <ul className="flex space-x-8">
             <li>
               <a href="/" className="hover:text-gray-300">
-                Home
+                {t("Home")}
               </a>
             </li>
             <li>
               <a href="/#about-crafters" className="hover:text-gray-300">
-                About Us
+                {t("About Us")}
               </a>
             </li>
             <li>
               <a href="/products" className="hover:text-gray-300">
-                Products
+                {t("Products")}
               </a>
             </li>
             <li>
               <a href="/#contact-us" className="hover:text-gray-300">
-                Contact Us
+                {t("Contact")}
               </a>
             </li>
           </ul>
@@ -114,7 +118,7 @@ const Header: React.FC = () => {
       </div>
 
       {userData ? (
-        <div className="hidden lg:flex items-center space-x-8 pr-24">
+        <div className="hidden lg:flex items-center space-x-8 pr-20">
           <a href="" className="relative">
             <svg
               width="30"
@@ -201,7 +205,7 @@ const Header: React.FC = () => {
                   >
                     <p className="font-outfit text-lg text-white flex gap-3">
                       <img src={profileIcon} alt="" />
-                      Profile
+                      {t("Profile")}
                     </p>
                   </div>
                   {userData.role === "vendor" && (
@@ -211,7 +215,7 @@ const Header: React.FC = () => {
                     >
                       <a className="font-outfit text-lg text-white flex gap-3">
                         <img src={Bag} alt="" />
-                        My Shop
+                        {t("My Shop")}
                       </a>
                     </div>
                   )}
@@ -224,7 +228,7 @@ const Header: React.FC = () => {
                       className="font-outfit text-lg text-white flex gap-3"
                     >
                       <img src={logout} alt="" />
-                      Logout
+                      {t("Logout")}
                     </a>
                   </div>
                 </div>
@@ -341,57 +345,9 @@ const Header: React.FC = () => {
         </>
       )}
 
-      <div className="flex lg:hidden items-center space-x-8">
-        <div className="flex flex-row items-center gap-20px pr-24">
-          <div className="hidden lg:flex items-center space-x-8">
-            <a href="#">
-              <i className="text-2xl fas fa-shopping-cart"></i>
-            </a>
-            <a href="#">
-              <i className="text-2xl fas fa-heart"></i>
-            </a>
-            <div className="relative">
-              <button
-                onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
-                className="flex items-center"
-              >
-                {selectedLanguage}
-                <i className="fas fa-chevron-down ml-2"></i>
-              </button>
-              {isUserDropdownOpen && (
-                <div className="absolute right-0 mt-2 w-28 bg-white text-black rounded shadow-lg">
-                  <ul className="py-1">
-                    <li>
-                      <button
-                        onClick={() => handleLanguageChange("ENG")}
-                        className="block px-4 py-2 hover:bg-gray-200 w-full text-left"
-                      >
-                        ENG
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        onClick={() => handleLanguageChange("FR")}
-                        className="block px-4 py-2 hover:bg-gray-200 w-full text-left"
-                      >
-                        FR
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        onClick={() => handleLanguageChange("KINY")}
-                        className="block px-4 py-2 hover:bg-gray-200 w-full text-left"
-                      >
-                        KINY
-                      </button>
-                    </li>
-                  </ul>
-                </div>
-              )}
-            </div>
-          </div>
-
-          <div className="flex lg:hidden items-center space-x-8">
+      <div className="flex lg:hidden items-center">
+        <div className="flex flex-row items-center gap-20px">
+          <div className="flex lg:hidden items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-3xl sm:pr-6 md:pr-12"
@@ -402,7 +358,7 @@ const Header: React.FC = () => {
 
           <div
             onClick={() => handelDarkMode()}
-            className={`w-[50px] ml-4 ${
+            className={`w-[50px] mr-4 ${
               openDark ? "bg-black" : "bg-white"
             } cursor-pointer p-1 rounded-[12px] border`}
           >
@@ -447,89 +403,92 @@ const Header: React.FC = () => {
               )}
             </div>
           </div>
-        </div>
 
-        {isMenuOpen && (
-          <div className="absolute top-full left-0 w-full bg-primary text-white p-8 sm:p-6 md:p-8 flex flex-col space-y-4 z-50">
-            <nav className="flex flex-col space-y-4">
-              <a href="/" className="hover:text-gray-300">
-                Home
-              </a>
-              <a href="/#about-crafters" className="hover:text-gray-300">
-                About Us
-              </a>
-              <a href="/products" className="hover:text-gray-300">
-                Products
-              </a>
-              <a href="/#contact-us" className="hover:text-gray-300">
-                Contact Us
-              </a>
-              {userData ? (
-                <div className="flex flex-col space-y-2">
-                  <a href="#" className="hover:text-gray-300">
-                    Cartitems({cartsNumber})
-                  </a>
-                  <a href="#" className="hover:text-gray-300">
-                    Wishlists({wishlistsNumber})
-                  </a>
-                  <div
-                    className="flex flex-row gap-6 hover:scale-105 transition-transform duration-200"
-                    onClick={handleLogout}
-                  >
-                    <a href="" className="hover:text-gray-300">
-                      Logout
-                    </a>
-                  </div>
-                </div>
-              ) : (
-                <a href="/login" className="pr-60 hover:text-gray-300">
-                  Login
+          {isMenuOpen && (
+            <div className="absolute top-full left-0 w-full bg-primary text-white p-8 sm:p-6 md:p-8 flex flex-col space-y-4 z-50">
+              <nav className="flex flex-col space-y-4">
+                <a href="/" className="hover:text-gray-300">
+                  Home
                 </a>
-              )}
-            </nav>
-            <div className="relative" ref={dropdownRef}>
-              <button
-                onClick={() =>
-                  setIsLanguageDropdownOpen(!isLanguageDropdownOpen)
-                }
-                className="flex items-center"
-              >
-                {selectedLanguage}
-                <i className="fas fa-chevron-down ml-2"></i>
-              </button>
-              {isLanguageDropdownOpen && (
-                <div className="mt-2 w-28 bg-primary border border-border rounded shadow-lg">
-                  <ul className="py-1">
-                    <li>
-                      <button
-                        onClick={() => handleLanguageChange("ENG")}
-                        className="block px-4 py-2 w-full text-left"
-                      >
-                        ENG
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        onClick={() => handleLanguageChange("FR")}
-                        className="block px-4 py-2 w-full text-left"
-                      >
-                        FR
-                      </button>
-                    </li>
-                    <li>
-                      <button
-                        onClick={() => handleLanguageChange("KINY")}
-                        className="block px-4 py-2 w-full text-left"
-                      >
-                        KINY
-                      </button>
-                    </li>
-                  </ul>
+                <a href="/#about-crafters" className="hover:text-gray-300">
+                  About Us
+                </a>
+                <a href="/products" className="hover:text-gray-300">
+                  Products
+                </a>
+                <a href="/#contact-us" className="hover:text-gray-300">
+                  Contact Us
+                </a>
+                {userData ? (
+                  <div className="flex flex-col space-y-2">
+                    <a href="#" className="hover:text-gray-300">
+                      Cartitems({cartsNumber})
+                    </a>
+                    <a href="#" className="hover:text-gray-300">
+                      Wishlists({wishlistsNumber})
+                    </a>
+                    <div
+                      className="flex flex-row gap-6 hover:scale-105 transition-transform duration-200"
+                      onClick={handleLogout}
+                    >
+                      <a href="" className="hover:text-gray-300">
+                        Logout
+                      </a>
+                    </div>
+                  </div>
+                ) : (
+                  <a href="/login" className="pr-60 hover:text-gray-300">
+                    Login
+                  </a>
+                )}
+                <div className="relative" ref={dropdownRef}>
+                  <button
+                    onClick={() =>
+                      setIsLanguageDropdownOpen(!isLanguageDropdownOpen)
+                    }
+                    className="flex items-center"
+                  >
+                    {selectedLanguage}
+                    <i className="fas fa-chevron-down ml-2"></i>
+                  </button>
+                  {isLanguageDropdownOpen && (
+                    <div
+                      className="top-12 w-28 bg-primary border border-border rounded shadow-lg"
+                      ref={dropdownRef}
+                    >
+                      <ul className="py-1">
+                        <li>
+                          <button
+                            onClick={() => handleLanguageChange("ENG")}
+                            className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
+                          >
+                            ENG
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            onClick={() => handleLanguageChange("FR")}
+                            className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
+                          >
+                            FR
+                          </button>
+                        </li>
+                        <li>
+                          <button
+                            onClick={() => handleLanguageChange("KINY")}
+                            className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
+                          >
+                            KINY
+                          </button>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
                 </div>
-              )}
+              </nav>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </header>
   );

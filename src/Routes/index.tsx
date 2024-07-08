@@ -22,6 +22,7 @@ import Checkout from "../pages/Checkout";
 import Singlepage from "../pages/singlePage";
 import Requests from "../pages/Requests";
 import Chat from "../pages/chat/Chat";
+import Forgotpassword from "../Lib/ForgotPassword";
 
 const AppRoutes: React.FC = () => (
   <div>
@@ -36,6 +37,7 @@ const AppRoutes: React.FC = () => (
       <Route path="/authgoogle" element={<AuthGoogle />} />
       <Route path="/singleproduct" element={<Singlepage />} />
       <Route path="/products" element={<Products />} />
+      <Route path="/forgot-password" element={<Forgotpassword/>}/>
 
       <Route path="/product/:id" element={<Singlepage />} />
       <Route path="/order-tracking" element={<OrderTrackingPage />} />

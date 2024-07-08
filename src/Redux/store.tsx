@@ -14,6 +14,7 @@ import WeeklySellingReducer from "./Analytic/WeeklySellingSlice";
 import OrderStatusSlice from "./Analytic/orderStatusSlice";
 import wishlistslice from './Reducer/wishlistslice';
 import similarScile from './Reducer/similarScile';
+// import wishlistslice from "./Reducer/Reducer/wishlistslice";
 
 export const store = configureStore({
   reducer: {
