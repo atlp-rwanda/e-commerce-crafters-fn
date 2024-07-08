@@ -32,8 +32,7 @@ export const submitReview = createAsyncThunk(
   async ({ productId, data }: { productId: string; data: ReviewData }, { rejectWithValue }) => {
     try {
       const apiUrl = `http://localhost:5000/addfeedback/${productId}`;
-      const token = Cookies.get('token');
-      console.log("poooooooooooooo",token)
+      const token = localStorage.getItem('token');
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
