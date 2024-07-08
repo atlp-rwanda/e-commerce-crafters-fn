@@ -11,7 +11,11 @@ const Footer: React.FC = () => {
             <div className="text-lg font-bold mb-6">
               <img src={logo} alt="CRAFTERS Logo" className="h-12" />
             </div>
-            <p className="font-outfit font-[300]">{t("abouts")}</p>
+            <p className="font-outfit font-[300]">
+              {t(
+                "We're here to help buyers and sellers connect in a friendly and trustworthy environment. Join us and explore a world of seamless online shopping!"
+              )}
+            </p>
           </div>
           <div className="footer-links max-w-full md:max-w-md pl-6">
             <p className="mb-4 md:mb-10 font-bold">Links</p>

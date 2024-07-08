@@ -20,8 +20,6 @@ const Header: React.FC = () => {
   const dropdownRef = useRef<HTMLDivElement>(null); 
 
   const navigate = useNavigate();
-
-  const userToken = Cookies.get("_auth");
   const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = Logout();
@@ -67,30 +65,30 @@ const Header: React.FC = () => {
   const handelDarkMode = () => {
     const newDarkModeState = !openDark;
     setOpenDark(newDarkModeState);
-    document.getElementById("root").classList.toggle("dark", newDarkModeState);
-    localStorage.setItem("darkMode", newDarkModeState);
+    document.getElementById("root")?.classList.toggle("dark", newDarkModeState);
+    localStorage.setItem("darkMode", newDarkModeState.toString());
   };
 
   useEffect(() => {
     const savedDarkMode = localStorage.getItem("darkMode") === "true";
     setOpenDark(savedDarkMode);
-    document.getElementById("root").classList.toggle("dark", savedDarkMode);
+    document.getElementById("root")?.classList.toggle("dark", savedDarkMode);
   }, []);
 
   return (
-    <header className="bg-primary text-xl text-white pl-24 pt-8 pb-8 sm:pl-12 sm:pt-6 sm:pb-6 md:pl-24 md:pt-8 md:pb-8 flex items-center justify-between font-outfit border-b-2 border-border fixed top-0 w-full z-50">
+    <header className="relative bg-primary text-xl text-white pl-24 pt-8 pb-8 sm:pl-12 sm:pt-6 sm:pb-6 md:pl-24 md:pt-8 md:pb-8 flex items-center justify-between font-outfit border-b-2 border-border top-0 w-full z-50">
       <div className="flex items-center">
         <img src={logo} alt="CRAFTERS Logo" className=" mr-20 h-12 sm:h-10" />
 
       <nav className="hidden lg:flex">
         <ul className="flex space-x-8">
           <li>
-            <a href="" className="hover:text-gray-300">
+            <a href="/" className="hover:text-gray-300">
               Home
             </a>
           </li>
           <li>
-            <a href="#about-crafters" className="hover:text-gray-300">
+            <a href="/#about-crafters" className="hover:text-gray-300">
               About Us
             </a>
           </li>
@@ -100,7 +98,7 @@ const Header: React.FC = () => {
             </a>
           </li>
           <li>
-            <a href="#contact-us" className="hover:text-gray-300">
+            <a href="/#contact-us" className="hover:text-gray-300">
               Contact Us
             </a>
           </li>
@@ -125,7 +123,7 @@ const Header: React.FC = () => {
               fill="white"
             />
           </svg>
-          <div className=" absolute top-[-10px] left-[10px] p-1 min-h-[25px] min-w-[25px] flex items-center justify-center rounded-full bg-secondary">
+          <div className=" absolute top-[-10px] left-[10px] p-1 h-[25px] w-[25px] flex items-center justify-center rounded-full bg-secondary">
             <span className="text-white text-[12px]">{cartsNumber}</span>
           </div>
         </a>
@@ -152,58 +150,17 @@ const Header: React.FC = () => {
             />
           </svg>
 
-          <div className=" absolute top-[-10px] left-[10px] p-1 min-h-[25px] min-w-[25px] flex items-center justify-center rounded-full bg-secondary">
+          <div className=" absolute top-[-10px] left-[10px] p-1 h-[25px] w-[25px] flex items-center justify-center rounded-full bg-secondary">
             <span className="text-white text-[12px]">{wishlistsNumber}</span>
           </div>
         </a>
 
-          <div className="relative" ref={dropdownRef}>
-            <button
-              onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
-              className="flex items-center"
-            >
-              {selectedLanguage}
-              <i className="fas fa-chevron-down ml-2"></i>
-            </button>
-            {isLanguageDropdownOpen && (
-              <div className="absolute right-0 top-12 w-28 bg-primary border border-border rounded shadow-lg" ref={dropdownRef}>
-                <ul className="py-1">
-                  <li>
-                    <button
-                      onClick={() => handleLanguageChange('ENG')}
-                      className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
-                    >
-                      ENG
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => handleLanguageChange('FR')}
-                      className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
-                    >
-                      FR
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => handleLanguageChange('KINY')}
-                      className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
-                    >
-                      KINY
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
 
-          <div className="flex items-center space-x-4" ref={dropdownRef}>
-            <img src={userData?.profile} alt="User Profile" className="w-10 h-10 rounded-full" />
-            <span className="text-sm">{userData?.name}</span>
-            <i className="fas fa-chevron-down ml-2 cursor-pointer" onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}></i>
-          </div>
 
-          {isUserDropdownOpen && (
+          <div className="flex items-center space-x-4 ref={dropdownRef}">
+            <img src={userData?.profile} alt="User Profile" className="w-12 h-12 rounded-full" />
+            <i className={`fas fa-chevron-down ml-2 cursor-pointer ${isUserDropdownOpen ? 'rotate-180' : ''}`} onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)} ref={dropdownRef}></i>
+              {isUserDropdownOpen && (
                   <div className="absolute z-50 flex flex-col top-full mt-2 right-2 h-62 bg-[#012F5A] rounded-l-[20px] mb-4 border-2 border-[#ffffff3e] fade-in">
                     <div className="flex flex-row gap-4 bg-[#0E3F6D] rounded-tl-[20px] p-7">
                       <div className="w-[60px] h-[60px] rounded-full overflow-hidden">
@@ -249,18 +206,101 @@ const Header: React.FC = () => {
                     </div>
                   </div>
                 )}
+          </div>
+
+          <div className="relative" ref={dropdownRef}>
+            <button
+              onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+              className="flex items-center"
+            >
+              {selectedLanguage}
+              <i className={`fas fa-chevron-down ml-2 ${isLanguageDropdownOpen ? 'rotate-180' : ''}`}></i>
+            </button>
+            {isLanguageDropdownOpen && (
+              <div className="absolute right-0 top-12 w-28 bg-primary border border-border rounded shadow-lg" ref={dropdownRef}>
+                <ul className="py-1">
+                  <li>
+                    <button
+                      onClick={() => handleLanguageChange('ENG')}
+                      className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
+                    >
+                      ENG
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLanguageChange('FR')}
+                      className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
+                    >
+                      FR
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLanguageChange('KINY')}
+                      className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
+                    >
+                      KINY
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+
         </div>
       ) : (
-        <a href="/login" className="hidden lg:flex items-center bg-secondary px-6 py-2 rounded-lg mr-36 mb-4 md:mb-0 md:text-lg cursor-pointer">
+        <>
+        <div className="flex flex-row items-center justify-center">
+        <a href="/login" className="hidden lg:flex items-center bg-secondary px-6 py-2 mr-20 rounded-lg mb-4 md:mb-0 md:text-lg cursor-pointer">
           Login
           <i className="fas fa-arrow-right ml-2"></i>
         </a>
+        <div className="hidden relative mr-20 lg:block" ref={dropdownRef}>
+            <button
+              onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+              className="flex items-center"
+            >
+              {selectedLanguage}
+              <i className={`fas fa-chevron-down ml-2 ${isLanguageDropdownOpen ? 'rotate-180' : ''}`}></i>
+            </button>
+            {isLanguageDropdownOpen && (
+              <div className="absolute right-0 top-12 w-28 bg-primary border border-border rounded shadow-lg" ref={dropdownRef}>
+                <ul className="py-1">
+                  <li>
+                    <button
+                      onClick={() => handleLanguageChange('ENG')}
+                      className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
+                    >
+                      ENG
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLanguageChange('FR')}
+                      className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
+                    >
+                      FR
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      onClick={() => handleLanguageChange('KINY')}
+                      className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
+                    >
+                      KINY
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+        </div>
+        </>
+
       )}
 
       <div className="flex lg:hidden items-center space-x-8">
-        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-3xl sm:pr-6 md:pr-12">
-          <i className="fas fa-bars"></i>
-        </button>
 
       <div className="flex flex-row items-center gap-20px pr-24">
         <div className="hidden lg:flex items-center space-x-8">
@@ -272,13 +312,13 @@ const Header: React.FC = () => {
           </a>
           <div className="relative">
             <button
-              onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
               className="flex items-center"
             >
               {selectedLanguage}
               <i className="fas fa-chevron-down ml-2"></i>
             </button>
-            {isDropdownOpen && (
+            {isUserDropdownOpen && (
               <div className="absolute right-0 mt-2 w-28 bg-white text-black rounded shadow-lg">
                 <ul className="py-1">
                   <li>
@@ -373,9 +413,9 @@ const Header: React.FC = () => {
         <div className="absolute top-full left-0 w-full bg-primary text-white p-8 sm:p-6 md:p-8 flex flex-col space-y-4 z-50">
           <nav className="flex flex-col space-y-4">
             <a href="/" className="hover:text-gray-300">Home</a>
-            <a href="#AboutCrafters" className="hover:text-gray-300">About Us</a>
+            <a href="/#about-crafters" className="hover:text-gray-300">About Us</a>
             <a href="/products" className="hover:text-gray-300">Products</a>
-            <a href="#ContactSection" className="hover:text-gray-300">Contact Us</a>
+            <a href="/#contact-us" className="hover:text-gray-300">Contact Us</a>
             {userData ? (
               <div className="flex flex-col space-y-2">
                 <a href="#" className="hover:text-gray-300">Cartitems({cartsNumber})</a>
@@ -431,6 +471,7 @@ const Header: React.FC = () => {
           </div>
         </div>
       )}
+      </div>
     </header>
   );
 };
