@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../Redux/store";
 import { useTranslation } from "react-i18next";
 import { fetchImages } from "../../Redux/HomePage/ProductsImagesSlice";
+import Skeleton from "react-loading-skeleton";
 
 const HeroSection: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -53,7 +54,9 @@ const HeroSection: React.FC = () => {
 
       <div className="w-full lg:w-1/2">
         <div className="w-[500px] h-[400px]">
-          {loading && <div>Loading...</div>}
+          {loading && <div className="w-[500px] h-[400px">
+            <Skeleton height={400} />
+            </div>}
           {error && <div>Error: {error}</div>}
           {!loading && !error && (!images || images.length === 0) && (
             <div>No images found.</div>
