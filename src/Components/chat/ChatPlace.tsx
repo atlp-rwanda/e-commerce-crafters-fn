@@ -1,35 +1,26 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { useGetAllMessageQuery, useSendMessageMutation } from '../../Redux/features/ChatSlice'
 import axios from 'axios'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 import SentImage from './SentImage'
+import pusher from '../../Lib/pusher'
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser'
 
 const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
-    const { data, error, isLoading } = useGetAllMessageQuery({})
+    const { data, error, isLoading,refetch } = useGetAllMessageQuery({})
+    const userData:any = useAuthUser()
     const [newMessage, setNewMessage] = useState<string>("")
     const [image, setImage] = useState<string>("")
-    const [messages, setMessage] = useState<any>([])
+    const [messages, setMessages] = useState<any[]>([])
+    const [filteredMessages, setFilteredMessages] = useState<any[]>([]);
 
     const [sendMessage, { isLoading: loading, isError: errorr, isSuccess }] = useSendMessageMutation()
 
-    const handleImage = async () => {
-        const formData = new FormData();
-        formData.append('file', image);
-        formData.append('upload_preset', 'e-commerce');
+    const myId = userData.userId
 
-        try {
-            const response = await axios.post(
-                'https://api.cloudinary.com/v1_1/dnefzcfv6/image/upload',
-                formData
-            );
-            console.log(response.data.secure_url);
-        } catch (error) {
-            console.error('Error uploading the image', error);
-        }
-    };
-
-
-    const myId = "bca80aa7-5759-4793-9988-270396d36612"
+    useEffect(() => {
+        refetch();
+    }, [selectedUser, refetch]);
 
     useEffect(() => {
         if (isLoading) {
@@ -38,19 +29,58 @@ const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
             console.error("Error loading data:", error);
         } else if (data) {
             console.log("data", data);
-            setMessage(data.messages)
+            setMessages(data.messages || [])
 
         }
     }, [isLoading, data, error]);
 
-    const lastMessage = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-        if (lastMessage.current) {
-            lastMessage.current.scrollIntoView({ behavior: 'smooth' });
+        const filtered:any = messages?.length> 0 && messages
+            .filter((mess: any) =>
+                (mess.sender === myId && mess.receiver === selectedUser?.userId) ||
+                (mess.sender === selectedUser?.userId && mess.receiver === myId)
+            )
+            .sort((a: any, b: any) => {
+                const timeA = typeof a.createdAt === 'string' ? new Date(a.createdAt).getTime() : a.createdAt;
+                const timeB = typeof b.createdAt === 'string' ? new Date(b.createdAt).getTime() : b.createdAt;
+                return timeA - timeB;
+            });
+    
+        setFilteredMessages(filtered || []);
+
+        if (chatContainerRef.current) {
+            setTimeout(() => {
+                chatContainerRef.current!.scrollTop = chatContainerRef.current!.scrollHeight;
+            }, 0);
+        }
+    }, [messages, selectedUser, myId]);
+
+    const chatContainerRef = useRef<HTMLDivElement>(null);
+
+    const scrollToBottom = () => {
+        if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    };
+
+    const lastMessageRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+        if (lastMessageRef.current) {
+            lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     }, [messages]);
 
+    useEffect(() => {
+        if (lastMessageRef.current) {
+            lastMessageRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    }, []);
+
+    useLayoutEffect(() => {
+        scrollToBottom();
+    }, [messages, isLoading, data]);
     const handelSubmit = async () => {
         try {
             const newMessageObject = {
@@ -61,9 +91,6 @@ const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
                 createdAt: Date.now(),
             }
             const response = await sendMessage(newMessageObject)
-            if (response) {
-                setMessage([...messages, newMessageObject])
-            }
             setNewMessage('')
         } catch (error) {
             console.log(error)
@@ -71,20 +98,30 @@ const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
         }
     }
 
-    const filteredMessages = messages
-        .filter((mess: any) =>
-            (mess.sender === myId && mess.receiver === selectedUser?.userId) ||
-            (mess.sender === selectedUser?.userId && mess.receiver === myId)
-        )
-        .sort((a: any, b: any) => {
-            const timeA = typeof a.createdAt === 'string' ? new Date(a.createdAt).getTime() : a.createdAt;
-            const timeB = typeof b.createdAt === 'string' ? new Date(b.createdAt).getTime() : b.createdAt;
-            return timeA - timeB;
-        });
+  
+
+        useEffect(() => {
+            const channel = pusher.subscribe('message');
+    
+            const handleMessageReceived = (data:any) => {
+                if(data.message.sender === myId || data.message.receiver === myId){
+
+                    setMessages((prevMessages:any) => [...prevMessages, data.message]);
+                }
+            };
+    
+            channel.bind('new-message', handleMessageReceived);
+    
+            return () => {
+                channel.unbind('new-message', handleMessageReceived);
+                channel.unsubscribe();
+            };
+        }, []);
+    
 
     return (
-        <div className='w-full relative flex flex-col justify-between rounded-[12px] bg-white p-2 h-[80vh]'>
-            {!selectedUser.name ? (
+        <div className='w-full  flex flex-col justify-between rounded-[12px] bg-white p-2 h-[80vh]'>
+            {!selectedUser?.name ? (
                 <>
                     <div className='w-full h-full  items-center justify-center flex flex-col'>
 
@@ -110,7 +147,7 @@ const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
                         </div>
                     </div>
 
-                    <div className='w-full p-2 flex flex-col  overflow-y-scroll   h-full'>
+                    <div  ref={chatContainerRef} className='w-full  p-2 flex flex-col  overflow-y-scroll   h-full'>
                         {isLoading ? ("lofing") : (<>
                             {filteredMessages.length < 1 && (
                                 <div className='flex flex-col py-10 gap-[10px]'>
@@ -121,7 +158,7 @@ const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
                             {filteredMessages.map((message: any, index: number) => {
                                 const isLastMessage: any = index === filteredMessages.length - 1;
                                 return (
-                                    <div ref={isLastMessage ? lastMessage : null} key={index} className={` flex flex-col ${message.sender === myId ? "ml-auto" : "mr-auto"} `}>
+                                    <div ref={isLastMessage ? lastMessageRef : null} key={index} className={` flex flex-col gap-[4px] ${message.sender === myId ? "ml-auto" : "mr-auto"} `}>
                                         {message.imageUrl == null ? (
                                             <div className={`p-2 mb-2 min-w-[100px] flex flex-col max-w-[500px] rounded-[6px] ${message.sender === myId ? "ml-auto bg-primary" : "mr-auto bg-gray-50"}`}>
 
@@ -148,8 +185,8 @@ const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
 
                     </div>
                     {image !== "" ? (
-                        <div className='w-[400px] h-[400px] bottom-2 absolute'>
-                            <SentImage image={image} />
+                        <div className='w-full h-full left-0 pt-10  bg-black/30 bottom-2 absolute'>
+                            <SentImage setImage={setImage} setMessage={setMessages} selectedUser={selectedUser} messages={messages} image={image} />
                         </div>
                     ) : ("")}
 

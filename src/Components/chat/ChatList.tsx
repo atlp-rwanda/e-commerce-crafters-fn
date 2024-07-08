@@ -1,36 +1,50 @@
 import React, { useEffect, useState } from 'react'
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
+import pusher from '../../Lib/pusher';
 
 interface Vendor {
     userId: string;
     name: string;
+    profile: string
     Vendor?: {
-      storeName: string;
+        storeName: string;
     };
-  }
-  
-  interface ChatListProps {
-    selectedUser: Partial<Vendor> | null; 
+}
+interface ChatListProps {
+    selectedUser: Partial<Vendor> | null;
     vendors: Vendor[];
     isLoading: boolean;
     handelSelect: (vendor: Vendor) => void;
-  }
-  
-  const ChatList: React.FC<ChatListProps> = ({ vendors, isLoading, handelSelect, selectedUser }) => {
+}
+
+const ChatList: React.FC<ChatListProps> = ({ vendors, isLoading, handelSelect, selectedUser }) => {
     const [selectUsers, setSelectUsers] = useState<Vendor[]>([]);
+    const userData: any = useAuthUser()
+
     useEffect(() => {
-        if (selectedUser?.name) {
-          if (vendors.some((vendor) => vendor.userId === selectedUser.userId) || selectUsers.some((user) => user.userId === selectedUser.userId)) {
-            return; 
-          }
-          setSelectUsers((prevUsers) => [...prevUsers, selectedUser as Vendor]);
+        if (userData && userData.role === "vendor") {
+          const channel = pusher.subscribe("user");
+          channel.bind("send-user", (data: any) => {
+            const userExists = vendors.some((vendor) => vendor.userId === data.sender.userId) || selectUsers.some((user) => user?.userId === data.sender.userId);
+            if (!userExists && data.message.receiver === userData.userId) {
+              setSelectUsers((prevUsers) => [...prevUsers, data.sender as Vendor]);
+              console.log("selected user...: ", selectUsers)
+            }
+          });
+          return () => {
+            pusher.unsubscribe("user");
+          };
         }
-      }, [selectedUser, vendors, selectUsers]);
+      }, [userData, vendors, selectUsers]);
+
+   
+
 
     return (
         <div className='w-full bg-white min-h-[45vh] p-2 rounded-[12px] rounded-tl-none flex flex-col gap-[10px]'>
 
-            {isLoading ? ("locaing") : (
-                vendors.length === 0 ? (
+            {isLoading ? ("loading") : (
+                selectUsers.length == 0 && vendors.length === 0 ? (
                     <div className=' w-full h-full flex flex-col items-center justify-center'>
                         <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_1508_1557)">
@@ -49,28 +63,34 @@ interface Vendor {
                     </div>
                 ) : (
                     <>
-                        {selectUsers.map((vendor)=>{
-                            return(
-                                <div onClick={() => handelSelect(vendor)}  className=' cursor-pointer hover:opacity-40 flex flex-row gap-[10px]  py-2 items-center'>
-                                <div className='flex items-center justify-center w-[45px] h-[45px] rounded-full border border-gray-500'>
-                                    <img src="" className='w-full h-full object-cover rounded-full' alt="" />
-                                </div>
-                                <div className='flex flex-col leading-1 w-[250px]'>
-                                    <div className='flex font-outfit flex-row items-center justify-between w-full'>
-                                        <span className='text-[18px] font-[600]'>store 4</span>
-                                        <span className='text-[14px] text-gray-400'>Today</span>
+                        {selectUsers.map((vendor:any) => {
+                            return (
+                                <div onClick={() => handelSelect(vendor)} className=' cursor-pointer hover:opacity-40 flex flex-row gap-[10px]  py-2 items-center'>
+                                    <div className='flex items-center justify-center w-[45px] h-[45px] rounded-full border border-gray-500'>
+                                        <img src={vendor?.profile} className='w-full h-full object-cover rounded-full' alt="" />
                                     </div>
-                                    <div className='flex flex-row gap-[4px]'>
-    
-                                        <span className=' line-clamp-1 text-[12px] text-gray-500'>Lorem ipsum dolor sit, amet consectetur adipisicing</span>
-                                        <span className='bg-primary px-2 text-[12px] text-white rounded-full'>2</span>
+                                    <div className='flex flex-col leading-1 w-[250px]'>
+                                        <div className='flex font-outfit flex-row items-center justify-between w-full'>
+                                            {vendor?.role == "vendor" ?(
+                                                
+                                                <span className='text-[18px] font-[600]'>{vendor?.Vendor?.storeName}</span>
+                                            ) :(
+                                                <span className='text-[18px] font-[600]'>{vendor?.name}</span>
+                                                
+                                            )}
+                                            <span className='text-[14px] text-gray-400'>Today</span>
+                                        </div>
+                                        <div className='flex flex-row gap-[4px]'>
+
+                                            <span className=' line-clamp-1 text-[12px] text-gray-500'>Lorem ipsum dolor sit, amet consectetur adipisicing</span>
+                                            <span className='bg-primary px-2 text-[12px] text-white rounded-full'>2</span>
+                                        </div>
                                     </div>
+
                                 </div>
-    
-                            </div>
 
                             )
-                        }) }
+                        })}
                         {vendors.map((vendor: any) => {
                             return (
                                 <div onClick={() => handelSelect(vendor)} className=' cursor-pointer hover:opacity-40 flex flex-row gap-[10px]  py-2 items-center'>
@@ -79,7 +99,13 @@ interface Vendor {
                                     </div>
                                     <div className='flex flex-col leading-1 w-[250px]'>
                                         <div className='flex font-outfit flex-row items-center justify-between w-full'>
-                                            <span className='text-[18px] font-[600]'>{vendor.Vendor.storeName}</span>
+                                        {vendor?.role == "vendor" ?(
+                                                
+                                                <span className='text-[18px] font-[600]'>{vendor?.Vendor?.storeName}</span>
+                                            ) :(
+                                                <span className='text-[18px] font-[600]'>{vendor?.name}</span>
+                                                
+                                            )}
                                             <span className='text-[14px] text-gray-400'>Today</span>
                                         </div>
                                         <div className='flex flex-row gap-[4px]'>

@@ -5,10 +5,11 @@ import ChatList from '../../Components/chat/ChatList'
 import ChatPlace from '../../Components/chat/ChatPlace'
 import { useGetVendorQuery } from '../../Redux/features/ChatSlice'
 import ChatSearch from '../../Components/chat/ChatSearch'
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser'
 
 const Chat = () => {
-    const myId = "bca80aa7-5759-4793-9988-270396d36612"
-    const { data, error, isLoading:vendorLoading } = useGetVendorQuery(myId);
+    const userData:any = useAuthUser()
+    const { data, error, isLoading:vendorLoading } = useGetVendorQuery(userData.userId);
     const vendors = data ? data.vendors : []
     const [selectedUser,setSelectedUser] = useState({})
 
