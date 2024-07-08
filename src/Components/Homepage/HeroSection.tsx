@@ -36,9 +36,12 @@ const HeroSection: React.FC = () => {
         </h1>
         <p className="text-[16px] font-poppins">
           {" "}
-          {t("Welcome")}
-          <a href="#" className="text-secondary font-bold">
-            {t("here")}
+          {t(" Welcome to our online store! Whether you're a buyer looking for great")}
+          {t("deals or a seller wanting to showcase your products, our platform")}
+          {t("offers you the opportunity to connect and thrive. Explore our wide")}
+          {t("range of products and create an account")}
+          <a href="#" className="text-secondary font-bold px-3">
+            {t("  here  ")}
           </a>{" "}
           {t("to get started")}{" "}
         </p>
