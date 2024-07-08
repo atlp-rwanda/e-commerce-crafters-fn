@@ -16,13 +16,13 @@ const Singlepage = () => {
   
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
       <div className="flex flex-col justify-center w-full">
         <Sproduct productId={productId} />
         <Reviews productId={productId} />
         <SimilarProduct productId={productId} />
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };

@@ -27,15 +27,11 @@ export const store = configureStore({
     category: categoryReducer,
     pagination: paginationReducer,
     search: searchReducer,
-
     productsImages: productsImagesReducer,
     similarProducts: similarScile,
-
     popularProducts: popularProductsReducer,
     contact: contactReducer,
-
     wishlist: wishlistSlice,
-
     cart: cartReducer,
   },
 
