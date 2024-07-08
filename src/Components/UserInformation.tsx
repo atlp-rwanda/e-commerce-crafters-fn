@@ -2,7 +2,7 @@ import React from "react";
 import CustomButton from "./CustomButton";
 import { UserDataType } from "../pages/User";
 const UserInformation = ({
- user: { profile, name, role, email },
+ user: { profile, name, role, email, isTwoFactorEnabled },
 }: {
  user: UserDataType;
 }) => {
@@ -30,9 +30,16 @@ const UserInformation = ({
       </div>
       {role === "buyer" && (
        <CustomButton
-        title='Become a Seller'
-        buttonStyles='bg-primary text-sm lg:text-base px-2 py-1 h-fit w-fit font-outfit font-thin lg:px-4 lg:py-2 text-white'
+        title='Be a Vendor'
+        buttonStyles='bg-primary font-regular text-sm lg:text-base px-2 py-1 h-fit w-fit font-outfit  lg:px-4 lg:py-2 text-white'
         handleClick={() => console.log("Modal")}
+       />
+      )}
+      {isTwoFactorEnabled || (
+       <CustomButton
+        title='Enable 2FA'
+        buttonStyles='bg-secondary font-regular text-sm lg:text-base px-2 py-1 h-fit w-fit font-outfit  lg:px-4 lg:py-2 text-white rounded'
+        handleClick={() => console.log("Two factor")}
        />
       )}
      </div>

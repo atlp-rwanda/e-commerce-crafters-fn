@@ -17,7 +17,17 @@ export const apiSlice = createApi({
     },
    }),
   }),
+  updatePassword: builder.mutation({
+   query: ({ userId, newPassword }) => ({
+    url: `/updatepassword/${userId}`,
+    method: "PATCH",
+    body: JSON.stringify(newPassword),
+    headers: {
+     "Content-Type": "application/json",
+    },
+   }),
+  }),
  }),
 });
 
-export const { useUpdateUserMutation } = apiSlice;
+export const { useUpdateUserMutation, useUpdatePasswordMutation } = apiSlice;

@@ -46,7 +46,11 @@ const User = () => {
       label={"profiledetails"}
       tabName={"Profile Details"}
      />
-     <ChangePasswordTab label={"changepassword"} tabName={"Change Password"} />
+     <ChangePasswordTab
+      label={"changepassword"}
+      tabName={"Change Password"}
+      user={user as UserDataType}
+     />
      {user?.role === "seller" ? (
       <BusinessInformationTab
        label={"bussininfo"}

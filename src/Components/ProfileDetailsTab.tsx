@@ -45,7 +45,7 @@ const ProfileDetailsTab = ({
  const [profileImage, setProfileImage] = useState(profile);
 
  const onSubmitForm: SubmitHandler<FormFields> = async (formData) => {
-  const toadId = toast.loading("Updating Profile");
+  const toastId = toast.loading("Updating Profile");
 
   try {
    if (formData.profile) {
@@ -67,10 +67,10 @@ const ProfileDetailsTab = ({
     userState: response.data.user,
    });
    await setUser(response.data.user);
-   toast.dismiss(toadId);
+   toast.dismiss(toastId);
    toast.success("Updated Successfully ");
   } catch (error: any) {
-   toast.dismiss(toadId);
+   toast.dismiss(toastId);
    toast.error(error?.message);
   }
  };
@@ -137,8 +137,8 @@ const ProfileDetailsTab = ({
     />
     <div className='flex flex-row gap-x-2 mt-4 sm:self-end'>
      <CustomButton
-      buttonStyles={`transition-colors duration-500 hover:bg-primary hover:text-white text-black rounded-lg px-3 md:px-4 py-2 font-outfit text-sm md:text-base ${
-       isSubmitting ? "hidden" : ""
+      buttonStyles={`transition-colors duration-500 hover:bg-border hover:text-white text-black rounded-lg px-3 md:px-4 py-2 font-outfit text-sm md:text-base ${
+       isSubmitting && "hidden"
       }`}
       title='Discard'
       buttonType='reset'
