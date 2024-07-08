@@ -16,12 +16,12 @@ import Settings from "../pages/Settings";
 import AdminHome from "../pages/Admin/AdminHome";
 import Homepage from "../pages/Homepage";
 import Products from "../pages/ProductsPage";
-import SingleProduct from "../pages/SingleProduct";
 import { OrderTrackingPage } from "../pages/orderTrackingPage";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Singlepage from "../pages/singlePage";
 import Requests from "../pages/Requests";
+import Chat from "../pages/chat/Chat";
 
 const AppRoutes: React.FC = () => (
   <div>
@@ -34,12 +34,13 @@ const AppRoutes: React.FC = () => (
       <Route path="/2fa" element={<VerifyCode />} />
       <Route path="/verifyemail" element={<VerifyEmail />} />
       <Route path="/authgoogle" element={<AuthGoogle />} />
-      <Route path="/products" element={<Products />} />
       <Route path="/singleproduct" element={<Singlepage />} />
+      <Route path="/products" element={<Products />} />
 
-      <Route path="/product/:id" element={<SingleProduct />} />
+      <Route path="/product/:id" element={<Singlepage />} />
       <Route path="/order-tracking" element={<OrderTrackingPage />} />
       <Route element={<AuthOutlet fallbackPath="/login" />}>
+      <Route path='/chat' element={<Chat/>} />
         <Route path="/admin" element={<Admin />}>
           <Route index element={<AdminHome />} />
           <Route path="users" element={<Users />} />

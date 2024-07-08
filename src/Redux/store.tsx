@@ -12,11 +12,16 @@ import { productReducer, cartReducer } from './Action/Reducer/singleproductSlice
 import sellingReportReducer from "./Analytic/SellingReportSlice";
 import WeeklySellingReducer from "./Analytic/WeeklySellingSlice";
 import OrderStatusSlice from "./Analytic/orderStatusSlice";
+import wishlistslice from './Reducer/wishlistslice';
+import similarScile from './Reducer/similarScile';
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
-    productsImages: productsImagesReducer,
+
+    reviews: reviewReducer,
+    product: productReducer,
+    Wishlist: wishlistslice,
     category: categoryReducer,
     pagination: paginationReducer,
     search: searchReducer,
@@ -26,11 +31,14 @@ export const store = configureStore({
     orderStatus: OrderStatusSlice,
     sellingReport: sellingReportReducer,
     weeklyReport: WeeklySellingReducer,
+    productsImages: productsImagesReducer,
+    similarProducts: similarScile,
   },
+
   middleware: (getDefaultMiddelware) =>
     getDefaultMiddelware().concat(apiSlice.middleware),
 });
-  
-  export type RootState = ReturnType<typeof store.getState>;
-  export type AppDispatch = typeof store.dispatch;
-  export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>;
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>;

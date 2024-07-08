@@ -4,7 +4,7 @@ import Payment from "../Components/Checkout/Payment";
 import useFetch from "../Components/Checkout/UseFetch";
 import Footer from "../Components/Homepage/Homepage_footer";
 import Header from "../Components/Homepage/Homepage_header";
-
+import { useTranslation } from "react-i18next";
 
 const Checkout = () => {
   const {
@@ -19,7 +19,7 @@ const Checkout = () => {
   const handleDelete = (id: number) => {
     setCartItems((products) => products.filter((item) => item.id !== id));
   };
-
+  const { t } = useTranslation();
   return (
     <>
       <Header />
@@ -37,7 +37,7 @@ const Checkout = () => {
         </div>
         <a href="/products">
           <button className="bg-amber-600 px-32 py-3 rounded-lg text-2xl mx-[410px] my-20  text-white font-semibold hover:shadow-sm hover:shadow-black">
-            BACK TO HOME
+            {t("BACK TO HOME")}
           </button>
         </a>
       </div>
