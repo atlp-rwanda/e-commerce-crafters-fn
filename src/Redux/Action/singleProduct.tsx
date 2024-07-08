@@ -30,7 +30,7 @@ export const submitReview = createAsyncThunk(
   'reviews/submitReview',
   async ({ productId, data }: { productId: string; data: ReviewData }, { rejectWithValue }) => {
     try {
-      const apiUrl = `https://http://localhost:5000/products/addfeedback/${productId}`;
+      const apiUrl = `http://localhost:5000/addfeedback/${productId}`;
       const token = localStorage.getItem('token');
       const config = {
         headers: {
