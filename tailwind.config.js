@@ -13,6 +13,7 @@ module.exports = {
         gray: {
           100: '#EEEDED',
           200: '#CACACA',
+          300: '#797979'
         },
         border: '#666666',
       },
