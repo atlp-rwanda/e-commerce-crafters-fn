@@ -7,10 +7,6 @@ import categoryReducer from './productsPage/categorySlice';
 import paginationReducer from './productsPage/paginationSlice';
 import searchReducer from './productsPage/searchSlice';
 import { apiSlice } from './features/ApiSlice';
-import { reviewReducer } from './Action/Reducer/Review';
-import { productReducer,cartReducer } from './Action/Reducer/singleproductSlice';
-
-
 
 export const store = configureStore({
   reducer: {
@@ -21,7 +17,6 @@ export const store = configureStore({
     search: searchReducer,
     popularProducts: popularProductsReducer,
     contact: contactReducer,
-    cart: cartReducer
   },
   middleware: (getDefaultMiddelware) =>
     getDefaultMiddelware().concat(apiSlice.middleware),

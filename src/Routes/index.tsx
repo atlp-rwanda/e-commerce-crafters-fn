@@ -15,14 +15,23 @@ import Analytics from "../pages/Analytics";
 import Settings from "../pages/Settings";
 import AdminHome from "../pages/Admin/AdminHome";
 import Homepage from "../pages/Homepage";
-import Products from "../pages/ProductsPage";
-import SingleProduct from "../pages/SingleProduct";
+
+
+
 import { OrderTrackingPage } from "../pages/orderTrackingPage";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
-import Singlepage from "../pages/singlePage";
 
-const AppRoutes: React.FC = () => (
+
+
+import Singlepage from "../pages/singlePage";
+import Forgotpassword from "../Lib/ForgotPasword";
+import Products from "../pages/ProductsPage";
+
+
+
+const AppRoutes: React.FC = () => {
+  return (
   <div>
     <Routes>
       <Route path="" element={<Homepage />} />
@@ -33,10 +42,10 @@ const AppRoutes: React.FC = () => (
       <Route path="/2fa" element={<VerifyCode />} />
       <Route path="/verifyemail" element={<VerifyEmail />} />
       <Route path="/authgoogle" element={<AuthGoogle />} />
-      <Route path="/products" element={<Products />} />
       <Route path="/singleproduct" element={<Singlepage />} />
+      <Route path="/products" element={<Products />} />
 
-      <Route path="/product/:id" element={<SingleProduct />} />
+      <Route path="/product/:id" element={<Singlepage />} />
       <Route path="/order-tracking" element={<OrderTrackingPage />} />
       <Route element={<AuthOutlet fallbackPath="/login" />}>
         <Route path="/admin" element={<Admin />}>
@@ -51,6 +60,6 @@ const AppRoutes: React.FC = () => (
       </Route>
     </Routes>
   </div>
-);
+);}
 
 export default AppRoutes;
