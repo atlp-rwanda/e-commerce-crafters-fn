@@ -60,18 +60,14 @@ const Header: React.FC = () => {
   };
 
   const userId = userData?.userId;
-  const { data: carts } = useCartsQuery({});
+  const { data: cartsItems } = useCartsQuery(userId);
   // console.log(carts)
-  const { data: wishlists } = useWishlistsQuery({});
+  const { data: wishlistsItems } = useWishlistsQuery(userId);
   // console.log(wishlists)
-  const userWishlists = wishlists
-    ? wishlists.filter((wishlist: any) => wishlist.userId === userId)
-    : [];
-  const wishlistsNumber = userWishlists.length;
-  const userCarts = carts
-    ? carts.filter((cart: any) => cart.userId === userId)
-    : [];
-  const cartsNumber = userCarts.length;
+
+  const wishlistsNumber = wishlistsItems?.wishlist.length || 0;
+
+  const cartsNumber = cartsItems?.cartitem.length || 0;
 
   const handelDarkMode = () => {
     const newDarkModeState = !openDark;
