@@ -23,39 +23,41 @@ import Singlepage from "../pages/singlePage";
 import Requests from "../pages/Requests";
 import Chat from "../pages/chat/Chat";
 import Forgotpassword from "../Lib/ForgotPassword";
+import User from "../pages/User";
 
 const AppRoutes: React.FC = () => (
-  <div>
-    <Routes>
-      <Route path="" element={<Homepage />} />
-      <Route path="/login" element={<Signin />} />
-      <Route path="/checkout" element={<Checkout />} />
-      <Route path="/cart" element={<Cart />} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/2fa" element={<VerifyCode />} />
-      <Route path="/verifyemail" element={<VerifyEmail />} />
-      <Route path="/authgoogle" element={<AuthGoogle />} />
-      <Route path="/singleproduct" element={<Singlepage />} />
-      <Route path="/products" element={<Products />} />
-      <Route path="/forgot-password" element={<Forgotpassword/>}/>
+ <div>
+  <Routes>
+   <Route path='' element={<Homepage />} />
+   <Route path='/login' element={<Signin />} />
+   <Route path='/checkout' element={<Checkout />} />
+   <Route path='/cart' element={<Cart />} />
+   <Route path='/signup' element={<SignUp />} />
+   <Route path='/2fa' element={<VerifyCode />} />
+   <Route path='/verifyemail' element={<VerifyEmail />} />
+   <Route path='/authgoogle' element={<AuthGoogle />} />
+   <Route path='/singleproduct' element={<Singlepage />} />
+   <Route path='/products' element={<Products />} />
+   <Route path='/forgot-password' element={<Forgotpassword />} />
 
-      <Route path="/product/:id" element={<Singlepage />} />
-      <Route path="/order-tracking" element={<OrderTrackingPage />} />
-      <Route element={<AuthOutlet fallbackPath="/login" />}>
-      <Route path='/chat' element={<Chat/>} />
-        <Route path="/admin" element={<Admin />}>
-          <Route index element={<AdminHome />} />
-          <Route path="users" element={<Users />} />
-          <Route path="sellers" element={<Sellers />} />
-          <Route path="analytics" element={<Analytics />} />
-          <Route path="requests" element={<Requests />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
-        <Route path="/buyer" element={<Buyer />} />
-        <Route path="/vendor" element={<Seller />} />
-      </Route>
-    </Routes>
-  </div>
+   <Route path='/product/:id' element={<Singlepage />} />
+   <Route path='/order-tracking' element={<OrderTrackingPage />} />
+   <Route element={<AuthOutlet fallbackPath='/login' />}>
+    <Route path='/chat' element={<Chat />} />
+    <Route path='/admin' element={<Admin />}>
+     <Route index element={<AdminHome />} />
+     <Route path='users' element={<Users />} />
+     <Route path='sellers' element={<Sellers />} />
+     <Route path='analytics' element={<Analytics />} />
+     <Route path='requests' element={<Requests />} />
+     <Route path='settings' element={<Settings />} />
+    </Route>
+    <Route path='/user' element={<User />} />
+    <Route path='/buyer' element={<Buyer />} />
+    <Route path='/vendor' element={<Seller />} />
+   </Route>
+  </Routes>
+ </div>
 );
 
 export default AppRoutes;
