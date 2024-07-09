@@ -10,8 +10,9 @@ import { useParams } from "react-router-dom";
 import Header from "../Components/Homepage/Homepage_header";
 
 export const OrderTrackingPage = () => {
-  const { orderId } = useParams();
-
+      const orderId = "2b701ee8-913f-422f-8f23-902a7687719a";
+    // const orderId = "3945e594-cc56-41d1-9c6a-a056cc848a05"; shipped
+  const phoneNumber = "0787990099";
   const [userId, setUserId] = useState('');
   const [orderStatus, setOrderStatus] = useState('pending');
 

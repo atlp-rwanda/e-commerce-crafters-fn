@@ -22,15 +22,11 @@ import { OrderTrackingPage } from "../pages/orderTrackingPage";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Singlepage from "../pages/singlePage";
-import Requests from "../pages/Requests";
-import AdminSettings from "../Components/dashboard/AdminSettings";
-import Forgotpassword from "../Lib/ForgotPassword";
-import User from "../pages/User";
-import Sellers from "../pages/Sellers";
-import Signin from "../pages/Signin";
+import Forgotpassword from "../Lib/ForgotPasword";
+import Products from "../pages/ProductsPage";
+import OrderComponent from "../Components/orderComponent";
 
-import Chat from "../pages/chat/Chat";
-import OrderComponent from "../Components/orders";
+
 
 const AppRoutes: React.FC = () => (
   <div>
@@ -48,10 +44,7 @@ const AppRoutes: React.FC = () => (
       <Route path="/geolocation" element={<Location />} />
       <Route path="/product/:id" element={<Singlepage />} />
       <Route path="/order-tracking" element={<OrderTrackingPage />} />
-      <Route path="/forgot-password" element={<Forgotpassword />} />
-      <Route path="/product/:id" element={<Singlepage />} />
-      <Route path="/order/:orderId" element={<OrderTrackingPage />} />
-      <Route path="/orders" element={<OrderComponent />} />
+      <Route path="/order" element={<OrderComponent/>}/>
       <Route element={<AuthOutlet fallbackPath="/login" />}>
         <Route path="/chat" element={<Chat />} />
 
