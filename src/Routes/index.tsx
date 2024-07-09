@@ -27,6 +27,7 @@ import Checkout from "../pages/Checkout";
 import Singlepage from "../pages/singlePage";
 import Forgotpassword from "../Lib/ForgotPasword";
 import Products from "../pages/ProductsPage";
+import OrderComponent from "../Components/orderComponent";
 
 
 
@@ -47,6 +48,7 @@ const AppRoutes: React.FC = () => {
 
       <Route path="/product/:id" element={<Singlepage />} />
       <Route path="/order-tracking" element={<OrderTrackingPage />} />
+      <Route path="/order" element={<OrderComponent/>}/>
       <Route element={<AuthOutlet fallbackPath="/login" />}>
         <Route path="/admin" element={<Admin />}>
           <Route index element={<AdminHome />} />
