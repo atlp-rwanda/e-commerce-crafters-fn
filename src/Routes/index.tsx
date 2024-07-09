@@ -11,6 +11,7 @@ import VerifyEmail from '../Lib/VerifyEmail';
 import AuthGoogle from '../Lib/authgoogle';
 import Users from '../pages/Users';
 import Forgotpassword from '../Lib/ForgotPassword';
+import VendorHome from '../pages/vendor/vendorHome';
 
 
 const AppRoutes: React.FC = () => (
@@ -29,7 +30,9 @@ const AppRoutes: React.FC = () => (
           <Route path="users" element={<Users />} />
         </Route>
         <Route path="/buyer" element={<Buyer />} />
-        <Route path="/vendor" element={<Seller />} />
+        <Route path="/vendor" element={<Seller />}>
+        <Route index element={<VendorHome/>}/>
+        </Route>
 
       </Route>
     </Routes>
