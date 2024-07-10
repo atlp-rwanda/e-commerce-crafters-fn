@@ -60,7 +60,7 @@ const Signin: React.FC = () => {
             navigate("/products");
           } else if (response.user.role === "vendor") {
             navigate("/vendor");
-          } else if (response.user.role === "admin") {
+          } else if ((response.user.role === "admin")) {
             navigate("/admin");
           }
         } else {
@@ -80,7 +80,7 @@ const Signin: React.FC = () => {
         setError("Invalid credentials. Try again");
         setErr(true);
       } else {
-        setError("Something is wrong , Try again later");
+        setError("Invalid credentials, Try again");
         setErr(false);
       }
     }

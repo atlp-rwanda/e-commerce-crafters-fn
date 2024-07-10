@@ -61,6 +61,8 @@ const SignUp: React.FC = () => {
       if (error.data && error.data.Message === "Email already exists") {
         setError("Email has been taken");
         setIsEmpty("email");
+      }else{
+        setError("Something get wrong, Try again later")
       }
       console.log(error);
     }
@@ -102,7 +104,7 @@ const SignUp: React.FC = () => {
 
       {token ? (
         <div className="w-full z-50 h-screen top-0  absolute flex items-center justify-center bg-black/20">
-          <div className="p-4 bg-white rounded-[12px] w-1/4 flex items-center justify-center min-h-40">
+          <div className="p-4 bg-white rounded-[12px] w-full md:w-[1/2] lg:w-1/4 flex items-center justify-center min-h-40">
             {token && isVerifying && !verificationAttempted && (
               <Puff
                 visible
@@ -351,3 +353,4 @@ const SignUp: React.FC = () => {
 };
 
 export default SignUp;
+
