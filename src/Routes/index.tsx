@@ -22,6 +22,7 @@ import Checkout from "../pages/Checkout";
 import Singlepage from "../pages/singlePage";
 import Requests from "../pages/Requests";
 import AdminSettings from "../Components/dashboard/AdminSettings";
+import Forgotpassword from "../Lib/ForgotPassword";
 
 const AppRoutes: React.FC = () => (
   <div>
@@ -36,9 +37,9 @@ const AppRoutes: React.FC = () => (
       <Route path="/authgoogle" element={<AuthGoogle />} />
       <Route path="/products" element={<Products />} />
       <Route path="/singleproduct" element={<Singlepage />} />
-
       <Route path="/product/:id" element={<SingleProduct />} />
       <Route path="/order-tracking" element={<OrderTrackingPage />} />
+      <Route path="/forgot-password" element={<Forgotpassword />} />
       <Route element={<AuthOutlet fallbackPath="/login" />}>
         <Route path="/admin" element={<Admin />}>
           <Route index element={<AdminHome />} />
