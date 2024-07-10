@@ -6,10 +6,17 @@ import {
   useRegisterMutation,
   useVerifyEmailQuery,
 } from "../Redux/features/AuthSlice";
+<<<<<<< HEAD
 import EmailSent from "../Components/Modal/EmailSent";
 import { useLocation } from "react-router-dom";
 import { Puff } from "react-loader-spinner";
 import { useTranslation } from "react-i18next";
+=======
+
+import { useLocation } from "react-router-dom";
+import { Puff } from "react-loader-spinner";
+import EmailSent from "../Components/modal/EmailSent";
+>>>>>>> 169ef0a (Add forgot password)
 
 const SignUp: React.FC = () => {
   const [name, setName] = useState<string>("");
@@ -61,6 +68,11 @@ const SignUp: React.FC = () => {
       if (error.data && error.data.Message === "Email already exists") {
         setError("Email has been taken");
         setIsEmpty("email");
+<<<<<<< HEAD
+=======
+      }else{
+        setError("Something get wrong, Try again later")
+>>>>>>> 169ef0a (Add forgot password)
       }
       console.log(error);
     }
@@ -95,14 +107,22 @@ const SignUp: React.FC = () => {
       }
     }
   }, [token, data, isSuccess, verificationAttempted]);
+<<<<<<< HEAD
   const { t } = useTranslation();
+=======
+
+>>>>>>> 169ef0a (Add forgot password)
   return (
     <div className="w-full h-screen flex flex-col justify-between items-center ">
       {modal ? <EmailSent email={email} /> : ""}
 
       {token ? (
         <div className="w-full z-50 h-screen top-0  absolute flex items-center justify-center bg-black/20">
+<<<<<<< HEAD
           <div className="p-4 bg-white rounded-[12px] w-1/4 flex items-center justify-center min-h-40">
+=======
+          <div className="p-4 bg-white rounded-[12px] w-full md:w-[1/2] lg:w-1/4 flex items-center justify-center min-h-40">
+>>>>>>> 169ef0a (Add forgot password)
             {token && isVerifying && !verificationAttempted && (
               <Puff
                 visible
@@ -242,11 +262,19 @@ const SignUp: React.FC = () => {
 
         <div className="flex flex-col gap-[2px] items-center">
           <span className="font-[600] text-[28px] text-[#333333] font-outfit">
+<<<<<<< HEAD
             {t("Sign Up")}
           </span>
           <span className="text-[18px] font-[300] text-[#A3A2A2] font-outfit">
             {" "}
             {t("Enter your credentials")}
+=======
+            Sign Up
+          </span>
+          <span className="text-[18px] font-[300] text-[#A3A2A2] font-outfit">
+            {" "}
+            Enter your credentials
+>>>>>>> 169ef0a (Add forgot password)
           </span>
         </div>
         <span className="text-red-500 text-[14px] font-outfit">{errorr}</span>
@@ -258,22 +286,35 @@ const SignUp: React.FC = () => {
         >
           <Input
             error={isEmpty === "name" ? true : !!(false || err)}
+<<<<<<< HEAD
             label={t("Enter Your Name")}
             type="text"
             placeholder={t("Enter Your Name")}
+=======
+            label="Enter Your Name"
+            type="text"
+            placeholder="Enter your name"
+>>>>>>> 169ef0a (Add forgot password)
             value={name}
             onChange={(value) => setName(value)}
           />
           <Input
             error={isEmpty === "email" ? true : !!(false || err)}
+<<<<<<< HEAD
             label={t("Enter Your Email")}
             type="email"
             placeholder={t("Enter your email address")}
+=======
+            label="Enter Your Email"
+            type="email"
+            placeholder="Enter your email addres"
+>>>>>>> 169ef0a (Add forgot password)
             value={email}
             onChange={(value) => setEmail(value)}
           />
           <Input
             error={isEmpty === "password" ? true : !!(false || err)}
+<<<<<<< HEAD
             label={t("Enter Your Password")}
             type="password"
             placeholder={t("Enter your password")}
@@ -281,6 +322,15 @@ const SignUp: React.FC = () => {
             onChange={(value) => setPassword(value)}
           />
           <AuthButton isLoading={!!isLoading} label={t("Sign Up")} />
+=======
+            label="Enter Your Password"
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(value) => setPassword(value)}
+          />
+          <AuthButton isLoading={!!isLoading} label="Sign Up" />
+>>>>>>> 169ef0a (Add forgot password)
 
           <div
             onClick={loginWithGoogle}
@@ -327,6 +377,7 @@ const SignUp: React.FC = () => {
               </defs>
             </svg>
             <span className="text-[#828282] font-[400] text-[18px]">
+<<<<<<< HEAD
               {t("Sign Up with Google")}
             </span>
           </div>
@@ -337,6 +388,16 @@ const SignUp: React.FC = () => {
             <a href="/login" className=" text-secondary">
               {" "}
               {t("Login")}
+=======
+              Sign Up with Google
+            </span>
+          </div>
+          <div className="flex flex-row gap-[4px] items-center justify-center">
+            <span className=" text-black">Already have an account? </span>
+            <a href="/login" className=" text-secondary">
+              {" "}
+              login
+>>>>>>> 169ef0a (Add forgot password)
             </a>
           </div>
         </form>
@@ -351,3 +412,4 @@ const SignUp: React.FC = () => {
 };
 
 export default SignUp;
+

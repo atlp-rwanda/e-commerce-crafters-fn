@@ -31,10 +31,14 @@ const AuthApiSlice = apiSlice.injectEndpoints({
     }),
     request_pasword: builder.mutation({
 <<<<<<< HEAD
+<<<<<<< HEAD
       query: (data) => ({
 =======
       query: (data)=>({
 >>>>>>> c7e1c1b (add forgot password ft)
+=======
+      query: (data)=>({
+>>>>>>> 169ef0a (Add forgot password)
         url: "/forget-password",
         method: "POST",
         body: data
@@ -42,18 +46,25 @@ const AuthApiSlice = apiSlice.injectEndpoints({
     }),
     reset_password: builder.mutation({
 <<<<<<< HEAD
+<<<<<<< HEAD
       query: (data) => ({
 =======
       query: (data)=>({
 >>>>>>> c7e1c1b (add forgot password ft)
+=======
+      query: (data)=>({
+>>>>>>> 169ef0a (Add forgot password)
         url: `/reset-password/${data.token}`,
         method: "POST",
         body: data
       })
     })
 <<<<<<< HEAD
+<<<<<<< HEAD
   })
 =======
+=======
+>>>>>>> 169ef0a (Add forgot password)
   }),
 >>>>>>> c7e1c1b (add forgot password ft)
 });
