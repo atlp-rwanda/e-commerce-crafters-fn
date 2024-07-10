@@ -5,7 +5,7 @@ const BestDeals: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const productId = "de400228-de1e-4bad-b464-d81e27b83777"; 
+  const productId = "73046fd0-bf56-4e14-8b35-adf4067d023h"; 
 
   useEffect(() => {
     const fetchImage = async () => {
@@ -31,8 +31,8 @@ const BestDeals: React.FC = () => {
   }, [productId]);
 
   return (
-    <section className="bg-primary text-white p-8 sm:p-16 md:pl-24 flex flex-col md:flex-row items-center justify-between sm:items-center justify-center gap-10 sm:gap-2 font-outfit text-lg md:text-xl sm:text-sm h-screen">
-      <div className="md:w-1/2 mb-8 md:mb-0 md:mr-8">
+    <section className="bg-primary text-white p-8 sm:p-16 md:pl-24 flex flex-col md:flex-row items-center justify-between sm:items-center justify-center md:gap-10 sm:gap-0 font-outfit text-lg md:text-xl sm:text-sm sm:h-auto md:h-screen">
+      <div className="md:w-1/2 sm:mb-8 md:mb-0 md:mr-8">
         <h2 className="text-2xl sm:text-xl md:text-4xl font-bold mb-4 md:mb-8">Best Samsung TV Deals</h2>
         <p className="text-base sm:text-sm md:text-xl mb-4 md:mb-6">
           Discover the latest Samsung TV deals at unbeatable prices. Whether

@@ -27,8 +27,8 @@ const HeroSection: React.FC = () => {
     console.log("Images from state:", images);
 
     return (
-        <section className="bg-primary text-white text-xl sm:text-sm p-24 sm:p-6 md:p-12 lg:p-24 flex flex-col md:flex-row gap-8 md:gap-20 lg:gap-40 font-outfit h-screen mt-24">
-            <div className="mt-8 mb-16 md:mb-0 md:w-1/2">
+        <section className="bg-primary text-white text-xl sm:text-sm p-24 sm:p-6 md:p-12 lg:p-24 flex flex-col md:flex-row sm:gap-0 md:gap-20 lg:gap-40 font-outfit md:h-screen sm:h-auto mt-24 sm:mt-20">
+            <div className="mt-8 sm:mb-0 md:mb-16 md:mb-0 md:w-1/2">
                 <h1 className="text-4xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-8">
                     <span className='text-secondary'>CRAFTERS</span> ONLINE SHOP
                 </h1>
@@ -36,11 +36,11 @@ const HeroSection: React.FC = () => {
                     Welcome to our online store! Whether you're a buyer looking for 
                     great <br className="hidden md:inline" /> deals or a seller wanting to showcase your products, our platform <br className="hidden md:inline" />
                     offers you the opportunity to connect and thrive. Explore our wide <br className="hidden md:inline" /> range of products and
-                    create an account <a href="#" className='text-secondary font-bold'>here</a> to get started.
+                    create an account <a href="/signup" className='text-secondary font-bold'>here</a> to get started.
                 </p>
                 <div>
-                    <button className="bg-secondary px-6 py-2 rounded-lg mr-4 mb-4 md:mb-0 md:text-lg">Shop Now</button>
-                    <button className="bg-blue-900 px-6 py-2 rounded-lg md:text-lg">Contact Us</button>
+                    <a href="/products" className="bg-secondary px-6 py-2 rounded-lg mr-4 mb-4 md:mb-0 md:text-lg">Shop Now</a>
+                    <a href="#ContactSection" className="bg-blue-900 px-6 py-2 rounded-lg md:text-lg">Contact Us</a>
                 </div>
             </div>
             
