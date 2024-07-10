@@ -45,12 +45,9 @@ const Forgotpassword: React.FC = () => {
     const data = {
       email: email,
     };
-<<<<<<< HEAD
     if(newPassword == "" || re_password == ""){
      return  setErrorMessage("All field Are Required")
     }
-=======
->>>>>>> c7e1c1b (add forgot password ft)
     const data_reset = {
       password: newPassword,
       token: token,
