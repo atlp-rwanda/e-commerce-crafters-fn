@@ -163,6 +163,7 @@ const Signin = () => {
             value={password}
             onChange={(value) => setPassword(value)}
           />
+<<<<<<< HEAD
           <a
             href="/forgot-password"
             className="text-[16px] font-[600] text-primary text-end"
@@ -170,6 +171,10 @@ const Signin = () => {
             {t("Forgot Password")}?
           </a>
           <AuthButton isLoading={!!isLoading} label={t("Sign In")} />
+=======
+          <a href="/forgot-password" className="text-[16px] font-[600] text-primary text-end">Forgot Password?</a>
+          <AuthButton isLoading={!!isLoading} label="Sign In" />
+>>>>>>> c7e1c1b (add forgot password ft)
 
           <div
             onClick={loginWithGoogle}
