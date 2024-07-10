@@ -64,7 +64,11 @@ const AppRoutes: React.FC = () => (
       <Route path="/2fa" element={<VerifyCode />} />
       <Route path="/verifyemail" element={<VerifyEmail />} />
       <Route path="/authgoogle" element={<AuthGoogle />} />
-      <Route path="/forgot-password" element={<Forgotpassword />} />
+      <Route path="/products" element={<Products />} />
+      <Route path="/singleproduct" element={<Singlepage />} />
+
+      <Route path="/product/:id" element={<SingleProduct />} />
+      <Route path="/order-tracking" element={<OrderTrackingPage />} />
       <Route element={<AuthOutlet fallbackPath="/login" />}>
         <Route path="/admin" element={<Admin />}>
           <Route index element={<Users />} />
