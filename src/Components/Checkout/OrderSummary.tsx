@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 interface OrderSummaryProps {
   subTotal: number;
@@ -17,10 +18,11 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   cartItems,
   handleDelete,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="orderSummary w-[500px] rounded-md hover:shadow-md hover:shadow-black">
       <header className="bg-blue-900 text-white text-center p-3 rounded-t-[5px]">
-        ORDER SUMMARY
+        {t("ORDER SUMMARY")}
       </header>
       <div className="summaryContent p-5 font-semibold">
         <div className="summaryItems mb-10">

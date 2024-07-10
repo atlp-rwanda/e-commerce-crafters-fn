@@ -27,7 +27,8 @@ const reviewSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(submitReview.pending, (state) => {
+      .addCase(
+        submitReview.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -39,11 +40,13 @@ const reviewSlice = createSlice({
           console.log("mmmmmmm", state.reviews);
         }
       )
-      .addCase(submitReview.rejected, (state, action) => {
+      .addCase(
+        submitReview.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to submit review";
       })
-      .addCase(fetchReviews.pending, (state) => {
+      .addCase(
+        fetchReviews.pending, (state) => {
         state.loading = true;
         state.error = null;
       })

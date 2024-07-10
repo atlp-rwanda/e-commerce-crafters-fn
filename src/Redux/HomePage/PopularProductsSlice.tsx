@@ -30,10 +30,12 @@ const popularProductsSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPopularProducts.pending, (state) => {
+      .addCase(
+        fetchPopularProducts.pending, (state) => {
         state.loading = true;
       })
-      .addCase(fetchPopularProducts.fulfilled, (state, action) => {
+      .addCase(
+        fetchPopularProducts.fulfilled, (state, action) => {
         state.loading = false;
         state.products = action.payload;
       })
