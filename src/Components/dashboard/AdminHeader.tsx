@@ -185,12 +185,11 @@ const AdminHeader = () => {
             <a href="/admin/analytics" className="hover:text-gray-300">
               Analytics
             </a>
+            <a href="/admin/settings" className="hover:text-gray-300">
+              Settings
+            </a>
             <a>
-              <button
-                onClick={Logout()}
-              >
-              Sign Out
-              </button>
+              <button onClick={Logout()}>Sign Out</button>
             </a>
           </nav>
         </div>

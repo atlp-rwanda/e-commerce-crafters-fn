@@ -12,11 +12,22 @@ const usersSlice = apiSlice.injectEndpoints({
       query: () => ({
         url: "/finduser/:id",
         method: "GET",
-      })
-    })
+      }),
+    }),
+    updatePassword: builder.mutation({
+      query: ({ id, passwords }) => ({
+        url: `/updatepassword/${id}`,
+        method: "PATCH",
+        body: passwords,
+      }),
+    }),
   }),
 });
 
-export const { useSelectUsersQuery, useSelectUserQuery } = usersSlice;
+export const {
+  useSelectUsersQuery,
+  useSelectUserQuery,
+  useUpdatePasswordMutation,
+} = usersSlice;
 
 export default usersSlice;

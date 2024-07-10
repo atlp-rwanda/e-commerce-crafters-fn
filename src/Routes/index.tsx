@@ -12,7 +12,6 @@ import AuthGoogle from "../Lib/authgoogle";
 import Users from "../pages/Users";
 import Sellers from "../pages/Sellers";
 import Analytics from "../pages/Analytics";
-import Settings from "../pages/Settings";
 import AdminHome from "../pages/Admin/AdminHome";
 import Homepage from "../pages/Homepage";
 import Products from "../pages/ProductsPage";
@@ -22,6 +21,7 @@ import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Singlepage from "../pages/singlePage";
 import Requests from "../pages/Requests";
+import AdminSettings from "../Components/dashboard/AdminSettings";
 
 const AppRoutes: React.FC = () => (
   <div>
@@ -46,7 +46,7 @@ const AppRoutes: React.FC = () => (
           <Route path="sellers" element={<Sellers />} />
           <Route path="analytics" element={<Analytics />} />
           <Route path="requests" element={<Requests />} />
-          <Route path="settings" element={<Settings />} />
+          <Route path="settings" element={<AdminSettings />} />
         </Route>
         <Route path="/buyer" element={<Buyer />} />
         <Route path="/vendor" element={<Seller />} />

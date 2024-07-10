@@ -13,34 +13,31 @@ import {
 import { fetchWeeklyReport } from "../../../Redux/Analytic/WeeklySellingSlice";
 import { AppDispatch, RootState } from "../../../Redux/store";
 
-
-
 const WeeklyReport = () => {
-   const dispatch: AppDispatch = useDispatch();
-   const { weeklySales, isLoading, error } = useSelector(
-     (state: RootState) => state.weeklyReport
-   );
+  const dispatch: AppDispatch = useDispatch();
+  const { weeklySales, isLoading, error } = useSelector(
+    (state: RootState) => state.weeklyReport
+  );
 
-   useEffect(() => {
-     dispatch(fetchWeeklyReport());
-   }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchWeeklyReport());
+  }, [dispatch]);
 
-   const data = weeklySales.map((day) => ({
-     name: day.day,
-     TotalSales: day.totalSales,
-   }));
-  
+  const data = weeklySales.map((day) => ({
+    name: day.day,
+    TotalSales: day.totalSales,
+  }));
+
   return (
-    <div
-      className="flex  flex-col h-full w-full m-auto text-xs  rounded-lg  bg-white pb-3"
-    >
+    <div className="flex  flex-col h-full w-full m-auto text-xs  rounded-lg  bg-white pb-3">
       <div className="py-2 pl-10 relative">
         <h2 className="font-bold text-lg">Reports</h2>
         <span className="flex gap-2 mt-3">
           <div className=" bg-[#37C9EE] w-3 h-3 inline-block rounded-full " />
           <span>Weekly report</span>
           <img
-            src="https://static.vecteezy.com/system/resources/previews/026/622/025/original/add-category-icon-symbol-design-illustration-vector.jpg" className="w-5 h-5 absolute top-3 right-2"
+            src="https://static.vecteezy.com/system/resources/previews/026/622/025/original/add-category-icon-symbol-design-illustration-vector.jpg"
+            className="w-5 h-5 absolute top-3 right-2"
             alt="category-icon"
           />
         </span>
@@ -65,7 +62,7 @@ const WeeklyReport = () => {
           <Bar dataKey="TotalSales" fill="#013362" barSize={30} />
         </BarChart>
       </ResponsiveContainer>
-      </div>
+    </div>
   );
 };
 
