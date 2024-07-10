@@ -22,10 +22,11 @@ const Header: React.FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(currentLanguage);
   const userData: any = useAuthUser();
   const { t } = useTranslation();
-  const dropdownRef = useRef<HTMLDivElement>(null);
+  const userDropdownRef = useRef<HTMLDivElement>(null);
+const languageDropdownRef = useRef<HTMLDivElement>(null);
+
 
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = Logout();
 
@@ -38,26 +39,29 @@ const Header: React.FC = () => {
     i18n.changeLanguage(language);
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      dropdownRef.current &&
-      !dropdownRef.current.contains(event.target as Node)
-    ) {
-      setIsLanguageDropdownOpen(false);
-      setIsUserDropdownOpen(false);
-    }
-  };
-
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        userDropdownRef.current &&
+        !userDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsUserDropdownOpen(false);
+      }
+  
+      if (
+        languageDropdownRef.current &&
+        !languageDropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsLanguageDropdownOpen(false);
+      }
+    };
+  
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  const handleDropDown = () => {
-    setIsOpen(!isOpen);
-  };
+  
 
   const userId = userData?.userId;
   const { data: cartsItems } = useCartsQuery(userId);
@@ -162,7 +166,7 @@ const Header: React.FC = () => {
             </div>
           </a>
 
-          <div className="flex items-center space-x-4 ref={dropdownRef}">
+          <div className="flex items-center space-x-4" ref={userDropdownRef}>
             <img
               src={userData?.profile}
               alt="User Profile"
@@ -173,7 +177,7 @@ const Header: React.FC = () => {
                 isUserDropdownOpen ? "rotate-180" : ""
               }`}
               onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
-              ref={dropdownRef}
+              ref={userDropdownRef}
             ></i>
             {isUserDropdownOpen && (
               <div className="absolute z-50 flex flex-col top-full mt-2 right-2 h-62 bg-[#012F5A] rounded-l-[20px] mb-4 border-2 border-[#ffffff3e] fade-in">
@@ -192,7 +196,7 @@ const Header: React.FC = () => {
                 </div>
                 <div className="flex flex-col space-y-6 mb-4 p-8">
                   <div
-                    className="flex flex-row gap-6 hover:scale-105 transition-transform duration-200"
+                    className="flex flex-row gap-6 hover:scale-105 transition-transform duration-200 cursor-pointer"
                     onClick={() =>
                       navigate(
                         userData.role === "vendor" ? "/vendor" : "/buyer"
@@ -230,66 +234,7 @@ const Header: React.FC = () => {
                 </div>
               </div>
             )}
-          </div>
-
-          <div className="relative" ref={dropdownRef}>
-            <button
-              onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
-              className="flex items-center"
-            >
-              {selectedLanguage}
-              <i
-                className={`fas fa-chevron-down ml-2 ${
-                  isLanguageDropdownOpen ? "rotate-180" : ""
-                }`}
-              ></i>
-            </button>
-            {isLanguageDropdownOpen && (
-              <div
-                className="absolute right-0 top-12 w-28 bg-primary border border-border rounded shadow-lg"
-                ref={dropdownRef}
-              >
-                <ul className="py-1">
-                  <li>
-                    <button
-                      onClick={() => handleLanguageChange("ENG")}
-                      className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
-                    >
-                      ENG
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => handleLanguageChange("FR")}
-                      className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
-                    >
-                      FR
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => handleLanguageChange("KINY")}
-                      className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
-                    >
-                      KINY
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
-        </div>
-      ) : (
-        <>
-          <div className="flex flex-row items-center justify-center">
-            <a
-              href="/login"
-              className="hidden lg:flex items-center bg-secondary px-6 py-2 mr-20 rounded-lg mb-4 md:mb-0 md:text-lg cursor-pointer"
-            >
-              Login
-              <i className="fas fa-arrow-right ml-2"></i>
-            </a>
-            <div className="hidden relative mr-20 lg:block" ref={dropdownRef}>
+            <div className="relative" ref={languageDropdownRef}>
               <button
                 onClick={() =>
                   setIsLanguageDropdownOpen(!isLanguageDropdownOpen)
@@ -306,7 +251,67 @@ const Header: React.FC = () => {
               {isLanguageDropdownOpen && (
                 <div
                   className="absolute right-0 top-12 w-28 bg-primary border border-border rounded shadow-lg"
-                  ref={dropdownRef}
+                  ref={languageDropdownRef}
+                >
+                  <ul className="py-1">
+                    <li>
+                      <button
+                        onClick={() => handleLanguageChange("ENG")}
+                        className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
+                      >
+                        ENG
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => handleLanguageChange("FR")}
+                        className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
+                      >
+                        FR
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => handleLanguageChange("KINY")}
+                        className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
+                      >
+                        KINY
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      ) : (
+        <>
+          <div className="flex flex-row items-center justify-center">
+            <a
+              href="/login"
+              className="hidden lg:flex items-center bg-secondary px-6 py-2 mr-20 rounded-lg mb-4 md:mb-0 md:text-lg cursor-pointer"
+            >
+              Login
+              <i className="fas fa-arrow-right ml-2"></i>
+            </a>
+            <div className="hidden relative mr-20 lg:block" ref={languageDropdownRef}>
+              <button
+                onClick={() =>
+                  setIsLanguageDropdownOpen(!isLanguageDropdownOpen)
+                }
+                className="flex items-center"
+              >
+                {selectedLanguage}
+                <i
+                  className={`fas fa-chevron-down ml-2 ${
+                    isLanguageDropdownOpen ? "rotate-180" : ""
+                  }`}
+                ></i>
+              </button>
+              {isLanguageDropdownOpen && (
+                <div
+                  className="absolute right-0 top-12 w-28 bg-primary border border-border rounded shadow-lg"
+                  ref={languageDropdownRef}
                 >
                   <ul className="py-1">
                     <li>
@@ -437,7 +442,7 @@ const Header: React.FC = () => {
                     Login
                   </a>
                 )}
-                <div className="relative" ref={dropdownRef}>
+                <div className="relative" ref={languageDropdownRef}>
                   <button
                     onClick={() =>
                       setIsLanguageDropdownOpen(!isLanguageDropdownOpen)
@@ -450,7 +455,7 @@ const Header: React.FC = () => {
                   {isLanguageDropdownOpen && (
                     <div
                       className="top-12 w-28 bg-primary border border-border rounded shadow-lg"
-                      ref={dropdownRef}
+                      ref={languageDropdownRef}
                     >
                       <ul className="py-1">
                         <li>
