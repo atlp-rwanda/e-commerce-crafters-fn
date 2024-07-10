@@ -15,11 +15,7 @@ const AboutCrafters: React.FC = () => {
       </h2>
       <div className="container flex flex-col md:flex-row gap-8 md:gap-20">
         <div className="flex-none w-full md:w-1/3 mb-8">
-          <img
-            src={imageUrl}
-            alt="About Crafters"
-            className="w-full h-60 sm:h-80 rounded-lg object-cover"
-          />
+          <img src={imageUrl} alt="About Crafters" className="w-full h-60 sm:h-80 rounded-lg object-cover" />
         </div>
         <div>
           <p className="text-gray-700 text-base sm:text-lg md:text-xl sm:text-sm">
