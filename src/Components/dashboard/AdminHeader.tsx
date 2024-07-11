@@ -5,6 +5,12 @@ import { useLocation } from "react-router-dom";
 import Logout from "../../services/Logout";
 import { useTranslation } from "react-i18next";
 
+export function toCapital(string: string): string {
+  return string
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}
 
 const AdminHeader = () => {
   const [currentDateTime, setCurrentDateTime] = useState("");
@@ -46,7 +52,7 @@ const AdminHeader = () => {
       setPageTitle("Dashboard Page");
     }
   }, [pathName]);
-  
+
   const { t } = useTranslation();
 
   return (
@@ -152,7 +158,7 @@ const AdminHeader = () => {
             </span>
           </div>
           <div className="flex flex-col">
-            <span className="font-medium">{userData?.name}</span>
+            <span className="font-medium">{toCapital(userData?.name)}</span>
             <span className="text-xs text-gray-500">{t("Administrator")}</span>
           </div>
         </div>

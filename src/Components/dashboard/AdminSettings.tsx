@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
-import { useUpdatePasswordMutation } from "../../Redux/Admin/usersSlice";
+import { useUpdateAdminPasswordMutation } from "../../Redux/Admin/usersSlice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Logout from "../../services/Logout";
@@ -27,10 +27,10 @@ const AdminSettings = () => {
   const [errors, setErrors] = useState<Errors>({});
   const user: any = useAuthUser();
 
-  const [updatePassword] = useUpdatePasswordMutation();
+  const [updatePassword] = useUpdateAdminPasswordMutation();
   const logout = Logout();
 
-  const handleChangePassword= () => {
+  const handleChangePassword = () => {
     setIsChangingPassword(true);
   };
 

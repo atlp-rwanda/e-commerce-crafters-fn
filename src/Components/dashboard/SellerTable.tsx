@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelectUsersQuery } from "../../Redux/Admin/usersSlice";
 import { Circles } from "react-loader-spinner";
+import { toCapital } from "./AdminHeader";
 
 interface UserData {
   id: number;
@@ -100,7 +101,7 @@ const SellerTable: React.FC = () => {
               <td className="px-4 py-2 text-left">
                 {String(indexOfFirstUser + index + 1).padStart(2, "0")}
               </td>
-              <td className="px-4 py-2">{user.name}</td>
+              <td className="px-4 py-2">{toCapital(user.name)}</td>
               <td className="px-4 py-2 hidden md:table-cell lg:table-cell">
                 {user.email}
               </td>
@@ -122,7 +123,7 @@ const SellerTable: React.FC = () => {
           <div className="bg-white rounded-lg shadow-lg p-4 max-w-sm w-full">
             <h2 className="text-lg font-semibold mb-4">User Details</h2>
             <p>
-              <strong>Name:</strong> {selectedUser.name}
+              <strong>Name:</strong> {toCapital(selectedUser.name)}
             </p>
             <p>
               <strong>Email:</strong> {selectedUser.email}

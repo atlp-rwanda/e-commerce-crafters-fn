@@ -14,7 +14,7 @@ const usersSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
-    updatePassword: builder.mutation({
+    updateAdminPassword: builder.mutation({
       query: ({ id, passwords }) => ({
         url: `/updatepassword/${id}`,
         method: "PATCH",
@@ -27,7 +27,7 @@ const usersSlice = apiSlice.injectEndpoints({
 export const {
   useSelectUsersQuery,
   useSelectUserQuery,
-  useUpdatePasswordMutation,
+  useUpdateAdminPasswordMutation,
 } = usersSlice;
 
 export default usersSlice;
