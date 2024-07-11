@@ -1,10 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import AuthSlice from './features/AuthSlice';
 import { apiSlice } from './features/ApiSlice';
+import  unreadMessagesReducer from "./features/MessageSlice"
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
+    unreadMessages: unreadMessagesReducer,
   },
   middleware: (getDefaultMiddelware) => getDefaultMiddelware().concat(apiSlice.middleware),
 });
