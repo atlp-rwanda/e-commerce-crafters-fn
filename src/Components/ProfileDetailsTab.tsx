@@ -62,6 +62,9 @@ const ProfileDetailsTab = ({
     userId: userId,
     newUserData: formData,
    });
+   if (error) {
+    throw new Error();
+   }
    signIn({
     auth: { token: token, type: "Bearer" },
     userState: response.data.user,

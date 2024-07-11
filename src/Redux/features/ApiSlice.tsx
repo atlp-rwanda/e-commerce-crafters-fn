@@ -27,7 +27,22 @@ export const apiSlice = createApi({
     },
    }),
   }),
+  updateBusinessInformation: builder.mutation({
+   query: (data) => ({
+    url: "/requestVendor",
+    method: "POST",
+    body: JSON.stringify(data),
+    headers: {
+     "Content-Type": "application/json",
+    },
+   }),
+  }),
  }),
 });
 
-export const { useUpdateUserMutation, useUpdatePasswordMutation } = apiSlice;
+
+export const {
+ useUpdateUserMutation,
+ useUpdatePasswordMutation,
+ useUpdateBusinessInformationMutation,
+} = apiSlice;
