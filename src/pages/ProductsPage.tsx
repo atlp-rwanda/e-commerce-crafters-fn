@@ -11,6 +11,7 @@ import Footer from "../Components/Homepage/Homepage_footer";
 import LoadingFrame from "../Constants/frameLoader";
 import { useTranslation } from "react-i18next";
 import NavBar from "../Components/navBar";
+import VoiceflowChatWidget from "../Components/ChatBot";
 
 interface Product {
   productId: string;
