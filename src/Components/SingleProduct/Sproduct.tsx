@@ -4,19 +4,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProductDetails, addToCart } from "../../Redux/Action/singleProduct";
-import { addToWishlist, removeFromWishlist, fetchWishlist } from "../../Redux/Action/wishlist";
+import { addToWishlist,  fetchWishlist } from "../../Redux/Action/wishlist";
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
-import "./product.css"
-import { jwtDecode } from "jwt-decode";
+import heartact from "../../asset/images/red.svg"
+import "./product.css";
+import {jwtDecode} from "jwt-decode";
 import { toast } from "react-toastify";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
-
 
 interface DecodedToken {
   Id: string | null;
   userId: string;
- 
 }
 
 const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
@@ -25,21 +24,22 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
   const status = useSelector((state: any) => state.product.status);
   const error = useSelector((state: any) => state.product.error);
   const wishlist = useSelector((state: any) => state.Wishlist.items);
-  const [selectedImage, setSelectedImage] = useState<string>(product.image ? product.image[0] : '');
+  const [selectedImage, setSelectedImage] = useState<string | undefined>(undefined);
   const [isWishlist, setIsWishlist] = useState<boolean>(false);
   const [quantity, setQuantity] = useState<number>(1);
   const [size, setSize] = useState<number>(1);
   const [isLoadingCart, setLoadingCart] = useState<boolean>(false);
-  const userData:any = useAuthUser()
+  const [isButtonDisabled, setButtonDisabled] = useState<boolean>(false);
+  const userData: any = useAuthUser();
+  const [isLoading, setLoading] = useState<boolean>(false);
   const userId = userData ? userData.userId : "";
-  console.log("hhhhh", userId)
+
   const getUserIdFromToken = (): string | null => {
     const token = localStorage.getItem('token');
-    console.log("hhhhh", token)
     if (!token) return null;
 
     try {
-      const decodedToken: DecodedToken = jwtDecode(token);;
+      const decodedToken: DecodedToken = jwtDecode(token);
       return decodedToken.Id;
     } catch (error) {
       console.error('Error decoding token:', error);
@@ -48,7 +48,6 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
   };
 
   useEffect(() => {
-    // const id = getUserIdFromToken();
     dispatch(fetchProductDetails(productId) as any);
     if (userId) {
       dispatch(fetchWishlist(userId) as any);
@@ -56,27 +55,58 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
   }, [dispatch, productId]);
 
   useEffect(() => {
-    if (product.image && product.image.length > 0) {
-      setSelectedImage(product.image[0]);
+    const fetchData = async () => {
+      try {
+        if (userId) {
+          const response = await dispatch(fetchWishlist(userId) as any);
+          const isInWishlist = response.payload.some((item: any) => item.productId === productId);
+          setIsWishlist(isInWishlist);
+        } else {
+          setIsWishlist(false);
+        }
+      } catch (error) {
+        console.error('Error fetching wishlist:', error);
+        setIsWishlist(false); 
+      }
+    };
+  
+    fetchData();
+  }, [dispatch, productId, userId]);
+
+
+  useEffect(() => {
+    if (product.image) {
+      const images = typeof product.image === 'string' ? JSON.parse(product.image) : product.image;
+      if (Array.isArray(images) && images.length > 0) {
+        setSelectedImage(images[0]);
+      }
     }
   }, [product.image]);
 
-  useEffect(() => {
-    // const id = getUserIdFromToken();
-    if (userId && Array.isArray(wishlist)) {
-      console.log('Is in wishlist:', wishlist);
-      const isInWishlist = wishlist.some((item: any) => item.productId === product.productId);
-      console.log('Is in wishlist:', isInWishlist);
-      setIsWishlist(isInWishlist);
-    }
-  }, [wishlist, product.productId]);
 
   const handleImageClick = (image: string) => {
     setSelectedImage(image);
   };
-
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (userId) {
+          const response = await dispatch(fetchWishlist(userId) as any);
+          console.log("jjjjjjjjik",response)
+          const isInWishlist = response.payload.wishlist.some((item: any) => item.productId === productId);
+          setIsWishlist(isInWishlist);
+        } else {
+          setIsWishlist(false);
+        }
+      } catch (error) {
+        console.error('Error fetching wishlist:', error);
+        setIsWishlist(false); 
+      }
+    };
+  
+    fetchData();
+  }, [dispatch, productId, userId]);
   const toggleWishlist = () => {
-    // const userId = getUserIdFromToken();
     if (!userId) {
       console.error('User ID not found in token');
       return;
@@ -88,26 +118,20 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
       price: product.price,
     };
 
-    if (isWishlist) {
-      dispatch(removeFromWishlist({ userId, productId: product.productId }) as any)
-        .then(() => {
-          toast.success("Wishlist removed successfully");
-          dispatch(fetchWishlist(userId) as any);
-        })
-        .catch((err: any) => {
-          console.error('Error removing from wishlist:', err);
-        });
-    } else {
-      dispatch(addToWishlist(wishlistItem) as any)
-        .then(() => {
-          toast.success("Wishlist added successfully");
-          dispatch(fetchWishlist(userId) as any);
-        })
-        .catch((err: any) => {
-          console.error('Error adding to wishlist:', err);
-        });
-    }
+    dispatch(addToWishlist(wishlistItem) as any)
+      .then((response: any) => {
+        const action = isWishlist ? "removed from" : "added to";
+        // toast.success(`Product ${action} wishlist successfully`);
+        setLoading(true)
+        setIsWishlist(!isWishlist);
+      })
+      .catch((err: any) => {
+        console.error(`Error ${isWishlist ? "removing from" : "adding to"} wishlist:`, err);
+        setLoading(false)
+        toast.error(`Failed to ${isWishlist ? "remove from" : "add to"} wishlist`);
+      });
   };
+
 
   const subtractQuantity = () => {
     if (quantity > 1) {
@@ -130,7 +154,6 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
   };
 
   const handleAddToCart = () => {
-    // const userId = getUserIdFromToken();
     if (!userId) {
       console.error('User ID not found in token');
       return;
@@ -185,6 +208,8 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
     return <div>Error: {error}</div>;
   }
 
+  const images = typeof product.image === 'string' ? JSON.parse(product.image) : product.image;
+
   return (
     <div className='flex justify-center md:flex-row lg:flex-col items-center flex-col'>
       <div className='flex justify-center gap-5 md:flex-row md:w-4/5 flex-col'>
@@ -193,7 +218,7 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
             <img src={selectedImage} alt="Selected product" className='min-w-[300px] max-w-[100%] sm:h-[300px] w-full md:w-[95%] md:h-[400px] h-[200px] object-cover' />
             <div className="absolute bottom-4 translate-x-6 left-6">
               <div className='flex justify-center mt-4'>
-                {product.image && product.image.map((image: string, index: number) => (
+              {images && images.map((image: string, index: number) => (
                   <span
                     key={index}
                     className={`h-4 w-4 rounded-full mx-1 ${selectedImage === image ? 'bg-[#C9974C]' : 'bg-white'}`}
@@ -201,18 +226,19 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
                 ))}
               </div>
             </div>
-            <div className='absolute bottom-4 -translate-x-6 right-4 bg-[#c9974c4b] p-3 rounded-md cursor-pointer' onClick={toggleWishlist}>
-              <img
-                src={heart}
-                alt="Wishlist"
-                style={{
-                  filter: isWishlist ? 'invert(32%) sepia(92%) saturate(2878%) hue-rotate(358deg) brightness(101%) contrast(105%)' : 'none',
-                }}
-              />
-            </div>
+            <div 
+  className='absolute bottom-4 -translate-x-6 right-4 bg-[#c9974c4b] p-3 rounded-md cursor-pointer'
+  onClick={toggleWishlist}
+>
+  <img
+    src={isWishlist ? heartact : heart}
+    alt="Wishlist"
+    className={`transition-colors duration-300 h-8 w-8 ${isLoading ? ' cursor-not-allowed' : 'cursor-pointer'}}`}
+  />
+</div>
           </div>
           <div className="grid grid-cols-4 gap-1">
-            {product.image && product.image.map((image: string, index: number) => (
+            {images && images.map((image: string, index: number) => (
               <img
                 key={index}
                 src={image}
@@ -222,8 +248,7 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
               />
             ))}
           </div>
-        </div>
-        <div className='md:w-1/3 w-full'>
+        </div>      <div className='md:w-1/3 w-full'>
           <div className='flex flex-col gap-6 p-5 mt-10'>
             <h1><span className='text-[#E4A951]'>Stock</span> : <span className='font-extrabold text-blue-700'>{product.Vendor?.storeName}</span></h1>
             <h1 className='font-extrabold text-xl'>{product.name}</h1>
@@ -272,7 +297,7 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
                 </button>
               </div>
             </div>
-            <button onClick={handleAddToCart} className='bg-[#E4A951] p-3 rounded-lg w-full'>{isLoadingCart ? 'Adding ...' : 'Add to Cart'}</button>
+            <button onClick={handleAddToCart} disabled={isButtonDisabled} className={`bg-[#E4A951] p-3 rounded-lg w-full ${isLoadingCart ? ' cursor-not-allowed' : 'cursor-pointer'}`}>{isLoadingCart ? 'Adding ...' : 'Add to Cart'}</button>
           </div>
         </div>
       </div>
