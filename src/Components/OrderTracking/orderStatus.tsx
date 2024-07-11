@@ -16,7 +16,7 @@ const pusher = new Pusher(process.env.PUSHER_KEY as string, {
 });
 
 interface OrderStatusProps {
-  orderId: string;
+  orderId?: string;
   currentStatus: string;
 }
 

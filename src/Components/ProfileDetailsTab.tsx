@@ -62,6 +62,9 @@ const ProfileDetailsTab = ({
     userId: userId,
     newUserData: formData,
    });
+   if (error) {
+    throw new Error();
+   }
    signIn({
     auth: { token: token, type: "Bearer" },
     userState: response.data.user,
@@ -84,7 +87,7 @@ const ProfileDetailsTab = ({
     <img
      src={profileImage}
      alt='Profile'
-     className='rounded-full w-20 h-20 md:w-24 md:h-24 object-cover border-4 border-primary'
+     className='rounded-full min-w-20 min-h-20 md:w-24 md:h-24 object-cover border-4 border-primary'
     />
     <div className='text-center'>
      <CustomInput

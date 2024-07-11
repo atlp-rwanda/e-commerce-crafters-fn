@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
-import {
-  useApproveMutation,
-  useRejectMutation,
-} from "../../Redux/Admin/requestsSlice";
+import React, { useEffect, useState } from "react";
 import { Circles } from "react-loader-spinner";
+import { useSelectStoresQuery } from "../../Redux/Admin/sellersSlice";
+import { useSelectUsersQuery } from "../../Redux/Admin/usersSlice";
 
 interface SellerData {
   sellerId: string;
@@ -13,31 +11,46 @@ interface SellerData {
     city: string;
   };
   TIN: string;
+  status: string;
 }
 
-interface SellerTableProps {
-  sellers: SellerData[];
+interface UserData {
+  userId: string;
+  name: string;
+  email: string;
 }
 
-const RequestsTable: React.FC<SellerTableProps> = ({
-  sellers: initialSellers,
-}) => {
-  const [sellers, setSellers] = useState(initialSellers);
+const SellersView: React.FC = () => {
+  const {
+    data: sellers = [],
+    isLoading: isSellersLoading,
+    isError: isSellersError,
+    refetch: refetchSellers,
+  } = useSelectStoresQuery({});
+
+  const {
+    data: users = [],
+    isLoading: isUsersLoading,
+    isError: isUsersError,
+    refetch: refetchUsers,
+  } = useSelectUsersQuery({});
+
   const [selectedSeller, setSelectedSeller] = useState<SellerData | null>(null);
+  const [selectedUser, setSelectedUser] = useState<UserData | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [search, setSearch] = useState("");
   const sellersPerPage = 15;
 
-  const [approveVendor] = useApproveMutation();
-  const [rejectVendor] = useRejectMutation();
-
   useEffect(() => {
-    setSellers(initialSellers);
-  }, [initialSellers]);
+    refetchSellers();
+    refetchUsers();
+  }, [refetchSellers, refetchUsers]);
 
-  const filteredSellers = sellers.filter((seller: SellerData) =>
+  const approvedSellers = sellers.filter(
+    (seller: SellerData) => seller.status === "approved"
+  );
+
+  const filteredSellers = approvedSellers.filter((seller: SellerData) =>
     seller.storeName.toLowerCase().includes(search.toLowerCase())
   );
 
@@ -54,55 +67,54 @@ const RequestsTable: React.FC<SellerTableProps> = ({
 
   const onViewDetails = (seller: SellerData) => {
     setSelectedSeller(seller);
+    const user = users.find((user: UserData) => user.userId === seller.userId);
+    setSelectedUser(user || null);
   };
 
   const closeModal = () => {
     setSelectedSeller(null);
-  };
-
-  const onApprove = async () => {
-    if (selectedSeller) {
-      setIsLoading(true);
-      await approveVendor(selectedSeller.userId).unwrap();
-      setIsLoading(false);
-      setSuccessMessage("Seller approved successfully");
-      setSellers((prevSellers) =>
-        prevSellers.filter((seller) => seller.userId !== selectedSeller.userId)
-      );
-      setSelectedSeller(null);
-    }
-  };
-
-  const onDeny = async () => {
-    if (selectedSeller) {
-      setIsLoading(true);
-      await rejectVendor(selectedSeller.userId).unwrap();
-      setIsLoading(false);
-      setSuccessMessage("Seller rejected successfully");
-      setSellers((prevSellers) =>
-        prevSellers.filter((seller) => seller.userId !== selectedSeller.userId)
-      );
-      setSelectedSeller(null);
-    }
-  };
-
-  const closeSuccessMessage = () => {
-    setSuccessMessage(null);
+    setSelectedUser(null);
   };
 
   const totalPages = Math.ceil(filteredSellers.length / sellersPerPage);
 
+  if (isSellersLoading || isUsersLoading) {
+    return (
+      <div className="flex justify-center items-center h-[90%]">
+        <Circles visible height="80" width="80" color="#C9974C" />
+      </div>
+    );
+  }
+
+  if (isSellersError || isUsersError) {
+    return (
+      <div className="flex justify-center items-center  h-[90%]">
+        <div className="text-center">
+          <p className="text-red-600 font-semibold">
+            An error occurred. Please try again later.
+          </p>
+          <button
+            className="mt-3 px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary"
+            onClick={() => window.location.reload()}
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full bg-white rounded-lg shadow-md overflow-hidden lg:mb-12 xl:ml-[5%] mt-3">
-      {sellers.length === 0 ? (
+      {filteredSellers.length === 0 ? (
         <div className="items-center p-4 text-center text-secondary font-semibold">
-          No requests present
+          No Approved Sellers
         </div>
       ) : (
         <>
           <div className="flex justify-between items-center p-4">
             <h1 className="text-xl font-semibold text-gray-600">
-              Vendor Applications
+              Approved Sellers
             </h1>
             <input
               type="text"
@@ -124,7 +136,7 @@ const RequestsTable: React.FC<SellerTableProps> = ({
               </tr>
             </thead>
             <tbody>
-              {currentSellers.map((seller, index) => (
+              {currentSellers.map((seller: any, index: any) => (
                 <tr key={seller.sellerId}>
                   <td className="px-4 py-2 text-left">
                     {String(indexOfFirstSeller + index + 1).padStart(2, "0")}
@@ -146,10 +158,16 @@ const RequestsTable: React.FC<SellerTableProps> = ({
             </tbody>
           </table>
 
-          {selectedSeller && (
-            <div className="z-80 fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
+          {selectedSeller && selectedUser && (
+            <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
               <div className="bg-white rounded-lg shadow-lg p-4 max-w-sm w-full">
                 <h2 className="text-lg font-semibold mb-4">Seller Details</h2>
+                <p>
+                  <strong>Seller Name:</strong> {selectedUser.name}
+                </p>
+                <p>
+                  <strong>Seller Email:</strong> {selectedUser.email}
+                </p>
                 <p>
                   <strong>Store Name:</strong> {selectedSeller.storeName}
                 </p>
@@ -160,45 +178,9 @@ const RequestsTable: React.FC<SellerTableProps> = ({
                   <strong>TIN:</strong> {selectedSeller.TIN}
                 </p>
                 <div className="mt-4 text-right">
-                  {isLoading ? (
-                    <div className="flex justify-center items-center h-24">
-                      <Circles visible height="80" width="80" color="#C9974C" />
-                    </div>
-                  ) : (
-                    <>
-                      <button
-                        className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 mr-2"
-                        onClick={onApprove}
-                      >
-                        Approve
-                      </button>
-                      <button
-                        className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 mr-2"
-                        onClick={onDeny}
-                      >
-                        Deny
-                      </button>
-                    </>
-                  )}
                   <button
                     className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
                     onClick={closeModal}
-                  >
-                    Close
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {successMessage && (
-            <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50 z-50">
-              <div className="bg-white rounded-lg shadow-lg p-4 max-w-sm w-full">
-                <h2 className="text-lg font-semibold mb-4">{successMessage}</h2>
-                <div className="mt-4 text-right">
-                  <button
-                    className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
-                    onClick={closeSuccessMessage}
                   >
                     Close
                   </button>
@@ -233,4 +215,4 @@ const RequestsTable: React.FC<SellerTableProps> = ({
   );
 };
 
-export default RequestsTable;
+export default SellersView;

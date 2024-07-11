@@ -3,11 +3,13 @@ import CustomButton from "./CustomButton";
 import { UserDataType } from "../pages/User";
 const UserInformation = ({
  user: { profile, name, role, email, isTwoFactorEnabled },
+ openModal,
 }: {
  user: UserDataType;
+ openModal: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
  return (
-  <div className='py-5 '>
+  <section className='py-5 '>
    <h1 className='font-outfit font-semibold lg:text-xl'>Profile information</h1>
    <div className='py-8 flex flex-col gap-y-5 lg:flex-row lg:items-center md:gap-x-7 '>
     <img
@@ -32,7 +34,7 @@ const UserInformation = ({
        <CustomButton
         title='Be a Vendor'
         buttonStyles='bg-primary font-regular text-sm lg:text-base px-2 py-1 h-fit w-fit font-outfit  lg:px-4 lg:py-2 text-white'
-        handleClick={() => console.log("Modal")}
+        handleClick={() => openModal((prev) => !prev)}
        />
       )}
       {isTwoFactorEnabled || (
@@ -45,7 +47,7 @@ const UserInformation = ({
      </div>
     </div>
    </div>
-  </div>
+  </section>
  );
 };
 

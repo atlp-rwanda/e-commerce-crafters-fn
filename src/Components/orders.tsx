@@ -1,5 +1,7 @@
 import React from "react";
 import OrderTable from "./orderComponent";
+import { useGetAllOrdersQuery } from "../Redux/OrderSlice";
+
 
 interface Order {
     orderId: string;
@@ -8,13 +10,29 @@ interface Order {
     status: 'pending'| 'processing' | 'shipped' | 'delivered';
 }
 
+
 const OrderComponent = () => {
-    const orders: Order[] = [
-        { orderId: '01', orderDate: new Date('2024-05-24'),expectedDeliveryDate: new Date('2024-05-24'), status: 'pending' },
-        { orderId: '02', orderDate: new Date('2024-05-24'), expectedDeliveryDate: new Date('2024-05-25'), status: 'processing' },
-        { orderId: '03', orderDate: new Date('2024-05-24'), expectedDeliveryDate: new Date('2024-05-26'), status: 'delivered' },
-      ];
-      
+    function getAuthCookie() {
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            const [name, value] = cookie.trim().split('=');
+            if (name === '_auth') {
+                return decodeURIComponent(value);
+            }
+        }
+        return null;
+    }
+    const token = getAuthCookie();
+    console.log('token ', token);
+    const {data: orders, isLoading, error} = useGetAllOrdersQuery({ token });
+
+    if(isLoading){
+        return <div>Loading orders...</div>
+    }
+
+    if(error){
+        return <div>Error loading orders</div>
+    }
 
     return(
         <div className="font-outfit">
