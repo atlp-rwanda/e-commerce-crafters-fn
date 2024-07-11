@@ -19,10 +19,7 @@ import similarScile from './Reducer/similarScile';
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
-
-    reviews: reviewReducer,
-    product: productReducer,
-    Wishlist: wishlistslice,
+    productsImages: productsImagesReducer,
     category: categoryReducer,
     pagination: paginationReducer,
     search: searchReducer,
@@ -32,14 +29,12 @@ export const store = configureStore({
     orderStatus: OrderStatusSlice,
     sellingReport: sellingReportReducer,
     weeklyReport: WeeklySellingReducer,
-    productsImages: productsImagesReducer,
     similarProducts: similarScile,
   },
-
   middleware: (getDefaultMiddelware) =>
     getDefaultMiddelware().concat(apiSlice.middleware),
 });
-
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
-export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>;
+  
+  export type RootState = ReturnType<typeof store.getState>;
+  export type AppDispatch = typeof store.dispatch;
+  export type AppThunk = ThunkAction<void, RootState, unknown, Action<string>>;
