@@ -9,7 +9,7 @@ interface Product {
 }
 
 interface OrderDetailsProps {
-  orderId: string;
+  orderId?: string;
 }
 
 export const OrderProductDetails: React.FC<OrderDetailsProps> = ({ orderId }) => {
