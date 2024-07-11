@@ -34,6 +34,7 @@ const languageDropdownRef = useRef<HTMLDivElement>(null);
   const handleLanguageChange = (language: string) => {
     setSelectedLanguage(language);
     setIsLanguageDropdownOpen(false);
+    setIsLanguageDropdownOpen(false);
     setIsMenuOpen(false);
     localStorage.setItem("lang", language);
     i18n.changeLanguage(language);
@@ -87,7 +88,7 @@ const languageDropdownRef = useRef<HTMLDivElement>(null);
   }, []);
 
   return (
-    <header className="relative bg-primary text-xl text-white pl-24 pt-8 pb-8 sm:pl-12 sm:pt-6 sm:pb-6 md:pl-24 md:pt-8 md:pb-8 flex items-center justify-between font-outfit border-b-2 border-border top-0 w-full z-50">
+    <header className="fixed bg-primary text-xl text-white pl-24 pr-24 pt-8 pb-8 sm:pl-12 sm:pt-6 sm:pb-6 md:pl-24 md:pt-8 md:pb-8 flex items-center justify-between font-outfit border-b-2 border-border top-0 w-full z-50">
       <div className="flex items-center">
         <img src={logo} alt="CRAFTERS Logo" className=" mr-20 h-12 sm:h-10" />
 
@@ -351,7 +352,7 @@ const languageDropdownRef = useRef<HTMLDivElement>(null);
           <div className="flex lg:hidden items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-3xl sm:pr-6 md:pr-12"
+              className="text-3xl sm:pl-28 sm:pr-6 md:pr-12"
             >
               <i className="fas fa-bars"></i>
             </button>

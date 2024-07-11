@@ -6,8 +6,7 @@ import AuthButton from "../Constants/AuthButton";
 import Input from "../Constants/Input";
 import { useLoginMutation } from "../Redux/features/AuthSlice";
 import { useTranslation } from "react-i18next";
-
-const Signin: React.FC = () => {
+const Signin = () => {
   const navigate = useNavigate();
   const signIn = useSignIn();
   const [email, setEmail] = useState<string>("");
@@ -60,7 +59,9 @@ const Signin: React.FC = () => {
             navigate("/products");
           } else if (response.user.role === "vendor") {
             navigate("/vendor");
+
           } else if ((response.user.role === "admin")) {
+
             navigate("/admin");
           }
         } else {
@@ -83,6 +84,7 @@ const Signin: React.FC = () => {
         setError("Invalid credentials, Try again");
         setErr(false);
       }
+
     }
   };
 
@@ -90,6 +92,7 @@ const Signin: React.FC = () => {
     const googleAuthUrl = `${process.env.GOOGLE_AUTH_URL}`;
     window.location.href = googleAuthUrl;
   };
+
   const { t } = useTranslation();
   return (
     <div className="w-full h-screen flex flex-col justify-between items-center ">
@@ -133,6 +136,7 @@ const Signin: React.FC = () => {
         </a>
         <div className="flex flex-col gap-[2px] items-center">
           <span className="font-[600] text-[28px] text-[#333333] font-outfit">
+
             {t("Sign In")}
           </span>
           <span className="text-[20px] font-[300] text-[#A3A2A2] font-outfit">
@@ -156,7 +160,6 @@ const Signin: React.FC = () => {
             onChange={(value) => setEmail(value)}
           />
           <Input
-            error={isEmpty === "password" ? true : !!(false || err)}
             label={t("Enter Your Password")}
             type="password"
             placeholder={t("Enter Your Password")}

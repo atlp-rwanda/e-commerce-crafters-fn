@@ -22,5 +22,4 @@ const productApiSlice = apiSlice.injectEndpoints({
   }),
 });
 export const { useAllProductsQuery, useCartsQuery, useWishlistsQuery } = productApiSlice;
-
 export default productApiSlice;

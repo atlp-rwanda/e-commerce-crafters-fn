@@ -121,6 +121,47 @@ const Sidebar = () => {
     },
     {
       id: "004",
+      label: "Requests",
+      icon: (
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 20 20"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M7.63411 9.05829C7.55078 9.04996 7.45078 9.04996 7.35911 9.05829C5.37578 8.99163 3.80078 7.36663 3.80078 5.36663C3.80078 3.32496 5.45078 1.66663 7.50078 1.66663C9.54241 1.66663 11.2007 3.32496 11.2007 5.36663C11.1924 7.36663 9.61741 8.99163 7.63411 9.05829Z"
+            stroke="white"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            opacity="0.4"
+            d="M13.6747 3.33337C15.2914 3.33337 16.5914 4.64171 16.5914 6.25004C16.5914 7.82504 15.3414 9.10837 13.7831 9.16671C13.7164 9.15837 13.6414 9.15837 13.5664 9.16671"
+            stroke="white"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            d="M3.46758 12.1334C1.45091 13.4834 1.45091 15.6834 3.46758 17.025C5.75924 18.5584 9.51758 18.5584 11.8092 17.025C13.8259 15.675 13.8259 13.475 11.8092 12.1334C9.52591 10.6084 5.76758 10.6084 3.46758 12.1334Z"
+            stroke="white"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path
+            opacity="0.4"
+            d="M15.2832 16.6667C15.8832 16.5417 16.4499 16.3 16.9165 15.9417C18.2165 14.9667 18.2165 13.3584 16.9165 12.3834C16.4582 12.0334 15.8999 11.8 15.3082 11.6667"
+            stroke="white"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      ),
+      location: "/admin/requests",
+    },
+    {
+      id: "005",
       label: "Analytics",
       icon: (
         <svg
@@ -237,7 +278,7 @@ const Sidebar = () => {
   const handelLogout = Logout();
 
   return (
-    <div className="fixed h-[100vh] flex flex-col gap-[40px] bg-primary p-4 w-[15%]">
+    <div className="hidden lg:flex fixed flex-col gap-[40px] bg-primary p-4 lg:w-[22%] h-full xl:w-[18%]">
       <div>
         <svg
           width="150"
@@ -275,7 +316,7 @@ const Sidebar = () => {
           </defs>
         </svg>
       </div>
-      <div className="flex flex-col gap-[20px]">
+      <div className="flex flex-col lg:gap[50px] gap-[20px]">
         {Navlinks.map((item, index) => {
           return (
             <div

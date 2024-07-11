@@ -11,6 +11,7 @@ import { useLocation } from "react-router-dom";
 import { Puff } from "react-loader-spinner";
 import { useTranslation } from "react-i18next";
 
+
 const SignUp: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -278,7 +279,7 @@ const SignUp: React.FC = () => {
             error={isEmpty === "password" ? true : !!(false || err)}
             label={t("Enter Your Password")}
             type="password"
-            placeholder={t("Enter your password")}
+            placeholder="Enter your password"
             value={password}
             onChange={(value) => setPassword(value)}
           />
@@ -333,9 +334,7 @@ const SignUp: React.FC = () => {
             </span>
           </div>
           <div className="flex flex-row gap-[4px] items-center justify-center">
-            <span className=" text-black">
-              {t("Already have an account")}?{" "}
-            </span>
+            <span className=" text-black">Already have an account? </span>
             <a href="/login" className=" text-secondary">
               {" "}
               {t("Login")}
@@ -353,4 +352,5 @@ const SignUp: React.FC = () => {
 };
 
 export default SignUp;
+
 
