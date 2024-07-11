@@ -1,6 +1,7 @@
 import React from "react";
 import { UseDispatch, useDispatch } from "react-redux";
 import { setSearchTerm } from "../../Redux/productsPage/searchSlice";
+import { useTranslation } from "react-i18next";
 
 const Search = () => {
   const dispatch = useDispatch();
@@ -8,7 +9,7 @@ const Search = () => {
   const searchChange = (event: any) => {
     dispatch(setSearchTerm(event.target.value));
   };
-
+  const { t } = useTranslation();
   return (
     <div className="py-1 rounded-[12px] px-4 bg-gray-100 flex flex-row gap-[10px] items-center md:p-2">
       <svg
@@ -36,7 +37,7 @@ const Search = () => {
       </svg>
       <input
         type="text"
-        placeholder="Search Products"
+        placeholder={t("Search Products")}
         className="p-1 bg-transparent outline-none md:p-2"
         onChange={searchChange}
       />
