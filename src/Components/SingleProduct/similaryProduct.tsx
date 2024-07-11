@@ -1,4 +1,3 @@
-
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../Redux/store";
@@ -19,8 +18,7 @@ const SimilarProduct: React.FC<SimilarProductProps> = ({ productId }) => {
 
   useEffect(() => {
     if (productId) {
-      // @ts-ignore
-      dispatch(fetchSimilarProducts(productId));
+      dispatch(fetchSimilarProducts(productId) as any);
     }
   }, [dispatch, productId]);
 
