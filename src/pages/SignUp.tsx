@@ -62,8 +62,8 @@ const SignUp: React.FC = () => {
       if (error.data && error.data.Message === "Email already exists") {
         setError("Email has been taken");
         setIsEmpty("email");
-      }else{
-        setError("Something get wrong, Try again later")
+      } else {
+        setError("Something get wrong, Try again later");
       }
       console.log(error);
     }
@@ -279,7 +279,7 @@ const SignUp: React.FC = () => {
             error={isEmpty === "password" ? true : !!(false || err)}
             label={t("Enter Your Password")}
             type="password"
-            placeholder="Enter your password"
+            placeholder={t("Enter your password")}
             value={password}
             onChange={(value) => setPassword(value)}
           />
@@ -334,7 +334,9 @@ const SignUp: React.FC = () => {
             </span>
           </div>
           <div className="flex flex-row gap-[4px] items-center justify-center">
-            <span className=" text-black">Already have an account? </span>
+            <span className=" text-black">
+              {t("Already have an account")}?{" "}
+            </span>
             <a href="/login" className=" text-secondary">
               {" "}
               {t("Login")}

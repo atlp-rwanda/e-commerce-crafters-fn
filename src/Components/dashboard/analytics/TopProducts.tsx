@@ -4,7 +4,6 @@ import { fetchSellingReport } from "../../../Redux/Analytic/SellingReportSlice";
 import { AppDispatch, RootState } from "../../../Redux/store";
 import { Circles } from "react-loader-spinner";
 
-
 const TopProduct: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { topProducts, isLoading, error } = useSelector(
@@ -18,15 +17,7 @@ const TopProduct: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-24">
-        <Circles
-          visible
-          height="80"
-          width="80"
-          color="#C9974C"
-          ariaLabel="circles-loading"
-          wrapperStyle={{}}
-          wrapperClass="circles-wrapper"
-        />
+        <Circles visible height="80" width="80" color="#C9974C" />
       </div>
     );
   }
@@ -54,7 +45,6 @@ const TopProduct: React.FC = () => {
     name: product.name,
     TotalSales: product.totalRevenue,
   }));
-  console.log(data);
 
   const totalRevenueSum = topProducts.reduce((acc, product) => {
     return acc + product.totalRevenue;
