@@ -14,7 +14,9 @@ import AuthSlice from "./features/AuthSlice";
 import OrderStatusSlice from './Analytic/orderStatusSlice';
 import sellingReportReducer from "./Analytic/SellingReportSlice";
 import WeeklySellingReducer from './Analytic/WeeklySellingSlice';
-import TopProductReducer from "../Components/Analytics/TopProduct";
+import SellerOrderStatusSliceReducer from "../Redux/Analytic/SellerAnalytics/OrderStatusSlice"
+import SellerWeekSalesSliceReducer from "../Redux/Analytic/SellerAnalytics/WeekSellingSlice"
+
 
 
 
@@ -34,7 +36,9 @@ export const store = configureStore({
     orderStatus: OrderStatusSlice,
     sellingReport: sellingReportReducer,
     weeklyReport: WeeklySellingReducer,
-    // topProduct:TopProductReducer
+    sellerSellingReport: sellingReportReducer,
+    SellerOrderStatus: SellerOrderStatusSliceReducer,
+    SellerWeeklySales: SellerWeekSalesSliceReducer,
   },
   middleware: (getDefaultMiddelware) =>
     getDefaultMiddelware().concat(apiSlice.middleware),

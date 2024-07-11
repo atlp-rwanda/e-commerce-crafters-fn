@@ -10,14 +10,17 @@ import VerifyEmail from "../Lib/VerifyEmail";
 import AuthGoogle from "../Lib/authgoogle";
 import Users from "../pages/Users";
 import AuthOutlet from "@auth-kit/react-router/AuthOutlet";
-import Analytics from "../pages/Analytics";
 import Test from "../pages/Check";
+import Analytics from "../pages/Analytics";
+import Homepage from "./Homepage";
+
 
 const AppRoutes: React.FC = () => {
   return (
     <div>
       <Routes>
         <Route path="/login" element={<Signin />} />
+        <Route path="/" element={<Homepage />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/test" element={<Test />} />
         <Route path="/signup" element={<SignUp />} />

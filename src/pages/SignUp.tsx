@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import AuthButton from '../Constants/AuthButton'
 import Input from '../Constants/Input'
 import { useRegisterMutation } from '../Redux/features/AuthSlice'
-import EmailSent from '../Components/modal/EmailSent'
+import EmailSent from '../Components/Modal/EmailSent'
 
 
 const SignUp: React.FC = () => {

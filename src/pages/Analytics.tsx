@@ -1,46 +1,26 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import OrderStatus from "../Components/Analytics/OrderStatus";
 import SellingReport from "../Components/Analytics/SellingReport";
-import { RootState, AppDispatch } from "../Redux/store";
-import { fetchOrders } from "../Redux/features/analyticSlice";
+import WeeklyReport from "../Components/Analytics/WeeklyReport";
+import TopProduct from "../Components/Analytics/TopProduct";
+import SellerSellingReport from "../Components/Analytics/SellerAnalytics/AnnualSellingReport";
+import SellerWeeklyReport from "../Components/Analytics/SellerAnalytics/WeeklySellingReport";
+import SellerTopProduct from "../Components/Analytics/SellerAnalytics/TopProducts";
+import SellerOrderStatus from "../Components/Analytics/SellerAnalytics/SellerOrderStatus";
 
-
-const Analytics: React.FC = () => {
- const dispatch: AppDispatch = useDispatch();
-  const { isLoading, data, error } = useSelector(
-    (state: RootState) => state.orderStatus
-  );
-  const [statusCounts, setStatusCounts] = useState<{ [key: string]: number }>(
-    {}
-  );
-
-  useEffect(() => {
-    dispatch(fetchOrders());
-  }, [dispatch]);
-
-  useEffect(() => {
-    if (data) {
-      const counts: { [key: string]: number } = {};
-      data.forEach((order) => {
-        counts[order.status] = (counts[order.status] || 0) + 1;
-      });
-      setStatusCounts(counts);
-    }
-  }, [data]);
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error fetching orders</div>;
-  }
-
+const Analytics = () => {
   return (
-    <div className="font-poppins">
-      <OrderStatus statusCounts={statusCounts} />
+    <div>
+      {/* <OrderStatus /> */}
       {/* <SellingReport/> */}
+      {/* <WeeklyReport/> */}
+      {/* <TopProduct/> */}
+      {/* <SellerSellingReport/> */}
+      {/* <SellerWeeklyReport /> */}
+      {/* <SellerTopProduct /> */}
+      <SellerOrderStatus/>
+      
+      
     </div>
   );
 };
