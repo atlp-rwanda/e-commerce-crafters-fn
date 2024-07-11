@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState, AppDispatch } from "../../Redux/store";
 import { useTranslation } from "react-i18next";
 import { fetchImages } from "../../Redux/HomePage/ProductsImagesSlice";
+import Skeleton from "react-loading-skeleton";
 
 const HeroSection: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -35,9 +36,18 @@ const HeroSection: React.FC = () => {
         </h1>
         <p className="text-[16px] font-poppins">
           {" "}
-          {t("Welcome")}
-          <a href="#" className="text-secondary font-bold">
-            {t("here")}
+          {t(
+            " Welcome to our online store! Whether you're a buyer looking for great"
+          )}
+          {t(
+            "deals or a seller wanting to showcase your products, our platform"
+          )}
+          {t(
+            "offers you the opportunity to connect and thrive. Explore our wide"
+          )}
+          {t("range of products and create an account")}
+          <a href="#" className="text-secondary font-bold px-3">
+            {t("  here  ")}
           </a>{" "}
           {t("to get started")}{" "}
         </p>
@@ -53,7 +63,11 @@ const HeroSection: React.FC = () => {
 
       <div className="w-full lg:w-1/2">
         <div className="w-[500px] h-[400px]">
-          {loading && <div>Loading...</div>}
+          {loading && (
+            <div className="w-[500px] h-[400px">
+              <Skeleton height={400} />
+            </div>
+          )}
           {error && <div>Error: {error}</div>}
           {!loading && !error && (!images || images.length === 0) && (
             <div>No images found.</div>

@@ -1,5 +1,4 @@
 import React from "react";
-import OrderStatus from "./orderStatus";
 import { useGetOrderQuery } from "../../Redux/OrderSlice";
 
 interface OrderDetailsProps {
@@ -22,7 +21,7 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ orderId }) => {
 
   return (
     <>
-      <div className="border-b pb-8 ">
+      <div className=" ">
         <div className="font-poppins font-bold pb-8">
           <p>Order #{orderId}</p>
         </div>
@@ -52,9 +51,6 @@ const OrderDetails: React.FC<OrderDetailsProps> = ({ orderId }) => {
           </div>
         </div>
 
-        <div className="order-status font-outfit">
-          <OrderStatus orderId={orderId} currentStatus={status} />
-        </div>
       </div>
     </>
   );

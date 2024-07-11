@@ -8,9 +8,8 @@ const Seller = () => {
   const navigate = useNavigate()
   const userData: any = useAuthUser()
   useEffect(() => {
-    if (userData.role !== "vendor") {
-      navigate(`/${userData.role}`)
-      return
+    if (!userData || userData.role !== 'vendor') {
+      navigate(`/${userData.role}`);
     }
   }, [navigate])
   const handelLogout = Logout()
