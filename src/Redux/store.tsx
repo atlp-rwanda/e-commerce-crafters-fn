@@ -32,7 +32,7 @@ export const store = configureStore({
     orderStatus: OrderStatusSlice,
     sellingReport: sellingReportReducer,
     weeklyReport: WeeklySellingReducer,
-    similarProducts: similarScile,]
+    similarProducts: similarScile,
   },
   middleware: (getDefaultMiddelware) =>
     getDefaultMiddelware().concat(apiSlice.middleware),

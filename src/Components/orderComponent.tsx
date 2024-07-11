@@ -35,7 +35,7 @@ const Order: React.FC<OrderProps> = ({ orderId, orderDate, expectedDeliveryDate,
     }
     
     return (
-        <div className="bg-gray-500 hover:shadow-md rounded-lg p-6 mb-4 flex justify-between">
+        <div className="bg-customGray hover:shadow-md rounded-lg p-6 mb-4 flex justify-between">
            
             <div className="flex gap-10">
                 <div>
