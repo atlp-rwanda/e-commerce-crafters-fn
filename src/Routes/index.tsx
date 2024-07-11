@@ -11,6 +11,7 @@ import VerifyEmail from '../Lib/VerifyEmail';
 import AuthGoogle from '../Lib/authgoogle';
 import Users from '../pages/Users';
 import Chat from '../pages/chat/Chat';
+import Forgotpassword from '../Lib/ForgotPassword';
 
 
 const AppRoutes: React.FC = () => (
@@ -22,6 +23,7 @@ const AppRoutes: React.FC = () => (
       <Route path="/2fa" element={<VerifyCode />} />
       <Route path="/verifyemail" element={<VerifyEmail />} />
       <Route path="/authgoogle" element={<AuthGoogle />} />
+      <Route path="/forgot-password" element={<Forgotpassword />} />
       <Route element={<AuthOutlet fallbackPath="/login" />}>
         <Route path="/admin" element={<Admin />}>
           <Route index element={<Users />} />
