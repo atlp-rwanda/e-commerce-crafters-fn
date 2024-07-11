@@ -121,7 +121,7 @@ const Products = () => {
   return (
     <div className="flex flex-col">
       <Header />
-      <div className="flex flex-col gap-[20px] px-10 p-6 mb-20">
+      <div className="mt-32 flex flex-col gap-[20px] px-10 p-6 mb-20">
         <div className="flex flex-col-reverse gap-4 justify-between items-center md:flex-row">
           <div className="flex flex-row gap-[14px] items-center font-outfit">
             <span
