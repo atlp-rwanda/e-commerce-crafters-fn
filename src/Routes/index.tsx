@@ -40,7 +40,6 @@ const AppRoutes: React.FC = () => (
    <Route path='/singleproduct' element={<Singlepage />} />
    <Route path='/products' element={<Products />} />
    <Route path='/forgot-password' element={<Forgotpassword />} />
-
    <Route path='/product/:id' element={<Singlepage />} />
    <Route path='/order/:orderId' element={<OrderTrackingPage />} />
    <Route path="/orders" element={<OrderComponent/>}/>
