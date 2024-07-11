@@ -1,6 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 
+
 interface Products {
   id: number;
   img: string;
@@ -8,6 +9,7 @@ interface Products {
   quantity: number;
   price: number;
 }
+
 
 interface OrderSummaryProps {
   subTotal: number;

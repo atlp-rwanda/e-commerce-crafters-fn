@@ -18,6 +18,7 @@ const AboutCrafters: React.FC = () => {
           <img src={imageUrl} alt="About Crafters" className="w-full h-60 sm:h-80 rounded-lg object-cover" />
         </div>
         <div>
+
           <p className="text-gray-700 text-base sm:text-lg md:text-xl sm:text-sm">
             {t(
               "Crafters is a team of developers who are passionate about creating online shopping experiences. Our goal is to make shopping easy and enjoyable for everyone."

@@ -29,6 +29,7 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
   };
 
   return (
+
     <section className="px-8 md:px-64 py-16 bg-gray-100 flex flex-col md:flex-row justify-center font-outfit md:text-xl md:space-x-40 sm:h-auto md:h-screen mt-24 sm:mt-8" id="contact-us">
       <div className="w-full md:w-1/2 mb-8 md:mb-0 flex flex-col">
         <h2 className="text-primary text-3xl md:text-4xl font-bold mb-4">Get In Touch With Us</h2>

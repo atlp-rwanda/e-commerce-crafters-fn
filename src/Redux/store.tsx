@@ -33,6 +33,9 @@ export const store = configureStore({
     sellingReport: sellingReportReducer,
     weeklyReport: WeeklySellingReducer,
     similarProducts: similarScile,
+    product: productReducer,
+    Wishlist: wishlistslice,
+    reviews: reviewReducer,
   },
   middleware: (getDefaultMiddelware) =>
     getDefaultMiddelware().concat(apiSlice.middleware),

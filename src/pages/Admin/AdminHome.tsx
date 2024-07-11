@@ -189,8 +189,8 @@ function AdminHome() {
     },
   ];
   return (
-    <div className="flex flex-col space-y-5 w-full">
-      <div className="flex flex-col w-full xl:h-50 xl:p-5">
+    <div className="flex flex-col space-y-5 w-full lg:mt-5">
+      <div className="flex flex-col w-full lg:p-[1%] xl:h-50 xl:p-1 2xl:p-3 3xl:p-5">
         <div className="grid grid-cols-2 gap-[10px] w-full lg:gap-[5px] lg:h-[15%] xl:gap-[10px] xl:w-[90%] xl:ml-[40px] xl:mt-2 xl:grid-cols-4 ">
           {cardData.map((item, index) => (
             <InteractionCard key={index} data={item} />
@@ -198,22 +198,20 @@ function AdminHome() {
         </div>
       </div>
 
-      <div className="w-full h-60 lg:p-6  xl:w-full xl:ml-[10px] xl:p-2  xl:pl-6">
+      <div className="w-full h-60 lg:p-[1%] lg:h-80  xl:h-96 xl:w-full xl:ml-[10px] xl:p-6 xl:pr-3 2xl:p-8 3xl:p-12 3xl:h-[500px]">
         <WeeklyReport />
       </div>
 
-      <div className="flex flex-col md:flex-col lg:flex-row w-full space-y-5 lg:space-y-0 lg:space-x-5 pb-10 xl:ml-[15px] xl:pl-6">
+      <div className="flex flex-col md:flex-col lg:flex-row w-full space-y-5 lg:space-y-0 lg:space-x-5 pb-10 xl:ml-[15px] xl:pl-6 2xl:p-12">
         <div className="w-full  md:mt-2 md:p-2 lg:mt-0  xl:p-0">
           <UserTable />
         </div>
-        <div className="w-full md:mt-2 md:p-2 xl:p-0">
-          <VendorRequestList  />
+        <div className="w-full md:mt-2 md:p-2 xl:pr-3">
+          <VendorRequestList />
         </div>
       </div>
     </div>
   );
-
-
 }
 
 export default AdminHome;

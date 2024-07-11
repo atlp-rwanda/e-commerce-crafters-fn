@@ -1,56 +1,29 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { addToWishlist, removeFromWishlist, fetchWishlist } from '../Action/wishlist';
-
-interface WishlistItem {
-  userId: string;
-  productId: string;
-  price: number;
-}
-
-interface WishlistState {
-  items: WishlistItem[];
-  status: 'idle' | 'loading' | 'succeeded' | 'failed';
-  error: string | null;
-}
-
-const initialState: WishlistState = {
-  items: [],
-  status: 'idle',
-  error: null,
-};
+import { createSlice } from '@reduxjs/toolkit';
+import { addToWishlist, fetchWishlist } from '../Action/wishlist';
 
 const wishlistSlice = createSlice({
   name: 'wishlist',
-  initialState,
+  initialState: {
+    items: [],
+    status: 'idle',
+    error: null,
+  },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(addToWishlist.fulfilled, (state, action: PayloadAction<WishlistItem>) => {
-        state.items.push(action.payload);
-        state.status = 'succeeded';
+      .addCase(addToWishlist.fulfilled, (state, action) => {
+
       })
-      .addCase(removeFromWishlist.fulfilled, (state, action: PayloadAction<{ productId: string }>) => {
-        state.items = state.items.filter((item) => item.productId !== action.payload.productId);
+      .addCase(fetchWishlist.fulfilled, (state, action) => {
+        state.items = action.payload;
         state.status = 'succeeded';
       })
       .addCase(fetchWishlist.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(fetchWishlist.fulfilled, (state, action: PayloadAction<WishlistItem[]>) => {
-        state.items = action.payload;
-        state.status = 'succeeded';
-      })
-      .addCase(fetchWishlist.rejected, (state, action: PayloadAction<any>) => {
-        state.error = action.payload;
+      .addCase(fetchWishlist.rejected, (state, action) => {
         state.status = 'failed';
-      })
-      .addCase(addToWishlist.rejected, (state, action: PayloadAction<any>) => {
-        state.error = action.payload;
-        state.status = 'failed';
-      })
-      .addCase(removeFromWishlist.rejected, (state, action: PayloadAction<any>) => {
-        state.error = action.payload;
-        state.status = 'failed';
+        state.error = action.error.message;
       });
   },
 });
