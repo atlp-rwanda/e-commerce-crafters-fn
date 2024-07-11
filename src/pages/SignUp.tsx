@@ -11,6 +11,7 @@ import { useLocation } from "react-router-dom";
 import { Puff } from "react-loader-spinner";
 import { useTranslation } from "react-i18next";
 
+
 const SignUp: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -61,6 +62,8 @@ const SignUp: React.FC = () => {
       if (error.data && error.data.Message === "Email already exists") {
         setError("Email has been taken");
         setIsEmpty("email");
+      }else{
+        setError("Something get wrong, Try again later")
       }
       console.log(error);
     }
@@ -102,7 +105,7 @@ const SignUp: React.FC = () => {
 
       {token ? (
         <div className="w-full z-50 h-screen top-0  absolute flex items-center justify-center bg-black/20">
-          <div className="p-4 bg-white rounded-[12px] w-1/4 flex items-center justify-center min-h-40">
+          <div className="p-4 bg-white rounded-[12px] w-full md:w-[1/2] lg:w-1/4 flex items-center justify-center min-h-40">
             {token && isVerifying && !verificationAttempted && (
               <Puff
                 visible
@@ -276,7 +279,7 @@ const SignUp: React.FC = () => {
             error={isEmpty === "password" ? true : !!(false || err)}
             label={t("Enter Your Password")}
             type="password"
-            placeholder={t("Enter your password")}
+            placeholder="Enter your password"
             value={password}
             onChange={(value) => setPassword(value)}
           />
@@ -331,9 +334,7 @@ const SignUp: React.FC = () => {
             </span>
           </div>
           <div className="flex flex-row gap-[4px] items-center justify-center">
-            <span className=" text-black">
-              {t("Already have an account")}?{" "}
-            </span>
+            <span className=" text-black">Already have an account? </span>
             <a href="/login" className=" text-secondary">
               {" "}
               {t("Login")}

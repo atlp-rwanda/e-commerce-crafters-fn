@@ -33,6 +33,7 @@ const Header: React.FC = () => {
   const handleLanguageChange = (language: string) => {
     setSelectedLanguage(language);
     setIsLanguageDropdownOpen(false);
+    setIsLanguageDropdownOpen(false);
     setIsMenuOpen(false);
     localStorage.setItem("lang", language);
     i18n.changeLanguage(language);
@@ -87,10 +88,9 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-   <header className='relative bg-primary text-xl text-white pl-24 pt-8 pb-8 sm:pl-12 sm:pt-6 sm:pb-6 md:pl-24 md:pt-8 md:pb-8 flex items-center justify-between font-outfit border-b-2 border-border top-0 w-full z-50'>
-    <div className='flex items-center'>
-     <img src={logo} alt='CRAFTERS Logo' className=' mr-20 h-12 sm:h-10' />
-
+    <header className="fixed bg-primary text-xl text-white pl-24 pr-24 pt-8 pb-8 sm:pl-12 sm:pt-6 sm:pb-6 md:pl-24 md:pt-8 md:pb-8 flex items-center justify-between font-outfit border-b-2 border-border top-0 w-full z-50">
+      <div className="flex items-center">
+        <img src={logo} alt="CRAFTERS Logo" className=" mr-20 h-12 sm:h-10" />
      <nav className='hidden lg:flex'>
       <ul className='flex space-x-8'>
        <li>
@@ -324,8 +324,8 @@ const Header: React.FC = () => {
            </li>
            <li>
             <button
-             onClick={() => handleLanguageChange("KINY")}
-             className='block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200'
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-3xl sm:pl-28 sm:pr-6 md:pr-12"
             >
              KINY
             </button>

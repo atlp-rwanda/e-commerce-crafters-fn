@@ -18,12 +18,15 @@ const chatSlice = apiSlice.injectEndpoints({
         }),
         getAllMessage: builder.query({
             query: () => `/get-message`
+        }),
+        getLatestMessage: builder.query({
+            query: (id)=> `/get-latestMessage/${id}`
         })
 
     })
 })
 
-export const {useGetVendorQuery,useGetAllVendorsQuery,useGetAllMessageQuery,useSendMessageMutation } = chatSlice
+export const {useGetVendorQuery,useGetAllVendorsQuery,useGetAllMessageQuery,useSendMessageMutation,useGetLatestMessageQuery } = chatSlice
 
 export default chatSlice
 
