@@ -42,7 +42,7 @@ const ChatSearch = ({ handelSelect }: { handelSelect: any }) => {
                 <div className='flex flex-row gap-[10px] items-center justify-between w-full'>
                     <h1 className='text-[20px] font-[600] font-outfit'>Chat</h1>
                     <div onClick={() => setIsVendorOpen(!isVendorOpen)} className='w-[40px] h-[40px] bg-primary cursor-pointer hover:scale-75 transition-all duration-200 flex items-center justify-center rounded-[4px]'>
-                        <span className='text-[24px] text-white '> +</span>
+                        <span className='text-[24px] text-white '> + </span>
                     </div>
 
                 </div>

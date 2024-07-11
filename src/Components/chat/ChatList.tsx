@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
 import pusher from '../../Lib/pusher';
+import { useGetLatestMessageQuery } from '../../Redux/features/ChatSlice';
+import { useDispatch } from 'react-redux';
+import { addUnreadMessage, markMessagesAsRead } from '../../Redux/features/MessageSlice';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../Redux/store';
 
 interface Vendor {
     userId: string;
@@ -19,26 +24,63 @@ interface ChatListProps {
 
 const ChatList: React.FC<ChatListProps> = ({ vendors, isLoading, handelSelect, selectedUser }) => {
     const [selectUsers, setSelectUsers] = useState<Vendor[]>([]);
-    const userData: any = useAuthUser()
+    const userData: any = useAuthUser();
+    const id = userData.userId;
+    const [lastMessages, setLastMessages] = useState<any[]>([]);
+    
+    const dispatch = useDispatch()
+
+    const { data: latestMessages, error, isLoading: latestLoading } = useGetLatestMessageQuery(id);
+    const unreadMessages = useSelector((state: RootState) => state.unreadMessages.unreadMessages);
 
     useEffect(() => {
-        if (userData && userData.role === "vendor") {
-          const channel = pusher.subscribe("user");
-          channel.bind("send-user", (data: any) => {
+        if (latestMessages) {
+            setLastMessages(latestMessages);
+        }
+    }, [latestMessages]);
+
+    useEffect(() => {
+
+        const channel = pusher.subscribe("user");
+        channel.bind("send-user", (data: any) => {
             const userExists = vendors.some((vendor) => vendor.userId === data.sender.userId) || selectUsers.some((user) => user?.userId === data.sender.userId);
             if (!userExists && data.message.receiver === userData.userId) {
-              setSelectUsers((prevUsers) => [...prevUsers, data.sender as Vendor]);
-              console.log("selected user...: ", selectUsers)
+                setSelectUsers((prevUsers) => [...prevUsers, data.sender as Vendor]);
             }
-          });
-          return () => {
+            dispatch(addUnreadMessage({ userId: data.sender.userId }));
+            setLastMessages((prevMessages) => {
+                const messageIndex = prevMessages.findIndex((msg) => msg.userId === data.sender.userId || msg.userId === data.message.receiver);
+                if (messageIndex !== -1) {
+                    const updatedMessages = [...prevMessages];
+                    updatedMessages[messageIndex] = { ...updatedMessages[messageIndex], latestMessage: data.message };
+                    return updatedMessages;
+                }
+                return [...prevMessages, { userId: data.sender.userId, latestMessage: data.message }];
+            });
+        });
+        return () => {
             pusher.unsubscribe("user");
-          };
-        }
-      }, [userData, vendors, selectUsers]);
+        };
 
-   
+    }, [userData, vendors, selectUsers]);
 
+    const getLatestMessage = (userId: string) => {
+        const message = lastMessages.find((msg) => {
+            return (msg.latestMessage?.sender === userData.userId && msg.latestMessage?.receiver === userId) ||
+                (msg.latestMessage?.sender === userId && msg.latestMessage?.receiver === userData.userId);
+        });
+        return message?.latestMessage?.content || "No messages yet";
+    };
+
+    const handleSelectVendor = (vendor: Vendor) => {
+        handelSelect(vendor);
+        dispatch(markMessagesAsRead({ userId: vendor.userId }));
+      };
+    
+      const getUnreadCount = (userId: string) => {
+        const unread = unreadMessages.find((msg) => msg.userId === userId);
+        return unread ? unread.count : 0;
+      };
 
     return (
         <div className='w-full bg-white min-h-[45vh] p-2 rounded-[12px] rounded-tl-none flex flex-col gap-[10px]'>
@@ -63,27 +105,30 @@ const ChatList: React.FC<ChatListProps> = ({ vendors, isLoading, handelSelect, s
                     </div>
                 ) : (
                     <>
-                        {selectUsers.map((vendor:any) => {
+                        {selectUsers.map((vendor: any) => {
                             return (
-                                <div onClick={() => handelSelect(vendor)} className=' cursor-pointer hover:opacity-40 flex flex-row gap-[10px]  py-2 items-center'>
+                                <div onClick={() => handleSelectVendor(vendor)} className=' cursor-pointer hover:opacity-40 flex flex-row gap-[10px]  py-2 items-center'>
                                     <div className='flex items-center justify-center w-[45px] h-[45px] rounded-full border border-gray-500'>
                                         <img src={vendor?.profile} className='w-full h-full object-cover rounded-full' alt="" />
                                     </div>
                                     <div className='flex flex-col leading-1 w-[250px]'>
                                         <div className='flex font-outfit flex-row items-center justify-between w-full'>
-                                            {vendor?.role == "vendor" ?(
-                                                
+                                            {vendor?.role == "vendor" ? (
+
                                                 <span className='text-[18px] font-[600]'>{vendor?.Vendor?.storeName}</span>
-                                            ) :(
+                                            ) : (
                                                 <span className='text-[18px] font-[600]'>{vendor?.name}</span>
-                                                
+
                                             )}
                                             <span className='text-[14px] text-gray-400'>Today</span>
                                         </div>
-                                        <div className='flex flex-row gap-[4px]'>
+                                        <div className='flex flex-row w-full items-center justify-between gap-[4px]'>
 
-                                            <span className=' line-clamp-1 text-[12px] text-gray-500'>Lorem ipsum dolor sit, amet consectetur adipisicing</span>
-                                            <span className='bg-primary px-2 text-[12px] text-white rounded-full'>2</span>
+                                            <span className=' line-clamp-1 text-[12px] text-gray-500'>{getLatestMessage(vendor.userId)}</span>
+                                            {getUnreadCount(vendor.userId)=== 0 ? (""):(
+                                                <span className='bg-primary px-2 text-[12px] text-white rounded-full'>{getUnreadCount(vendor.userId)}</span>
+
+                                            )}
                                         </div>
                                     </div>
 
@@ -93,25 +138,28 @@ const ChatList: React.FC<ChatListProps> = ({ vendors, isLoading, handelSelect, s
                         })}
                         {vendors.map((vendor: any) => {
                             return (
-                                <div onClick={() => handelSelect(vendor)} className=' cursor-pointer hover:opacity-40 flex flex-row gap-[10px]  py-2 items-center'>
+                                <div onClick={() => handleSelectVendor(vendor)} className=' cursor-pointer hover:opacity-40 flex flex-row gap-[10px]  py-2 items-center'>
                                     <div className='flex items-center justify-center w-[45px] h-[45px] rounded-full border border-gray-500'>
                                         <img src={vendor.profile} className='w-full h-full object-cover rounded-full' alt="" />
                                     </div>
                                     <div className='flex flex-col leading-1 w-[250px]'>
                                         <div className='flex font-outfit flex-row items-center justify-between w-full'>
-                                        {vendor?.role == "vendor" ?(
-                                                
+                                            {vendor?.role == "vendor" ? (
+
                                                 <span className='text-[18px] font-[600]'>{vendor?.Vendor?.storeName}</span>
-                                            ) :(
+                                            ) : (
                                                 <span className='text-[18px] font-[600]'>{vendor?.name}</span>
-                                                
+
                                             )}
                                             <span className='text-[14px] text-gray-400'>Today</span>
                                         </div>
-                                        <div className='flex flex-row gap-[4px]'>
+                                        <div className='flex flex-row gap-[4px] w-full justify-between'>
 
-                                            <span className=' line-clamp-1 text-[12px] text-gray-500'>Lorem ipsum dolor sit, amet consectetur adipisicing</span>
-                                            <span className='bg-primary px-2 text-[12px] text-white rounded-full'>2</span>
+                                            <span className=' line-clamp-1 text-[12px] text-gray-500'>{getLatestMessage(vendor.userId)}</span>
+                                            {getUnreadCount(vendor.userId)=== 0 ? (""):(
+                                                <span className='bg-primary px-2 text-[12px] text-white rounded-full'>{getUnreadCount(vendor.userId)}</span>
+
+                                            )}
                                         </div>
                                     </div>
 
