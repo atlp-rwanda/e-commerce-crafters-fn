@@ -1,5 +1,16 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+<<<<<<< HEAD
+=======
+
+interface Products {
+  id: number;
+  img: string;
+  name: string;
+  quantity: number;
+  price: number;
+}
+>>>>>>> 5e9c5368254cec75402d7190a1e6663536800cf7
 
 interface OrderSummaryProps {
   subTotal: number;
