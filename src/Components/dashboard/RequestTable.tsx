@@ -28,6 +28,9 @@ const RequestsTable: React.FC<SellerTableProps> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [search, setSearch] = useState("");
+  const [rejectMessage, setRejectMessage] = useState("");
+  const [IsMessageOpen, setIsMessageOpen] = useState(false);
+
   const sellersPerPage = 15;
 
   const [approveVendor] = useApproveMutation();
@@ -58,6 +61,8 @@ const RequestsTable: React.FC<SellerTableProps> = ({
 
   const closeModal = () => {
     setSelectedSeller(null);
+    setRejectMessage("");
+    setIsMessageOpen(false);
   };
 
   const onApprove = async () => {
@@ -73,16 +78,25 @@ const RequestsTable: React.FC<SellerTableProps> = ({
     }
   };
 
+  const openMessageModal = () => {
+    setIsMessageOpen(true);
+  };
+
   const onDeny = async () => {
     if (selectedSeller) {
+      setIsMessageOpen(false);
       setIsLoading(true);
-      await rejectVendor(selectedSeller.userId).unwrap();
+      await rejectVendor({
+        userId: selectedSeller.userId,
+        message: rejectMessage,
+      }).unwrap();
       setIsLoading(false);
       setSuccessMessage("Seller rejected successfully");
       setSellers((prevSellers) =>
         prevSellers.filter((seller) => seller.userId !== selectedSeller.userId)
       );
       setSelectedSeller(null);
+      setRejectMessage("");
     }
   };
 
@@ -174,7 +188,7 @@ const RequestsTable: React.FC<SellerTableProps> = ({
                       </button>
                       <button
                         className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 mr-2"
-                        onClick={onDeny}
+                        onClick={openMessageModal}
                       >
                         Deny
                       </button>
@@ -186,6 +200,44 @@ const RequestsTable: React.FC<SellerTableProps> = ({
                   >
                     Close
                   </button>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {IsMessageOpen && (
+            <div className="z-90 fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
+              <div className="bg-white rounded-lg shadow-lg p-4 max-w-sm w-full">
+                <h2 className="text-lg font-semibold mb-4">
+                  Rejection Message
+                </h2>
+                <textarea
+                  className="border rounded-lg p-2 w-full"
+                  value={rejectMessage}
+                  onChange={(e) => setRejectMessage(e.target.value)}
+                  placeholder="Enter reason for rejection of request"
+                />
+                <div className="mt-4 text-right">
+                  {isLoading ? (
+                    <div className="flex justify-center items-center h-24">
+                      <Circles visible height="80" width="80" color="#C9974C" />
+                    </div>
+                  ) : (
+                    <>
+                      <button
+                        className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 mr-2"
+                        onClick={onDeny}
+                      >
+                        Deny
+                      </button>
+                      <button
+                        className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300"
+                        onClick={closeModal}
+                      >
+                        Close
+                      </button>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
