@@ -39,10 +39,12 @@ const AuthApiSlice = apiSlice.injectEndpoints({
       query: (data) => ({
         url: `/reset-password/${data.token}`,
         method: "POST",
+
         body: data,
       }),
     }),
   }),
+
 });
 
 export const {

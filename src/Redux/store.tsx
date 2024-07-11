@@ -7,15 +7,21 @@ import categoryReducer from './productsPage/categorySlice';
 import paginationReducer from './productsPage/paginationSlice';
 import searchReducer from './productsPage/searchSlice';
 import { apiSlice } from './features/ApiSlice';
+import  unreadMessagesReducer from "./features/MessageSlice"
 import { reviewReducer } from './Action/Reducer/Review';
 import { productReducer, cartReducer } from './Action/Reducer/singleproductSlice';
 import sellingReportReducer from "./Analytic/SellingReportSlice";
 import WeeklySellingReducer from "./Analytic/WeeklySellingSlice";
 import OrderStatusSlice from "./Analytic/orderStatusSlice";
+import wishlistslice from './Reducer/wishlistslice';
+import similarScile from './Reducer/similarScile';
+// import wishlistslice from "./Reducer/Reducer/wishlistslice";
+
 
 export const store = configureStore({
   reducer: {
     [apiSlice.reducerPath]: apiSlice.reducer,
+    unreadMessages: unreadMessagesReducer,
     productsImages: productsImagesReducer,
     category: categoryReducer,
     pagination: paginationReducer,
@@ -26,6 +32,10 @@ export const store = configureStore({
     orderStatus: OrderStatusSlice,
     sellingReport: sellingReportReducer,
     weeklyReport: WeeklySellingReducer,
+    similarProducts: similarScile,
+    product: productReducer,
+    Wishlist: wishlistslice,
+    reviews: reviewReducer,
   },
   middleware: (getDefaultMiddelware) =>
     getDefaultMiddelware().concat(apiSlice.middleware),

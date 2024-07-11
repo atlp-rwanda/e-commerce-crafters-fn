@@ -1,31 +1,46 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { ContactInfo } from "../Components/OrderTracking/contactInfo";
 import OrderDetails from "../Components/OrderTracking/orderDetails";
 import { OrderProductDetails } from "../Components/OrderTracking/orderProductDetails";
+import OrderStatus from "../Components/OrderTracking/orderStatus";
 import Navbar from "../Components/navBar";
+import { getCookie } from "../Components/OrderTracking/authUtils";
+import { useGetOrderQuery, useGetUserInfoQuery } from "../Redux/OrderSlice";
+import { useParams } from "react-router-dom";
 
 export const OrderTrackingPage = () => {
-      const orderId = "3767bf83-339a-4bd1-bccc-c77435272cf5";
-    // const orderId = "3945e594-cc56-41d1-9c6a-a056cc848a05"; shipped
-  const phoneNumber = "0787990099";
-  const email = "bernice@example.com";
-  const contactName = "bernice";
-  const address = "Kigali, Kicukiro";
+  const { orderId } = useParams();
+
+  const [userId, setUserId] = useState('');
   const [orderStatus, setOrderStatus] = useState('pending');
 
+  const { data: orderData, error: orderError, isLoading: orderLoading } = useGetOrderQuery({orderId});
+
+  useEffect(() => {
+    console.log("Attempting to fetch order with ID:", orderId);
+    if(orderData){
+      setUserId(orderData.userId);
+      setOrderStatus(orderData.status);
+    }
+
+  }, [orderData]);
+
+  const { data: userInfo, error: userInfoError, isLoading: userInfoLoading } = useGetUserInfoQuery({ userId }, { skip: !userId });
+
+  if(orderLoading) return <div>Loading order data...</div>
+  if(orderError) return <div>Error loading order</div>
   return (
     <>
       <Navbar />
       <div className="flex flex-col gap-20 h-screen p-10 lg:p-20">
-        <div className="order-details-container">
+        <div className="order-details-container border-b pb-8">
           <OrderDetails orderId={orderId} />
+          <OrderStatus orderId={orderId} currentStatus={orderStatus} />
         </div>
         <div className="contact-info-container">
           <ContactInfo
-            address={address}
-            contactName={contactName}
-            email={email}
-            phoneNumber={phoneNumber}
+            contactName={userInfo?.name || ''}
+            email={userInfo?.email || ''}
             orderId={orderId}
           />
         </div>

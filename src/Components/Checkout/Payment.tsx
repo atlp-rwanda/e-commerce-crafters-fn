@@ -1,3 +1,4 @@
+import { t } from "i18next";
 import React from "react";
 import { useTranslation } from "react-i18next";
 
@@ -24,7 +25,7 @@ const Payment = () => {
           </div>
           <div className="email w-full mb-5">
             <input
-              className="w-full h-[35px] rounded-[7px] bg-gray-200 pl-[15px]"
+              className="w-full h-[35px] rounded-[7px] bg-gray-300 pl-[15px]"
               type="email"
               placeholder={t("Email Address")}
             />
@@ -43,13 +44,13 @@ const Payment = () => {
           </div>
           <div className="location w-full flex justify-between mb-5">
             <select
-              className="w-[49%] h-[35px] rounded-[7px] bg-gray-200 pl-[15px]"
+              className="w-[49%] h-[35px] rounded-[7px] bg-gray-300 pl-[15px]"
               name="Country"
               id=""
               title="Country"
             ></select>
             <select
-              className="w-[49%] h-[35px] rounded-[7px] bg-gray-200 pl-[15px]"
+              className="w-[49%] h-[35px] rounded-[7px] bg-gray-300 pl-[15px]"
               name="City"
               id=""
               title="City"
@@ -57,7 +58,7 @@ const Payment = () => {
           </div>
           <div className="delivery w-full mb-5">
             <select
-              className="w-full h-[35px] rounded-[7px] bg-gray-200 pl-[15px]"
+              className="w-full h-[35px] rounded-[7px] bg-gray-300 pl-[15px]"
               name="delivery"
               id=""
               title="delivery"
