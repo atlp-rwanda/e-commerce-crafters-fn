@@ -2,7 +2,7 @@ import React from "react";
 import { useGetOrderQuery } from "../../Redux/OrderSlice";
 
 interface OrderDetailsProps {
-  orderId: string;
+  orderId?: string;
 }
 
 const OrderDetails: React.FC<OrderDetailsProps> = ({ orderId }) => {

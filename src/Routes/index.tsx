@@ -42,8 +42,8 @@ const AppRoutes: React.FC = () => (
    <Route path='/forgot-password' element={<Forgotpassword />} />
 
    <Route path='/product/:id' element={<Singlepage />} />
-   <Route path='/order-tracking' element={<OrderTrackingPage />} />
-   <Route path="/order" element={<OrderComponent/>}/>
+   <Route path='/order/:orderId' element={<OrderTrackingPage />} />
+   <Route path="/orders" element={<OrderComponent/>}/>
    <Route element={<AuthOutlet fallbackPath='/login' />}>
     <Route path='/chat' element={<Chat />} />
     <Route path='/admin' element={<Admin />}>
