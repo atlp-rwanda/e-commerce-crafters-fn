@@ -4,7 +4,7 @@ import mainproduct1 from "../../asset/images/Products/0ce8299f7b1c845d575f949b24
 import mainproduct2 from "../../asset/images/Products/529d198d51183b1643323dd26b8db71d (1).jpg";
 import mainproduct4 from "../../asset/images/Products/529d198d51183b1643323dd26b8db71d.jpg";
 import mainproduct3 from "../../asset/images/Products/f8c69bc0404ff0b6158cab028ac8e632.jpg";
-// import heart from "../../asset/images/products/heart_.png";
+import heart from "../../asset/images/heart 1.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -192,7 +192,7 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
   }
 
   return (
-    <div className='flex justify-center md:flex-row lg:flex-col items-center flex-col'>
+    <div className='flex justify-center md:flex-row lg:flex-col items-center flex-col pt-40'>
       <div className='flex justify-center gap-5 md:flex-row md:w-4/5 flex-col'>
         <div className="grid grid-cols-1 justify-center p-5 gap-y-5 items-center md:w-[70%]">
           <div className='flex justify-center items-center relative'>

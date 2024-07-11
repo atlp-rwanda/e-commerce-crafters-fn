@@ -29,7 +29,7 @@ import OrderComponent from "../Components/orders";
 const AppRoutes: React.FC = () => (
   <div>
     <Routes>
- <Route path='' element={<Homepage />} />
+ <Route path='/' element={<Homepage />} />
    <Route path='/login' element={<Signin />} />
    <Route path='/checkout' element={<Checkout />} />
    <Route path='/cart' element={<Cart />} />
