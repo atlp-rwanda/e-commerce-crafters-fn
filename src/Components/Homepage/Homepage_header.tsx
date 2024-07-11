@@ -84,6 +84,30 @@ const Header: React.FC = () => {
     <header className="fixed bg-primary text-xl text-white pl-24 pr-24 pt-8 pb-8 sm:pl-12 sm:pt-6 sm:pb-6 md:pl-24 md:pt-8 md:pb-8 flex items-center justify-between font-outfit border-b-2 border-border top-0 w-full z-50">
       <div className="flex items-center">
         <img src={logo} alt="CRAFTERS Logo" className=" mr-20 h-12 sm:h-10" />
+        <nav className='hidden lg:flex'>
+      <ul className='flex space-x-8'>
+       <li>
+        <a href='/' className='hover:text-gray-300'>
+         {t("Home")}
+        </a>
+       </li>
+       <li>
+        <a href='/#about-crafters' className='hover:text-gray-300'>
+         {t("About Us")}
+        </a>
+       </li>
+       <li>
+        <a href='/products' className='hover:text-gray-300'>
+         {t("Products")}
+        </a>
+       </li>
+       <li>
+        <a href='/#contact-us' className='hover:text-gray-300'>
+         {t("Contact Us")}
+        </a>
+       </li>
+      </ul>
+     </nav>
       </div>
       {userData ? (
         <div className="hidden lg:flex items-center space-x-8 pr-20">

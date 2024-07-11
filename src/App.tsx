@@ -10,7 +10,7 @@ const App: React.FC = () =>{
   useEffect(() => {
     const savedDarkMode = localStorage.getItem('darkMode') === 'true';
     setOpenDark(savedDarkMode);
-    document.getElementById('root').classList.toggle('dark', savedDarkMode);
+    document.getElementById('root')?.classList.toggle('dark', savedDarkMode);
   }, []);
 
   useEffect(() => {
