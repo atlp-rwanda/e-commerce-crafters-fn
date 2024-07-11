@@ -11,6 +11,7 @@ import Header from "../Components/Homepage/Homepage_header";
 import CustomInput from "../Components/CustomInput";
 import VendorRequestForm from "../Components/VendorRequestForm";
 import Footer from "../Components/Homepage/Homepage_footer";
+import OrderComponent from "../Components/orders";
 export interface UserDataType {
  cartId: string | null;
  createdAt: string;
@@ -41,8 +42,8 @@ const User = () => {
 
  return (
   <div className='flex flex-col relative'>
-   <Header />
-   <main className='sm:px-3 md:px-7 pb-10 '>
+   <Header/>
+   <main className='sm:px-3 md:px-7 pb-10 mt-16 min-h-screen-80'>
     <UserInformation openModal={setOpenModal} user={user as UserDataType} />
     <UserSettings className='sm:px-4 '>
      <ProfileDetailsTab
@@ -67,6 +68,7 @@ const User = () => {
      )}
     </UserSettings>
     <Toaster position='top-center' />
+
    </main>
    <div
     className={`${

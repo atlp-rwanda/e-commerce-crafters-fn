@@ -88,7 +88,7 @@ const Header: React.FC = () => {
   }, []);
 
   return (
-    <header className="fixed bg-primary text-xl text-white pl-24 pr-24 pt-8 pb-8 sm:pl-12 sm:pt-6 sm:pb-6 md:pl-24 md:pt-8 md:pb-8 flex items-center justify-between font-outfit border-b-2 border-border top-0 w-full z-50">
+    <header className="fixed bg-primary text-xl min-h-20 text-white pl-24 pr-24 pt-8 pb-8 sm:pl-12 sm:pt-6 sm:pb-6 md:pl-24 md:pt-8 md:pb-8 flex items-center justify-between font-outfit border-b-2 border-border top-0 w-full z-50">
       <div className="flex items-center">
         <img src={logo} alt="CRAFTERS Logo" className=" mr-20 h-12 sm:h-10" />
      <nav className='hidden lg:flex'>
@@ -196,9 +196,9 @@ const Header: React.FC = () => {
          </div>
          <div className='flex flex-col space-y-6 mb-4 p-8'>
           <div
-           className='flex flex-row gap-6 hover:scale-105 transition-transform duration-200'
+           className='flex cursor-pointer flex-row gap-6 hover:scale-105 transition-transform duration-200'
            onClick={() =>
-            navigate(userData.role === "vendor" ? "/vendor" : "/buyer")
+            navigate(userData.role === "vendor" ? "/vendor" : "/user")
            }
           >
            <p className='font-outfit text-lg text-white flex gap-3'>
