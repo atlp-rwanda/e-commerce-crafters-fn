@@ -6,7 +6,7 @@ const AboutCrafters: React.FC = () => {
   const { t } = useTranslation();
   return (
     <section
-      className="py-16 px-6 sm:px-12 md:px-24 bg-white font-outfit text-lg md:text-xl h-screen mt-96"
+      className="py-16 px-6 sm:px-12 md:px-24 bg-white font-outfit text-lg md:text-xl h-screen"
       id="about-crafters"
     >
       <h2 className="text-2xl sm:text-3xl font-bold mb-8">
