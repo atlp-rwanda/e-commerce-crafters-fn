@@ -11,13 +11,18 @@ module.exports = {
         secondary: 'var(--color-secondary)',
         white: 'var(--color-white)',
         black: 'var(--color-black)',
+        
         gray: {
           100: 'var(--color-gray-100)',
           200: 'var(--color-gray-200)',
+          300: '#F7F7F7',
+          400: '#797979'
         },
         border: 'var(--color-border)',
         bgwhite: 'var(--color-bgwhite)',
         textprimary:'var(--color-textprimary)',
+        blue: '#24ABE3',
+        
       },
       fontFamily: {
         outfit: ['Outfit', 'sans-serif'],

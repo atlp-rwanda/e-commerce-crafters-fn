@@ -68,7 +68,8 @@ const User = () => {
      )}
     </UserSettings>
     <Toaster position='top-center' />
-
+    <OrderComponent/>
+    
    </main>
    <div
     className={`${

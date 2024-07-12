@@ -35,7 +35,7 @@ const Order: React.FC<OrderProps> = ({ orderId, orderDate, expectedDeliveryDate,
     }
     
     return (
-        <div className="bg-customGray hover:shadow-md rounded-lg p-6 mb-4 flex justify-between">
+        <div className="bg-gray-300 hover:shadow-md rounded-lg p-6 mb-4 flex justify-between mr-20">
            
             <div className="flex gap-10">
                 <div>
@@ -58,7 +58,7 @@ const Order: React.FC<OrderProps> = ({ orderId, orderDate, expectedDeliveryDate,
                 </div>
             </div>
             <div className="mt-4">
-                <button className="text-blue-100 hover:underline" onClick={() => onViewDetails(orderId)} >View Details</button>
+                <button className="text-blue hover:underline" onClick={() => onViewDetails(orderId)} >View Details</button>
             </div>
         </div>
     )
