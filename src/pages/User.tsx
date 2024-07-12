@@ -43,7 +43,7 @@ const User = () => {
  return (
   <div className='flex flex-col relative'>
    <Header/>
-   <main className='sm:px-3 md:px-7 pb-10 mt-16 min-h-screen-80'>
+   <main className='sm:px-3 md:px-7 pb-10 mt-40 min-h-screen-80'>
     <UserInformation openModal={setOpenModal} user={user as UserDataType} />
     <UserSettings className='sm:px-4 '>
      <ProfileDetailsTab
