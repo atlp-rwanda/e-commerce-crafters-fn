@@ -5,6 +5,7 @@ import { LazyLoadImage } from 'react-lazy-load-image-component'
 import SentImage from './SentImage'
 import pusher from '../../Lib/pusher'
 import useAuthUser from 'react-auth-kit/hooks/useAuthUser'
+import OpenedImage from './OpenedImage'
 
 const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
     const { data, error, isLoading,refetch } = useGetAllMessageQuery({})
@@ -13,6 +14,7 @@ const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
     const [image, setImage] = useState<string>("")
     const [messages, setMessages] = useState<any[]>([])
     const [filteredMessages, setFilteredMessages] = useState<any[]>([]);
+    const [openedImage , setOpenedImage] = useState<string>("")
 
     const [sendMessage, { isLoading: loading, isError: errorr, isSuccess }] = useSendMessageMutation()
 
@@ -117,6 +119,11 @@ const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
                 channel.unsubscribe();
             };
         }, []);
+
+        const handelOpenImage = async(image:any)=>{
+            setOpenedImage(image)
+
+        }
     
 
     return (
@@ -168,7 +175,7 @@ const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
                                             </div>
                                         ) : (
                                             <div className='flex flex-col bg-gray-50'>
-                                                <div className='w-[200px] h-[150px] rounded-[4px] cursor-pointer'>
+                                                <div onClick={()=> handelOpenImage(message.imageUrl[0])} className='w-[200px] h-[150px] rounded-[4px] cursor-pointer'>
                                                     <LazyLoadImage src={message.imageUrl[0]} className='w-full h-full object-cover rounded-[4px]' />
                                                 </div>
                                                 <span className={` p-1 text-[14px] font-outfit ${message.sender === myId ? "text-black" : ""}`}>{message?.content}</span>
@@ -212,6 +219,11 @@ const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
                         </button>
                     </div>
                 </>)}
+
+                {openedImage !== "" ? (
+                    <OpenedImage setOpenedImage={setOpenedImage} image={openedImage}/>
+
+                ): ("")}
         </div>
     )
 }

@@ -107,7 +107,7 @@ const SellerSellingReport = () => {
       </div>
 
       <div
-        style={{ height: "400px" }}
+        style={{ height: "400px",width:"100%" }}
         className="flex flex-col m-auto text-xs bg-white mb-20 w-[50%] rounded-lg shadow-2xl border-gray-400 font-poppins"
       >
         <div className="py-2 pl-10 relative  ">

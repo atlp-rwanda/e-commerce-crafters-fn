@@ -3,6 +3,14 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import { useLocation } from "react-router-dom";
 import Logout from "../../services/Logout";
+import { useTranslation } from "react-i18next";
+
+export function toCapital(string: string): string {
+  return string
+    .split(" ")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+    .join(" ");
+}
 
 const AdminHeader = () => {
   const [currentDateTime, setCurrentDateTime] = useState("");
@@ -45,12 +53,14 @@ const AdminHeader = () => {
     }
   }, [pathName]);
 
+  const { t } = useTranslation();
+
   return (
     <div className=" z-50 bg-primary w-full flex lg:bg-white shadow-md py-4 px-6 justify-between items-center fixed lg:w-[78%] lg:ml-[9%] xl:h-[10vh] xl:w-[82%] xl:ml-[5%] ">
       <div className="hidden lg:flex items-center xl:flex">
-        <div className="flex flex-col">
-          <span className="text-gray-600 mr-4 font-bold text-lg">
-            Administration
+        <div className="flex flex-col w-[130px]">
+          <span className="text-gray-600 mr-4 font-bold  text-lg">
+            {t("Administration")}
           </span>
           <span className="text-gray-500  text-sm">{currentDateTime}</span>
         </div>
@@ -137,7 +147,7 @@ const AdminHeader = () => {
         {pageTitle}
       </div>
       <div className="flex">
-        <div className="hidden lg:flex items-center space-x-2 bg-gray-100  rounded-lg py-2 px-4 xl:mr-2 ">
+        <div className="hidden lg:flex items-center space-x-2 bg-gray-100  rounded-lg py-1 px-4 xl:mr-2 ">
           <div className="bg-secondary rounded-full p-2 flex items-center justify-center h-8 w-8 text-white ">
             <span className="text-xs font-medium">
               {`${userData?.name}`
@@ -148,8 +158,8 @@ const AdminHeader = () => {
             </span>
           </div>
           <div className="flex flex-col">
-            <span className="font-medium">{userData?.name}</span>
-            <span className="text-xs text-gray-500">Administrator</span>
+            <span className="font-medium">{toCapital(userData?.name)}</span>
+            <span className="text-xs text-gray-500">{t("Administrator")}</span>
           </div>
         </div>
       </div>
@@ -184,6 +194,9 @@ const AdminHeader = () => {
             </a>
             <a href="/admin/analytics" className="hover:text-gray-300">
               Analytics
+            </a>
+            <a href="/admin/settings" className="hover:text-gray-300">
+              Settings
             </a>
             <a>
               <button onClick={Logout()}>Sign Out</button>

@@ -10,23 +10,20 @@ import {
 import { AppDispatch, RootState } from "../../../Redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSellerOrderStatus } from "../../../Redux/Analytic/SellerAnalytics/OrderStatusSlice";
+import OrderTable from "./OrderTable";
 
 
 
 
 const SellerOrderStatus = () => {
 
-interface OrderStatusProps {
-  statusCounts: { [key: string]: number };
-}
-
-const colors = ["#FFC632", "#17BF6B", "#ED3333"];
-
 const dispatch: AppDispatch = useDispatch();
 const { isLoading, data, error } = useSelector(
   (state: RootState) => state.SellerOrderStatus
 );
 const [statusCounts, setStatusCounts] = useState<{ [key: string]: number }>({});
+const [filteredData, setFilteredData] = useState<any[]>([]);
+const [currentStatus, setCurrentStatus] = useState<string | null>(null);
 
 useEffect(() => {
   dispatch(fetchSellerOrderStatus());
@@ -42,6 +39,12 @@ useEffect(() => {
   }
 }, [data]);
 
+const handlePieClick = (status: string) => {
+  setCurrentStatus(status);
+  const filteredOrders = data.filter((order) => order.status === status);
+  setFilteredData(filteredOrders);
+};
+
 if (isLoading) {
   return <div>Loading...</div>;
 }
@@ -50,24 +53,18 @@ if (error) {
   return <div>Error fetching orders</div>;
 }
 
-let statusCount = {
-  pending: statusCounts.pending,
-  delivered: statusCounts.delivered,
-  cancelled: statusCounts.cancelled,
-};
+const colors = ["#FFC632", "#17BF6B", "#ED3333"];
 
-
-const datas = Object.entries(statusCount).map(([status, value], index) => ({
+const datas = Object.entries(statusCounts).map(([status, value], index) => ({
   name: status,
   value,
   color: colors[index % colors.length],
 }));
-    
-    console.log(data)
 
 
   return (
     <div className="mt-80 font-poppins">
+      {/* <OrderTable datas={filteredData.length > 0 ? filteredData : data} /> */}
       <div className="flex flex-col w-[400px] m-auto h-[280px]  border-2  rounded-xl shadow-md ">
         <div className="pl-5 h-[30%]">
           <h2 className="font-bold pt-3">Order status</h2>

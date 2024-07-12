@@ -104,7 +104,7 @@ const SellerWeeklyReport = () => {
         <SalesTable datas={datas} />
       </div>
       <div
-        style={{ width: "40%", height: "350px" }}
+        style={{ width: "100%", height: "350px" }}
         className="flex  flex-col m-auto mt-80 text-xs  rounded-lg shadow-2xl border-gray-400"
       >
         <div className="py-2 pl-10 relative">

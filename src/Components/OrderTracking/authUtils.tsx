@@ -11,16 +11,22 @@ export const getCookie = (name: string) => {
   }
   
   export const isVendor = (): boolean => {
-    const authStateCookie = getCookie("_auth_state");
-    if (authStateCookie) {
-      const authState = JSON.parse(decodeURIComponent(authStateCookie));
-      return authState.role === 'vendor';
+    const token = Cookies.get('_auth');
+    if (token) {
+      try {
+        const decodedToken = jwtDecode(token) as { role?: string };
+        return decodedToken.role === 'vendor';
+      } catch (error) {
+        console.error('Failed to decode token ', error);
+        return false;
+      }
     }
     return false;
   };
 
   export const getToken = () => {
     const token = Cookies.get('_auth');
+
     if(!token) return null;
     try{
         return jwtDecode(token);

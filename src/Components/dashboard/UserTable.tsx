@@ -33,8 +33,7 @@ const UserTable: React.FC = () => {
     activeTab === "Buyers" ? user.role === "buyer" : user.role === "vendor"
   );
 
-  const viewAllUrl =
-    activeTab === "Buyers" ? "/admin/users" : "/admin/sellers";
+  const viewAllUrl = activeTab === "Buyers" ? "/admin/users" : "/admin/sellers";
 
   return (
     <div className="bg-white rounded-lg p-4">
@@ -75,15 +74,7 @@ const UserTable: React.FC = () => {
         {isLoading ? (
           <tbody>
             <div className="flex justify-center items-center h-24">
-              <Circles
-                visible
-                height="80"
-                width="80"
-                color="#C9974C"
-                ariaLabel="circles-loading"
-                wrapperStyle={{}}
-                wrapperClass="circles-wrapper"
-              />
+              <Circles visible height="80" width="80" color="#C9974C" />
             </div>
           </tbody>
         ) : (

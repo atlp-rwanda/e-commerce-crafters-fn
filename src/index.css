@@ -36,5 +36,30 @@
   border-radius: 10px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #555; 
 }
+:root {
+  --color-primary: #013362;
+  --color-secondary: #C9974C;
+  --color-white: #fff;
+  --color-bgwhite: #fff;
+  --color-black: #000;
+  --color-gray-100: #EEEDED;
+  --color-gray-200: #CACACA;
+  --color-border: #666666;
+  --color-textprimary: #013362;
+}
+
+
+.dark {
+  --color-textprimary: #fff;
+  --color-primary: #0F1729; 
+  --color-secondary: #C9974C;
+  --color-white: #F9FAFB;
+  --color-bgwhite: #1F2A3D;
+  --color-black: #1F2937;
+  --color-gray-100: #1F2937;
+  --color-gray-200: #4B5563;
+  --color-border: #4B5563;
+}
+

@@ -2,12 +2,11 @@ import React, { useEffect, useState } from "react";
 import { useSelectRequestsQuery } from "../../Redux/Admin/sellersSlice";
 import { Circles } from "react-loader-spinner";
 
-
 interface Seller {
-  storeName: string,
+  storeName: string;
   address: {
-    city:string
-  }
+    city: string;
+  };
 }
 
 const VendorRequestList: React.FC = () => {
@@ -43,15 +42,7 @@ const VendorRequestList: React.FC = () => {
           {isLoading ? (
             <tr>
               <div className="flex justify-center items-center h-24">
-                <Circles
-                  visible
-                  height="80"
-                  width="80"
-                  color="#C9974C"
-                  ariaLabel="circles-loading"
-                  wrapperStyle={{}}
-                  wrapperClass="circles-wrapper"
-                />
+                <Circles visible height="80" width="80" color="#C9974C" />
               </div>
             </tr>
           ) : (

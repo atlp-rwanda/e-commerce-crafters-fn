@@ -14,9 +14,19 @@ const sellersSlice = apiSlice.injectEndpoints({
         method: "GET",
       }),
     }),
+    selectStores: builder.query({
+      query: () => ({
+        url: "/allstores",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
-export const { useSelectSellersQuery, useSelectRequestsQuery } = sellersSlice;
+export const {
+  useSelectSellersQuery,
+  useSelectRequestsQuery,
+  useSelectStoresQuery,
+} = sellersSlice;
 
 export default sellersSlice;
