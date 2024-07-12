@@ -190,27 +190,28 @@ const Analytics = () => {
      },
    ];
   return (
-    <>
-      <div className="flex flex-row items-center gap-10">
-        {cardData.map((item, index) => {
-          return <InteractionCard data={item} />;
-        })}
-      </div>
-      <div className="flex flex-wrap justify-evenly">
-        <OrderStatus
-          statusCounts={{
-            delivered: 30,
-            pending: 20,
-            cancelled: 40,
-          }}
-        />
-        <TopProduct />
-      </div>
+      <div className="items-center flex flex-col md:w-full xl:ml-[5%] xl:mt-5">
+      <div
+        style={{width: "100%"}}
+        className="grid gap-5 lg:gap-10 sm:grid-cols-2 grid-cols-1 md:w-full">
+          {cardData.map((item, index) => (
+            <InteractionCard key={index} data={item} />
+          ))}
+        </div>
 
-      <div className=" mt-5">
-        <SellingReport />
+        <div className="mt-5 w-full">
+          <OrderStatus
+          />
+        </div>
+
+        <div className="mt-5 w-full">
+          <TopProduct />
+        </div>
+
+        <div className="mt-5 w-full mb-8">
+          <SellingReport />
+        </div>
       </div>
-    </>
   );
 };
 

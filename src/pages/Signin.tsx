@@ -6,8 +6,7 @@ import AuthButton from "../Constants/AuthButton";
 import Input from "../Constants/Input";
 import { useLoginMutation } from "../Redux/features/AuthSlice";
 import { useTranslation } from "react-i18next";
-
-const Signin: React.FC = () => {
+const Signin = () => {
   const navigate = useNavigate();
   const signIn = useSignIn();
   const [email, setEmail] = useState<string>("");
@@ -80,9 +79,10 @@ const Signin: React.FC = () => {
         setError("Invalid credentials. Try again");
         setErr(true);
       } else {
-        setError("Something is wrong , Try again later");
+        setError("Invalid credentials, Try again");
         setErr(false);
       }
+
     }
   };
 
@@ -156,7 +156,6 @@ const Signin: React.FC = () => {
             onChange={(value) => setEmail(value)}
           />
           <Input
-            error={isEmpty === "password" ? true : !!(false || err)}
             label={t("Enter Your Password")}
             type="password"
             placeholder={t("Enter Your Password")}

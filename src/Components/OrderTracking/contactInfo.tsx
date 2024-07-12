@@ -4,13 +4,11 @@ import { useGetOrderQuery } from "../../Redux/OrderSlice";
 interface ContactInfoProps {
   contactName: string;
   email: string;
-  phoneNumber: string;
-  orderId: string;
+  orderId?: string;
 }
 export const ContactInfo: React.FC<ContactInfoProps> = ({
   contactName,
   email,
-  phoneNumber,
   orderId,
 }) => {
   const { data, error, isLoading } = useGetOrderQuery({ orderId });

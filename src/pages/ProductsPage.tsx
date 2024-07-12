@@ -6,12 +6,12 @@ import Search from "../Components/ProductsPage/searchProduct";
 import { useAllProductsQuery } from "../Redux/productsPage/productSlice";
 import ProductCard from "../Components/ProductsPage/productCard";
 import Pagination from "../Components/ProductsPage/pagination";
-import Header from "../Components/Homepage/Homepage_header";
 import Footer from "../Components/Homepage/Homepage_footer";
 import LoadingFrame from "../Constants/frameLoader";
 import { useTranslation } from "react-i18next";
 import NavBar from "../Components/navBar";
-
+import VoiceflowChatWidget from "../Components/ChatBot";
+import Header from "../Components/Homepage/Homepage_header";
 interface Product {
   productId: string;
   name: string;
@@ -121,7 +121,7 @@ const Products = () => {
   return (
     <div className="flex flex-col">
       <Header />
-      <div className="flex flex-col gap-[20px] px-10 p-6 mb-20">
+      <div className="mt-32 flex flex-col gap-[20px] px-10 p-6 mb-20">
         <div className="flex flex-col-reverse gap-4 justify-between items-center md:flex-row">
           <div className="flex flex-row gap-[14px] items-center font-outfit">
             <span

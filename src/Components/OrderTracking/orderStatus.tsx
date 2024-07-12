@@ -16,7 +16,7 @@ import 'react-toastify/dist/ReactToastify.css';
 // });
 
 interface OrderStatusProps {
-  orderId: string;
+  orderId?: string;
   currentStatus: string;
 }
 

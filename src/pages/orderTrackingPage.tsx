@@ -6,17 +6,20 @@ import OrderStatus from "../Components/OrderTracking/orderStatus";
 import Navbar from "../Components/navBar";
 import { getCookie } from "../Components/OrderTracking/authUtils";
 import { useGetOrderQuery, useGetUserInfoQuery } from "../Redux/OrderSlice";
+import { useParams } from "react-router-dom";
 
 export const OrderTrackingPage = () => {
-      const orderId = "2b701ee8-913f-422f-8f23-902a7687719a";
-    // const orderId = "3945e594-cc56-41d1-9c6a-a056cc848a05"; shipped
-  const phoneNumber = "0787990099";
+
+  const { orderId } = useParams();
+
+
   const [userId, setUserId] = useState('');
   const [orderStatus, setOrderStatus] = useState('pending');
 
-  const { data: orderData, error: orderError, isLoading: orderLoading } = useGetOrderQuery({ orderId });
+  const { data: orderData, error: orderError, isLoading: orderLoading } = useGetOrderQuery({orderId});
 
   useEffect(() => {
+    console.log("Attempting to fetch order with ID:", orderId);
     if(orderData){
       setUserId(orderData.userId);
       setOrderStatus(orderData.status);
@@ -25,6 +28,9 @@ export const OrderTrackingPage = () => {
   }, [orderData]);
 
   const { data: userInfo, error: userInfoError, isLoading: userInfoLoading } = useGetUserInfoQuery({ userId }, { skip: !userId });
+
+  if(orderLoading) return <div>Loading order data...</div>
+  if(orderError) return <div>Error loading order</div>
   return (
     <>
       <Navbar />
@@ -37,7 +43,6 @@ export const OrderTrackingPage = () => {
           <ContactInfo
             contactName={userInfo?.name || ''}
             email={userInfo?.email || ''}
-            phoneNumber={phoneNumber}
             orderId={orderId}
           />
         </div>
@@ -49,4 +54,3 @@ export const OrderTrackingPage = () => {
     </>
   );
 };
-
