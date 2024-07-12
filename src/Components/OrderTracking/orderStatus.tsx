@@ -11,9 +11,9 @@ import { ThreeDots } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 
-const pusher = new Pusher(process.env.PUSHER_KEY as string, {
-  cluster: process.env.PUSHER_CLUSTER as string,
-});
+// const pusher = new Pusher(process.env.PUSHER_KEY as string, {
+//   cluster: process.env.PUSHER_CLUSTER as string,
+// });
 
 interface OrderStatusProps {
   orderId?: string;
