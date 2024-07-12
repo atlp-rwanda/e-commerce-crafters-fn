@@ -23,34 +23,10 @@ const Header: React.FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useState(currentLanguage);
   const userData: any = useAuthUser();
   const { t } = useTranslation();
-  const userDropdownRef = useRef<HTMLDivElement>(null);
-  const languageDropdownRef = useRef<HTMLDivElement>(null);
+
   const navigate = useNavigate();
 
   const handleLogout = Logout();
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        userDropdownRef.current &&
-        !userDropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsUserDropdownOpen(false);
-      }
-
-      if (
-        languageDropdownRef.current &&
-        !languageDropdownRef.current.contains(event.target as Node)
-      ) {
-        setIsLanguageDropdownOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
 
   const handleLanguageChange = (language: string) => {
     setSelectedLanguage(language);
@@ -158,7 +134,7 @@ const Header: React.FC = () => {
             </div>
           </a>
 
-          <div className="flex items-center space-x-4 ref={dropdownRef}">
+          <div className="flex items-center space-x-4">
             <img
               src={userData?.profile}
               alt="User Profile"
@@ -169,7 +145,6 @@ const Header: React.FC = () => {
                 isUserDropdownOpen ? "rotate-180" : ""
               }`}
               onClick={() => setIsUserDropdownOpen(!isUserDropdownOpen)}
-              ref={userDropdownRef}
             ></i>
             {isUserDropdownOpen && (
               <div className="absolute z-50 flex flex-col top-full mt-2 right-2 h-62 bg-[#012F5A] rounded-l-[20px] mb-4 border-2 border-[#ffffff3e] fade-in">
@@ -226,7 +201,7 @@ const Header: React.FC = () => {
             )}
           </div>
 
-          <div className="relative" ref={languageDropdownRef}>
+          <div className="relative">
             <button
               onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
               className="flex items-center"
@@ -241,7 +216,7 @@ const Header: React.FC = () => {
             {isLanguageDropdownOpen && (
               <div
                 className="absolute right-0 top-12 w-28 bg-primary border border-border rounded shadow-lg"
-                ref={languageDropdownRef}
+                
               >
                 <ul className="py-1">
                   <li>
@@ -380,7 +355,6 @@ const Header: React.FC = () => {
             </a>
             <div
               className="hidden relative mr-20 lg:block"
-              ref={languageDropdownRef}
             >
               <button
                 onClick={() =>
@@ -398,7 +372,6 @@ const Header: React.FC = () => {
               {isLanguageDropdownOpen && (
                 <div
                   className="absolute right-0 top-12 w-28 bg-primary border border-border rounded shadow-lg"
-                  ref={languageDropdownRef}
                 >
                   <ul className="py-1">
                     <li>
@@ -532,7 +505,7 @@ const Header: React.FC = () => {
                     Login
                   </a>
                 )}
-                <div className="relative" ref={languageDropdownRef}>
+                <div className="relative">
                   <button
                     onClick={() =>
                       setIsLanguageDropdownOpen(!isLanguageDropdownOpen)
@@ -545,7 +518,6 @@ const Header: React.FC = () => {
                   {isLanguageDropdownOpen && (
                     <div
                       className="top-12 w-28 bg-primary border border-border rounded shadow-lg"
-                      ref={languageDropdownRef}
                     >
                       <ul className="py-1">
                         <li>
