@@ -5,27 +5,29 @@ import VendorRequestList from "../../Components/dashboard/VendorRequestList";
 import InteractionCard from "../../Components/dashboard/InteractionCard";
 import { useSelectStoresQuery } from "../../Redux/Admin/sellersSlice";
 import { useSelectUsersQuery } from "../../Redux/Admin/usersSlice";
+import { useAllOrdersQuery } from "../../Redux/OrderSlice";
 
 function AdminHome() {
-   const {
-     data: sellers = [],
-     refetch: refetchSellers,
-   } = useSelectStoresQuery({});
-    const approvedSellers = sellers.filter(
-      (seller:any) => seller.status === "approved"
-    );
+  const { data: sellers = [], refetch: refetchSellers } = useSelectStoresQuery(
+    {}
+  );
+  const approvedSellers = sellers.filter(
+    (seller: any) => seller.status === "approved"
+  );
 
-  const {
-    data: users = [],
-    refetch: refetchUsers,
-  } = useSelectUsersQuery({});
+  const { data: orders = [], refetch: refetchOrders } = useAllOrdersQuery({});
+  const transactions = orders.filter(
+    (order: any) => order.status === "delivered"
+  );
 
-   useEffect(() => {
-     refetchSellers();
-     refetchUsers();
-   }, [refetchSellers, refetchUsers]);
-  
-  
+  const { data: users = [], refetch: refetchUsers } = useSelectUsersQuery({});
+
+  useEffect(() => {
+    refetchSellers();
+    refetchUsers();
+    refetchOrders();
+  }, [refetchSellers, refetchUsers, refetchOrders]);
+
   const cardData = [
     {
       name: "Vendors",
@@ -137,7 +139,7 @@ function AdminHome() {
     },
     {
       name: "Transactions",
-      numbers: 1500,
+      numbers: transactions.length,
       icon: (
         <svg
           width="20"
@@ -183,7 +185,7 @@ function AdminHome() {
     },
     {
       name: "Orders",
-      numbers: 1500,
+      numbers: orders.length,
       icon: (
         <svg
           width="20"
