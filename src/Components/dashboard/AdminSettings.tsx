@@ -64,7 +64,7 @@ const AdminSettings = () => {
         handleDiscard();
         setTimeout(() => {
           logout();
-        }, 5000);
+        }, 4000);
       } catch (error) {
         toast.error("Failed to update password");
       }

@@ -12,8 +12,8 @@ const OrderApiSlice = apiSlice.injectEndpoints({
         url: `/orders/`,
         headers: {
           Authorization: `Bearer ${token}`,
-        }, 
-        credentials: 'include'
+        },
+        credentials: "include",
       }),
     }),
     getOrderStatus: builder.query({
@@ -25,23 +25,35 @@ const OrderApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     updateOrderStatus: builder.mutation({
-      query: ({token, orderId, status, userId}) => ({
-        url:`/order/${orderId}/order-status`,
-        method: 'PUT',
+      query: ({ token, orderId, status, userId }) => ({
+        url: `/order/${orderId}/order-status`,
+        method: "PUT",
         headers: {
           Authorization: `Bearer ${token}`,
         },
         body: { status, userId },
-        credentials: 'include'
-      })
+        credentials: "include",
+      }),
     }),
     getUserInfo: builder.query({
       query: ({ userId }) => ({
         url: `/user-info/${userId}`,
-      })
-    })
+      }),
+    }),
+    allOrders: builder.query({
+      query: () => ({
+        url: `/order/getAllOrder`,
+      }),
+    }),
   }),
 });
 
-export const { useGetOrderStatusQuery, useGetOrderQuery, useUpdateOrderStatusMutation, useGetUserInfoQuery, useGetAllOrdersQuery } = OrderApiSlice;
+export const {
+  useGetOrderStatusQuery,
+  useGetOrderQuery,
+  useUpdateOrderStatusMutation,
+  useGetUserInfoQuery,
+  useGetAllOrdersQuery,
+  useAllOrdersQuery,
+} = OrderApiSlice;
 export default OrderApiSlice;
