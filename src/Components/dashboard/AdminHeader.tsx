@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Logout from "../../services/Logout";
 import { useTranslation } from "react-i18next";
 
@@ -180,24 +180,24 @@ const AdminHeader = () => {
             <i className="fas fa-times"></i>
           </button>
           <nav className="flex flex-col space-y-4 mt-4">
-            <a href="/admin" className="hover:text-gray-300">
+            <Link to="/admin" className="hover:text-gray-300">
               Administration
-            </a>
-            <a href="/admin/users" className="hover:text-gray-300">
+            </Link>
+            <Link to="/admin/users" className="hover:text-gray-300">
               Users
-            </a>
-            <a href="/admin/sellers" className="hover:text-gray-300">
+            </Link>
+            <Link to="/admin/sellers" className="hover:text-gray-300">
               Sellers
-            </a>
-            <a href="/admin/requests" className="hover:text-gray-300">
+            </Link>
+            <Link to="/admin/requests" className="hover:text-gray-300">
               Applications
-            </a>
-            <a href="/admin/analytics" className="hover:text-gray-300">
+            </Link>
+            <Link to="/admin/analytics" className="hover:text-gray-300">
               Analytics
-            </a>
-            <a href="/admin/settings" className="hover:text-gray-300">
+            </Link>
+            <Link to="/admin/settings" className="hover:text-gray-300">
               Settings
-            </a>
+            </Link>
             <a>
               <button onClick={Logout()}>Sign Out</button>
             </a>
