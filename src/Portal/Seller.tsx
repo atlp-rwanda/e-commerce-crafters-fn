@@ -25,11 +25,10 @@ const Seller = () => {
         <button onClick={handelLogout}>Sign Out</button>
       </div>
       <div className="w-[45%] m-auto mb-40">
-        {/* <SellerSellingReport /> */}
-        {/* <SellerTopProduct />
-        <SellerOrderStatus /> */}
-        <SellerWeeklyReport />
-        <SellerSellingReport />
+      <SellerTopProduct />
+      <SellerOrderStatus />
+        {/* <SellerWeeklyReport />
+        <SellerSellingReport /> */}
       </div>
     </div>
   );

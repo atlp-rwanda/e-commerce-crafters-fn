@@ -2,14 +2,12 @@ import React from "react";
 import OrderTable from "./orderComponent";
 import { useGetAllOrdersQuery } from "../Redux/OrderSlice";
 
-
 interface Order {
     orderId: string;
     orderDate: Date;
     expectedDeliveryDate: Date;
     status: 'pending'| 'processing' | 'shipped' | 'delivered';
 }
-
 
 const OrderComponent = () => {
     function getAuthCookie() {
@@ -22,26 +20,27 @@ const OrderComponent = () => {
         }
         return null;
     }
+
     const token = getAuthCookie();
     console.log('token ', token);
-    const {data: orders, isLoading, error} = useGetAllOrdersQuery({ token });
+    const { data: orders, isLoading, error } = useGetAllOrdersQuery({ token });
 
-    if(isLoading){
-        return <div>Loading orders...</div>
-    }
-
-    if(error){
-        return <div>Error loading orders</div>
-    }
-
-    return(
+    return (
         <div className="font-outfit">
             <div className="font-semibold m-10">
                 My Orders
             </div>
-            <OrderTable orders={orders}/>
+            {isLoading ? (
+                <div>Loading orders...</div>
+            ) : error ? (
+                <div>Error loading orders</div>
+            ) : !orders || orders.length === 0 ? (
+                <div>No orders available</div>
+            ) : (
+                <OrderTable orders={orders} />
+            )}
         </div>
-    )
-}
+    );
+};
 
 export default OrderComponent;

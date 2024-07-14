@@ -2,14 +2,15 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
-    status: 'pending'| 'processing' | 'shipped' | 'delivered';
+    status: 'pending'| 'processing' | 'shipped' | 'delivered' | 'cancelled';
 
 }
 
 const StatusIndicator: React.FC<Props> = ({ status }) => {
     const colorClass = status === 'pending' ? 'bg-primary':
                     status === 'processing' ? 'bg-secondary':
-                    status === 'shipped' ? 'bg-green-400':
+                    status === 'shipped' ? 'bg-orange-500':
+                    status === 'cancelled' ? 'bg-red-600':
                     status === 'delivered' ? 'bg-green-400': 'bg-gray-500'
 
     return (
@@ -69,7 +70,8 @@ interface Order {
     status: 'pending'| 'processing' | 'shipped' | 'delivered',
     orderId: string,
     expectedDeliveryDate: Date,
-    orderDate: Date
+    orderDate: Date,
+    createdAt: Date
 }
 
 interface OrderTableProps {
@@ -88,8 +90,8 @@ const OrderTable: React.FC<OrderTableProps> = ({ orders }) => {
                     {orders.map((order, index) => (
                         <Order
                             key={order.orderId} 
-                            orderId={order.orderId} 
-                            orderDate= {order.orderDate}
+                            orderId={index + 1} 
+                            orderDate= {order.createdAt}
                             expectedDeliveryDate={order.expectedDeliveryDate} 
                             status={order.status}
                             onViewDetails={handleViewDetails}

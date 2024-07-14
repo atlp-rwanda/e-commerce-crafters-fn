@@ -48,6 +48,7 @@ export const fetchSellerSellingReport = createAsyncThunk(
 
     const decodedToken = jwtDecode<TokenPayload>(token);
     const vendorId = decodedToken.vendor;
+    console.log(vendorId)
 
     const response = await axios.get(
       `http://localhost:5000/annualSellingReport/${vendorId}`
