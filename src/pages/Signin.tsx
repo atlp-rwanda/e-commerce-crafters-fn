@@ -58,7 +58,7 @@ const Signin = () => {
           if (response.user.role === "buyer") {
             navigate("/products");
           } else if (response.user.role === "vendor") {
-            navigate("/vendor");
+            navigate("/user");
           } else if (response.user.role === "admin") {
             navigate("/admin");
           }
