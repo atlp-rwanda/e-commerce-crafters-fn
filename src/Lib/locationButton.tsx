@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { HiMapPin } from "react-icons/hi2";
 import { toast } from "react-toastify";
-// require('dotenv').config()
 
 
 function LocationButton() {
