@@ -15,12 +15,10 @@ function AdminHome() {
     (seller: any) => seller.status === "approved"
   );
 
-  const { data: orders = [], refetch: refetchOrders } = useAllOrdersQuery(
-    {}
-  );
+  const { data: orders = [], refetch: refetchOrders } = useAllOrdersQuery({});
   const transactions = orders.filter(
-    (order:any) => order.status === "delivered"
-  )
+    (order: any) => order.status === "delivered"
+  );
 
   const { data: users = [], refetch: refetchUsers } = useSelectUsersQuery({});
 

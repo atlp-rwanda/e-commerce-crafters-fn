@@ -391,11 +391,11 @@ const Header: React.FC = () => {
                       </button>
                     </li>
                     <li>
-                      <button
-                        onClick={() => setIsMenuOpen(!isMenuOpen)}
-                        className="text-3xl sm:pl-28 sm:pr-6 md:pr-12"
+                    <button
+                        onClick={() => handleLanguageChange("KINY")}
+                        className="block px-4 py-2 w-full text-left hover:scale-105 transition-transform duration-200"
                       >
-                        <i className="fas fa-bars"></i>
+                        KINY
                       </button>
                     </li>
                   </ul>
