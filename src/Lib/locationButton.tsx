@@ -1,117 +1,97 @@
-"use client";
 
-import React from "react";
-import { Fragment, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { HiMapPin } from "react-icons/hi2";
-import { FaChevronRight } from "react-icons/fa";
-import SearchLocation from "../Components/locationSearch";
-import { Dialog, Transition } from "@headlessui/react";
+import { toast } from "react-toastify";
+// require('dotenv').config()
 
-const LocationBtn = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [isChanged, setIsChanged] = useState<boolean>(false);
 
-  const address =
-    typeof window !== "undefined" && localStorage?.getItem("delivery_address");
+function LocationButton() {
+  const [location, setLocation] = useState<{
+    latitude: number;
+    longitude: number;
+  } | null>(null);
+  const address = typeof window !== "undefined" && localStorage?.getItem("delivery_address");
+  const [currentAddress, setCurrentAddress] = useState(address) || "";
 
-  const openModal = () => setIsOpen(true);
-  const closeModal = () => {
-    setIsChanged(false);
-    setIsOpen(false);
+  const handleClick = () => {
+    if ("geolocation" in navigator) {
+      // console.log("i am here")
+      navigator.permissions
+        .query({ name: "geolocation" })
+        .then((result) => {
+          if (result.state === "granted" || result.state === "prompt") {
+            navigator.geolocation.getCurrentPosition(
+              (position) => {
+                const { latitude, longitude } = position.coords;
+                setLocation({ latitude, longitude });
+              },
+              (error) => {
+                toast.error(error.message);
+              }
+            );
+          } else if (result.state === "denied") {
+            toast.error("Allow the location access");
+          }
+        })
+        .catch((error: any) => {
+          console.error("Error checking the location permission:", error);
+        });
+    } else {
+      toast.error("Sorry! geolocation is not supported by this browser");
+    }
   };
+
+  useEffect(() => {
+    if (location) {
+      const endpoint = `https://maps.googleapis.com/maps/api/geocode/json?latlng=${location.latitude},${location.longitude}&result_type=street_address&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`;
+      fetch(endpoint)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          if (data.results && data.results.length > 0) {
+            const { formatted_address, address_components } = data.results[0];
+            const city = address_components.find((component: any) =>
+              component.types.includes("locality")
+            )?.long_name;
+            const street = address_components.find((component: any) =>
+              component.types.includes("route")
+            )?.long_name;
+            localStorage.setItem("delivery_address", formatted_address);
+            localStorage.setItem("delivery_address_city", city);
+            localStorage.setItem("delivery_address_street", street);
+            setCurrentAddress(formatted_address);
+          }
+        })
+        .catch((error) => {
+          console.log("Fetch error: ", error.message);
+        });
+    }
+  }, [location]);
+
+  
 
   return (
     <>
       <button
-        onClick={openModal}
+        onClick={handleClick}
         className={`flex items-center px-6 py-3 bg-slate-200 rounded-full md:rounded-lg`}
       >
-        {" "}
-        <HiMapPin className="shrink-0 text-secondary" />{" "}
+        <HiMapPin className="shrink-0 text-secondary" />
         <span
           className={
             "truncate max-w-[8rem]  font-outfit text-sm text-gray-300 md:max-w-full"
           }
         >
-          {address ? address : "Choose Your Delivery Address"}
+          {currentAddress ? currentAddress : "Choose Your Delivery Address"}
         </span>
       </button>
-      <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
-          <Transition
-            show={isOpen}
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
-          </Transition>
-
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Transition
-                show={isOpen}
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-outfit font-medium leading-6 text-gray-900"
-                  >
-                    Delivery Address
-                  </Dialog.Title>
-
-                  {isChanged ? (
-                    <div className="mt-2">
-                      <SearchLocation />
-                    </div>
-                  ) : (
-                    <div className="flex items-center mt-8 justify-between">
-                      <div>
-                        <p className="truncate font-poppins max-w-[10rem] md:max-w-xs">
-                          {address ? address : "Current Location"}
-                        </p>
-                      </div>
-
-                      <div>
-                        {" "}
-                        <button
-                          className="px-4 py-1 text-gray-300 bg-gray-100 hover:cursor-pointe rounded-full"
-                          onClick={() => setIsChanged(true)}
-                        >
-                          Choose location
-                        </button>
-                      </div>
-                    </div>
-                  )}
-
-                  <div className="mt-12 mx-12">
-                    <button
-                      type="submit"
-                      className="px-4 py-1 w-full font-outfit text-white bg-primary hover:cursor-pointer border border-none rounded-lg"
-                      onClick={closeModal}
-                    >
-                      OK
-                    </button>
-                  </div>
-                </Dialog.Panel>
-              </Transition>
-            </div>
-          </div>
-        </Dialog>
-      </Transition>
     </>
   );
-};
+}
 
-export default LocationBtn;
+export default LocationButton;
