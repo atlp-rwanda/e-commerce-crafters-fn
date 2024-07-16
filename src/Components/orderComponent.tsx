@@ -22,13 +22,14 @@ const StatusIndicator: React.FC<Props> = ({ status }) => {
 interface OrderProps {
     status: 'pending'| 'processing' | 'shipped' | 'delivered',
     orderId: string | number,
+    keyIndex: number,
     expectedDeliveryDate: Date,
     orderDate: Date,
     onViewDetails: (orderId: string | number) => void
 
 }
 
-const Order: React.FC<OrderProps> = ({ orderId, orderDate, expectedDeliveryDate, status, onViewDetails}) => {
+const Order: React.FC<OrderProps> = ({ orderId, orderDate, keyIndex, expectedDeliveryDate, status, onViewDetails}) => {
     const formatDate = (dateString: Date) => {
         const options: Intl.DateTimeFormatOptions = {year: 'numeric', month: 'long', day: 'numeric'};
         const date = new Date(dateString);
@@ -41,7 +42,7 @@ const Order: React.FC<OrderProps> = ({ orderId, orderDate, expectedDeliveryDate,
             <div className="flex gap-10">
                 <div>
                 <div className="text-sm text-gray-400">No.</div>
-                <div>{orderId}</div>
+                <div>{keyIndex}</div>
                 </div>
             
                 <div>
@@ -71,7 +72,7 @@ interface Order {
     orderId: string,
     expectedDeliveryDate: Date,
     orderDate: Date,
-    createdAt: Date
+    createdAt: Date,
 }
 
 interface OrderTableProps {
@@ -90,7 +91,8 @@ const OrderTable: React.FC<OrderTableProps> = ({ orders }) => {
                     {orders.map((order, index) => (
                         <Order
                             key={order.orderId} 
-                            orderId={index + 1} 
+                            orderId={order.orderId} 
+                            keyIndex={index + 1}
                             orderDate= {order.createdAt}
                             expectedDeliveryDate={order.expectedDeliveryDate} 
                             status={order.status}
