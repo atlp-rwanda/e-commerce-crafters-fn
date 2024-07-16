@@ -9,6 +9,7 @@ import { useSelectUsersQuery } from "../Redux/Admin/usersSlice";
 import { useAllOrdersQuery } from "../Redux/OrderSlice";
 
 const Analytics = () => {
+
   const { data: sellers = [], refetch: refetchSellers } = useSelectStoresQuery(
     {}
   );
