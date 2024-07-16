@@ -14,6 +14,10 @@ import Analytics from "../pages/Analytics";
 import AdminHome from "../pages/Admin/AdminHome";
 import Homepage from "../pages/Homepage";
 import Products from "../pages/ProductsPage";
+import Location from "../pages/location"
+
+
+
 import { OrderTrackingPage } from "../pages/orderTrackingPage";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
@@ -41,6 +45,9 @@ const AppRoutes: React.FC = () => (
       <Route path="/authgoogle" element={<AuthGoogle />} />
       <Route path="/singleproduct" element={<Singlepage />} />
       <Route path="/products" element={<Products />} />
+      <Route path="/geolocation" element={<Location />} />
+      <Route path="/product/:id" element={<Singlepage />} />
+      <Route path="/order-tracking" element={<OrderTrackingPage />} />
       <Route path="/forgot-password" element={<Forgotpassword />} />
       <Route path="/product/:id" element={<Singlepage />} />
       <Route path="/order/:orderId" element={<OrderTrackingPage />} />
