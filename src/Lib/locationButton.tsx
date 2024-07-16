@@ -80,10 +80,10 @@ function LocationButton() {
         onClick={handleClick}
         className={`flex items-center px-6 py-3 bg-slate-200 rounded-full md:rounded-lg`}
       >
-        <HiMapPin className="shrink-0 text-secondary" />
+        <HiMapPin className="shrink-0 text-secondary" />{" "}
         <span
           className={
-            "truncate max-w-[8rem]  font-outfit text-sm text-gray-300 md:max-w-full"
+            "truncate max-w-[8rem]  font-outfit text-sm text-gray-400 md:max-w-full"
           }
         >
           {currentAddress ? currentAddress : "Choose Your Delivery Address"}
