@@ -40,7 +40,7 @@ function Seller() {
       </div>
 
     </div>
-  );
+  )
 }
 
-export default Seller;
+export default Seller

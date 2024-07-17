@@ -229,4 +229,4 @@ const Signin: React.FC = () => {
   );
 };
 
-export default Signin;
+export default Signin

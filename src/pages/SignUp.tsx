@@ -66,7 +66,6 @@ const SignUp: React.FC = () => {
       }
       console.log(error);
     }
-  };
 
   const loginWithGoogle = () => {
     const googleAuthUrl = `${process.env.GOOGLE_AUTH_URL}`;
