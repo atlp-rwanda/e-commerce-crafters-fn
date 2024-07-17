@@ -2,7 +2,6 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import AuthOutlet from '@auth-kit/react-router/AuthOutlet';
 import Signin from '../pages/Signin';
-import SignUp from '../pages/SignUp';
 import Admin from '../Portal/admin';
 import Buyer from '../Portal/Buyer';
 import Seller from '../Portal/Seller';
@@ -14,6 +13,7 @@ import Forgotpassword from '../Lib/ForgotPassword';
 import VendorHome from '../pages/vendor/vendorHome';
 import MyProducts from '../pages/vendor/MyProducts';
 import VendorSingleProduct from '../pages/vendor/VendorSingleProduct';
+import SignUp from '../pages/SignUp';
 
 
 const AppRoutes: React.FC = () => (
@@ -37,8 +37,6 @@ const AppRoutes: React.FC = () => (
           <Route path='my-products' element={<MyProducts />} />
         </Route>
         <Route path="/vendor-single-product/:id" element={<VendorSingleProduct />} />
-
-
       </Route>
     </Routes>
 

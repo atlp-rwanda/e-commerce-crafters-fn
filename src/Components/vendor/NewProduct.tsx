@@ -87,6 +87,7 @@ const NewProduct = (property: productProps) => {
             property.setIsComplete(true)
           }
         } catch (error) {
+            console.log(error)
           setLoading(false)
           setError(true);
         }

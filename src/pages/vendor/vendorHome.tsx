@@ -1,9 +1,12 @@
 import React from 'react'
 import { useSelectFeddbackQuery } from '../../Redux/features/sellerSlice'
 import { FaStar } from "react-icons/fa";
+import WeeklyReport from '../../Components/Analytics/WeeklyReport';
 
 const VendorHome = () => {
     const { data: responseData, error, isLoading } = useSelectFeddbackQuery({})
+    const vendorData:any = localStorage.getItem("vendorData")
+    const vendor = JSON.parse(vendorData)
     const cardReview = [
         {
             label: "Reviews",
@@ -60,8 +63,8 @@ const VendorHome = () => {
     ]
     return (
         <div className='flex flex-col gap-[20px] px-2'>
-            <div className='felx flex-row gap-[20px]'>
-                <div className='grid grid-cols-2 gap-[10px] w-1/2'>
+            <div className='flex  flex-row gap-[20px]'>
+                <div className='grid grid-cols-2 gap-[10px] w-[40%]'>
                     {cardReview.map((item, index) => {
                         return (
                             <div className='flex p-4 bg-white rounded-[12px] flex-row w-full justify-between gap-[20px] items-center' key={index}>
@@ -73,6 +76,10 @@ const VendorHome = () => {
                             </div>
                         )
                     })}
+
+                </div>
+                <div className='w-[60%]'>
+                <WeeklyReport/>
 
                 </div>
             </div>
@@ -99,7 +106,7 @@ const VendorHome = () => {
                                     <th className='text-start font-[500] text-gray-400'>Product</th>
                                     <th className='text-start font-[500] text-gray-400'>Review</th>
                                 </tr>
-                                {responseData.feedback.filter((data: any) => data.Product.vendorId === "ae77853b-f3cf-4026-9a56-fd149d8ae84c").slice(0,2).map((item: any, index: number) => {
+                                {responseData.feedback.filter((data: any) => data.Product.vendorId === vendor.vendorId).slice(0,3).map((item: any, index: number) => {
                                     return (
                                         <tr className='h-10' key={index}>
                                             <td className='text-start font-[500] text-gray-400'>{item.name}</td>

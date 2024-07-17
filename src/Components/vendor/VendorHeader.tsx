@@ -50,7 +50,7 @@ const VendorHeader = () => {
     ];
 
     return (
-        <div className="flex flex-row p-4 items-center justify-between bg-white">
+        <div className="flex flex-row fixed w-[80%] z-50 p-4 items-center justify-between bg-white">
             <div className="flex flex-col">
                 <h1 className="text-[16px] font-[600]">Welcome back! {authData?.name} </h1>
                 <div className="flex text-gray-400 font-[400] font-outfit text-[14px] flex-row items-center gap-[4px]">

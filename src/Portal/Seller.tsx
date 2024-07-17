@@ -31,12 +31,14 @@ function Seller() {
   const handelLogout = Logout();
   return (
     <div className="w-full h-screen flex flex-row ">
-      <div className='h-screen'>
+      <div className='h-screen fixed w-[20%]'>
         <VendorSidebar />
       </div>
-      <div className='flex flex-col gap-[10px] bg-gray-50 w-full'>
+      <div className='flex w-[80%] w flex-col gap-[10px] bg-gray-50 ml-auto'>
         <VendorHeader />
+        <div className='w-full pt-24'>  
         <Outlet />
+        </div>
       </div>
 
     </div>

@@ -34,8 +34,8 @@ const WeeklyReport = () => {
 
   return (
     <div
-      style={{ width: "40%", height: "350px" }}
-      className="flex  flex-col m-auto mt-80 text-xs  rounded-lg shadow-2xl border-gray-400"
+      style={{ width: "100%", height: "250px" }}
+      className="flex  flex-col m-auto text-xs  rounded-lg shadow-2xl border-gray-400"
     >
       <div className="py-2 pl-10 relative">
         <h2 className="font-bold text-lg">Reports</h2>
