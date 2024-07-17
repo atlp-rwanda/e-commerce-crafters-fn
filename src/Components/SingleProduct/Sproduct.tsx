@@ -34,7 +34,7 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
   const userData: any = useAuthUser();
   const [isLoading, setLoading] = useState<boolean>(false);
   const userId = userData ? userData.userId : "";
-
+  const [showFullDescription, setShowFullDescription] = useState<boolean>(false); 
   const getUserIdFromToken = (): string | null => {
     const token = localStorage.getItem('token');
     if (!token) return null;
@@ -257,7 +257,7 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
             ))}
           </div>
         </div>      <div className='md:w-1/3 w-full'>
-          <div className='flex flex-col gap-6 p-5 mt-10'>
+          <div className='flex flex-col gap-4 p-5 mt-10'>
             <h1><span className='text-[#E4A951]'>Stock</span> : <span className='font-extrabold text-blue-700'>{product.Vendor?.storeName}</span></h1>
             <h1 className='font-extrabold text-xl'>{product.name}</h1>
             <div className='bg-[#D9D9D9] p-2 rounded-md text-sm w-28 text-center font-bold'>{product.quantity} IN STOCK</div>
@@ -280,9 +280,26 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
               </div>
             </div>
             <div>
-              <h2 className='text-[#E4A951]'>Description</h2>
-              <p>{product.description}</p>
-            </div>
+  <h2 className="text-[#E4A951]">Description</h2>
+  {product.description ? (
+    showFullDescription ? (
+      <p>{product.description}</p>
+    ) : (
+      <div className="flex flex-col">
+        <p>{product.description.slice(0, 50)}...</p>
+        <button
+          onClick={() => setShowFullDescription(!showFullDescription)}
+          className="text-[#E4A951]"
+        >
+          {showFullDescription ? 'Show Less' : 'Show More'}
+        </button>
+      </div>
+    )
+  ) : (
+    <p>No description available.</p>
+  )}
+</div>
+
             <div className='flex-container flex  gap-4  w-full justify-center'>
               <div className="flex gap-4 border-2 justify-around items-center  rounded-lg p-2 md:w-[180px] bg-[#F7F7F7] font-bold">
                 <h3 className="">Quantity</h3>

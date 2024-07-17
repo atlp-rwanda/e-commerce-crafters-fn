@@ -119,7 +119,7 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
             <div className="flex justify-center">
             <div className="md:ml-0 py-4 w-4/5 flex flex-col justify-center ">
               <div className="bg-[#F9FAFB] mt-7 p-2.5 grid md:grid-cols-2 grid-cols-1 justify-between  md:w-full">
-                <p className="md:w-3/4 w-full">How will you rate this product?</p>
+                <p className="md:w-w-full w-full">How will you rate this product?</p>
                 <div className="mr-0 md:mr-4">
                   <StarRating
                     rating={ratingScore}
