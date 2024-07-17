@@ -27,6 +27,7 @@ import Forgotpassword from "../Lib/ForgotPassword";
 const AppRoutes: React.FC = () => (
   <div>
     <Routes>
+      
       <Route path="" element={<Homepage />} />
       <Route path="/login" element={<Signin />} />
       <Route path="/checkout" element={<Checkout />} />
