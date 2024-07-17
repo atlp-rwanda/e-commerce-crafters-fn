@@ -26,12 +26,12 @@ export interface ProductState {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
-
+const API_URL:any = `${process.env.BACKEND_API_URL}`;
 export const submitReview = createAsyncThunk(
   'reviews/submitReview',
   async ({ productId, data }: { productId: string; data: ReviewData }, { rejectWithValue }) => {
     try {
-      const apiUrl = `http://localhost:5000/addfeedback/${productId}`;
+      const apiUrl = `${API_URL}/addfeedback/${productId}`;
       const token = localStorage.getItem('token');
       const config = {
         headers: {
@@ -77,7 +77,7 @@ export const addToCart = createAsyncThunk(
   'cart/addToCart',
   async (cartItem: { userId: string; productId: string; quantity: number; price: number }) => {
     try {
-      const apiUrl = "http://localhost:5000/addcart";
+      const apiUrl = `${API_URL}/addcart`;
       const response = await axios.post(apiUrl, cartItem);
       
       const existingToastId = toast.isActive("error to add cart");
@@ -120,7 +120,7 @@ export const fetchCart = createAsyncThunk(
   "cart/viewCart",
 async(userId: string) => {
   try {
-    const apiUrl =`http://localhost:5000/products/${userId}`;
+    const apiUrl =`${API_URL}/products/${userId}`;
     const response = await axios.get(apiUrl);
     return response.data
   }catch(error: any) {
@@ -132,7 +132,7 @@ export const fetchProductDetails = createAsyncThunk(
   'product/fetchProductDetails',
   async (productId:string, { rejectWithValue }) => {
     try {
-      const apiUrl = `http://localhost:5000/readProduct/${productId}`;
+      const apiUrl = `${API_URL}/readProduct/${productId}`;
       
       const response = await axios.get(apiUrl);
       console.log("response")
@@ -147,7 +147,7 @@ export const fetchReviews = createAsyncThunk(
   'product/fetchProductDetail',
   async (productId, { rejectWithValue }) => {
     try {
-      const apiUrl = `http://localhost:5000/getfeedback/${productId}`;
+      const apiUrl = `${API_URL}/getfeedback/${productId}`;
       const response = await axios.get(apiUrl);
       return response.data;
     } catch (error:any) {
@@ -160,7 +160,7 @@ export const fetchSimilarProducts = createAsyncThunk(
   'products/fetchSimilarProducts',
   async (productId: string, { rejectWithValue }) => {
     try {
-      const apiUrl = `http://localhost:5000/similarproducts/${productId}`;
+      const apiUrl = `${API_URL}/similarproducts/${productId}`;
       const response = await axios.get<Product[]>(apiUrl);
       return response.data;
     } catch (error:any) {

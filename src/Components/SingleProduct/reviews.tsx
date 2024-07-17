@@ -33,11 +33,11 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
 
   const dispatch = useDispatch();
   const { loading: isLoading, error } = useSelector((state: any) => state.reviews);
-
+  const API_URL:any = `${process.env.BACKEND_API_URL}`;
   useEffect(() => {
-    fetch(`http://localhost:5000/getfeedback/${productId}`)
+    fetch(`${API_URL}/getfeedback/${productId}`)
       .then(response => response.json())
-      .then(data => setReviews(data.ratings || []))  // Ensure default to empty array
+      .then(data => setReviews(data.ratings || []))  
       .catch(error => console.error('Error fetching reviews:', error));
   }, [productId]);
 
@@ -85,7 +85,7 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
           ratingScore: 0,
         });
 
-        fetch(`http://localhost:5000/getfeedback/${productId}`)
+        fetch(`${API_URL}/getfeedback/${productId}`)
           .then(response => response.json())
           .then(data => setReviews(data.ratings || []))  // Ensure default to empty array
           .catch(error => console.error('Error fetching reviews:', error));
@@ -116,9 +116,10 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
             </div>
           </div>
           {showContent && (
-            <div className="md:ml-0 py-4">
-              <div className="bg-[#F9FAFB] mt-7 p-2.5 grid md:grid-cols-2 grid-cols-1 justify-between w- md:w-full">
-                <p className="md:w-3/4 w-full">How will you rate this product?</p>
+            <div className="flex justify-center">
+            <div className="md:ml-0 py-4 w-4/5 flex flex-col justify-center ">
+              <div className="bg-[#F9FAFB] mt-7 p-2.5 grid md:grid-cols-2 grid-cols-1 justify-between  md:w-full">
+                <p className="md:w-w-full w-full">How will you rate this product?</p>
                 <div className="mr-0 md:mr-4">
                   <StarRating
                     rating={ratingScore}
@@ -129,7 +130,7 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
               </div>
               <form
                 onSubmit={handleFormSubmit}
-                className="py-4 flex flex-col items-center gap-4 justify-center md:w-3/5 w-full"
+                className="py-4 flex flex-col items-center gap-4 justify-center md:w-full w-full"
               >
                 <input
                   type="text"
@@ -149,13 +150,14 @@ const Review: React.FC<{ productId: string }> = ({ productId }) => {
                 ></textarea>
                 <button
                   type="submit"
-                  className="bg-blue-900 text-white font-extrabold p-3 md:w-1/2 w-full rounded-lg"
+                  className=" bg-orange-400  text-white font-extrabold p-3 md:w-1/2 w-full rounded-lg"
                   disabled={isLoading}
                 >
                   {isLoading ? 'Submitting...' : 'Submit Feedback'}
                 </button>
                 {error && <p className="text-red-500 mt-2">{error}</p>}
               </form>
+            </div>
             </div>
           )}
           {isLoading ? (
