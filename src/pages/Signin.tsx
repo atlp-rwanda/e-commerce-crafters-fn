@@ -7,7 +7,7 @@ import Input from "../Constants/Input";
 import { useLoginMutation } from "../Redux/features/AuthSlice";
 import { useTranslation } from "react-i18next";
 
-const Signin: React.FC = () => {
+const Signin = () => {
   const navigate = useNavigate();
   const signIn = useSignIn();
   const [email, setEmail] = useState<string>("");
@@ -167,9 +167,9 @@ const Signin: React.FC = () => {
             href="/forgot-password"
             className="text-[16px] font-[600] text-primary text-end"
           >
-            Forgot Password?
+            {t("Forgot Password")}?
           </a>
-          <AuthButton isLoading={!!isLoading} label="Sign In" />
+          <AuthButton isLoading={!!isLoading} label={t("Sign In")} />
 
           <div
             onClick={loginWithGoogle}

@@ -2,14 +2,15 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveCategory } from "../Redux/productsPage/categorySlice";
 import { RootState } from "../Redux/store";
-import Navbar from "../Components/navBar";
 import Search from "../Components/ProductsPage/searchProduct";
-import { useSelectProductsQuery } from "../Redux/productsPage/productSlice";
+import { useAllProductsQuery } from "../Redux/productsPage/productSlice";
 import ProductCard from "../Components/ProductsPage/productCard";
 import Pagination from "../Components/ProductsPage/pagination";
 import Footer from "../Components/Homepage/Homepage_footer";
 import LoadingFrame from "../Constants/frameLoader";
 import { useTranslation } from "react-i18next";
+import NavBar from "../Components/navBar";
+import Header from "../Components/Homepage/Homepage_header";
 
 interface Product {
   productId: string;
@@ -25,7 +26,8 @@ const Products = () => {
   const activeCategory: string | null = useSelector(
     (state: RootState) => state.category.activeCategory
   );
-  const { data: products, isLoading, isError } = useSelectProductsQuery({});
+  const { data: products, isLoading, isError } = useAllProductsQuery({});
+  // console.log(products)
   const productsPerPage = 9;
   const currentPage = useSelector(
     (state: RootState) => state.pagination.currentPage
@@ -118,7 +120,7 @@ const Products = () => {
 
   return (
     <div className="flex flex-col">
-      <Navbar />
+      <Header />
       <div className="flex flex-col gap-[20px] px-10 p-6 mb-20">
         <div className="flex flex-col-reverse gap-4 justify-between items-center md:flex-row">
           <div className="flex flex-row gap-[14px] items-center font-outfit">
@@ -130,7 +132,7 @@ const Products = () => {
             </span>
             <span className="text-black font-[800]">/</span>
             <span className="text-base text-black font-[800] md:text-[18px]">
-              {activeCategory || t("All Products")}
+              {t(activeCategory || "All Products")}
             </span>
           </div>
           <Search />

@@ -5,7 +5,7 @@ import AuthButton from "../Constants/AuthButton";
 import Input from "../Constants/Input";
 import {
   useRequest_paswordMutation,
-  useReset_passwordMutation,
+  useReset_passwordMutation
 } from "../Redux/features/AuthSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -80,10 +80,7 @@ const Forgotpassword: React.FC = () => {
     } else {
       try {
         const response = await request(data).unwrap();
-        if (
-          response.message &&
-          response.message === "Password reset email sent"
-        ) {
+        if (response.message && response.message === "Password reset email sent") {
           setIsEmailSent(true);
         }
       } catch (error: any) {
@@ -173,8 +170,8 @@ const Forgotpassword: React.FC = () => {
               </span>
             </div>
             <span className="text-center text-white font-outfit font-[600]">
-              The reset password link has been sent to your email address. Use
-              it to reset your password in less than 15 minutes.
+              The reset password link has been sent to your email address. Use it
+              to reset your password in less than 15 minutes.
             </span>
           </div>
         ) : (

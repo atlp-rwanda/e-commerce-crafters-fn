@@ -6,7 +6,7 @@ const AboutCrafters: React.FC = () => {
   const { t } = useTranslation();
   return (
     <section
-      className="py-16 px-6 sm:px-12 md:px-24 bg-white font-poppins text-lg md:text-xl"
+      className="py-16 px-6 sm:px-12 md:px-24 bg-white font-outfit text-lg md:text-xl h-screen mt-96"
       id="about-crafters"
     >
       <h2 className="text-2xl sm:text-3xl font-bold mb-8">
@@ -23,7 +23,19 @@ const AboutCrafters: React.FC = () => {
         </div>
         <div>
           <p className="text-gray-700 text-base sm:text-lg md:text-xl sm:text-sm">
-            {t("AboutUs")}
+            {t(
+              "Crafters is a team of developers who are passionate about creating online shopping experiences. Our goal is to make shopping easy and enjoyable for everyone."
+            )}
+            <br />
+            <br />
+            {t(
+              "We focus on designing websites that are easy to use and look great. Whether you're buying clothes, electronics, or anything else, we want you to have a smooth and pleasant experience. Sellers can also create accounts on our platform to sell their products to a wide audience."
+            )}
+            <br />
+            <br />
+            {t(
+              "We're here to help buyers and sellers connect in a friendly and trustworthy environment. Join us and explore a world of seamless online shopping!"
+            )}
           </p>
         </div>
       </div>

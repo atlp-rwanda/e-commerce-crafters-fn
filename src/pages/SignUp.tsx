@@ -9,7 +9,6 @@ import {
 
 import { useLocation } from "react-router-dom";
 import { Puff } from "react-loader-spinner";
-import EmailSent from "../Components/Modal/EmailSent";
 import { useTranslation } from "react-i18next";
 
 const SignUp: React.FC = () => {

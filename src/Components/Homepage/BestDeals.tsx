@@ -6,7 +6,9 @@ const BestDeals: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const productId = "de400228-de1e-4bad-b464-d81e27b83777";
+
+  const productId = "21acca30-db38-4d71-8022-266ae7305f10"; 
+
 
   useEffect(() => {
     const fetchImage = async () => {
