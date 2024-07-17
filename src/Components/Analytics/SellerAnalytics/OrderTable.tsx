@@ -1,18 +1,39 @@
+import { data } from "autoprefixer";
 import React from "react";
 import { useState, useMemo } from "react";
 import { useLocation } from "react-router-dom";
 
-interface Sale {
-  name: string;
+interface Product {
+  status: string;
   quantity: number;
-  price: number;
-  total: number;
-  date: string;
+  productId: string;
+  productName: string;
 }
 
+interface Order {
+  orderId: string;
+  deliveryAddress: {
+    city: string;
+    street: string;
+  };
+  userId: string;
+  client: string;
+  paymentMethod: string;
+  status: string;
+  products: Product[];
+  totalAmount: number | null;
+  expectedDeliveryDate: string | null;
+  createdAt: string;
+  updatedAt: string;
+}
 
+interface OrderTableProps {
+  data: Order[];
+}
 
-const SalesTable: React.FC = () => {
+console.log(data);
+
+const OrderStatusTable: React.FC = () => {
   const location = useLocation();
   const { state } = location;
 
@@ -20,11 +41,11 @@ const SalesTable: React.FC = () => {
     return <div>No data available</div>;
   }
 
-  const { datas } = state as { datas: Sale[] };
+  const { datas } = state as { datas: Order[] };
+
 
   const [productList] = useState(datas);
   const [rowsLimit] = useState(5);
-
   const [rowsToShow, setRowsToShow] = useState(productList.slice(0, rowsLimit));
   const [customPagination, setCustomPagination] = useState<any[]>([]);
   const [totalPage] = useState(Math.ceil(productList?.length / rowsLimit));
@@ -64,40 +85,46 @@ const SalesTable: React.FC = () => {
   }, [productList?.length, rowsLimit]);
 
   let id = 1;
-
+  console.log(rowsToShow);
   return (
-    <div className="min-h-screen  bg-white w-full flex   justify-start py-12 pl-24  font-poppins  ">
-      <div className="w-full max-w-4xl px-2  ">
+    <div className="min-h-screen w-full   ml-14  flex  py-12 pl-16 justify-center  font-poppins  ">
+      <div className="w-full ">
         <div>
           <h1 className="text-2xl font-semibold font-poppins text-secondary">
             My Sales Table
           </h1>
         </div>
-        <div className="w-full overflow-x-scroll md:overflow-auto  max-w-7xl 2xl:max-w-none mt-2">
-          <table className="table-auto text-sm overflow-scroll md:overflow-auto w-full  text-left font-inter border">
+        <div className="w-[80%] overflow-x-scroll md:overflow-auto  max-w-7xl 2xl:max-w-none mt-2">
+          <table className="table-auto  text-sm overflow-scroll md:overflow-auto w-full  text-left font-inter border">
             <thead className="rounded-lg  text-sm text-white font-semibold w-full ">
               <tr className="rounded-lg">
                 <th className="py-3 px-1 text-center text-[#212B36]  sm:text-base font-bold whitespace-nowrap">
                   ID
                 </th>
+                <th className="py-3 px-1 text-center text-[#212B36]  sm:text-base font-bold whitespace-nowrap">
+                  name
+                </th>
                 <th className="py-3 px-1 text-center text-[#212B36] sm:text-base font-bold whitespace-nowrap">
-                  Product
+                  Address
                 </th>
                 <th className="py-3 px-1  text-center gap-1 text-[#212B36] sm:text-base font-bold whitespace-nowrap">
-                  Quantity
+                  Payment
                 </th>
                 <th className="py-3 px-1 text-center text-[#212B36] sm:text-base font-bold whitespace-nowrap">
-                  Price
+                  products
                 </th>
                 <th className="text-center py-3 px-1 text-[#212B36] sm:text-base font-bold whitespace-nowrap gap-1">
-                  Total Price
+                  status
                 </th>
                 <th className="py-3 px-1 text-center text-[#212B36] sm:text-base font-bold whitespace-nowrap  ">
+                  Amount
+                </th>
+                <th className="py-3 px-1 text-center text-[#212B36] sm:text-base font-bold whitespace-nowrap">
                   Date
                 </th>
-                {/* <th className="py-3 px-3 text-[#212B36] sm:text-base font-bold whitespace-nowrap">
+                <th className="py-3 px-1 text-center text-[#212B36] sm:text-base font-bold whitespace-nowrap">
                   Time
-                </th> */}
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -120,7 +147,7 @@ const SalesTable: React.FC = () => {
                     {id++}
                   </td>
                   <td
-                    className={`py-2 px-1 font-normal text-xs text-center ${
+                    className={`py-2 px-1 font-normal  text-xs text-center ${
                       index == 0
                         ? "border-t-[1px] border-x-gray-300"
                         : index == rowsToShow?.length
@@ -128,18 +155,18 @@ const SalesTable: React.FC = () => {
                         : "border-t"
                     } whitespace-nowrap`}
                   >
-                    {data?.name}
+                    {data?.client}
                   </td>
                   <td
-                    className={`py-2 px-1 text-center font-normal text-xs   ${
+                    className={`py-2 px-1 text-center  font-normal text-xs   ${
                       index == 0
                         ? "border-t-[1px] border-x-gray-300"
                         : index == rowsToShow?.length
                         ? "border-y"
                         : "border-t"
-                    } whitespace-nowrap`}
+                    } whitespace-nowrap `}
                   >
-                    {data?.quantity}
+                    {data?.deliveryAddress.city} , {data.deliveryAddress.street}
                   </td>
                   <td
                     className={`py-2 px-1 text-xs  font-normal text-center  ${
@@ -150,19 +177,19 @@ const SalesTable: React.FC = () => {
                         : "border-t"
                     } whitespace-nowrap`}
                   >
-                    {data?.price}
+                    {data?.paymentMethod}
                   </td>
 
                   <td
-                    className={`py-5 px-1 text-xs  font-normal text-center ${
+                    className={`py-2 px-1 text-xs  font-normal text-center ${
                       index == 0
                         ? "border-t-[1px] border-x-gray-300"
                         : index == rowsToShow?.length
                         ? "border-y"
                         : "border-t"
-                    }`}
+                    }  min-w-[150px]`}
                   >
-                    {data?.price * data.quantity}
+                    {data?.products.map((item) => item.productName)}
                   </td>
                   <td
                     className={`py-2 px-1 text-xs  font-normal text-center
@@ -173,12 +200,12 @@ const SalesTable: React.FC = () => {
                             ? "border-y"
                             : "border-t"
                         } 
-                    min-w-[100px]`}
+                    `}
                   >
-                    {data?.date.slice(0, 10)}
+                    {data?.status}
                   </td>
-                  {/* <td
-                    className={`py-2 px-3 text-xs  font-normal 
+                  <td
+                    className={`py-2 px-1 text-xs   font-normal text-center
                         ${
                           index == 0
                             ? "border-t-[1px] border-x-gray-300"
@@ -186,16 +213,42 @@ const SalesTable: React.FC = () => {
                             ? "border-y"
                             : "border-t"
                         } 
-                    min-w-[250px]`}
+                    `}
                   >
-                    {data?.date.slice(11,16)}
-                  </td> */}
+                    {data?.totalAmount}
+                  </td>
+                  <td
+                    className={`py-2 px-1 text-xs  font-normal text-center
+                        ${
+                          index == 0
+                            ? "border-t-[1px] border-x-gray-300"
+                            : index == rowsToShow?.length
+                            ? "border-y"
+                            : "border-t"
+                        } 
+                    `}
+                  >
+                    {data?.createdAt.slice(0, 10)}
+                  </td>
+                  <td
+                    className={`py-2 px-3 text-xs text-center font-normal 
+                        ${
+                          index == 0
+                            ? "border-t-[1px] border-x-gray-300"
+                            : index == rowsToShow?.length
+                            ? "border-y"
+                            : "border-t"
+                        } 
+                 `}
+                  >
+                    {data?.createdAt.slice(11, 16)}
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
-        <div className="w-full  flex justify-center sm:justify-between flex-col sm:flex-row gap-5 mt-1.5 px-1 items-center">
+        <div className="w-[80%]  flex justify-center sm:justify-between flex-col sm:flex-row gap-5 mt-1.5 px-1 items-center">
           <div className="text-sm">
             Showing {currentPage == 0 ? 1 : currentPage * rowsLimit + 1} to{" "}
             {currentPage == totalPage - 1
@@ -251,4 +304,4 @@ const SalesTable: React.FC = () => {
   );
 };
 
-export default SalesTable;
+export default OrderStatusTable;

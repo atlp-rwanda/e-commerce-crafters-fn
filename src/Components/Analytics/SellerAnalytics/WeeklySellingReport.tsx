@@ -94,15 +94,14 @@ const SellerWeeklyReport = () => {
   );
 
 
-  console.log(data);
 
   return (
     <div className="h-full">
-      <div
+      {/* <div
         style={showSales ? { visibility: "visible" } : { visibility: "hidden" }}
       >
         <SalesTable datas={datas} />
-      </div>
+      </div> */}
       <div
         style={{ width: "40%", height: "350px" }}
         className="flex  flex-col m-auto mt-80 text-xs  rounded-lg shadow-2xl border-gray-400"

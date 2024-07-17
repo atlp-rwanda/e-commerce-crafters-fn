@@ -100,11 +100,11 @@ const SellerSellingReport = () => {
 
   return (
     <div className="h-full">
-      <div
+      {/* <div
         style={showSales ? { visibility: "visible" } : { visibility: "hidden" }}
       >
         <SalesTable datas={datas} />
-      </div>
+      </div> */}
 
       <div
         style={{ height: "400px" }}

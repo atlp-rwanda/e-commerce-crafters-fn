@@ -10,64 +10,55 @@ import {
 import { AppDispatch, RootState } from "../../../Redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSellerOrderStatus } from "../../../Redux/Analytic/SellerAnalytics/OrderStatusSlice";
-
-
-
+import OrderTable from "./OrderTable";
+import { useNavigate } from "react-router-dom";
+// import OrderTable from "./OrderTable";
 
 const SellerOrderStatus = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLoading, data, error } = useSelector(
+    (state: RootState) => state.SellerOrderStatus
+  );
+  const [statusCounts, setStatusCounts] = useState<{ [key: string]: number }>(
+    {}
+  );
+  const [showSales, setShowSales] = useState(false);
 
-interface OrderStatusProps {
-  statusCounts: { [key: string]: number };
-}
+  useEffect(() => {
+    dispatch(fetchSellerOrderStatus());
+  }, [dispatch]);
 
-const colors = ["#FFC632", "#17BF6B", "#ED3333"];
+  useEffect(() => {
+    if (data) {
+      const counts: { [key: string]: number } = {};
+      data.forEach((order) => {
+        counts[order.status] = (counts[order.status] || 0) + 1;
+      });
+      setStatusCounts(counts);
+    }
+  }, [data]);
 
-const dispatch: AppDispatch = useDispatch();
-const { isLoading, data, error } = useSelector(
-  (state: RootState) => state.SellerOrderStatus
-);
-const [statusCounts, setStatusCounts] = useState<{ [key: string]: number }>({});
-
-useEffect(() => {
-  dispatch(fetchSellerOrderStatus());
-}, [dispatch]);
-
-useEffect(() => {
-  if (data) {
-    const counts: { [key: string]: number } = {};
-    data.forEach((order) => {
-      counts[order.status] = (counts[order.status] || 0) + 1;
-    });
-    setStatusCounts(counts);
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
-}, [data]);
 
-if (isLoading) {
-  return <div>Loading...</div>;
-}
+  if (error) {
+    return <div>Error fetching orders</div>;
+  }
 
-if (error) {
-  return <div>Error fetching orders</div>;
-}
+  const colors = ["#FFC632", "#17BF6B", "#ED3333"];
 
-let statusCount = {
-  pending: statusCounts.pending,
-  delivered: statusCounts.delivered,
-  cancelled: statusCounts.cancelled,
-};
+  const datas = Object.entries(statusCounts).map(([status, value], index) => ({
+    name: status,
+    value,
+    color: colors[index % colors.length],
+  }));
 
-
-const datas = Object.entries(statusCount).map(([status, value], index) => ({
-  name: status,
-  value,
-  color: colors[index % colors.length],
-}));
-    
-    console.log(data)
 
 
   return (
-    <div className="mt-80 font-poppins">
+    <div className="mt-80 font-poppins ">
       <div className="flex flex-col w-[400px] m-auto h-[280px]  border-2  rounded-xl shadow-md ">
         <div className="pl-5 h-[30%]">
           <h2 className="font-bold pt-3">Order status</h2>
@@ -85,6 +76,8 @@ const datas = Object.entries(statusCount).map(([status, value], index) => ({
                 outerRadius={"80"}
                 paddingAngle={0}
                 dataKey="value"
+                // onClick={() => setShowSales(!showSales)}
+                // onClick={() => navigate("/orderStatus")}
               >
                 {datas.map((item) => (
                   <Cell key={item.name} fill={item.color} />
@@ -111,6 +104,6 @@ const datas = Object.entries(statusCount).map(([status, value], index) => ({
       </div>
     </div>
   );
-}
+};
 
-export default SellerOrderStatus
+export default SellerOrderStatus;
