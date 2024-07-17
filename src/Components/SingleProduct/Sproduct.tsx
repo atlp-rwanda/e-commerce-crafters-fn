@@ -1,9 +1,4 @@
 import React, { useState, useEffect } from "react";
-
-import mainproduct1 from "../../asset/images/Products/0ce8299f7b1c845d575f949b244ea238.jpg";
-import mainproduct2 from "../../asset/images/Products/529d198d51183b1643323dd26b8db71d (1).jpg";
-import mainproduct4 from "../../asset/images/Products/529d198d51183b1643323dd26b8db71d.jpg";
-import mainproduct3 from "../../asset/images/Products/f8c69bc0404ff0b6158cab028ac8e632.jpg";
 import heart from "../../asset/images/heart 1.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -217,11 +212,18 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
   const images = typeof product.image === 'string' ? JSON.parse(product.image) : product.image;
 
   return (
-    <div className='flex justify-center md:flex-row lg:flex-col items-center flex-col pt-40'>
+    <div className='flex justify-center md:flex-row lg:flex-col items-center flex-col pt-32'>
       <div className='flex justify-center gap-5 md:flex-row md:w-4/5 flex-col'>
         <div className="grid grid-cols-1 justify-center p-5 gap-y-5 items-center md:w-[70%]">
           <div className='flex justify-center items-center relative'>
-            <img src={selectedImage} alt="Selected product" className='min-w-[300px] max-w-[100%] sm:h-[300px] w-full md:w-[95%] md:h-[400px] h-[200px] object-cover' />
+          <div className="w-full">
+      <img
+        src={selectedImage}
+        alt="Selected product"
+        className='min-w-[300px] max-w-[100%] sm:h-[300px] w-full md:w-[95%] md:h-[350px] h-[160px] object-cover'
+      />
+    </div>
+
             <div className="absolute bottom-4 translate-x-6 left-6">
               <div className='flex justify-center mt-4'>
               {images && images.map((image: string, index: number) => (
@@ -250,7 +252,7 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
                 src={image}
                 alt={`Thumbnail ${index + 1}`}
                 onClick={() => handleImageClick(image)}
-                className="cursor-pointer w-full md:w-[100%] rounded-md h-[10vh] md:h-[15vh] object-cover"
+                className="cursor-pointer w-full md:w-[70%] rounded-md h-[10vh] md:h-[15vh] object-fill"
               />
             ))}
           </div>
