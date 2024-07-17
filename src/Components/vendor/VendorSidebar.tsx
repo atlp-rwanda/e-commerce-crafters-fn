@@ -23,7 +23,7 @@ const VendorSidebar = () => {
             <path opacity="0.4" d="M6.66699 8.75H10.8337" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
             ,
-            url: "/my-products"
+            url: "/vendor/my-products"
         },
         {
             label: "Sales",

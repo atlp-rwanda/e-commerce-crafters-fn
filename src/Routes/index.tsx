@@ -12,6 +12,8 @@ import AuthGoogle from '../Lib/authgoogle';
 import Users from '../pages/Users';
 import Forgotpassword from '../Lib/ForgotPassword';
 import VendorHome from '../pages/vendor/vendorHome';
+import MyProducts from '../pages/vendor/MyProducts';
+import VendorSingleProduct from '../pages/vendor/VendorSingleProduct';
 
 
 const AppRoutes: React.FC = () => (
@@ -31,8 +33,11 @@ const AppRoutes: React.FC = () => (
         </Route>
         <Route path="/buyer" element={<Buyer />} />
         <Route path="/vendor" element={<Seller />}>
-        <Route index element={<VendorHome/>}/>
+          <Route index element={<VendorHome />} />
+          <Route path='my-products' element={<MyProducts />} />
         </Route>
+        <Route path="/vendor-single-product/:id" element={<VendorSingleProduct />} />
+
 
       </Route>
     </Routes>

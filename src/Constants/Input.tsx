@@ -3,11 +3,11 @@ import React, { useState } from 'react';
 interface InputProps {
   label: string,
   type: string,
-  value: string,
+  value: any,
   placeholder: string,
   error?: boolean,
 
-  onChange: (value: string) => void
+  onChange: (value: any) => void
 }
 
 const Input: React.FC<InputProps> = ({

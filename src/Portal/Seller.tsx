@@ -5,24 +5,38 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Logout from '../services/Logout';
 import VendorSidebar from '../Components/vendor/VendorSidebar';
 import VendorHeader from '../Components/vendor/VendorHeader';
+import { useSelectVendorQuery } from '../Redux/features/sellerSlice';
 
 function Seller() {
+
   const navigate = useNavigate();
   const userData: any = useAuthUser();
+  const { data: vendors, error, isLoading } = useSelectVendorQuery(userData.userId)
   useEffect(() => {
     if (userData.role !== 'vendor') {
       navigate(`/${userData.role}`);
+    } else {
+
+
+
     }
   }, [navigate]);
+
+  useEffect(() => {
+    if (vendors) {
+      console.log(vendors)
+      localStorage.setItem("vendorData", JSON.stringify({ storeName: vendors.vendor.storeName, vendorId: vendors.vendor.vendorId }))
+    }
+  }, [vendors])
   const handelLogout = Logout();
   return (
     <div className="w-full h-screen flex flex-row ">
       <div className='h-screen'>
-        <VendorSidebar/>
+        <VendorSidebar />
       </div>
       <div className='flex flex-col gap-[10px] bg-gray-50 w-full'>
-        <VendorHeader/>
-        <Outlet/>
+        <VendorHeader />
+        <Outlet />
       </div>
 
     </div>
