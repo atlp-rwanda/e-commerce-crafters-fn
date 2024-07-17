@@ -1,7 +1,8 @@
-import React from 'react';
+import React from "react";
+import SellerTable from "../Components/dashboard/SellerTable";
 
-function Users() {
-  return <div>Users</div>;
-}
+const Users = () => {
+  return <SellerTable />;
+};
 
 export default Users;
