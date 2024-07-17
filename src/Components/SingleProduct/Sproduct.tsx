@@ -305,7 +305,14 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
                 </button>
               </div>
             </div>
-            <button onClick={handleAddToCart} disabled={isButtonDisabled} className={`bg-[#E4A951] p-3 rounded-lg w-full ${isLoadingCart ? ' cursor-not-allowed' : 'cursor-pointer'}`}>{isLoadingCart ? 'Adding ...' : 'Add to Cart'}</button>
+            <button
+  onClick={handleAddToCart}
+  disabled={isButtonDisabled || isLoadingCart}
+  className={`bg-orange-400 p-3 rounded-lg w-full ${isButtonDisabled || isLoadingCart ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
+>
+  {isLoadingCart ? 'Adding ...' : 'Add to Cart'}
+</button>
+
           </div>
         </div>
       </div>
