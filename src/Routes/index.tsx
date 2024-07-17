@@ -11,7 +11,6 @@ import Users from "../pages/Users";
 import AuthOutlet from "@auth-kit/react-router/AuthOutlet";
 import Test from "../pages/Check";
 import Analytics from "../pages/Analytics";
-import Settings from "../pages/Settings";
 import AdminHome from "../pages/Admin/AdminHome";
 import Homepage from "../pages/Homepage";
 import Products from "../pages/ProductsPage";
@@ -28,6 +27,7 @@ import Signin from "../pages/Signin";
 import SalesTable from "../Components/Analytics/SellerAnalytics/SalesTable";
 import OrderStatusTable from "../Components/Analytics/SellerAnalytics/OrderTable";
 import SalesPreview from "../Components/Analytics/SellerAnalytics/SalesPreview";
+import AdminSettings from "../Components/dashboard/AdminSettings";
 
 
 const AppRoutes: React.FC = () => (
@@ -47,6 +47,7 @@ const AppRoutes: React.FC = () => (
 
       <Route path="/product/:id" element={<Singlepage />} />
       <Route path="/order-tracking" element={<OrderTrackingPage />} />
+      <Route path="/forgot-password" element={<Forgotpassword />} />
       <Route element={<AuthOutlet fallbackPath="/login" />}>
         <Route path="/chat" element={<Chat />} />
         <Route path="/admin" element={<Admin />}>
@@ -58,7 +59,7 @@ const AppRoutes: React.FC = () => (
           <Route path="orderStatus" element={<OrderStatusTable />} />
           <Route path="topProduct" element={<SalesPreview />} />
           <Route path="requests" element={<Requests />} />
-          <Route path="settings" element={<Settings />} />
+          <Route path="settings" element={<AdminSettings />} />
         </Route>
         <Route path="/user" element={<User />} />
         <Route path="/buyer" element={<Buyer />} />

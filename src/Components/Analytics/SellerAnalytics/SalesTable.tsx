@@ -66,11 +66,11 @@ const SalesTable: React.FC = () => {
   let id = 1;
 
   return (
-    <div className="min-h-screen  bg-white w-full flex   justify-start py-12 pl-24  font-poppins  ">
-      <div className="w-full max-w-4xl px-2  ">
+    <div className="w-full bg-white rounded-lg shadow-md overflow-hidden lg:mb-12 xl:ml-[5%] mt-3 ">
+      <div className="w-full h-full p-2 mb-4">
         <div>
-          <h1 className="text-2xl font-semibold font-poppins text-secondary">
-            My Sales Table
+          <h1 className="text-2xl text-center font-semibold font-poppins text-secondary">
+            Sales Table
           </h1>
         </div>
         <div className="w-full overflow-x-scroll md:overflow-auto  max-w-7xl 2xl:max-w-none mt-2">

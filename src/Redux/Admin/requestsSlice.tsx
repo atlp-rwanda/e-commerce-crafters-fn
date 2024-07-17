@@ -16,14 +16,16 @@ const RequestsSlice = apiSlice.injectEndpoints({
       },
     }),
     reject: builder.mutation({
-        query: (userId) => {
+      query: ({ userId, message }) => {
         const token = Cookies.get("_auth");
         return {
           url: `/reject-vendor/${userId}`,
           method: "PUT",
           headers: {
             Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
           },
+          body: { message },
         };
       },
     }),

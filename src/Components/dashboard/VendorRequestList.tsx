@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useSelectRequestsQuery } from "../../Redux/Admin/sellersSlice";
 import { Circles } from "react-loader-spinner";
-
+import { Link } from "react-router-dom";
 
 interface Seller {
-  storeName: string,
+  storeName: string;
   address: {
-    city:string
-  }
+    city: string;
+  };
 }
 
 const VendorRequestList: React.FC = () => {
@@ -26,9 +26,9 @@ const VendorRequestList: React.FC = () => {
         <span className="px-2 text-sm lg:p-2 lg:px-4 rounded-[6px] bg-secondary text-white">
           Vendor Applications ({sellersCount})
         </span>
-        <a href="/admin/requests">
+        <Link to="/admin/requests">
           <button className="sm:text-sm text-secondary">View all</button>
-        </a>
+        </Link>
       </div>
       <table className="w-full">
         <thead>
@@ -43,15 +43,7 @@ const VendorRequestList: React.FC = () => {
           {isLoading ? (
             <tr>
               <div className="flex justify-center items-center h-24">
-                <Circles
-                  visible
-                  height="80"
-                  width="80"
-                  color="#C9974C"
-                  ariaLabel="circles-loading"
-                  wrapperStyle={{}}
-                  wrapperClass="circles-wrapper"
-                />
+                <Circles visible height="80" width="80" color="#C9974C" />
               </div>
             </tr>
           ) : (

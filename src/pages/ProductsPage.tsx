@@ -6,11 +6,11 @@ import Search from "../Components/ProductsPage/searchProduct";
 import { useAllProductsQuery } from "../Redux/productsPage/productSlice";
 import ProductCard from "../Components/ProductsPage/productCard";
 import Pagination from "../Components/ProductsPage/pagination";
-import Header from "../Components/Homepage/Homepage_header";
 import Footer from "../Components/Homepage/Homepage_footer";
 import LoadingFrame from "../Constants/frameLoader";
 import { useTranslation } from "react-i18next";
 import NavBar from "../Components/navBar";
+import Header from "../Components/Homepage/Homepage_header";
 
 interface Product {
   productId: string;

@@ -54,33 +54,25 @@ const OrderStatus: React.FC = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center">
-        <Circles
-          visible
-          height="80"
-          width="80"
-          color="#C9974C"
-          ariaLabel="circles-loading"
-          wrapperStyle={{}}
-          wrapperClass="circles-wrapper"
-        />
+        <Circles visible height="80" width="80" color="#C9974C" />
       </div>
     );
   }
 
   if (error) {
-    return(
-    <div className="flex justify-center items-center  h-[90%]">
-      <div className="text-center">
-        <p className="text-red-600 font-semibold">
-          An error occurred. Please try again
-        </p>
-        <button
-          className="mt-3 px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary"
-          onClick={() => window.location.reload()}
-        >
-          Retry
-        </button>
-      </div>
+    return (
+      <div className="flex justify-center items-center  h-[90%]">
+        <div className="text-center">
+          <p className="text-red-600 font-semibold">
+            An error occurred. Please try again
+          </p>
+          <button
+            className="mt-3 px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary"
+            onClick={() => window.location.reload()}
+          >
+            Retry
+          </button>
+        </div>
       </div>
     );
   }
@@ -90,7 +82,6 @@ const OrderStatus: React.FC = () => {
     delivered: statusCounts.delivered,
     cancelled: statusCounts.cancelled,
   };
-  console.log(statusCount);
 
   const datas = Object.entries(statusCount).map(([status, value], index) => ({
     name: status,

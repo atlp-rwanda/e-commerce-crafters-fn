@@ -80,7 +80,7 @@ const Signin = () => {
         setError("Invalid credentials. Try again");
         setErr(true);
       } else {
-        setError("Something is wrong , Try again later");
+        setError("Invalid credentials, Try again");
         setErr(false);
       }
     }

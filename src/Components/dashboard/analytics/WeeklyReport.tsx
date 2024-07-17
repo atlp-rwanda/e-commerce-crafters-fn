@@ -14,8 +14,6 @@ import { fetchWeeklyReport } from "../../../Redux/Analytic/WeeklySellingSlice";
 import { AppDispatch, RootState } from "../../../Redux/store";
 import { useNavigate } from "react-router-dom";
 
-
-
 const WeeklyReport = () => {
    const navigate = useNavigate();
    const dispatch: AppDispatch = useDispatch();

@@ -22,8 +22,8 @@ const SalesPreview: React.FC = () => {
 
   let id = 1;
   return (
-    <div className="w-full h-fit m-auto flex my-12 pl-24 justify-start font-poppins">
-      <div className="w-[40%]   p-4  border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700 overflow-y-auto">
+    <div className="w-full rounded-lg shadow-md overflow-hidden lg:mb-12 xl:ml-[5%] mt-3 ">
+      <div className="w-full h-full p-8 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 overflow-y-auto">
         <div className="flex items-center justify-between mb-4">
           <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
             Top Products
@@ -52,7 +52,7 @@ const SalesPreview: React.FC = () => {
                   </div>
                   <div className="flex-1 min-w-0 ms-4">
                     <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                     {/* { id++} */}
+                      {/* { id++} */}
                     </p>
                     <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                       {product.name}

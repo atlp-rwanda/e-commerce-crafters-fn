@@ -87,14 +87,14 @@ const OrderStatusTable: React.FC = () => {
   let id = 1;
   console.log(rowsToShow);
   return (
-    <div className="min-h-screen w-full   ml-14  flex  py-12 pl-16 justify-center  font-poppins  ">
-      <div className="w-full ">
+    <div className="w-full  rounded-lg shadow-md overflow-hidden lg:mb-12 xl:ml-[5%] mt-3">
+      <div className="h-full">
         <div>
-          <h1 className="text-2xl font-semibold font-poppins text-secondary">
-            My Sales Table
+          <h1 className="text-2xl text-center font-semibold font-poppins text-secondary">
+            Orders Table
           </h1>
         </div>
-        <div className="w-[80%] overflow-x-scroll md:overflow-auto  max-w-7xl 2xl:max-w-none mt-2">
+        <div className="w-full p-4 overflow-x-scroll md:overflow-auto  max-w-7xl 2xl:max-w-none mt-2">
           <table className="table-auto  text-sm overflow-scroll md:overflow-auto w-full  text-left font-inter border">
             <thead className="rounded-lg  text-sm text-white font-semibold w-full ">
               <tr className="rounded-lg">
@@ -248,7 +248,7 @@ const OrderStatusTable: React.FC = () => {
             </tbody>
           </table>
         </div>
-        <div className="w-[80%]  flex justify-center sm:justify-between flex-col sm:flex-row gap-5 mt-1.5 px-1 items-center">
+        <div className="w-full flex justify-center sm:justify-between flex-col sm:flex-row gap-5 mt-1.5 px-1 items-center">
           <div className="text-sm">
             Showing {currentPage == 0 ? 1 : currentPage * rowsLimit + 1} to{" "}
             {currentPage == totalPage - 1

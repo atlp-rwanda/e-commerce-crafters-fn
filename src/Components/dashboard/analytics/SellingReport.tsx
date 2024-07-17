@@ -34,15 +34,7 @@ const SellingReport = () => {
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-24">
-        <Circles
-          visible
-          height="80"
-          width="80"
-          color="#C9974C"
-          ariaLabel="circles-loading"
-          wrapperStyle={{}}
-          wrapperClass="circles-wrapper"
-        />
+        <Circles visible height="80" width="80" color="#C9974C" />
       </div>
     );
   }

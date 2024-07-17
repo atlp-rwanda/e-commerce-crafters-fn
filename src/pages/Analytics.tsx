@@ -1,15 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 import WeeklyReport from "../Components/dashboard/analytics/WeeklyReport";
 import OrderStatus from "../Components/dashboard/analytics/OrderStatus";
 import SellingReport from "../Components/dashboard/analytics/SellingReport";
 import TopProduct from "../Components/dashboard/analytics/TopProducts";
 import InteractionCard from "../Components/dashboard/InteractionCard";
+import { useSelectStoresQuery } from "../Redux/Admin/sellersSlice";
+import { useSelectUsersQuery } from "../Redux/Admin/usersSlice";
+import { useAllOrdersQuery } from "../Redux/OrderSlice";
 
 const Analytics = () => {
+  const { data: sellers = [], refetch: refetchSellers } = useSelectStoresQuery(
+    {}
+  );
+  const approvedSellers = sellers.filter(
+    (seller: any) => seller.status === "approved"
+  );
+
+  const { data: orders = [], refetch: refetchOrders } = useAllOrdersQuery({});
+  const transactions = orders.filter(
+    (order: any) => order.status === "delivered"
+  );
+
+  const { data: users = [], refetch: refetchUsers } = useSelectUsersQuery({});
+
+  useEffect(() => {
+    refetchSellers();
+    refetchUsers();
+    refetchOrders();
+  }, [refetchSellers, refetchUsers, refetchOrders]);
   const cardData = [
     {
-      name: "sellers",
-      numbers: 1500,
+      name: "Vendors",
+      numbers: sellers.length,
       icon: (
         <svg
           width="20"
@@ -63,7 +85,7 @@ const Analytics = () => {
     },
     {
       name: "Users",
-      numbers: 1500,
+      numbers: users.length,
       icon: (
         <svg
           width="20"
@@ -117,7 +139,7 @@ const Analytics = () => {
     },
     {
       name: "Transactions",
-      numbers: 1500,
+      numbers: transactions.length,
       icon: (
         <svg
           width="20"
@@ -163,7 +185,7 @@ const Analytics = () => {
     },
     {
       name: "Orders",
-      numbers: 1500,
+      numbers: orders.length,
       icon: (
         <svg
           width="20"
