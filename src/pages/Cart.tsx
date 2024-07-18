@@ -9,7 +9,7 @@ import { RootState } from "../Redux/store";
 
 const Cart = () => {
   const dispatch = useDispatch();
-  const userId = "userId"; // Replace with actual userId logic
+  const userId = "userId";
 
   const cartState = useSelector((state: RootState) => state.cart);
   const { items: cartItems, loading, error } = cartState;
