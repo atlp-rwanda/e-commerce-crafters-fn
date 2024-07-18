@@ -43,11 +43,10 @@ const AppRoutes: React.FC = () => (
       <Route path="/products" element={<Products />} />
       <Route path="/forgot-password" element={<Forgotpassword />} />
       <Route path="/product/:id" element={<Singlepage />} />
-      <Route path="/order/:orderId" element={<OrderTrackingPage />} />
-      <Route path="/orders" element={<OrderComponent />} />
       <Route element={<AuthOutlet fallbackPath="/login" />}>
         <Route path="/chat" element={<Chat />} />
-
+        <Route path="/order/:orderId" element={<OrderTrackingPage />} />
+        <Route path="/orders" element={<OrderComponent />} />
         <Route path="/admin" element={<Admin />}>
           <Route index element={<AdminHome />} />
           <Route path="users" element={<Users />} />
