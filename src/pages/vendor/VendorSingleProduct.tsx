@@ -12,12 +12,19 @@ const VendorSingleProduct = () => {
     const { id } = useParams<{ id: string }>()
     const navigate:any = useNavigate()
     const token = useAuthHeader()
-    const { data: singleProduct, error, isLoading } = useSelectSingleProductQuery(id)
+    const { data: singleProduct, error, isLoading,refetch } = useSelectSingleProductQuery(id)
     const [deleteProduct, { isLoading: deleteLoading, isError: deleteError }] = useDeleteProductMutation()
     const vendorData: any = localStorage.getItem('vendorData')
     const vendor = JSON.parse(vendorData)
 
     const [openedImage, setOpenedImage] = useState<number>(0)
+
+    useEffect(() => {
+        if (isComplete) {
+            toast.success("Product updated")
+            refetch().then(() => setIsComplete(false))
+        }
+    }, [isComplete, refetch])
 
     if (isLoading) {
         return (
@@ -33,6 +40,7 @@ const VendorSingleProduct = () => {
             </div>
         )
     }
+    
 
     const expiringDate = new Date(singleProduct.expiringDate)
     const day = expiringDate.getDate()
@@ -53,6 +61,8 @@ const VendorSingleProduct = () => {
             console.log(error)
         }
     }
+
+
 
    
     return (
@@ -93,7 +103,7 @@ const VendorSingleProduct = () => {
                     </div>
                     <div className='flex flex-col gap-[5px]'>
                         <span className='text-secondary font-outfit '>Quantity</span>
-                        <span className='px-2 bg-gray-50 rounded-[12px] py-1 flex items-center justify-center w-[100px] font-[600] font-outfit'>{singleProduct.quantity} In Stock</span>
+                        <span className='px-2 bg-gray-50 rounded-[12px] py-1 flex items-center justify-center max-w-[150px] min-w-[100px] font-[600] font-outfit'>{singleProduct.quantity} In Stock</span>
                     </div>
                     <div className='flex flex-col gap-[5px] font-outfit'>
                         <span className='text-secondary font-outfit '>Price</span>

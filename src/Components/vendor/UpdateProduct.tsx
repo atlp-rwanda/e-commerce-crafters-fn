@@ -2,7 +2,7 @@ import React, { FormEvent, useEffect, useState } from 'react'
 import Input from '../../Constants/Input'
 import AuthButton from '../../Constants/AuthButton'
 import axios from 'axios'
-import { useCreateProductMutation } from '../../Redux/features/sellerSlice'
+import {useUpdateProductMutation } from '../../Redux/features/sellerSlice'
 import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader'
 
 
@@ -18,7 +18,7 @@ const UpdateProduct = (property: productProps) => {
     const [discount, setDiscount] = useState<number>(property.productData.discount)
     const [price, setPrice] = useState<string>(property.productData.price)
     const [image, setImage] = useState(property.productData.image);
-    const [category, setCategory] = useState<string>("")
+    const [category, setCategory] = useState<string>(property.productData.category)
     const [quantity, setQuantity] = useState<number>(property.productData.quantity)
     const [expiringDate, setExpiringDate] = useState<string>(property.productData.expiringDate)
     const [error, setError] = useState<boolean>(false)
@@ -28,7 +28,7 @@ const UpdateProduct = (property: productProps) => {
 
     
      
-    const [createProduct, {isLoading:uploadLoading,isError}] = useCreateProductMutation()
+    const [updateProduct, {isLoading:uploadLoading,isError}] = useUpdateProductMutation()
 
     const handleImages = (value: FileList): void => {
         const newImages = Array.from(value)
@@ -79,10 +79,10 @@ const UpdateProduct = (property: productProps) => {
           const imageUrls = responses.map(response => response.data.secure_url);
     
           const vendor = JSON.parse(localStorage.getItem('vendorData') as string);
-          const data = {name,quantity,description,price,discount,expiringDate,category,image: imageUrls, id: vendor.vendorId };
+          const data = {name,quantity,description,price,discount,expiringDate,category,image: imageUrls, vendorId: vendor.vendorId,id: property.productData.productId };
     
-          const response = await createProduct({data,token}).unwrap();
-          if (response.message && response.message === "Product Created") {
+          const response = await updateProduct({data,token}).unwrap();
+          if (response.message && response.message === "Product updated successfully") {
             console.log(response)
             setLoading(false)
             property.setModal(false)
@@ -100,7 +100,7 @@ const UpdateProduct = (property: productProps) => {
         <div className='w-full h-full bg-black/20  fixed flex items-center top-0 justify-center left-0'>
             <div className='w-1/2 flex flex-col max-h-[90vh] overflow-y-scroll gap-[10px] bg-white p-4 rounded-[12px]'>
                 <div className='w-full flex flex-row font-outfit items-center justify-between'>
-                    <h1 className='text-[18px] font-[600]'>New Products</h1>
+                    <h1 className='text-[18px] font-[600]'>Update Product</h1>
                     <div className='text-[20px] font-[700] text-black cursor-pointer hover:scale-125 transition-all duration-300' onClick={()=> property.setModal(false)}>X</div>
                 </div>
                 <form onSubmit={handleSubmit} className='flex flex-col gap-[10px] items-center'>

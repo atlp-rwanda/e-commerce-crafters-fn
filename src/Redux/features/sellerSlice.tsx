@@ -35,6 +35,18 @@ const SellerSlice = apiSlice.injectEndpoints({
             }
         }
     }),
+    updateProduct: builder.mutation({
+        query: ({data,token}) => {
+            return{
+                url: `/updateProduct/${data.id}`,
+                method: "PUT",
+                body: data,
+                headers:{
+                    Authorization: token
+                }
+            }
+        }
+    }),
     selectSingleProduct: builder.query({
       query: (id)=> `/readProduct/${id}`
     }),
@@ -53,5 +65,5 @@ const SellerSlice = apiSlice.injectEndpoints({
   })
 });
 
-export const { useSelectFeddbackQuery, useSelectProductsQuery,useSelectVendorQuery,useCreateProductMutation,useSelectSingleProductQuery,useDeleteProductMutation } = SellerSlice;
+export const { useSelectFeddbackQuery, useSelectProductsQuery,useSelectVendorQuery,useCreateProductMutation,useSelectSingleProductQuery,useDeleteProductMutation,useUpdateProductMutation } = SellerSlice;
 export default SellerSlice;

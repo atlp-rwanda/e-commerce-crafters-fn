@@ -96,8 +96,8 @@ const NewProduct = (property: productProps) => {
 
 
     return (
-        <div className='w-full h-full top-0 z-[400] bg-black/20  p-4 absolute flex items-center justify-center left-0'>
-            <div className='w-1/2 max-h-[95%]  flex flex-col gap-[10px] bg-white overflow-y-scroll p-4 rounded-[12px]'>
+        <div className='w-full h-full top-0 z-[400] bg-black/20 absolute flex items-center justify-center left-0'>
+            <div className='w-1/2 max-h-[95vh   ] flex flex-col gap-[10px] bg-white overflow-y-scroll p-4 rounded-[12px]'>
                 <div className='w-full flex flex-row font-outfit items-center justify-between'>
                     <h1 className='text-[18px] font-[600]'>New Products</h1>
                     <div>X</div>
