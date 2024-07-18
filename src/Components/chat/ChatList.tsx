@@ -212,7 +212,7 @@ const ChatList: React.FC<ChatListProps> = ({
                     <span className="text-[14px] text-gray-400"></span>
                   </div>
                   <div className="flex flex-row gap-[4px] w-full justify-between">
-                    <span className=" line-clamp-1 text-[12px] text-gray-500">
+                    <span className=" line-clamp-1 text-[12px] text-black">
                       {getLatestMessage(vendor.userId)}
                     </span>
                     {getUnreadCount(vendor.userId) === 0 ? (
