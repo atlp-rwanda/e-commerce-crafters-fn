@@ -6,11 +6,9 @@ import Search from "../Components/ProductsPage/searchProduct";
 import { useAllProductsQuery } from "../Redux/productsPage/productSlice";
 import ProductCard from "../Components/ProductsPage/productCard";
 import Pagination from "../Components/ProductsPage/pagination";
-import Header from "../Components/Homepage/Homepage_header";
 import Footer from "../Components/Homepage/Homepage_footer";
 import LoadingFrame from "../Constants/frameLoader";
 import { useTranslation } from "react-i18next";
-import NavBar from "../Components/navBar";
 
 interface Product {
   productId: string;
@@ -26,8 +24,7 @@ const Products = () => {
   const activeCategory: string | null = useSelector(
     (state: RootState) => state.category.activeCategory
   );
-  const { data: products, isLoading, isError } = useAllProductsQuery({});
-  // console.log(products)
+  const { data: products, isLoading, isError } = useSelectProductsQuery({});
   const productsPerPage = 9;
   const currentPage = useSelector(
     (state: RootState) => state.pagination.currentPage
@@ -132,7 +129,7 @@ const Products = () => {
             </span>
             <span className="text-black font-[800]">/</span>
             <span className="text-base text-black font-[800] md:text-[18px]">
-              {t(activeCategory || "All Products")}
+              {activeCategory || t("All Products")}
             </span>
           </div>
           <Search />
