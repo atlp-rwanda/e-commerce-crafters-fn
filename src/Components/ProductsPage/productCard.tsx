@@ -28,7 +28,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
   return (
     <div
-      className="flex flex-col w-full gap-[10px] lift-on-hover transition-transform duration-300 cursor-pointer fade-in"
+      className="flex flex-col w-full gap-[10px] lift-on-hover transition-transform rounded-b-lg duration-300 cursor-pointer fade-in"
       onClick={handleCardClick}
     >
       <div className="w-full h-32 sm:h-48 md:h-60 lg:h-48 xl:h-[30vh] rounded-[12px]">
@@ -38,7 +38,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
           alt="product image"
         />
       </div>
-      <div className="flex flex-col gap-[4px] pl-2 pb-2">
+      <div className="flex flex-col gap-[4px] p-5 ">
         <span className="text-sm text-gray-600 font-outfit md:text-lg">
           {product.category}
         </span>
