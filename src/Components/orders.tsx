@@ -1,6 +1,8 @@
 import React from "react";
 import OrderTable from "./orderComponent";
 import { useGetAllOrdersQuery } from "../Redux/OrderSlice";
+import Skeleton from "react-loading-skeleton";
+import 'react-loading-skeleton/dist/skeleton.css';
 
 interface Order {
     orderId: string;
@@ -25,13 +27,43 @@ const OrderComponent = () => {
     console.log('token ', token);
     const { data: orders, isLoading, error } = useGetAllOrdersQuery({ token });
 
+    const LoadingSkeleton = () => {
+        return (
+            <div className="m-10">
+                {[...Array(3)].map((_, index) => (
+                    <div key={index} className="bg-gray-300 rounded-lg p-6 mb-4 flex justify-between mr-20">
+                        <div className="flex gap-10">
+                            <div>
+                                <Skeleton width={20} />
+                            </div>
+                            <div>
+                                <Skeleton width={100} />
+                            </div>
+                            <div>
+                                <Skeleton width={100} />
+                            </div>
+                            <div>
+                                <Skeleton width={80} />
+                            </div>
+                        </div>
+                        <div>
+                            <Skeleton width={80}/>
+                        </div>
+    
+                    </div>
+                ))}
+            </div>
+        );
+        
+    }
+
     return (
         <div className="font-outfit">
             <div className="font-semibold m-10">
                 My Orders
             </div>
             {isLoading ? (
-                <div>Loading orders...</div>
+                <LoadingSkeleton/>
             ) : error ? (
                 <div>Error loading orders</div>
             ) : !orders || orders.length === 0 ? (

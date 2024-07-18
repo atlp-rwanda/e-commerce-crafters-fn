@@ -35,7 +35,8 @@ import OrderComponent from "../Components/orders";
 const AppRoutes: React.FC = () => (
   <div>
     <Routes>
-      <Route path="/" element={<Homepage />} />
+      
+      <Route path="" element={<Homepage />} />
       <Route path="/login" element={<Signin />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/cart" element={<Cart />} />
@@ -50,11 +51,10 @@ const AppRoutes: React.FC = () => (
       <Route path="/order-tracking" element={<OrderTrackingPage />} />
       <Route path="/forgot-password" element={<Forgotpassword />} />
       <Route path="/product/:id" element={<Singlepage />} />
-      <Route path="/order/:orderId" element={<OrderTrackingPage />} />
-      <Route path="/orders" element={<OrderComponent />} />
       <Route element={<AuthOutlet fallbackPath="/login" />}>
         <Route path="/chat" element={<Chat />} />
-
+        <Route path="/order/:orderId" element={<OrderTrackingPage />} />
+        <Route path="/orders" element={<OrderComponent />} />
         <Route path="/admin" element={<Admin />}>
           <Route index element={<AdminHome />} />
           <Route path="users" element={<Users />} />

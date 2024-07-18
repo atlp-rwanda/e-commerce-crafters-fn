@@ -18,6 +18,7 @@ const Homepage: React.FC = () => {
       <BestDeals />
       <ContactSection />
       <Footer />
+      <VoiceflowChatWidget />
     </div>
   );
 };
