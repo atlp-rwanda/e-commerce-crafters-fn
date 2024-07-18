@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-const Socket = () => {
+function Socket() {
   return (
-    <div>
-      
-    </div>
-  )
+    <div />
+  );
 }
 
-export default Socket
+export default Socket;
