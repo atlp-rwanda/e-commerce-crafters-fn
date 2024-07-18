@@ -50,7 +50,9 @@ module.exports = (env) => {
       }),
       new Dotenv({
         path: dotenvFilename,
+
         systemvars: true,
+
       }),
       new webpack.DefinePlugin({
         "process.env.NODE_ENV": JSON.stringify(env.NODE_ENV),

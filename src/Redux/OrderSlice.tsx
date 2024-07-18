@@ -48,12 +48,5 @@ const OrderApiSlice = apiSlice.injectEndpoints({
   }),
 });
 
-export const {
-  useGetOrderStatusQuery,
-  useGetOrderQuery,
-  useUpdateOrderStatusMutation,
-  useGetUserInfoQuery,
-  useGetAllOrdersQuery,
-  useAllOrdersQuery,
-} = OrderApiSlice;
+export const { useGetOrderStatusQuery, useGetOrderQuery, useUpdateOrderStatusMutation, useGetUserInfoQuery, useGetAllOrdersQuery, useAllOrdersQuery } = OrderApiSlice;
 export default OrderApiSlice;

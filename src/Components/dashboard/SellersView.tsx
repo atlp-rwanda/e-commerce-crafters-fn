@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Circles } from "react-loader-spinner";
 import { useSelectStoresQuery } from "../../Redux/Admin/sellersSlice";
 import { useSelectUsersQuery } from "../../Redux/Admin/usersSlice";
+import { toCapital } from "./AdminHeader";
 
 interface SellerData {
   sellerId: string;
@@ -163,7 +164,7 @@ const SellersView: React.FC = () => {
               <div className="bg-white rounded-lg shadow-lg p-4 max-w-sm w-full">
                 <h2 className="text-lg font-semibold mb-4">Seller Details</h2>
                 <p>
-                  <strong>Seller Name:</strong> {selectedUser.name}
+                  <strong>Seller Name:</strong> {toCapital(selectedUser.name)}
                 </p>
                 <p>
                   <strong>Seller Email:</strong> {selectedUser.email}
