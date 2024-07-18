@@ -24,6 +24,7 @@ import Forgotpassword from "../Lib/ForgotPassword";
 import User from "../pages/User";
 import Sellers from "../pages/Sellers";
 import Signin from "../pages/Signin";
+import Products from "../pages/ProductsPage";
 
 import Chat from "../pages/chat/Chat";
 import OrderComponent from "../Components/orders";
@@ -32,7 +33,7 @@ const AppRoutes: React.FC = () => (
   <div>
     <Routes>
 
-      <Route path="/" element={<Homepage />} />
+      <Route path="" element={<Homepage />} />
 
       
   
@@ -47,6 +48,7 @@ const AppRoutes: React.FC = () => (
       <Route path="/products" element={<Products />} />
       <Route path="/forgot-password" element={<Forgotpassword />} />
       <Route path="/product/:id" element={<Singlepage />} />
+      <Route path="/products" element={<Products />} />
       <Route path="/order/:orderId" element={<OrderTrackingPage />} />
       <Route path="/orders" element={<OrderComponent />} />
       <Route element={<AuthOutlet fallbackPath="/login" />}>
