@@ -1,5 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchProductDetails, addToCart, fetchCart } from "../singleProduct";
+import { 
+  fetchProductDetails, 
+  addToCart, 
+  fetchCart, 
+  updateCart, 
+  clearCart, 
+  deleteProductFromCart, 
+  submitReview, 
+  fetchReviews, 
+  fetchSimilarProducts 
+} from "../singleProduct"; // Adjust the import path as needed
 
 interface Review {
   id: number;
@@ -81,8 +91,7 @@ const cartSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(
-        addToCart.pending, (state) => {
+      .addCase(addToCart.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
@@ -93,28 +102,72 @@ const cartSlice = createSlice({
           state.items.push(action.payload);
         }
       )
-      .addCase(
-        addToCart.rejected, (state, action) => {
+      .addCase(addToCart.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to add to cart";
       })
-      .addCase(
-        fetchCart.pending, (state) => {
+      .addCase(fetchCart.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(
         fetchCart.fulfilled,
-        (state, action: PayloadAction<Review[]>) => {
+        (state, action: PayloadAction<CartItem[]>) => {
           state.loading = false;
-          state.reviews = action.payload;
-          console.log("mmmm", state.reviews);
+          state.items = action.payload;
         }
       )
-      .addCase(
-        fetchCart.rejected, (state, action) => {
+      .addCase(fetchCart.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.error.message || "Failed to fetch reviews";
+        state.error = action.error.message || "Failed to fetch cart";
+      })
+      .addCase(updateCart.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        updateCart.fulfilled,
+        (state, action: PayloadAction<CartItem>) => {
+          state.loading = false;
+          const index = state.items.findIndex(item => item.id === action.payload.id);
+          if (index !== -1) {
+            state.items[index] = action.payload;
+          }
+        }
+      )
+      .addCase(updateCart.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to update cart";
+      })
+      .addCase(clearCart.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        clearCart.fulfilled,
+        (state) => {
+          state.loading = false;
+          state.items = [];
+        }
+      )
+      .addCase(clearCart.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to clear cart";
+      })
+      .addCase(deleteProductFromCart.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(
+        deleteProductFromCart.fulfilled,
+        (state, action: PayloadAction<{ productId: string }>) => {
+          state.loading = false;
+          state.items = state.items.filter(item => item.productId !== action.payload.productId);
+        }
+      )
+      .addCase(deleteProductFromCart.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message || "Failed to delete product from cart";
       });
   },
 });

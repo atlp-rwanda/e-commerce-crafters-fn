@@ -1,11 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import Cookies from 'js-cookie';
-// import { useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
-
 
 type ReviewData = {
   name: string;
@@ -26,7 +23,8 @@ export interface ProductState {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null;
 }
-const API_URL:any = `${process.env.BACKEND_API_URL}`;
+
+const API_URL: any = `${process.env.BACKEND_API_URL}`;
 export const submitReview = createAsyncThunk(
   'reviews/submitReview',
   async ({ productId, data }: { productId: string; data: ReviewData }, { rejectWithValue }) => {
@@ -38,7 +36,6 @@ export const submitReview = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       };
-      
 
       const response = await axios.post(apiUrl, data, config);
       const SuccessMessage = response.data.message || 'Failed to add to cart';
@@ -51,7 +48,7 @@ export const submitReview = createAsyncThunk(
             backgroundColor: "#FFFFFF",
             color: "green", 
           },
-        })
+        });
       }
       return response.data;
     } catch (error: any) {
@@ -71,8 +68,6 @@ export const submitReview = createAsyncThunk(
     }
   }
 );
-
-
 export const addToCart = createAsyncThunk(
   'cart/addToCart',
   async (cartItem: { userId: string; productId: string; quantity: number; price: number }) => {
@@ -107,37 +102,54 @@ export const addToCart = createAsyncThunk(
           },
         });
       }
-   
-  
-  
-
       throw Error('Failed to add to cart');
     }
   }
 );
-
 export const fetchCart = createAsyncThunk(
-  "cart/viewCart",
-async(userId: string) => {
-  try {
-    const apiUrl =`${API_URL}/products/${userId}`;
-    const response = await axios.get(apiUrl);
-    return response.data
-  }catch(error: any) {
-    return rejectWithValue(error.message)
+  'cart/fetchCart',
+  async (userId: string, { rejectWithValue }) => {
+    try {
+      const apiUrl = `${API_URL}/getcart/${userId}`;
+      const response = await axios.get(apiUrl);
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
   }
-})
-
+);
+export const updateCart = createAsyncThunk(
+  'cart/updateCart',
+  async (cartItem: { userId: string; productId: string; quantity: number }, { rejectWithValue }) => {
+    try {
+      const apiUrl = `${API_URL}/updatecart`;
+      const response = await axios.post(apiUrl, cartItem);
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+export const deleteProductFromCart = createAsyncThunk(
+  'cart/deleteProductFromCart',
+  async ({ userId, productId }: { userId: string; productId: string }, { rejectWithValue }) => {
+    try {
+      const apiUrl = `${API_URL}/cart/${userId}/product/${productId}`;
+      const response = await axios.delete(apiUrl);
+      return response.data;
+    } catch (error: any) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 export const fetchProductDetails = createAsyncThunk(
   'product/fetchProductDetails',
-  async (productId:string, { rejectWithValue }) => {
+  async (productId: string, { rejectWithValue }) => {
     try {
       const apiUrl = `${API_URL}/readProduct/${productId}`;
-      
       const response = await axios.get(apiUrl);
-      console.log("response")
       return response.data;
-    } catch (error:any) {
+    } catch (error: any) {
       return rejectWithValue(error.message);
     }
   }
@@ -145,12 +157,12 @@ export const fetchProductDetails = createAsyncThunk(
 
 export const fetchReviews = createAsyncThunk(
   'product/fetchProductDetail',
-  async (productId, { rejectWithValue }) => {
+  async (productId: string, { rejectWithValue }) => {
     try {
       const apiUrl = `${API_URL}/getfeedback/${productId}`;
       const response = await axios.get(apiUrl);
       return response.data;
-    } catch (error:any) {
+    } catch (error: any) {
       return rejectWithValue(error.message);
     }
   }
@@ -163,7 +175,7 @@ export const fetchSimilarProducts = createAsyncThunk(
       const apiUrl = `${API_URL}/similarproducts/${productId}`;
       const response = await axios.get<Product[]>(apiUrl);
       return response.data;
-    } catch (error:any) {
+    } catch (error: any) {
       return rejectWithValue(error.message);
     }
   }

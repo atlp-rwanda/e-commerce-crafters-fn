@@ -13,7 +13,7 @@ import Test from "../pages/Check";
 import Analytics from "../pages/Analytics";
 import AdminHome from "../pages/Admin/AdminHome";
 import Homepage from "../pages/Homepage";
-import Products from "../pages/ProductsPage";
+// import Products from "../pages/ProductsPage";
 import Location from "../pages/location"
 
 

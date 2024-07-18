@@ -1,54 +1,45 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import CartItemList from "../Components/Cart/CartItemList";
 import CartTotals from "../Components/Cart/CartTotals";
-import useFetch from "../Components/Checkout/UseFetch";
 import Footer from "../Components/Homepage/Homepage_footer";
 import Header from "../Components/Homepage/Homepage_header";
-import { useTranslation } from "react-i18next";
+import { fetchCart, updateCart, deleteProductFromCart} from "../Redux/Reducer/singleproductSlice"; 
+import { RootState } from "../Redux/store"; 
 
 const Cart = () => {
-  const {
-    cartItems,
-    setCartItems,
-    subTotal,
-    total,
-    discountPercentage,
-    deliveryFeePercentage,
-  } = useFetch(`http://localhost:5000/getcart/${userId}`);
+  const dispatch = useDispatch();
+  const userId = "userId"; // Replace with actual userId logic
 
-  const handleQuantityChange = (id: number, newQuantity: number) => {
-    fetch(`http://localhost:5000/updateProduct/${productId}`, {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ quantity: Math.max(1, newQuantity) }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("network response was not ok");
-        }
+  const cartState = useSelector((state: RootState) => state.cart);
+  const { items: cartItems, loading, error } = cartState;
 
-        return response.json();
-      })
-      .then((updatedItem) => {
-        setCartItems((products) =>
-          products.map((item) =>
-            item.id === id ? { ...item, quantity: updatedItem.quantity } : item
-          )
-        );
-      })
-      .catch((error) => console.error("Error updating quantity:", error));
+  useEffect(() => {
+    dispatch(fetchCart(userId));
+  }, [dispatch, userId]);
+
+  const handleQuantityChange = (id: string, newQuantity: number) => {
+    const product = cartItems.find(item => item.id === id);
+    if (product) {
+      dispatch(updateCart({ userId, productId: id, quantity: newQuantity }));
+    }
   };
 
-  const handleDelete = (id: number) => {
-    setCartItems((products) => products.filter((item) => item.id !== id));
+  const handleDelete = (id: string) => {
+    dispatch(deleteProductFromCart({ userId, productId: id }));
   };
-  const { t } = useTranslation();
+
+  const subTotal = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const discountPercentage = 5;
+  const deliveryFeePercentage = 3;
+  const total = subTotal * (1 - discountPercentage / 100) + subTotal * (deliveryFeePercentage / 100);
+
   return (
     <>
       <Header />
       <div className="w-[90%] mx-auto my-[50px] p-4">
         <h1 className="text-xl font-semibold ml-10">
-          {t("Shopping Cart")}{" "}
+          Shopping Cart{" "}
           <span className="bg-gray-200 py-[4px] px-4 font-bold rounded-lg">
             0{cartItems.length}
           </span>
