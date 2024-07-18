@@ -14,10 +14,10 @@ const Cart = () => {
     total,
     discountPercentage,
     deliveryFeePercentage,
-  } = useFetch("http://localhost:5000/products");
+  } = useFetch(`http://localhost:5000/getcart/${userId}`);
 
   const handleQuantityChange = (id: number, newQuantity: number) => {
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`http://localhost:5000/updateProduct/${productId}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ quantity: Math.max(1, newQuantity) }),
