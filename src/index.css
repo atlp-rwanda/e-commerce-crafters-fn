@@ -2,58 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-.progress-bar {
-  padding: 16px;
-  border-radius: 5px;
-  box-shadow: 5px;
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.fade-in {
+  animation: fadeIn 1s ease-in;
 }
 
-.progress-bar-title {
-  font-size: 20px;
-  font-weight: 700;
-  color: red;
-  margin-bottom: 16px;
+.lift-on-hover {
+  transition: all 0.2s ease-in-out;
 }
 
-.bar-item-info {
-  display: flex;
-  align-items: center;
-  column-gap: 6px;
-  margin-bottom: 8px;
-  gap: 100px;
-
+.lift-on-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.progress-bar-item{
-    display: flex;
-    gap: 100px;
+::-webkit-scrollbar {
+  height: 4px;
+  border-radius: 10px;
 }
-
-.bar-item-info-name,
-.bar-item-info-value {
-  color: black;
-  font-weight: 600;
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
 }
-
-.progress-bar-list {
-  display: grid;
-  row-gap: 20px;
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
 }
-
-.bar-item-full {
-  width: 50%;
-  height: 10px;
-  border-radius: 100vh;
-  background-color: gainsboro;
-  position: relative;
-}
-
-.bar-item-filled {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0;
-  border-radius: 100vh;
-  background-color: red;
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }

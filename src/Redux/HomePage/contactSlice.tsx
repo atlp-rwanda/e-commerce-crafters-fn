@@ -45,14 +45,17 @@ const contactSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(sendMessage.pending, (state) => {
+      .addCase
+      (sendMessage.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(sendMessage.fulfilled, (state) => {
+      .addCase(
+        sendMessage.fulfilled, (state) => {
         state.status = "succeeded";
         state.error = null;
       })
-      .addCase(sendMessage.rejected, (state, action) => {
+      .addCase(
+        sendMessage.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.payload as string;
       });

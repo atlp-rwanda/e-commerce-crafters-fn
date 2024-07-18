@@ -1,9 +1,8 @@
-import React from 'react'
+import React from "react";
+import SellerTable from "../Components/dashboard/SellerTable";
 
 const Users = () => {
-  return (
-    <div>Useraaas</div>
-  )
-}
+  return <SellerTable />;
+};
 
-export default Users
+export default Users;

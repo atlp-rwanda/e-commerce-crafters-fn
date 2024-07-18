@@ -8,6 +8,7 @@ interface MonthlySale {
 }
 
 interface TopProduct {
+  image: any;
   productId: string;
   name: string;
   totalRevenue: number;

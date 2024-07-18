@@ -47,7 +47,7 @@ const VendorSidebar = () => {
             </svg>
             
             ,
-            url: "/my-sales"
+            url: "/vendor/analytics"
         },
     ]
     return (

@@ -2,6 +2,7 @@ import React from 'react'
 import { useSelectFeddbackQuery } from '../../Redux/features/sellerSlice'
 import { FaStar } from "react-icons/fa";
 import WeeklyReport from '../../Components/Analytics/WeeklyReport';
+import SellerWeeklyReport from '../../Components/Analytics/SellerAnalytics/WeeklySellingReport';
 
 const VendorHome = () => {
     const { data: responseData, error, isLoading } = useSelectFeddbackQuery({})
@@ -79,7 +80,7 @@ const VendorHome = () => {
 
                 </div>
                 <div className='w-[60%]'>
-                <WeeklyReport/>
+                <SellerWeeklyReport/>
 
                 </div>
             </div>
@@ -90,7 +91,7 @@ const VendorHome = () => {
                             <span className='text-[16px] font-[600] text-white font-outfit'>Reviews</span>
                             <span className='text-[16px] font-[600] text-white font-outfit'>
                                 {isLoading ? (<h1>Loading</h1>) :(
-                                    responseData.feedback.filter((data: any) => data.Product.vendorId === "ae77853b-f3cf-4026-9a56-fd149d8ae84c").length
+                                    responseData.feedback.filter((data: any) => data.Product.vendorId === vendor.vendorId).length
 
                                 )}
                             </span>

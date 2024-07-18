@@ -14,23 +14,31 @@ import { AppDispatch, RootState } from "../../Redux/store";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { fetchWeeklyReport } from "../../Redux/Analytic/WeeklySellingSlice";
+import { useNavigate } from "react-router-dom";
 
 
 const WeeklyReport = () => {
 
+  const navigate = useNavigate()
   const dispatch: AppDispatch = useDispatch();
-  const { weeklySales, isLoading, error } = useSelector(
+  const { weeklySales, isLoading, error,data } = useSelector(
     (state: RootState) => state.weeklyReport
   );
+
 
   useEffect(() => {
   dispatch(fetchWeeklyReport())
   }, [dispatch])
   
-  const data = weeklySales.map((day) => ({
+  const datas = weeklySales.map((day) => ({
     name: day.day,
       TotalSales:day.totalSales
   }))
+
+  const handelRedirect = ()=>{
+    navigate('/vendor/weekly-details', {state:{datas:data}})
+
+  }
 
   return (
     <div
@@ -52,7 +60,7 @@ const WeeklyReport = () => {
         <BarChart
           width={500}
           height={300}
-          data={data}
+          data={datas}
           margin={{
             top: 5,
             right: 30,
@@ -65,7 +73,7 @@ const WeeklyReport = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="TotalSales" fill="#013362" barSize={30} />
+          <Bar dataKey="TotalSales" fill="#013362" barSize={30} onClick={handelRedirect} />
         </BarChart>
       </ResponsiveContainer>
     </div>

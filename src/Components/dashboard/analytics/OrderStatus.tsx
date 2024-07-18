@@ -1,4 +1,6 @@
-import React from "react";
+import { RootState } from "../../../Redux/store";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import {
   PieChart,
   Pie,
@@ -7,24 +9,90 @@ import {
   ResponsiveContainer,
   Tooltip,
 } from "recharts";
+import { fetchOrders } from "../../../Redux/Analytic/orderStatusSlice";
+import { AppDispatch } from "../../../Redux/store";
+import { Circles } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 
-interface OrderStatusProps {
-  statusCounts: { [key: string]: number };
-}
+// interface OrderStatusProps {
+//   statusCounts: { [key: string]: number };
+// }
 
-const OrderStatus: React.FC<OrderStatusProps> = ({ statusCounts }) => {
-  const colors = ["#FFC632", "#ED3333", "#17BF6B"];
+const OrderStatus: React.FC = () => {
+  const navigate = useNavigate();
+  const colors = ["#FFC632", "#17BF6B", "#ED3333"];
 
-  const data = Object.entries(statusCounts).map(([status, value], index) => ({
+  const dispatch: AppDispatch = useDispatch();
+  const { isLoading, data, error } = useSelector(
+    (state: RootState) => state.orderStatus
+  );
+  const [statusCounts, setStatusCounts] = useState<{ [key: string]: number }>(
+    {}
+  );
+
+
+
+  useEffect(() => {
+    dispatch(fetchOrders());
+  }, [dispatch]);
+
+
+  const handlePieClick = () => {
+    navigate("/admin/orderStatus",{state:{datas:data}})
+  }
+
+  useEffect(() => {
+    if (data) {
+      const counts: { [key: string]: number } = {};
+      data.forEach((order) => {
+        counts[order.status] = (counts[order.status] || 0) + 1;
+      });
+      setStatusCounts(counts);
+    }
+  }, [data]);
+
+  if (isLoading) {
+    return (
+      <div className="flex justify-center items-center">
+        <Circles visible height="80" width="80" color="#C9974C" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center  h-[90%]">
+        <div className="text-center">
+          <p className="text-red-600 font-semibold">
+            An error occurred. Please try again
+          </p>
+          <button
+            className="mt-3 px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary"
+            onClick={() => window.location.reload()}
+          >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  let statusCount = {
+    pending: statusCounts.pending,
+    delivered: statusCounts.delivered,
+    cancelled: statusCounts.cancelled,
+  };
+
+  const datas = Object.entries(statusCount).map(([status, value], index) => ({
     name: status,
     value,
     color: colors[index % colors.length],
   }));
 
   return (
-    <div className="mt-10 font-poppins w-[400px]">
-      <div className="flex flex-col w-[400px] m-auto h-[280px]  rounded-xl shadow-md bg-white">
-        <div className="pl-5 h-[30%]">
+    <div className="font-poppins">
+      <div className="flex flex-col w-full m-auto  bg-white rounded-xl shadow-md ">
+        <div className="pl-5">
           <h2 className="font-bold pt-3">Order status</h2>
           <p>Total Earnings of the Month</p>
         </div>
@@ -35,13 +103,14 @@ const OrderStatus: React.FC<OrderStatusProps> = ({ statusCounts }) => {
                 contentStyle={{ background: "white", borderRadius: "5px" }}
               />
               <Pie
-                data={data}
+                data={datas}
                 innerRadius={"60"}
                 outerRadius={"80"}
-                paddingAngle={5}
+                paddingAngle={0}
                 dataKey="value"
+                onClick={handlePieClick}
               >
-                {data.map((item) => (
+                {datas.map((item) => (
                   <Cell key={item.name} fill={item.color} />
                 ))}
               </Pie>
@@ -59,7 +128,7 @@ const OrderStatus: React.FC<OrderStatusProps> = ({ statusCounts }) => {
             </span>
             <span className="flex justify-center items-center">
               <span className=" bg-[#ED3333] w-4 h-4 inline-block rounded-full " />
-              <span className="pl-2">cancelled</span>
+              <span className="pl-2 ">cancelled</span>
             </span>
           </div>
         </div>
