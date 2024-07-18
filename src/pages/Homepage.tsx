@@ -6,12 +6,12 @@ import HeroSection from '../Components/Homepage/HeroSection';
 import BestDeals from '../Components/Homepage/BestDeals';
 import AboutCrafters from '../Components/Homepage/AboutCrafters'
 import PopularProducts from '../Components/Homepage/PopularProducts';
+
 import VoiceflowChatWidget from '../Components/ChatWidget';
-
-
 const Homepage: React.FC = () => {
   return (
     <div>
+      <VoiceflowChatWidget/>
       <Header />
       <HeroSection />
       <PopularProducts />
