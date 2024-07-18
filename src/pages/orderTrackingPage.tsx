@@ -7,6 +7,7 @@ import Navbar from "../Components/navBar";
 import { getCookie } from "../Components/OrderTracking/authUtils";
 import { useGetOrderQuery, useGetUserInfoQuery } from "../Redux/OrderSlice";
 import { useParams } from "react-router-dom";
+import Header from "../Components/Homepage/Homepage_header";
 
 export const OrderTrackingPage = () => {
 
@@ -29,12 +30,12 @@ export const OrderTrackingPage = () => {
 
   const { data: userInfo, error: userInfoError, isLoading: userInfoLoading } = useGetUserInfoQuery({ userId }, { skip: !userId });
 
-  if(orderLoading) return <div>Loading order data...</div>
+
   if(orderError) return <div>Error loading order</div>
   return (
     <>
-      <Navbar />
-      <div className="flex flex-col gap-20 h-screen p-10 lg:p-20">
+      <Header/>
+      <div className="flex flex-col gap-20 h-screen p-10 lg:p-20 mt-20">
         <div className="order-details-container border-b pb-8">
           <OrderDetails orderId={orderId} />
           <OrderStatus orderId={orderId} currentStatus={orderStatus} />

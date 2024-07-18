@@ -58,7 +58,7 @@ const Signin = () => {
           if (response.user.role === "buyer") {
             navigate("/products");
           } else if (response.user.role === "vendor") {
-            navigate("/vendor");
+            navigate("/user");
           } else if (response.user.role === "admin") {
             navigate("/admin");
           }
@@ -82,7 +82,6 @@ const Signin = () => {
         setError("Invalid credentials, Try again");
         setErr(false);
       }
-
     }
   };
 

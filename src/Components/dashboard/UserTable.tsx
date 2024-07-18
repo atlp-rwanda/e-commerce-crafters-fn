@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelectUsersQuery } from "../../Redux/Admin/usersSlice";
 import { Circles } from "react-loader-spinner";
+import { Link } from "react-router-dom";
 
 interface User {
   name: string;
@@ -60,9 +61,9 @@ const UserTable: React.FC = () => {
             Vendors ({sellersCount})
           </span>
         </div>
-        <a href={viewAllUrl}>
+        <Link to={viewAllUrl}>
           <button className="sm:text-sm text-secondary">View all</button>
-        </a>
+        </Link>
       </div>
       <table className="w-full">
         <thead>

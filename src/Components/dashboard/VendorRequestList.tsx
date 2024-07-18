@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelectRequestsQuery } from "../../Redux/Admin/sellersSlice";
 import { Circles } from "react-loader-spinner";
+import { Link } from "react-router-dom";
 
 interface Seller {
   storeName: string;
@@ -25,9 +26,9 @@ const VendorRequestList: React.FC = () => {
         <span className="px-2 text-sm lg:p-2 lg:px-4 rounded-[6px] bg-secondary text-white">
           Vendor Applications ({sellersCount})
         </span>
-        <a href="/admin/requests">
+        <Link to="/admin/requests">
           <button className="sm:text-sm text-secondary">View all</button>
-        </a>
+        </Link>
       </div>
       <table className="w-full">
         <thead>

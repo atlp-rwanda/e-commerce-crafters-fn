@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice,PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 
 interface WeeklySales {
@@ -26,7 +26,9 @@ export const fetchWeeklyReport = createAsyncThunk(
       "http://localhost:5000/OverallWeeklySellingReport/"
     );
 
-    return response.data;
+ 
+      return response.data;
+      
   }
 );
 
@@ -35,28 +37,20 @@ const weekSalesSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder
-      .addCase(fetchWeeklyReport.pending, (state) => {
+    builder.addCase(fetchWeeklyReport.pending, (state) => {
         state.isLoading = true;
-        state.error = false;
-      })
-      .addCase(
-        fetchWeeklyReport.fulfilled,
-        (
-          state,
-          action: PayloadAction<{ data: any[]; weeklySales: WeeklySales[] }>
-        ) => {
-          state.isLoading = false;
-          state.data = action.payload.data;
-          state.weeklySales = action.payload.weeklySales;
-          state.error = false;
-        }
-      )
-      .addCase(fetchWeeklyReport.rejected, (state, action) => {
+        state.error=false
+    }).addCase(fetchWeeklyReport.fulfilled, (state, action: PayloadAction<{ data: any[]; weeklySales: WeeklySales[] }>) => {
+        state.isLoading = false;
+        state.data = action.payload.data;
+        state.weeklySales = action.payload.weeklySales;
+        state.error=false
+    }).addCase(fetchWeeklyReport.rejected, (state, action) => {
         state.isLoading = false;
         state.error = true;
-      });
+    })
   },
 });
+
 
 export default weekSalesSlice.reducer;
