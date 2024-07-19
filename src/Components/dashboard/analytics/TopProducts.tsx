@@ -3,8 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSellingReport } from "../../../Redux/Analytic/SellingReportSlice";
 import { AppDispatch, RootState } from "../../../Redux/store";
 import { Circles } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
+
 
 const TopProduct: React.FC = () => {
+  const navigate=useNavigate()
   const dispatch = useDispatch<AppDispatch>();
   const { topProducts, isLoading, error } = useSelector(
     (state: RootState) => state.sellingReport
@@ -13,6 +16,10 @@ const TopProduct: React.FC = () => {
   useEffect(() => {
     dispatch(fetchSellingReport());
   }, [dispatch]);
+
+  const handleTopProducts = () => {
+    navigate("/admin/topProduct",{state:{datas:topProducts}})
+  }
 
   if (isLoading) {
     return (
@@ -88,7 +95,7 @@ const TopProduct: React.FC = () => {
                 >
                   {"0" + num++}
                 </th>
-                <td className="px-6 py-4"> {item.name}</td>
+                <td className="px-6 py-4 cursor-pointer hover:text-blue-950" onClick={handleTopProducts}> {item.name}</td>
                 <td className="px-6 py-4 w-[50%]">
                   <div className="w-full h-1 bg-gray-700 rounded-md relative">
                     <div

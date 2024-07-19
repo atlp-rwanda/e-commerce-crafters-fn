@@ -10,6 +10,10 @@ import Footer from "../Components/Homepage/Homepage_footer";
 import LoadingFrame from "../Constants/frameLoader";
 import { useTranslation } from "react-i18next";
 
+import NavBar from "../Components/navBar";
+import Header from "../Components/Homepage/Homepage_header";
+
+
 interface Product {
   productId: string;
   name: string;

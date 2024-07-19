@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState } from 'react'
 
-import { useLocation, useNavigate } from "react-router-dom";
-import Logout from "../../services/Logout";
+import { useLocation, useNavigate } from 'react-router-dom'
+import Logout from '../../services/Logout'
+
 
 const Sidebar = () => {
   const location = useLocation();
@@ -271,11 +272,13 @@ const Sidebar = () => {
     },
   ];
 
-  const handleNavigate = (data: any) => {
-    setActive(data.id);
-    navigate(data.location);
-  };
-  const handelLogout = Logout();
+    const handleNavigate = (data: any) => {
+        setActive(data.id);
+        navigate(data.location);
+    };
+    const handelLogout = Logout()
+
+
 
   return (
     <div className="hidden lg:flex fixed flex-col gap-[40px] bg-primary p-4 lg:w-[22%] h-full xl:w-[18%]">
@@ -350,13 +353,12 @@ const Sidebar = () => {
             />
           </svg>
 
-          <span className="text-white text-[16px] font-[500] font-outfit">
-            Sign Out
-          </span>
-        </div>
-      </div>
-    </div>
-  );
-};
+                    <span className='text-white text-[16px] font-[500] font-outfit'>Sign Out</span>
 
-export default Sidebar;
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default Sidebar

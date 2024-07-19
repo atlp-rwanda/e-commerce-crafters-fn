@@ -14,16 +14,22 @@ import {
 import { fetchSellingReport } from "../../../Redux/Analytic/SellingReportSlice";
 import { AppDispatch } from "../../../Redux/store";
 import { Circles } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 
 const SellingReport = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { monthlySales, isLoading, error } = useSelector(
+  const navigate = useNavigate();
+  const { monthlySales, data, isLoading, error } = useSelector(
     (state: RootState) => state.sellingReport
   );
 
   useEffect(() => {
     dispatch(fetchSellingReport());
   }, [dispatch]);
+
+  const handleBarClick = () => {
+    navigate("/admin/annualSales", { state: { datas: data } });
+  };
 
   if (isLoading) {
     return (
@@ -56,6 +62,30 @@ const SellingReport = () => {
     TotalSales: month.totalSales,
     Income: month.income,
   }));
+
+  interface Sale {
+    product: string;
+    quantity: number;
+    price: number;
+    total: number;
+    date: string;
+  }
+
+  const datas: Sale[] = data.map(
+    (totalSale: {
+      name: any;
+      quantity: any;
+      price: any;
+      Total: any;
+      date: any;
+    }) => ({
+      product: totalSale.name,
+      quantity: totalSale.quantity,
+      price: totalSale.price,
+      total: totalSale.quantity * totalSale.price,
+      date: totalSale.date,
+    })
+  );
 
   return (
     <div
@@ -92,12 +122,18 @@ const SellingReport = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="TotalSales" fill="#013362" barSize={30} />
+          <Bar
+            dataKey="TotalSales"
+            fill="#013362"
+            barSize={30}
+            onClick={handleBarClick}
+          />
           <Bar
             dataKey="Income"
             fill="#C9974C"
             background={{ fill: "#eee" }}
             barSize={30}
+            onClick={handleBarClick}
           />
         </BarChart>
       </ResponsiveContainer>

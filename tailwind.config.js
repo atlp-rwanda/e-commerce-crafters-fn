@@ -24,21 +24,21 @@ module.exports = {
         blue: {
           100: '#24ABE3',
         },
-        border: '#666666',
+        border: "#666666"
       },
-      fontFamily: {
-        outfit: ['Outfit', 'sans-serif'],
-        poppins: ['Poppins', 'sans-serif'],
+      fontFamily:{
+          outfit: ['Outfit', 'sans-serif'],
+          poppins: ['Poppins', 'sans-serif'],
       },
       screens: {
-        sm: '360px',
-        md: '540px',
-        lg: '768px',
-        xl: '1024px',
+        'sm': '360px', 
+        'md': '540px', 
+        'lg': '768px',
+        'xl': '1024px', 
         '2xl': '1280px',
         '3xl': '1440px',
-        '4xl': '1600px',
-        '5xl': '1920px',
+        '4xl': '1600px', 
+        '5xl': '1920px', 
       },
     },
   },
