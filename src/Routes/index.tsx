@@ -31,7 +31,6 @@ const AppRoutes: React.FC = () => (
       <Route path="" element={<Homepage />} />
       <Route path="/login" element={<Signin />} />
       <Route path="/checkout" element={<Checkout />} />
-      <Route path="/cart" element={<Cart />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/2fa" element={<VerifyCode />} />
       <Route path="/verifyemail" element={<VerifyEmail />} />
@@ -42,6 +41,7 @@ const AppRoutes: React.FC = () => (
       <Route path="/order-tracking" element={<OrderTrackingPage />} />
       <Route path="/forgot-password" element={<Forgotpassword />} />
       <Route element={<AuthOutlet fallbackPath="/login" />}>
+      <Route path="/cart" element={<Cart />} />
         <Route path="/admin" element={<Admin />}>
           <Route index element={<AdminHome />} />
           <Route path="users" element={<Users />} />

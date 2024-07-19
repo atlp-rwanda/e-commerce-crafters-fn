@@ -2,7 +2,7 @@ import React from "react";
 
 interface CartItemListProps {
   handleQuantityChange: (id: number, newQuantity: number) => void;
-  cartItems: Product[];
+  cartItems: any[];
   handleDelete: (id: number) => void;
 }
 
@@ -12,10 +12,10 @@ const CartItemList: React.FC<CartItemListProps> = ({
   handleDelete,
 }) => {
   return (
-    <div className="mx-11">
+    <div className="mx-11 w-1/2">
       {cartItems.map((item) => (
         <div
-          className="flex justify-between w-[800px] items-center mb-7 py-[15px] px-[20px] bg-gray-100 rounded-xl text-lg"
+          className="flex justify-between items-center mb-7 py-[15px] px-[20px]  rounded-xl text-lg"
           key={item.id}
         >
           <div className="flex items-center justify-between">
