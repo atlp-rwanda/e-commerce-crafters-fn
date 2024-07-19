@@ -9,8 +9,10 @@ import Pagination from "../Components/ProductsPage/pagination";
 import Footer from "../Components/Homepage/Homepage_footer";
 import LoadingFrame from "../Constants/frameLoader";
 import { useTranslation } from "react-i18next";
+
 import NavBar from "../Components/navBar";
 import Header from "../Components/Homepage/Homepage_header";
+
 
 interface Product {
   productId: string;
@@ -26,8 +28,7 @@ const Products = () => {
   const activeCategory: string | null = useSelector(
     (state: RootState) => state.category.activeCategory
   );
-  const { data: products, isLoading, isError } = useAllProductsQuery({});
-  // console.log(products)
+  const { data: products, isLoading, isError } = useSelectProductsQuery({});
   const productsPerPage = 9;
   const currentPage = useSelector(
     (state: RootState) => state.pagination.currentPage
@@ -121,7 +122,7 @@ const Products = () => {
   return (
     <div className="flex flex-col">
       <Header />
-      <div className="flex flex-col gap-[20px] px-10 p-6 mb-20">
+      <div className="mt-32 flex flex-col gap-[20px] px-10 p-6 mb-20">
         <div className="flex flex-col-reverse gap-4 justify-between items-center md:flex-row">
           <div className="flex flex-row gap-[14px] items-center font-outfit">
             <span
@@ -132,7 +133,7 @@ const Products = () => {
             </span>
             <span className="text-black font-[800]">/</span>
             <span className="text-base text-black font-[800] md:text-[18px]">
-              {t(activeCategory || "All Products")}
+              {activeCategory || t("All Products")}
             </span>
           </div>
           <Search />

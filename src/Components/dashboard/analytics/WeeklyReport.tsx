@@ -36,6 +36,7 @@ const WeeklyReport = () => {
      TotalSales: day.totalSales,
    }));
   
+
   return (
     <div className="flex  flex-col h-full w-full m-auto text-xs  rounded-lg  bg-white pb-3">
       <div className="py-2 pl-10 relative">

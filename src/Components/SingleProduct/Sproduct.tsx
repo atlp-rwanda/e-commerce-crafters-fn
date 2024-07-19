@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import heart from "../../asset/images/products/heart_.png";
+import heart from "../../asset/images/heart 1.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -33,6 +33,8 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
   const userData: any = useAuthUser();
   const [isLoading, setLoading] = useState<boolean>(false);
   const userId = userData ? userData.userId : "";
+
+  const [showFullDescription, setShowFullDescription] = useState<boolean>(false); 
 
   const getUserIdFromToken = (): string | null => {
     const token = localStorage.getItem('token');
@@ -211,11 +213,18 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
   const images = typeof product.image === 'string' ? JSON.parse(product.image) : product.image;
 
   return (
-    <div className='flex justify-center md:flex-row lg:flex-col items-center flex-col'>
+    <div className='flex justify-center md:flex-row lg:flex-col items-center flex-col pt-32'>
       <div className='flex justify-center gap-5 md:flex-row md:w-4/5 flex-col'>
         <div className="grid grid-cols-1 justify-center p-5 gap-y-5 items-center md:w-[70%]">
           <div className='flex justify-center items-center relative'>
-            <img src={selectedImage} alt="Selected product" className='min-w-[300px] max-w-[100%] sm:h-[300px] w-full md:w-[95%] md:h-[400px] h-[200px] object-cover' />
+          <div className="w-full">
+      <img
+        src={selectedImage}
+        alt="Selected product"
+        className='min-w-[300px] max-w-[100%] sm:h-[300px] w-full md:w-[95%] md:h-[350px] h-[160px] object-cover'
+      />
+    </div>
+
             <div className="absolute bottom-4 translate-x-6 left-6">
               <div className='flex justify-center mt-4'>
               {images && images.map((image: string, index: number) => (
@@ -244,12 +253,14 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
                 src={image}
                 alt={`Thumbnail ${index + 1}`}
                 onClick={() => handleImageClick(image)}
-                className="cursor-pointer w-full md:w-[100%] rounded-md h-[10vh] md:h-[15vh] object-cover"
+                className="cursor-pointer w-full md:w-[70%] rounded-md h-[10vh] md:h-[15vh] object-fill"
               />
             ))}
           </div>
         </div>      <div className='md:w-1/3 w-full'>
-          <div className='flex flex-col gap-6 p-5 mt-10'>
+
+          <div className='flex flex-col gap-4 p-5 mt-10'>
+
             <h1><span className='text-[#E4A951]'>Stock</span> : <span className='font-extrabold text-blue-700'>{product.Vendor?.storeName}</span></h1>
             <h1 className='font-extrabold text-xl'>{product.name}</h1>
             <div className='bg-[#D9D9D9] p-2 rounded-md text-sm w-28 text-center font-bold'>{product.quantity} IN STOCK</div>
@@ -272,9 +283,26 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
               </div>
             </div>
             <div>
-              <h2 className='text-[#E4A951]'>Description</h2>
-              <p>{product.description}</p>
-            </div>
+  <h2 className="text-[#E4A951]">Description</h2>
+  {product.description ? (
+    showFullDescription ? (
+      <p>{product.description}</p>
+    ) : (
+      <div className="flex flex-col">
+        <p>{product.description.slice(0, 50)}...</p>
+        <button
+          onClick={() => setShowFullDescription(!showFullDescription)}
+          className="text-[#E4A951]"
+        >
+          {showFullDescription ? 'Show Less' : 'Show More'}
+        </button>
+      </div>
+    )
+  ) : (
+    <p>No description available.</p>
+  )}
+</div>
+
             <div className='flex-container flex  gap-4  w-full justify-center'>
               <div className="flex gap-4 border-2 justify-around items-center  rounded-lg p-2 md:w-[180px] bg-[#F7F7F7] font-bold">
                 <h3 className="">Quantity</h3>
@@ -297,7 +325,15 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
                 </button>
               </div>
             </div>
-            <button onClick={handleAddToCart} disabled={isButtonDisabled} className={`bg-[#E4A951] p-3 rounded-lg w-full ${isLoadingCart ? ' cursor-not-allowed' : 'cursor-pointer'}`}>{isLoadingCart ? 'Adding ...' : 'Add to Cart'}</button>
+
+            <button
+  onClick={handleAddToCart}
+  disabled={isButtonDisabled || isLoadingCart}
+  className={`bg-orange-400 p-3 rounded-lg w-full ${isButtonDisabled || isLoadingCart ? 'cursor-not-allowed opacity-50' : 'cursor-pointer'}`}
+>
+  {isLoadingCart ? 'Adding ...' : 'Add to Cart'}
+</button>
+
           </div>
         </div>
       </div>
