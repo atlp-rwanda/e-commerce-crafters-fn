@@ -8,6 +8,8 @@ import {
 import Pusher from "pusher-js";
 import { isVendor, getCookie, getToken } from "./authUtils";
 import { ThreeDots } from "react-loader-spinner";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const pusher = new Pusher(process.env.PUSHER_KEY as string, {
   cluster: process.env.PUSHER_CLUSTER as string,
@@ -78,7 +80,7 @@ const OrderStatus: React.FC<OrderStatusProps> = ({
   const handleUpdateStatus = async () => {
     const nextStatus = getNextStatus(orderStatus);
     if (!nextStatus) {
-      setUpdateMessage("No further status updates available");
+      toast.info("No further status updates available");
       return;
     }
 
@@ -86,7 +88,7 @@ const OrderStatus: React.FC<OrderStatusProps> = ({
       setUpdateMessage(`Updating status to ${nextStatus}...`);
       const token = getToken();
       if (!token) {
-        setUpdateMessage('No authentication token found');
+        toast.error('No authentication token found');
         return;
       }
 
@@ -95,10 +97,10 @@ const OrderStatus: React.FC<OrderStatusProps> = ({
         orderId,
         status: nextStatus,
       }).unwrap();
-      setUpdateMessage(`Status updated to ${nextStatus} successfully!`);
+      toast.success(`Status updated to ${nextStatus} successfully!`);
     } catch (error: any) {
       console.error(error);
-      setUpdateMessage(`Failed to update status: ${error.message}`);
+      toast.error(`Failed to update status: ${error.message}`);
     }
   }
 
@@ -107,6 +109,7 @@ const OrderStatus: React.FC<OrderStatusProps> = ({
 
   return (
     <>
+      <ToastContainer/>
       <div className="flex items-center justify-center mt-8 gap-14 font-outfit">
         {statuses.map((status, index) => (
           <div key={status} className="flex items-center">

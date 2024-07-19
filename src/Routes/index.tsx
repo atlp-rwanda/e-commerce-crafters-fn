@@ -24,7 +24,7 @@ import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
 import Singlepage from "../pages/singlePage";
 import Requests from "../pages/Requests";
-import Chat from "../pages/chat/Chat";
+import AdminSettings from "../Components/dashboard/AdminSettings";
 import Forgotpassword from "../Lib/ForgotPassword";
 import User from "../pages/User";
 import Sellers from "../pages/Sellers";
@@ -34,6 +34,8 @@ import OrderStatusTable from "../Components/Analytics/SellerAnalytics/OrderTable
 import SalesPreview from "../Components/Analytics/SellerAnalytics/SalesPreview";
 import AdminSettings from "../Components/dashboard/AdminSettings";
 import VendorAnalytics from '../pages/vendor/VendorAnalytics';
+import Chat from "../pages/chat/Chat";
+import OrderComponent from "../Components/orders";
 
 
 const AppRoutes: React.FC = () => (
@@ -47,14 +49,13 @@ const AppRoutes: React.FC = () => (
       <Route path="/2fa" element={<VerifyCode />} />
       <Route path="/verifyemail" element={<VerifyEmail />} />
       <Route path="/authgoogle" element={<AuthGoogle />} />
-      <Route path="/singleproduct" element={<Singlepage />} />
       <Route path="/products" element={<Products />} />
-      <Route path="/forgot-password" element={<Forgotpassword />} />
       <Route path="/product/:id" element={<Singlepage />} />
       <Route path="/order-tracking" element={<OrderTrackingPage />} />
       <Route path="/forgot-password" element={<Forgotpassword />} />
+      <Route path="/order" element={<OrderComponent/>}/>
       <Route element={<AuthOutlet fallbackPath="/login" />}>
-        <Route path="/chat" element={<Chat />} />
+      <Route path='/chat' element={<Chat />} />
         <Route path="/admin" element={<Admin />}>
           <Route index element={<AdminHome />} />
           <Route path="users" element={<Users />} />
@@ -80,7 +81,6 @@ const AppRoutes: React.FC = () => (
         <Route path="/vendor-single-product/:id" element={<VendorSingleProduct />} />
       </Route>
     </Routes>
-
   </div>
 );
 

@@ -8,7 +8,7 @@ import { getCookie } from "../Components/OrderTracking/authUtils";
 import { useGetOrderQuery, useGetUserInfoQuery } from "../Redux/OrderSlice";
 
 export const OrderTrackingPage = () => {
-      const orderId = "526c0f63-bf14-4ca9-8655-23ea742e3b24";
+      const orderId = "2b701ee8-913f-422f-8f23-902a7687719a";
     // const orderId = "3945e594-cc56-41d1-9c6a-a056cc848a05"; shipped
   const phoneNumber = "0787990099";
   const [userId, setUserId] = useState('');
@@ -49,4 +49,3 @@ export const OrderTrackingPage = () => {
     </>
   );
 };
-
