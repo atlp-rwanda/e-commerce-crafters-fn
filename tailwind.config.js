@@ -7,6 +7,19 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+
+        
+        green: {
+        200: '#46EE37',
+        },
+        
+        
+        blue: {
+          100: '#24ABE3',
+        },
+        border: '#666666',
+
+
         primary: 'var(--color-primary)',
         secondary: 'var(--color-secondary)',
         white: 'var(--color-white)',
@@ -15,6 +28,9 @@ module.exports = {
         gray: {
           100: 'var(--color-gray-100)',
           200: 'var(--color-gray-200)',
+          300: '#797979',
+          400: '#AEAEAE',
+          500: '#F7F7F7',
           300: '#F7F7F7',
           400: '#797979'
         },
@@ -22,7 +38,6 @@ module.exports = {
         bgwhite: 'var(--color-bgwhite)',
         textprimary:'var(--color-textprimary)',
         blue: '#24ABE3',
-        
       },
       fontFamily:{
           outfit: ['Outfit', 'sans-serif'],
