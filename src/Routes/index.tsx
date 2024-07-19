@@ -15,7 +15,6 @@ import Analytics from "../pages/Analytics";
 import AdminHome from "../pages/Admin/AdminHome";
 import Homepage from "../pages/Homepage";
 import Products from "../pages/ProductsPage";
-import SingleProduct from "../pages/SingleProduct";
 import { OrderTrackingPage } from "../pages/orderTrackingPage";
 import Cart from "../pages/Cart";
 import Checkout from "../pages/Checkout";
@@ -23,6 +22,8 @@ import Singlepage from "../pages/singlePage";
 import Requests from "../pages/Requests";
 import AdminSettings from "../Components/dashboard/AdminSettings";
 import Forgotpassword from "../Lib/ForgotPassword";
+import Chat from "../pages/chat/Chat";
+import OrderComponent from "../Components/orders";
 
 const AppRoutes: React.FC = () => (
   <div>
@@ -37,11 +38,12 @@ const AppRoutes: React.FC = () => (
       <Route path="/verifyemail" element={<VerifyEmail />} />
       <Route path="/authgoogle" element={<AuthGoogle />} />
       <Route path="/products" element={<Products />} />
-      <Route path="/singleproduct" element={<Singlepage />} />
-      <Route path="/product/:id" element={<SingleProduct />} />
+      <Route path="/product/:id" element={<Singlepage />} />
       <Route path="/order-tracking" element={<OrderTrackingPage />} />
       <Route path="/forgot-password" element={<Forgotpassword />} />
+      <Route path="/order" element={<OrderComponent/>}/>
       <Route element={<AuthOutlet fallbackPath="/login" />}>
+      <Route path='/chat' element={<Chat />} />
         <Route path="/admin" element={<Admin />}>
           <Route index element={<AdminHome />} />
           <Route path="users" element={<Users />} />

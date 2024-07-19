@@ -2,9 +2,8 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setActiveCategory } from "../Redux/productsPage/categorySlice";
 import { RootState } from "../Redux/store";
-import Navbar from "../Components/navBar";
 import Search from "../Components/ProductsPage/searchProduct";
-import { useSelectProductsQuery } from "../Redux/productsPage/productSlice";
+import { useAllProductsQuery } from "../Redux/productsPage/productSlice";
 import ProductCard from "../Components/ProductsPage/productCard";
 import Pagination from "../Components/ProductsPage/pagination";
 import Footer from "../Components/Homepage/Homepage_footer";
@@ -118,8 +117,8 @@ const Products = () => {
 
   return (
     <div className="flex flex-col">
-      <Navbar />
-      <div className="flex flex-col gap-[20px] px-10 p-6 mb-20">
+      <Header />
+      <div className="mt-32 flex flex-col gap-[20px] px-10 p-6 mb-20">
         <div className="flex flex-col-reverse gap-4 justify-between items-center md:flex-row">
           <div className="flex flex-row gap-[14px] items-center font-outfit">
             <span
