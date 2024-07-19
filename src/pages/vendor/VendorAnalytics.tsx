@@ -9,9 +9,8 @@ import SellerOrderStatus from "../../Components/Analytics/SellerAnalytics/Seller
 import SellerSellingReport from "../../Components/Analytics/SellerAnalytics/AnnualSellingReport";
 import { useNavigate } from "react-router-dom";
 
-
 const VendorAnalytics = () => {
-    const navigate = useNavigate() 
+  const navigate = useNavigate();
   const { data: sellers = [], refetch: refetchSellers } = useSelectStoresQuery(
     {}
   );
@@ -31,7 +30,6 @@ const VendorAnalytics = () => {
     refetchUsers();
     refetchOrders();
   }, [refetchSellers, refetchUsers, refetchOrders]);
-
 
   const cardData = [
     {
@@ -218,23 +216,14 @@ const VendorAnalytics = () => {
   ];
   return (
     <div className="items-center flex flex-col md:w-full xl:ml-[5%] xl:mt-5">
-      <div
-        
-        className="grid gap-5 sm:grid-cols-2 grid-cols-1 md:w-full"
-      >
-        {cardData.map((item, index) => (
-          <InteractionCard key={index} data={item} />
-        ))}
-      </div>
       <div className="grid grid-cols-2 gap-[10px]">
+        <div className=" w-full">
+          <SellerOrderStatus />
+        </div>
 
-      <div className=" w-full">
-        <SellerOrderStatus />
-      </div>
-
-      <div className="mt-5 w-full">
-        <SellerTopProduct />
-      </div>
+        <div className="mt-5 w-full">
+          <SellerTopProduct />
+        </div>
       </div>
 
       <div className="mt-5 w-full mb-8">

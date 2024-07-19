@@ -11,7 +11,7 @@ const VendorHome = () => {
     const cardReview = [
         {
             label: "Reviews",
-            number: 104,
+            number: 4,
             icon: <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="32" height="32" rx="8" fill="#F2F2F2" />
                 <path opacity="0.4" d="M20.9984 11.9667C20.9484 11.9583 20.8901 11.9583 20.8401 11.9667C19.6901 11.925 18.7734 10.9833 18.7734 9.81666C18.7734 8.62499 19.7318 7.66666 20.9234 7.66666C22.1151 7.66666 23.0734 8.63332 23.0734 9.81666C23.0651 10.9833 22.1484 11.925 20.9984 11.9667Z" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round" />
@@ -24,7 +24,7 @@ const VendorHome = () => {
         },
         {
             label: "Purchases",
-            number: 50,
+            number: 5,
             icon: <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="32" height="32" rx="8" fill="#F2F2F2" />
                 <path opacity="0.4" d="M20.9984 11.9667C20.9484 11.9583 20.8901 11.9583 20.8401 11.9667C19.6901 11.925 18.7734 10.9833 18.7734 9.81666C18.7734 8.62499 19.7318 7.66666 20.9234 7.66666C22.1151 7.66666 23.0734 8.63332 23.0734 9.81666C23.0651 10.9833 22.1484 11.925 20.9984 11.9667Z" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round" />
@@ -37,7 +37,7 @@ const VendorHome = () => {
         },
         {
             label: "Orders",
-            number: 48,
+            number: 4,
             icon: <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="32" height="32" rx="8" fill="#F2F2F2" />
                 <path opacity="0.4" d="M20.9984 11.9667C20.9484 11.9583 20.8901 11.9583 20.8401 11.9667C19.6901 11.925 18.7734 10.9833 18.7734 9.81666C18.7734 8.62499 19.7318 7.66666 20.9234 7.66666C22.1151 7.66666 23.0734 8.63332 23.0734 9.81666C23.0651 10.9833 22.1484 11.925 20.9984 11.9667Z" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round" />
@@ -50,7 +50,7 @@ const VendorHome = () => {
         },
         {
             label: "Transactions",
-            number: 18000,
+            number: 7,
             icon: <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="32" height="32" rx="8" fill="#F2F2F2" />
                 <path opacity="0.4" d="M20.9984 11.9667C20.9484 11.9583 20.8901 11.9583 20.8401 11.9667C19.6901 11.925 18.7734 10.9833 18.7734 9.81666C18.7734 8.62499 19.7318 7.66666 20.9234 7.66666C22.1151 7.66666 23.0734 8.63332 23.0734 9.81666C23.0651 10.9833 22.1484 11.925 20.9984 11.9667Z" stroke="#292D32" stroke-linecap="round" stroke-linejoin="round" />
