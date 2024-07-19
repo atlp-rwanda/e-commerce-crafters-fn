@@ -1,3 +1,6 @@
+import AuthSlice from "./features/AuthSlice";
+import SellerOrderStatusSliceReducer from "../Redux/Analytic/SellerAnalytics/OrderStatusSlice"
+import SellerWeekSalesSliceReducer from "../Redux/Analytic/SellerAnalytics/WeekSellingSlice";
 import { configureStore, Action } from "@reduxjs/toolkit";
 import { ThunkAction } from "redux-thunk";
 import productsImagesReducer from "./features/ProductsImagesSlice";
@@ -30,10 +33,18 @@ export const store = configureStore({
     search: searchReducer,
     popularProducts: popularProductsReducer,
     contact: contactReducer,
-    cart: cartReducer,
+
     orderStatus: OrderStatusSlice,
     sellingReport: sellingReportReducer,
     weeklyReport: WeeklySellingReducer,
+    sellerSellingReport: sellingReportReducer,
+    SellerOrderStatus: SellerOrderStatusSliceReducer,
+    SellerWeeklySales: SellerWeekSalesSliceReducer,
+    cart: cartReducer,
+    // orderStatus: OrderStatusSlice,
+    // sellingReport: sellingReportReducer,
+    // weeklyReport: WeeklySellingReducer,
+    productsImages: productsImagesReducer,
     similarProducts: similarScile,
   },
   middleware: (getDefaultMiddelware) =>

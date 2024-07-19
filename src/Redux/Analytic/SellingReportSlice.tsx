@@ -8,6 +8,7 @@ interface MonthlySale {
 }
 
 interface TopProduct {
+  image: any;
   productId: string;
   name: string;
   totalRevenue: number;
@@ -54,10 +55,8 @@ const sellingReportSlice = createSlice({
         (
           state,
           action: PayloadAction<{
-            topProducts: any;
-            data: any[];
-            monthlySales: MonthlySale[];
-          }>
+            topProducts: any; data: any[]; monthlySales: MonthlySale[] 
+}>
         ) => {
           state.isLoading = false;
           state.data = action.payload.data;

@@ -7,7 +7,7 @@ const AuthApiSlice = apiSlice.injectEndpoints({
         url: "/login",
         method: "POST",
         body: credentials,
-      }),
+      })
     }),
     verifyCode: builder.mutation({
       query: (credentials) => ({
@@ -21,7 +21,7 @@ const AuthApiSlice = apiSlice.injectEndpoints({
         url: "/register",
         method: "POST",
         body: credentials,
-      }),
+      })
     }),
     verifyEmail: builder.query({
       query: (token) => ({

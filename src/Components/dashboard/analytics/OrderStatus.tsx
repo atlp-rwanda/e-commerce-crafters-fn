@@ -12,12 +12,14 @@ import {
 import { fetchOrders } from "../../../Redux/Analytic/orderStatusSlice";
 import { AppDispatch } from "../../../Redux/store";
 import { Circles } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 
-interface OrderStatusProps {
-  statusCounts: { [key: string]: number };
-}
+// interface OrderStatusProps {
+//   statusCounts: { [key: string]: number };
+// }
 
 const OrderStatus: React.FC = () => {
+  const navigate = useNavigate();
   const colors = ["#FFC632", "#17BF6B", "#ED3333"];
 
   const dispatch: AppDispatch = useDispatch();
@@ -28,9 +30,16 @@ const OrderStatus: React.FC = () => {
     {}
   );
 
+
+
   useEffect(() => {
     dispatch(fetchOrders());
   }, [dispatch]);
+
+
+  const handlePieClick = () => {
+    navigate("/admin/orderStatus",{state:{datas:data}})
+  }
 
   useEffect(() => {
     if (data) {
@@ -99,6 +108,7 @@ const OrderStatus: React.FC = () => {
                 outerRadius={"80"}
                 paddingAngle={0}
                 dataKey="value"
+                onClick={handlePieClick}
               >
                 {datas.map((item) => (
                   <Cell key={item.name} fill={item.color} />

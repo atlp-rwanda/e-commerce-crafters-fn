@@ -1,5 +1,5 @@
-import React from 'react';
-import useSignOut from 'react-auth-kit/hooks/useSignOut';
+import React from 'react'
+import useSignOut from 'react-auth-kit/hooks/useSignOut'
 
 const Logout = () => {
   const signOut = useSignOut();
@@ -9,4 +9,4 @@ const Logout = () => {
   };
 };
 
-export default Logout;
+export default Logout

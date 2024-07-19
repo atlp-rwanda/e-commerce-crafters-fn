@@ -13,7 +13,6 @@ import {jwtDecode} from "jwt-decode";
 import { toast } from "react-toastify";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
-
 interface DecodedToken {
   Id: string | null;
   userId: string;
@@ -34,6 +33,7 @@ const Sproduct: React.FC<{ productId: string }> = ({ productId }) => {
   const userData: any = useAuthUser();
   const [isLoading, setLoading] = useState<boolean>(false);
   const userId = userData ? userData.userId : "";
+
   const [showFullDescription, setShowFullDescription] = useState<boolean>(false); 
   const getUserIdFromToken = (): string | null => {
     const token = localStorage.getItem('token');

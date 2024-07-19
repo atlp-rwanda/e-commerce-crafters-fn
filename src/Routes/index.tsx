@@ -1,7 +1,10 @@
+
+import VendorHome from '../pages/vendor/vendorHome';
+import MyProducts from '../pages/vendor/MyProducts';
+import VendorSingleProduct from '../pages/vendor/VendorSingleProduct';
+
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import AuthOutlet from "@auth-kit/react-router/AuthOutlet";
-import Signin from "../pages/Signin";
 import SignUp from "../pages/SignUp";
 import Admin from "../Portal/admin";
 import Buyer from "../Portal/Buyer";
@@ -10,7 +13,8 @@ import VerifyCode from "../pages/VerifyCode";
 import VerifyEmail from "../Lib/VerifyEmail";
 import AuthGoogle from "../Lib/authgoogle";
 import Users from "../pages/Users";
-import Sellers from "../pages/Sellers";
+import AuthOutlet from "@auth-kit/react-router/AuthOutlet";
+import Test from "../pages/Check";
 import Analytics from "../pages/Analytics";
 import AdminHome from "../pages/Admin/AdminHome";
 import Homepage from "../pages/Homepage";
@@ -22,13 +26,20 @@ import Singlepage from "../pages/singlePage";
 import Requests from "../pages/Requests";
 import AdminSettings from "../Components/dashboard/AdminSettings";
 import Forgotpassword from "../Lib/ForgotPassword";
+import User from "../pages/User";
+import Sellers from "../pages/Sellers";
+import Signin from "../pages/Signin";
+import SalesTable from "../Components/Analytics/SellerAnalytics/SalesTable";
+import OrderStatusTable from "../Components/Analytics/SellerAnalytics/OrderTable";
+import SalesPreview from "../Components/Analytics/SellerAnalytics/SalesPreview";
+import VendorAnalytics from '../pages/vendor/VendorAnalytics';
 import Chat from "../pages/chat/Chat";
 import OrderComponent from "../Components/orders";
+
 
 const AppRoutes: React.FC = () => (
   <div>
     <Routes>
-      
       <Route path="" element={<Homepage />} />
       <Route path="/login" element={<Signin />} />
       <Route path="/checkout" element={<Checkout />} />
@@ -49,11 +60,24 @@ const AppRoutes: React.FC = () => (
           <Route path="users" element={<Users />} />
           <Route path="sellers" element={<Sellers />} />
           <Route path="analytics" element={<Analytics />} />
+          <Route path="annualSales" element={<SalesTable />} />
+          <Route path="orderStatus" element={<OrderStatusTable />} />
+          <Route path="topProduct" element={<SalesPreview />} />
           <Route path="requests" element={<Requests />} />
           <Route path="settings" element={<AdminSettings />} />
         </Route>
+        <Route path="/user" element={<User />} />
         <Route path="/buyer" element={<Buyer />} />
-        <Route path="/vendor" element={<Seller />} />
+        <Route path="/vendor" element={<Seller />}>
+          <Route index element={<VendorHome />} />
+          <Route path='my-products' element={<MyProducts />} />
+          <Route path='weekly-details' element={<SalesTable />} />
+          <Route path='order-details' element={<OrderStatusTable />} />
+          <Route path='analytics' element={<VendorAnalytics />} />
+          <Route path='top-product' element={<SalesPreview />} />
+
+        </Route>
+        <Route path="/vendor-single-product/:id" element={<VendorSingleProduct />} />
       </Route>
     </Routes>
   </div>
