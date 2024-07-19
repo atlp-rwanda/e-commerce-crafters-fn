@@ -6,10 +6,10 @@ const AboutCrafters: React.FC = () => {
   const { t } = useTranslation();
   return (
     <section
-      className="py-16 px-6 sm:px-12 md:px-24 bg-white font-outfit text-lg md:text-xl h-screen"
+      className="py-16 px-6 sm:px-12 md:px-24 bg-white font-outfit text-lg md:text-xl min-h-screen"
       id="about-crafters"
     >
-      <h2 className="text-2xl sm:text-3xl font-bold mb-8">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-12 mt-32">
         {" "}
         ABOUT <span className="text-secondary"> CRAFTERS </span>
       </h2>

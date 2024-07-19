@@ -6,7 +6,7 @@ const BestDeals: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
 
-  const productId = "73046fd0-bf56-4e14-8b35-adf4067d023h"; 
+  const productId = "084bfddb-c87a-42b0-aa27-2f71f39e7671"; 
 
 
   useEffect(() => {
