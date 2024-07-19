@@ -28,7 +28,7 @@ import Signin from "../pages/Signin";
 import SalesTable from "../Components/Analytics/SellerAnalytics/SalesTable";
 import OrderStatusTable from "../Components/Analytics/SellerAnalytics/OrderTable";
 import SalesPreview from "../Components/Analytics/SellerAnalytics/SalesPreview";
-import AdminSettings from "../Components/dashboard/AdminSettings";
+
 
 import Chat from "../pages/chat/Chat";
 import OrderComponent from "../Components/orders";
