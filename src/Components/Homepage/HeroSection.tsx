@@ -44,11 +44,11 @@ const HeroSection: React.FC = () => {
           </a>
           {t("to get started")}
         </p>
-        <div className="flex flex-col sm:flex-row gap-4">
-          <a href="/products" className="bg-secondary w-full py-4 rounded-lg font-outfit text-center">
+        <div className="flex flex-col md:flex-row gap-8">
+          <a href="/products" className="bg-secondary max-w-7xl py-4 px-16 rounded-lg font-outfit text-center">
             {t("Shop Now")}
           </a>
-          <a href="#ContactSection" className="bg-[#08447D] w-full py-4 rounded-lg font-outfit text-center">
+          <a href="/#ContactSection" className="bg-[#08447D] max-w-7xl py-4 px-16 rounded-lg font-outfit text-center">
             {t("Contact Us")}
           </a>
         </div>

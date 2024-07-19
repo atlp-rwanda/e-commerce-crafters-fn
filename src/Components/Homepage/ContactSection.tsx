@@ -32,7 +32,7 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
 
     <section className="px-8 md:px-64 py-16 bg-gray-100 flex flex-col md:flex-row justify-center font-outfit md:text-xl md:space-x-40 sm:h-auto md:h-screen mt-24 sm:mt-8" id="contact-us">
       <div className="w-full md:w-1/2 mb-8 md:mb-0 flex flex-col">
-        <h2 className="text-primary text-3xl md:text-4xl font-bold mb-4">Get In Touch With Us</h2>
+        <h2 className="text-primary text-3xl md:text-4xl font-bold mb-4 mt-32">Get In Touch With Us</h2>
         <h2 className="text-secondary text-2xl md:text-3xl mb-16">We Are Here To Help</h2>
         <div className="flex flex-col">
           <div className="w-full mb-4 md:mb-0">
@@ -50,7 +50,7 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
         </div>
       </div>
       <div className="w-full md:w-1/2 text-base md:text-lg flex flex-col">
-        <h2 className="text-secondary text-2xl md:text-4xl font-bold mb-4">Send Us Message</h2>
+        <h2 className="text-secondary text-2xl md:text-4xl font-bold mb-4 mt-32">Send Us Message</h2>
         <form onSubmit={handleSubmit} className="flex flex-col">
           <div className="mb-4">
             <input
