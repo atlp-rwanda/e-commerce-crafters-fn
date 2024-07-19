@@ -28,12 +28,6 @@ const SalesPreview: React.FC = () => {
           <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">
             Top Products
           </h5>
-          <a
-            href="#"
-            className="text-sm font-medium text-blue-600 hover:underline dark:text-blue-500"
-          >
-            View all
-          </a>
         </div>
         <div className="flow-root">
           <ul
@@ -51,9 +45,6 @@ const SalesPreview: React.FC = () => {
                     />
                   </div>
                   <div className="flex-1 min-w-0 ms-4">
-                    <p className="text-sm font-medium text-gray-900 truncate dark:text-white">
-                      {/* { id++} */}
-                    </p>
                     <p className="text-sm text-gray-500 truncate dark:text-gray-400">
                       {product.name}
                     </p>

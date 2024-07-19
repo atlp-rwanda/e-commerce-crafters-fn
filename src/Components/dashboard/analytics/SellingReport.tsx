@@ -133,6 +133,7 @@ const SellingReport = () => {
             fill="#C9974C"
             background={{ fill: "#eee" }}
             barSize={30}
+            onClick={handleBarClick}
           />
         </BarChart>
       </ResponsiveContainer>

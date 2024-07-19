@@ -29,11 +29,10 @@ import OrderStatusTable from "../Components/Analytics/SellerAnalytics/OrderTable
 import SalesPreview from "../Components/Analytics/SellerAnalytics/SalesPreview";
 import AdminSettings from "../Components/dashboard/AdminSettings";
 
-
 const AppRoutes: React.FC = () => (
   <div>
     <Routes>
-      <Route path="" element={<Homepage />} />
+      <Route path="/" element={<Homepage />} />
       <Route path="/login" element={<Signin />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/cart" element={<Cart />} />
