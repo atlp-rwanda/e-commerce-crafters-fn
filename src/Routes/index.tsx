@@ -69,11 +69,6 @@ const AppRoutes: React.FC = () => (
           <Route path="settings" element={<AdminSettings />} />
         </Route>
         <Route path="/user" element={<User />} />
-
-          <Route path="requests" element={<Requests />} />
-          <Route path="settings" element={<AdminSettings />} />
-        </Route>
-
         <Route path="/buyer" element={<Buyer />} />
         <Route path="/vendor" element={<Seller />} />
       </Route>
