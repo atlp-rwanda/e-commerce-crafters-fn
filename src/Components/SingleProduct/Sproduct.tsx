@@ -1,9 +1,5 @@
 import React, { useState, useEffect } from "react";
-<<<<<<< HEAD
-import heart from "../../asset/images/products/heart_.png";
-=======
 import heart from "../../asset/images/heart 1.svg";
->>>>>>> origin/demo-fn-19-07
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,10 +12,6 @@ import "./product.css";
 import {jwtDecode} from "jwt-decode";
 import { toast } from "react-toastify";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/demo-fn-19-07
 
 interface DecodedToken {
   Id: string | null;

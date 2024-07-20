@@ -10,13 +10,8 @@ import Footer from "../Components/Homepage/Homepage_footer";
 import LoadingFrame from "../Constants/frameLoader";
 import { useTranslation } from "react-i18next";
 import NavBar from "../Components/navBar";
-<<<<<<< HEAD
-import Header from "../Components/Homepage/Homepage_header";
-
-=======
 import VoiceflowChatWidget from "../Components/ChatBot";
 import Header from "../Components/Homepage/Homepage_header";
->>>>>>> origin/demo-fn-19-07
 interface Product {
   productId: string;
   name: string;
