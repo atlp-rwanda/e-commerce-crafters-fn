@@ -38,7 +38,7 @@ const CartTotals: React.FC<CartTotalsProps> = ({
           <span>{total} Rwf</span>
         </div>
       </div>
-      <a href="/checkout">
+      <a href="/checkout" className={`${subTotal == 0 ? "hidden" : "flex"}`}>
         <button className="bg-[#203b57] text-white py-2 px-4 border-none rounded-md cursor-pointer text-base w-full hover:bg-[#004494]">
           Checkout
         </button>

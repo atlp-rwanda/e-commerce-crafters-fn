@@ -7,6 +7,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import SignUp from "../pages/SignUp";
 import Admin from "../Portal/admin";
+
 import Buyer from "../Portal/Buyer";
 import Seller from "../Portal/Seller";
 import VerifyCode from "../pages/VerifyCode";
@@ -20,7 +21,6 @@ import AdminHome from "../pages/Admin/AdminHome";
 import Homepage from "../pages/Homepage";
 import Products from "../pages/ProductsPage";
 import Location from "../pages/location"
-
 
 
 import { OrderTrackingPage } from "../pages/orderTrackingPage";
@@ -47,7 +47,6 @@ const AppRoutes: React.FC = () => (
       <Route path="" element={<Homepage />} />
       <Route path="/login" element={<Signin />} />
       <Route path="/checkout" element={<Checkout />} />
-      <Route path="/cart" element={<Cart />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/2fa" element={<VerifyCode />} />
       <Route path="/verifyemail" element={<VerifyEmail />} />
@@ -61,6 +60,7 @@ const AppRoutes: React.FC = () => (
       <Route path="/forgot-password" element={<Forgotpassword />} />
       <Route path="/product/:id" element={<Singlepage />} />
       <Route element={<AuthOutlet fallbackPath="/login" />}>
+      <Route path="/cart" element={<Cart />} />
         <Route path="/chat" element={<Chat />} />
         <Route path="/order/:orderId" element={<OrderTrackingPage />} />
         <Route path="/orders" element={<OrderComponent />} />

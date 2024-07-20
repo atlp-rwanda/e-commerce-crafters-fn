@@ -16,7 +16,7 @@ interface OrderSummaryProps {
   deliveryFeePercentage: number;
   discountPercentage: number;
   total: number;
-  cartItems: Products[];
+  cartItems: any[];
   handleDelete: (id: number) => void;
 }
 
