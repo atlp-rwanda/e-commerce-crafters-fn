@@ -11,66 +11,64 @@ import { AppDispatch, RootState } from "../../../Redux/store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchSellerOrderStatus } from "../../../Redux/Analytic/SellerAnalytics/OrderStatusSlice";
 import OrderTable from "./OrderTable";
-
-
-
+import { useNavigate } from "react-router-dom";
+// import OrderTable from "./OrderTable";
 
 const SellerOrderStatus = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
+  const { isLoading, data, error } = useSelector(
+    (state: RootState) => state.SellerOrderStatus
+  );
+  const [statusCounts, setStatusCounts] = useState<{ [key: string]: number }>(
+    {}
+  );
+  const [showSales, setShowSales] = useState(false);
 
-const dispatch: AppDispatch = useDispatch();
-const { isLoading, data, error } = useSelector(
-  (state: RootState) => state.SellerOrderStatus
-);
-const [statusCounts, setStatusCounts] = useState<{ [key: string]: number }>({});
-const [filteredData, setFilteredData] = useState<any[]>([]);
-const [currentStatus, setCurrentStatus] = useState<string | null>(null);
+  useEffect(() => {
+    dispatch(fetchSellerOrderStatus());
+  }, [dispatch]);
 
-useEffect(() => {
-  dispatch(fetchSellerOrderStatus());
-}, [dispatch]);
+  useEffect(() => {
+    if (data) {
+      const counts: { [key: string]: number } = {};
+      data.forEach((order) => {
+        counts[order.status] = (counts[order.status] || 0) + 1;
+      });
+      setStatusCounts(counts);
+    }
+  }, [data]);
 
-useEffect(() => {
-  if (data) {
-    const counts: { [key: string]: number } = {};
-    data.forEach((order) => {
-      counts[order.status] = (counts[order.status] || 0) + 1;
-    });
-    setStatusCounts(counts);
+  if (isLoading) {
+    return <div>Loading...</div>;
   }
-}, [data]);
 
-const handlePieClick = (status: string) => {
-  setCurrentStatus(status);
-  const filteredOrders = data.filter((order) => order.status === status);
-  setFilteredData(filteredOrders);
-};
+  if (error) {
+    return <div>Error fetching orders</div>;
+  }
 
-if (isLoading) {
-  return <div>Loading...</div>;
-}
+  const colors = ["#FFC632", "#17BF6B", "#ED3333"];
 
-if (error) {
-  return <div>Error fetching orders</div>;
-}
+  const datas = Object.entries(statusCounts).map(([status, value], index) => ({
+    name: status,
+    value,
+    color: colors[index % colors.length],
+  }));
 
-const colors = ["#FFC632", "#17BF6B", "#ED3333"];
+  const handelRedirect = ()=>{
+    navigate('/vendor/order-details', {state:{datas:data}})
 
-const datas = Object.entries(statusCounts).map(([status, value], index) => ({
-  name: status,
-  value,
-  color: colors[index % colors.length],
-}));
-
+  }
+  
 
   return (
-    <div className="mt-80 font-poppins">
-      {/* <OrderTable datas={filteredData.length > 0 ? filteredData : data} /> */}
-      <div className="flex flex-col w-[400px] m-auto h-[280px]  border-2  rounded-xl shadow-md ">
+    <div className="mt-2 font-poppins w-full ">
+      <div className="flex flex-col w-full h-[280px]  border-2  rounded-xl shadow-md ">
         <div className="pl-5 h-[30%]">
           <h2 className="font-bold pt-3">Order status</h2>
           <p>Total Earnings of the Month</p>
         </div>
-        <div className="  flex h-[70%] items-center  justify-center pb-5  ">
+        <div className="flex h-[70%] items-center  justify-center pb-5  ">
           <ResponsiveContainer width="99%" height={300}>
             <PieChart>
               <Tooltip
@@ -82,6 +80,9 @@ const datas = Object.entries(statusCounts).map(([status, value], index) => ({
                 outerRadius={"80"}
                 paddingAngle={0}
                 dataKey="value"
+                onClick={handelRedirect}
+                // onClick={() => setShowSales(!showSales)}
+                // onClick={() => navigate("/orderStatus")}
               >
                 {datas.map((item) => (
                   <Cell key={item.name} fill={item.color} />
@@ -108,6 +109,6 @@ const datas = Object.entries(statusCounts).map(([status, value], index) => ({
       </div>
     </div>
   );
-}
+};
 
-export default SellerOrderStatus
+export default SellerOrderStatus;

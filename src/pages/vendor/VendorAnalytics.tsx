@@ -1,14 +1,17 @@
 import React, { useEffect } from "react";
-import WeeklyReport from "../Components/dashboard/analytics/WeeklyReport";
-import OrderStatus from "../Components/dashboard/analytics/OrderStatus";
-import SellingReport from "../Components/dashboard/analytics/SellingReport";
-import TopProduct from "../Components/dashboard/analytics/TopProducts";
-import InteractionCard from "../Components/dashboard/InteractionCard";
-import { useSelectStoresQuery } from "../Redux/Admin/sellersSlice";
-import { useSelectUsersQuery } from "../Redux/Admin/usersSlice";
-import { useAllOrdersQuery } from "../Redux/OrderSlice";
+import { useSelectStoresQuery } from "../../Redux/Admin/sellersSlice";
+import { useAllOrdersQuery } from "../../Redux/OrderSlice";
+import { useSelectUsersQuery } from "../../Redux/Admin/usersSlice";
+import InteractionCard from "../../Components/dashboard/InteractionCard";
+import OrderStatus from "../../Components/OrderTracking/orderStatus";
+import SellerTopProduct from "../../Components/Analytics/SellerAnalytics/TopProducts";
+import SellerOrderStatus from "../../Components/Analytics/SellerAnalytics/SellerOrderStatus";
+import SellerSellingReport from "../../Components/Analytics/SellerAnalytics/AnnualSellingReport";
+import { useNavigate } from "react-router-dom";
 
-const Analytics = () => {
+
+const VendorAnalytics = () => {
+    const navigate = useNavigate() 
   const { data: sellers = [], refetch: refetchSellers } = useSelectStoresQuery(
     {}
   );
@@ -28,6 +31,8 @@ const Analytics = () => {
     refetchUsers();
     refetchOrders();
   }, [refetchSellers, refetchUsers, refetchOrders]);
+
+
   const cardData = [
     {
       name: "Vendors",
@@ -214,27 +219,29 @@ const Analytics = () => {
   return (
     <div className="items-center flex flex-col md:w-full xl:ml-[5%] xl:mt-5">
       <div
-        style={{ width: "100%" }}
-        className="grid gap-5 lg:gap-10 sm:grid-cols-2 grid-cols-1 md:w-full"
+        
+        className="grid gap-5 sm:grid-cols-2 grid-cols-1 md:w-full"
       >
         {cardData.map((item, index) => (
           <InteractionCard key={index} data={item} />
         ))}
       </div>
+      <div className="grid grid-cols-2 gap-[10px]">
 
-      <div className="mt-5 w-full">
-        <OrderStatus />
+      <div className=" w-full">
+        <SellerOrderStatus />
       </div>
 
       <div className="mt-5 w-full">
-        <TopProduct />
+        <SellerTopProduct />
+      </div>
       </div>
 
       <div className="mt-5 w-full mb-8">
-        <SellingReport />
+        <SellerSellingReport />
       </div>
     </div>
   );
 };
 
-export default Analytics;
+export default VendorAnalytics;

@@ -1,21 +1,30 @@
 import React from "react";
 import { useState, useMemo } from "react";
+import { useLocation } from "react-router-dom";
 
 interface Sale {
-  product: string;
+  name: string;
   quantity: number;
   price: number;
   total: number;
   date: string;
 }
 
-interface SalesTableProps {
-  datas: Sale[];
-}
 
-const SalesTable: React.FC<SalesTableProps> = ({ datas }) => {
+
+const SalesTable: React.FC = () => {
+  const location = useLocation();
+  const { state } = location;
+
+  if (!state || !state.datas) {
+    return <div>No data available</div>;
+  }
+
+  const { datas } = state as { datas: Sale[] };
+
   const [productList] = useState(datas);
   const [rowsLimit] = useState(5);
+
   const [rowsToShow, setRowsToShow] = useState(productList.slice(0, rowsLimit));
   const [customPagination, setCustomPagination] = useState<any[]>([]);
   const [totalPage] = useState(Math.ceil(productList?.length / rowsLimit));
@@ -55,13 +64,13 @@ const SalesTable: React.FC<SalesTableProps> = ({ datas }) => {
   }, [productList?.length, rowsLimit]);
 
   let id = 1;
-  console.log(rowsToShow)
+
   return (
-    <div className="min-h-screen  bg-white flex  items-center justify-center  font-poppins  ">
-      <div className="w-full max-w-4xl px-2  ">
+    <div className="w-full bg-white rounded-lg shadow-md overflow-hidden lg:mb-12 xl:ml-[5%] mt-3 ">
+      <div className="w-full h-full p-2 mb-4">
         <div>
-          <h1 className="text-2xl font-semibold font-poppins text-secondary">
-            My Sales Table
+          <h1 className="text-2xl text-center font-semibold font-poppins text-secondary">
+            Sales Table
           </h1>
         </div>
         <div className="w-full overflow-x-scroll md:overflow-auto  max-w-7xl 2xl:max-w-none mt-2">
@@ -93,7 +102,6 @@ const SalesTable: React.FC<SalesTableProps> = ({ datas }) => {
             </thead>
             <tbody>
               {rowsToShow?.map((data, index) => (
-            
                 <tr
                   className={`${
                     index % 2 == 0 ? "bg-white" : "bg-[#222E3A]/[6%]"
@@ -120,7 +128,7 @@ const SalesTable: React.FC<SalesTableProps> = ({ datas }) => {
                         : "border-t"
                     } whitespace-nowrap`}
                   >
-                    {data?.product}
+                    {data?.name}
                   </td>
                   <td
                     className={`py-2 px-1 text-center font-normal text-xs   ${
@@ -154,7 +162,7 @@ const SalesTable: React.FC<SalesTableProps> = ({ datas }) => {
                         : "border-t"
                     }`}
                   >
-                    {"$" + data?.total}
+                    {data?.price * data.quantity}
                   </td>
                   <td
                     className={`py-2 px-1 text-xs  font-normal text-center
@@ -182,8 +190,6 @@ const SalesTable: React.FC<SalesTableProps> = ({ datas }) => {
                   >
                     {data?.date.slice(11,16)}
                   </td> */}
-
-                  
                 </tr>
               ))}
             </tbody>

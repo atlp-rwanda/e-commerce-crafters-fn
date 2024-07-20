@@ -1,35 +1,46 @@
-import React, { useEffect } from 'react'
-import useSignOut from 'react-auth-kit/hooks/useSignOut'
-import Logout from '../services/Logout'
-import useAuthUser from 'react-auth-kit/hooks/useAuthUser'
-import { useNavigate } from 'react-router-dom'
-import SellerSellingReport from '../Components/Analytics/SellerAnalytics/AnnualSellingReport'
-import SellerWeeklyReport from '../Components/Analytics/SellerAnalytics/WeeklySellingReport'
-import SellerOrderStatus from '../Components/Analytics/SellerAnalytics/SellerOrderStatus'
-import SellerTopProduct from '../Components/Analytics/SellerAnalytics/TopProducts'
+import React, { useEffect } from 'react';
+import useSignOut from 'react-auth-kit/hooks/useSignOut';
+import useAuthUser from 'react-auth-kit/hooks/useAuthUser';
+import { Outlet, useNavigate } from 'react-router-dom';
+import Logout from '../services/Logout';
+import VendorSidebar from '../Components/vendor/VendorSidebar';
+import VendorHeader from '../Components/vendor/VendorHeader';
+import { useSelectVendorQuery } from '../Redux/features/sellerSlice';
 
+function Seller() {
 
-const Seller = () => {
-  const navigate = useNavigate()
-  const userData: any = useAuthUser()
+  const navigate = useNavigate();
+  const userData: any = useAuthUser();
+  const { data: vendors, error, isLoading } = useSelectVendorQuery(userData.userId)
   useEffect(() => {
-    if (!userData || userData.role !== 'vendor') {
+    if (userData.role !== 'vendor') {
       navigate(`/${userData.role}`);
+    } else {
+
+
+
     }
-  }, [navigate])
-  const handelLogout = Logout()
+  }, [navigate]);
+
+  useEffect(() => {
+    if (vendors) {
+      console.log(vendors)
+      localStorage.setItem("vendorData", JSON.stringify({ storeName: vendors.vendor.storeName, vendorId: vendors.vendor.vendorId }))
+    }
+  }, [vendors])
+  const handelLogout = Logout();
   return (
-    <div>
-      <div className="w-full h-screen flex flex-col items-center justify-center">
-        <h1 className="text-[32px] font-[700]">Seller Dashboard</h1>
-        <button onClick={handelLogout}>Sign Out</button>
+    <div className="w-full h-screen flex flex-row ">
+      <div className='h-screen fixed w-[20%]'>
+        <VendorSidebar />
       </div>
-      <div className="w-[45%] m-auto mb-40">
-      <SellerTopProduct />
-      <SellerOrderStatus />
-        {/* <SellerWeeklyReport />
-        <SellerSellingReport /> */}
+      <div className='flex w-[80%] w flex-col gap-[10px] bg-gray-50 ml-auto'>
+        <VendorHeader />
+        <div className='w-full pt-24'>  
+        <Outlet />
+        </div>
       </div>
+
     </div>
   );
 }

@@ -11,7 +11,6 @@ import { useLocation } from "react-router-dom";
 import { Puff } from "react-loader-spinner";
 import { useTranslation } from "react-i18next";
 
-
 const SignUp: React.FC = () => {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");

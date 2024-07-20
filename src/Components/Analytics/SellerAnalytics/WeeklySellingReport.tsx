@@ -16,13 +16,19 @@ import { AppDispatch, RootState } from "../../../Redux/store";
 import { fetchSellerWeeklyReport } from "../../../Redux/Analytic/SellerAnalytics/WeekSellingSlice";
 import SalesTable from "./SalesTable";
 import { Circles } from "react-loader-spinner";
+import { useNavigate } from "react-router-dom";
 
 const SellerWeeklyReport = () => {
+  const navigate = useNavigate()
   const dispatch: AppDispatch = useDispatch();
   const { SellerWeeklySales,isLoading,data,error } = useSelector(
     (state: RootState) => state.SellerWeeklySales
   );
   const [showSales, setShowSales] = useState(false);
+  const handelRedirect = ()=>{
+    navigate('/vendor/weekly-details', {state:{datas:data}})
+
+  }
   
 
 
@@ -94,18 +100,17 @@ const SellerWeeklyReport = () => {
   );
 
 
-  console.log(data);
 
   return (
     <div className="h-full">
-      <div
+      {/* <div
         style={showSales ? { visibility: "visible" } : { visibility: "hidden" }}
       >
         <SalesTable datas={datas} />
-      </div>
+      </div> */}
       <div
-        style={{ width: "100%", height: "350px" }}
-        className="flex  flex-col m-auto mt-80 text-xs  rounded-lg shadow-2xl border-gray-400"
+        style={{ width: "100%", height: "250px" }}
+        className="flex  flex-col m-auto mt-0 text-xs  rounded-lg shadow-2xl border-gray-400"
       >
         <div className="py-2 pl-10 relative">
           <h2 className="font-bold text-lg">Reports</h2>
@@ -137,7 +142,7 @@ const SellerWeeklyReport = () => {
             <Tooltip />
             <Legend />
             <Bar dataKey="TotalSales" fill="#013362" barSize={30}
-              onClick={() => setShowSales(!showSales)}
+              onClick={handelRedirect}
             />
           </BarChart>
         </ResponsiveContainer>

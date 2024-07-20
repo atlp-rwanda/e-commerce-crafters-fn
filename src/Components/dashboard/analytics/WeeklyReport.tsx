@@ -12,22 +12,30 @@ import {
 } from "recharts";
 import { fetchWeeklyReport } from "../../../Redux/Analytic/WeeklySellingSlice";
 import { AppDispatch, RootState } from "../../../Redux/store";
+import { useNavigate } from "react-router-dom";
 
 const WeeklyReport = () => {
-  const dispatch: AppDispatch = useDispatch();
-  const { weeklySales, isLoading, error } = useSelector(
-    (state: RootState) => state.weeklyReport
-  );
+   const navigate = useNavigate();
+   const dispatch: AppDispatch = useDispatch();
+   const { weeklySales,data,isLoading, error } = useSelector(
+     (state: RootState) => state.weeklyReport
+   );
+ 
 
-  useEffect(() => {
-    dispatch(fetchWeeklyReport());
-  }, [dispatch]);
+   useEffect(() => {
+     dispatch(fetchWeeklyReport());
+   }, [dispatch]);
+  
+  const handleBarClick = () => {
+    console.log(data)
+    navigate("/admin/annualSales", { state: { datas: data } });
+  };
 
-  const data = weeklySales.map((day) => ({
-    name: day.day,
-    TotalSales: day.totalSales,
-  }));
-
+   const chartData = weeklySales.map((day) => ({
+     name: day.day,
+     TotalSales: day.totalSales,
+   }));
+  
   return (
     <div className="flex  flex-col h-full w-full m-auto text-xs  rounded-lg  bg-white pb-3">
       <div className="py-2 pl-10 relative">
@@ -46,7 +54,7 @@ const WeeklyReport = () => {
         <BarChart
           width={500}
           height={300}
-          data={data}
+          data={chartData}
           margin={{
             top: 5,
             right: 30,
@@ -59,7 +67,7 @@ const WeeklyReport = () => {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="TotalSales" fill="#013362" barSize={30} />
+          <Bar dataKey="TotalSales" fill="#013362" barSize={30} onClick={handleBarClick}/>
         </BarChart>
       </ResponsiveContainer>
     </div>

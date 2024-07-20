@@ -17,9 +17,11 @@ import { Circles } from "react-loader-spinner";
 import SalesTable from "./SalesTable";
 import { AppDispatch, RootState } from "../../../Redux/store";
 import { fetchSellerSellingReport } from "../../../Redux/Analytic/SellerAnalytics/SellingReportSlice";
+import { useNavigate } from "react-router-dom";
 
 
 const SellerSellingReport = () => {
+  const navigate = useNavigate()
   const dispatch: AppDispatch = useDispatch();
   const { monthlySales, data, isLoading, error } = useSelector(
     (state: RootState) => state.sellerSellingReport
@@ -30,6 +32,10 @@ const SellerSellingReport = () => {
   useEffect(() => {
     dispatch(fetchSellerSellingReport());
   }, [dispatch]);
+  const handelRedirect = ()=>{
+    navigate('/vendor/weekly-details', {state:{datas:data}})
+
+  }
 
   if (isLoading) {
     return (
@@ -100,11 +106,11 @@ const SellerSellingReport = () => {
 
   return (
     <div className="h-full">
-      <div
+      {/* <div
         style={showSales ? { visibility: "visible" } : { visibility: "hidden" }}
       >
         <SalesTable datas={datas} />
-      </div>
+      </div> */}
 
       <div
         style={{ height: "400px",width:"100%" }}
@@ -144,13 +150,14 @@ const SellerSellingReport = () => {
               dataKey="TotalSales"
               fill="#013362"
               barSize={30}
-              onClick={() => setShowSales(!showSales)}
+              onClick={handelRedirect}
             />
             <Bar
               dataKey="Income"
               fill="#C9974C"
               background={{ fill: "#eee" }}
               barSize={30}
+              onClick={handelRedirect}
             />
           </BarChart>
         </ResponsiveContainer>

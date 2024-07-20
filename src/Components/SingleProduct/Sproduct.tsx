@@ -13,7 +13,6 @@ import {jwtDecode} from "jwt-decode";
 import { toast } from "react-toastify";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
-
 interface DecodedToken {
   Id: string | null;
   userId: string;

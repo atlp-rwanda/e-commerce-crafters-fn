@@ -1,3 +1,8 @@
+
+import VendorHome from '../pages/vendor/vendorHome';
+import MyProducts from '../pages/vendor/MyProducts';
+import VendorSingleProduct from '../pages/vendor/VendorSingleProduct';
+
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import SignUp from "../pages/SignUp";
@@ -28,7 +33,10 @@ import Forgotpassword from "../Lib/ForgotPassword";
 import User from "../pages/User";
 import Sellers from "../pages/Sellers";
 import Signin from "../pages/Signin";
-
+import SalesTable from "../Components/Analytics/SellerAnalytics/SalesTable";
+import OrderStatusTable from "../Components/Analytics/SellerAnalytics/OrderTable";
+import SalesPreview from "../Components/Analytics/SellerAnalytics/SalesPreview";
+import VendorAnalytics from '../pages/vendor/VendorAnalytics';
 import Chat from "../pages/chat/Chat";
 import OrderComponent from "../Components/orders";
 
@@ -46,6 +54,7 @@ const AppRoutes: React.FC = () => (
       <Route path="/authgoogle" element={<AuthGoogle />} />
       <Route path="/singleproduct" element={<Singlepage />} />
       <Route path="/products" element={<Products />} />
+      <Route path="/forgot-password" element={<Forgotpassword />} />
       <Route path="/geolocation" element={<Location />} />
       <Route path="/product/:id" element={<Singlepage />} />
       <Route path="/order-tracking" element={<OrderTrackingPage />} />
@@ -60,14 +69,27 @@ const AppRoutes: React.FC = () => (
           <Route path="users" element={<Users />} />
           <Route path="sellers" element={<Sellers />} />
           <Route path="analytics" element={<Analytics />} />
+          <Route path="annualSales" element={<SalesTable />} />
+          <Route path="orderStatus" element={<OrderStatusTable />} />
+          <Route path="topProduct" element={<SalesPreview />} />
           <Route path="requests" element={<Requests />} />
           <Route path="settings" element={<AdminSettings />} />
         </Route>
         <Route path="/user" element={<User />} />
         <Route path="/buyer" element={<Buyer />} />
-        <Route path="/vendor" element={<Seller />} />
+        <Route path="/vendor" element={<Seller />}>
+          <Route index element={<VendorHome />} />
+          <Route path='my-products' element={<MyProducts />} />
+          <Route path='weekly-details' element={<SalesTable />} />
+          <Route path='order-details' element={<OrderStatusTable />} />
+          <Route path='analytics' element={<VendorAnalytics />} />
+          <Route path='top-product' element={<SalesPreview />} />
+
+        </Route>
+        <Route path="/vendor-single-product/:id" element={<VendorSingleProduct />} />
       </Route>
     </Routes>
+
   </div>
 );
 export default AppRoutes;
