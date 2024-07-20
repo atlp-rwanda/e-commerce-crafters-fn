@@ -23,6 +23,7 @@ const wishlistSlice = createSlice({
       })
       .addCase(fetchWishlist.rejected, (state, action) => {
         state.status = 'failed';
+        //@ts-ignore
         state.error = action.error.message;
       });
   },

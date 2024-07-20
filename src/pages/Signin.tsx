@@ -6,7 +6,6 @@ import AuthButton from "../Constants/AuthButton";
 import Input from "../Constants/Input";
 import { useLoginMutation } from "../Redux/features/AuthSlice";
 import { useTranslation } from "react-i18next";
-
 const Signin = () => {
   const navigate = useNavigate();
   const signIn = useSignIn();
@@ -59,7 +58,7 @@ const Signin = () => {
           if (response.user.role === "buyer") {
             navigate("/products");
           } else if (response.user.role === "vendor") {
-            navigate("/vendor");
+            navigate("/user");
           } else if (response.user.role === "admin") {
             navigate("/admin");
           }
@@ -156,7 +155,6 @@ const Signin = () => {
             onChange={(value) => setEmail(value)}
           />
           <Input
-            error={isEmpty === "password" ? true : !!(false || err)}
             label={t("Enter Your Password")}
             type="password"
             placeholder={t("Enter Your Password")}

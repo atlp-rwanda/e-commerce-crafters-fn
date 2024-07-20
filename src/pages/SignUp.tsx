@@ -6,10 +6,15 @@ import {
   useRegisterMutation,
   useVerifyEmailQuery,
 } from "../Redux/features/AuthSlice";
+<<<<<<< HEAD
 import EmailSent from "../Components/Modal/EmailSents";
+=======
+import EmailSent from "../Components/Modal/EmailSent";
+>>>>>>> origin/demo-fn-19-07
 import { useLocation } from "react-router-dom";
 import { Puff } from "react-loader-spinner";
 import { useTranslation } from "react-i18next";
+
 
 const SignUp: React.FC = () => {
   const [name, setName] = useState<string>("");

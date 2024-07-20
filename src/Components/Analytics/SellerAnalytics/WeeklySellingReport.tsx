@@ -109,8 +109,13 @@ const SellerWeeklyReport = () => {
         <SalesTable datas={datas} />
       </div> */}
       <div
+<<<<<<< HEAD
         style={{ width: "100%", height: "250px" }}
         className="flex  flex-col m-auto mt-0 text-xs  rounded-lg shadow-2xl border-gray-400"
+=======
+        style={{ width: "100%", height: "350px" }}
+        className="flex  flex-col m-auto mt-80 text-xs  rounded-lg shadow-2xl border-gray-400"
+>>>>>>> origin/demo-fn-19-07
       >
         <div className="py-2 pl-10 relative">
           <h2 className="font-bold text-lg">Reports</h2>

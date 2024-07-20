@@ -8,19 +8,18 @@ const productApiSlice = apiSlice.injectEndpoints({
       }),
     }),
     Carts: builder.query({
-      query: () => ({
-        url:"/readAllCarts",
+      query: (userId) => ({
+        url:`/getcart/${userId}`,
         method: "GET",
       }),
     }),
     Wishlists: builder.query({
-      query: () => ({
-        url: "/readAllWishlists",
+      query: (userId) => ({
+        url: `/toWishlist/${userId}`,
         method: "GET",
       }),
     }),
   }),
 });
 export const { useAllProductsQuery, useCartsQuery, useWishlistsQuery } = productApiSlice;
-
 export default productApiSlice;
