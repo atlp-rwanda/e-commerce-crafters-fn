@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useCreateOrderMutation, useCreatePaymentMutation } from "../../Redux/features/checkoutSlice";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader'
+import LocationButton from "../../Lib/locationButton";
 
 interface paymentProps {
   totalAmount: number
@@ -14,6 +15,8 @@ const Payment = (data: paymentProps) => {
   const userData:any = useAuthUser()
   const [district,setDistrict] = useState<string>("")
    const [sector,setSector] = useState<string>("")
+   const [cell,setCell] = useState<string>("")
+   const [city,setCity] = useState<string>("")
    const [streetAddress,setStreetAddress] = useState<string>("")
    const [errorMessage,setErrorMessage] = useState<string>("")
    const [loadingPay,setLoadingPay] = useState<boolean>(false)
@@ -64,13 +67,14 @@ const Payment = (data: paymentProps) => {
     }
   }
   return (
-    <div className="payment-details w-[550px] rounded-[5px] hover:shadow-md hover:shadow-black">
+    <div className="payment-details w-[550px] rounded-[5px] hover:shadow-md ">
       <header className="bg-primary text-white text-center p-4 rounded-t-[5px]">
         {t("PAYMENT DETAILS")}
       </header>
       <div className="payment-content px-[30px] py-[50px]">
         {errorMessage}
-        <form onSubmit={validation} action="" className="p-[5px] w-[90%] m-auto">
+        <form onSubmit={validation} action="" className="p-[5px] flex flex-col gap-[20px] w-[90%] m-auto">
+            <LocationButton setCell={setCell} setCity={setCity} setDistrict={setDistrict} setStreetAddress={setStreetAddress} />
           <div className="contacts w-full gap-[10px] grid grid-cols-2 justify-between mb-5">
             <input
               onChange={(e)=> setDistrict(e.target.value)}
@@ -81,15 +85,13 @@ const Payment = (data: paymentProps) => {
             />
             <input
             onChange={(e)=> setSector(e.target.value)}
-            value={sector}
+            value={cell}
 
               type="text"
               className="contact street  p-3 rounded-[7px] bg-gray-100 pl-[15px]"
               placeholder={t("Sector")}
             />
           </div>
-
-     
             <input
             onChange={(e)=> setStreetAddress(e.target.value)}
             value={streetAddress}

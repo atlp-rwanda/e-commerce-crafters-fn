@@ -1,4 +1,5 @@
 import React from 'react'
+import { IoChatbubblesOutline } from 'react-icons/io5'
 import { useLocation } from 'react-router-dom'
 
 const VendorSidebar = () => {
@@ -26,16 +27,11 @@ const VendorSidebar = () => {
             url: "/vendor/my-products"
         },
         {
-            label: "Sales",
-            icon: <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M7.63411 9.05832C7.55078 9.04999 7.45078 9.04999 7.35911 9.05832C5.37578 8.99166 3.80078 7.36666 3.80078 5.36666C3.80078 3.32499 5.45078 1.66666 7.50078 1.66666C9.54241 1.66666 11.2007 3.32499 11.2007 5.36666C11.1924 7.36666 9.61741 8.99166 7.63411 9.05832Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-            <path opacity="0.4" d="M13.6747 3.33334C15.2914 3.33334 16.5914 4.64168 16.5914 6.25001C16.5914 7.82501 15.3414 9.10834 13.7831 9.16668C13.7164 9.15834 13.6414 9.15834 13.5664 9.16668" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M3.46758 12.1333C1.45091 13.4833 1.45091 15.6833 3.46758 17.025C5.75924 18.5583 9.51758 18.5583 11.8092 17.025C13.8259 15.675 13.8259 13.475 11.8092 12.1333C9.52591 10.6083 5.76758 10.6083 3.46758 12.1333Z" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-            <path opacity="0.4" d="M15.2832 16.6667C15.8832 16.5417 16.4499 16.3 16.9165 15.9417C18.2165 14.9667 18.2165 13.3583 16.9165 12.3833C16.4582 12.0333 15.8999 11.8 15.3082 11.6667" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
+            label: "Chat",
+            icon: <IoChatbubblesOutline color='white' size={22} />
             
             ,
-            url: "/my-sales"
+            url: "/chat"
         },
         {
             label: "Analytics",

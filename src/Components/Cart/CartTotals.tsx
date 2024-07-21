@@ -14,7 +14,7 @@ const CartTotals: React.FC<CartTotalsProps> = ({
   total,
 }) => {
   return (
-    <div className="bg-white p-5 rounded-lg w-80 hover:shadow-lg hover:shadow-black font-sans h-[385px]">
+    <div className="bg-white p-5 rounded-lg w-80   font-outfit h-[385px]">
       <h2 className="mb-12 text-xl font-semibold">Cart Totals</h2>
       <div className="mt-5">
         <div className="flex items-center my-2 text-base pl-0 w-[98%]">
@@ -39,7 +39,7 @@ const CartTotals: React.FC<CartTotalsProps> = ({
         </div>
       </div>
       <a href="/checkout" className={`${subTotal == 0 ? "hidden" : "flex"}`}>
-        <button className="bg-[#203b57] text-white py-2 px-4 border-none rounded-md cursor-pointer text-base w-full hover:bg-[#004494]">
+        <button className="bg-primary text-white py-3 px-4 border-none rounded-md cursor-pointer text-base w-full hover:bg-[#004494]">
           Checkout
         </button>
       </a>

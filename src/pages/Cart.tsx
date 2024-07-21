@@ -86,8 +86,8 @@ const Cart = () => {
   return (
     <>
       <Header />
-      <div className="px-10 mx-auto my-[50px]">
-        <h1 className="text-xl font-semibold  ">
+      <div className="px-10 mx-auto pt-[24vh]">
+        <h1 className="text-xl font-semibold font-outfit  ">
           {t("Shopping Cart")}{" "}
           <span className="bg-gray-200 py-[4px] px-4 font-bold rounded-lg">
             0{!load && cart?.cartitem.length}
@@ -107,7 +107,7 @@ const Cart = () => {
                       <div className="w-[60px] h-[60px] rounded-[6px]">
                         <LazyLoadImage src={item.Product?.image[0]} className="w-full h-full rounded-[6px]" />
                       </div>
-                      <span>{item.Product?.name}</span>
+                      <span className=" font-outfit">{item.Product?.name}</span>
                     </div>
 
                     <div className="flex flex-row gap-[20px] font-outfit items-center">

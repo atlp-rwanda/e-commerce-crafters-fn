@@ -29,12 +29,12 @@ const HeroSection: React.FC = () => {
   const { t } = useTranslation();
 
   return (
-    <section className="sm:mt-4 md:mt-24 lg:mt-24 bg-primary text-white text-xl px-8 py-[15vh] h-[100vh] md:px-8 lg:px-16 flex flex-col lg:flex-row gap-8 lg:gap-64 font-outfit justify-start items-start">
-      <div className="w-full md:w-1/2 lg:w-1/2 flex flex-col gap-4 lg:gap-8">
-        <h1 className="text-3xl font-bold mb-4 lg:mb-8">
+    <section className=" bg-gradient-to-r from-primary to-primaryGradient text-white text-xl px-8 py-[20vh] h-[100vh] md:px-8 lg:px-16 flex flex-col lg:flex-row items-center gap-8 lg:gap-64 font-outfit justify-start items-start">
+      <div className="w-full  flex flex-col gap-4 lg:gap-8">
+        <h1 className="text-3xl font-bold">
           <span className="text-secondary">CRAFTERS</span> ONLINE SHOP
         </h1>
-        <p className="text-xl mb-4 font-outfit">
+        <p className="text-[18px] font-poppins">
           {t("Welcome to our online store! Whether you're a buyer looking for great")}
           {t("deals or a seller wanting to showcase your products, our platform")}
           {t("offers you the opportunity to connect and thrive. Explore our wide")}
@@ -45,10 +45,10 @@ const HeroSection: React.FC = () => {
           {t("to get started")}
         </p>
         <div className="flex flex-col md:flex-row gap-8">
-          <a href="/products" className="bg-secondary max-w-7xl py-4 px-16 rounded-lg font-outfit text-center">
+          <a href="/products" className="bg-secondary max-w-7xl py-3 px-10 rounded-lg font-outfit text-center">
             {t("Shop Now")}
           </a>
-          <a href="/#ContactSection" className="bg-[#08447D] max-w-7xl py-4 px-16 rounded-lg font-outfit text-center">
+          <a href="/#ContactSection" className="bg-[#08447D] max-w-7xl py-3 px-10 rounded-lg font-outfit text-center">
             {t("Contact Us")}
           </a>
         </div>

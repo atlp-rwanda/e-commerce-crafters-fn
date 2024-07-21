@@ -39,7 +39,8 @@
   background: #555; 
 }
 :root {
-  --color-primary: #013362;
+  --color-primary: #012e58;
+  --color-primaryGradient: #08447D;
   --color-secondary: #C9974C;
   --color-white: #fff;
   --color-bgwhite: #fff;
@@ -53,7 +54,8 @@
 
 .dark {
   --color-textprimary: #fff;
-  --color-primary: #0F1729; 
+  --color-primary: #0F1729;
+  --color-primaryGradient: #041131; 
   --color-secondary: #C9974C;
   --color-white: #F9FAFB;
   --color-bgwhite: #1F2A3D;

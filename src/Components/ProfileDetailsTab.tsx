@@ -84,15 +84,21 @@ const ProfileDetailsTab = ({
    className='lg:max-w-fit lg:px-2 md:px-5 pt-5 flex flex-col lg:flex-row'
   >
    <div className='flex flex-col lg:flex-row items-center gap-y-4 md:gap-x-5'>
+    <div>
+
+    <div className="w-20 border h-20 md:w-24 md:h-24 rounded-full">
+
     <img
      src={profileImage}
      alt='Profile'
-     className='rounded-full min-w-20 min-h-20 md:w-24 md:h-24 object-cover border-4 border-primary'
-    />
+     className='rounded-full w-full h-full  object-cover '
+     />
+        </div>
+     </div>
     <div className='text-center'>
      <CustomInput
       handleChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-       const files = e.target.files;
+          const files = e.target.files;
        if (files && files.length > 0) {
         setValue("profile", files[0]);
         setProfileImage(URL.createObjectURL(files[0]));
@@ -107,7 +113,7 @@ const ProfileDetailsTab = ({
       inputStyles='hidden'
       disable={isSubmitting}
      />
-     <p className='mt-2 text-gray-300 font-outfit text-xs md:text-sm'>
+     <p className='mt-2 text-gray-600 font-outfit text-xs md:text-sm'>
       Png or Jpg file
      </p>
     </div>
@@ -119,7 +125,7 @@ const ProfileDetailsTab = ({
      })}
      label='Email'
      inputId='email'
-     labelStyles='text-gray-300 text-sm md:text-base font-outfit mb-2'
+     labelStyles='text-gray-600 text-sm md:text-base font-outfit mb-2'
      inputStyles={`rounded w-full py-2 px-3 bg-gray-100 font-outfit text-sm md:text-base ${
       errors.email ? "border border-red-500" : ""
      }`}
@@ -132,7 +138,7 @@ const ProfileDetailsTab = ({
      register={register("name")}
      label='Name'
      inputId='name'
-     labelStyles='text-sm text-gray-300 md:text-base font-outfit mb-2'
+     labelStyles='text-sm text-gray-600 md:text-base font-outfit mb-2'
      inputStyles='rounded w-full py-2 px-3 bg-gray-100 font-outfit text-sm md:text-base'
      type='text'
      placeholder='Crafters'

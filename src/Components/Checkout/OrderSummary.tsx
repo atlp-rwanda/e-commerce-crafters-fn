@@ -1,5 +1,7 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { useDeleteFromCartMutation } from "../../Redux/features/checkoutSlice";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
 
 interface Products {
@@ -18,6 +20,7 @@ interface OrderSummaryProps {
   total: number;
   cartItems: any[];
   handleDelete: (id: number) => void;
+  refetch: any
 }
 
 const OrderSummary: React.FC<OrderSummaryProps> = ({
@@ -27,42 +30,63 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   total,
   cartItems,
   handleDelete,
+  refetch
 }) => {
   const { t } = useTranslation();
+  const userData: any = useAuthUser()
+
+  const [deleteCartItem, { isLoading: deleteLoading, isError: deleteError }] = useDeleteFromCartMutation()
+
+  const deleteFromCart = async (item: any) => {
+    try {
+      const data = {
+        userId: userData.userId,
+        productId: item.productId
+      }
+      await deleteCartItem(data).unwrap()
+      refetch()
+
+
+    } catch (error) {
+      console.log(error)
+
+    }
+  }
+
   return (
-    <div className="orderSummary w-[500px] rounded-md hover:shadow-md hover:shadow-black">
-      <header className="bg-blue-900 text-white text-center p-3 rounded-t-[5px]">
+    <div className=" rounded-md  ">
+      <header className="bg-blue-900 text-black font-[600] text-center p-3 rounded-t-[5px]">
         {t("ORDER SUMMARY")}
       </header>
-      <div className="summaryContent p-5 font-semibold">
-        <div className="summaryItems mb-10">
+      <div className=" p-5 font-semibold">
+        <div className="flex flex-col gap-[20px] ">
           {cartItems &&
             cartItems.map((item) => (
               <div
-                className="container  m-[10px] flex justify-between items-center p-[5px] px-[15px] h-[57px] bg-white rounded-md text-[9px] font-semibold mx-auto"
+                className=" flex flex-row gap-[20px] items-center"
                 key={item.id}
               >
-                <div className="img h-full">
-                  <img className="h-full" src={item.img} alt={item.name} />
+                <div className="w-[50px] h-[50px]">
+                  <img className="h-full w-full rounded-[12px]" src={item.Product.image[0]} alt={item.name} />
                 </div>
-                <div className="details w-20 h-[90%] flex flex-col">
-                  <div className="w-[78px] flex items-center">
-                    <div className="w-[53%] text-amber-600">Product:</div>
-                    <div className="text-center">{item.name}</div>
+                <div className="flex flex-col gap-[2px] font-[300] font-outfit">
+                  <div className=" flex items-center flex-row font-[300] gap-[10px]">
+                    <div className=" text-amber-600">Product:</div>
+                    <div className="text-center">{item.Product.name}</div>
                   </div>
-                  <div className="w-[78px] flex items-center">
-                    <div className="w-[55%] text-amber-600">Quantity:</div>
+                  <div className=" flex items-center">
+                    <div className=" text-amber-600">Quantity:</div>
                     <div className="text-center">{item.quantity}</div>
                   </div>
-                  <div className="w-[78px] flex items-center">
-                    <div className="w-[35%] text-amber-600">Price:</div>
+                  <div className=" flex items-center">
+                    <div className=" text-amber-600">Price:</div>
                     <div className="text-center">{item.price} Rwf</div>
                   </div>
                 </div>
                 <div className="action h-full flex flex-col justify-between items-center">
                   <button
-                    className="w-20 h-[25px] bg-blue-900 text-white rounded-[5px] text-[10px]"
-                    onClick={() => handleDelete(item.id)}
+                    className="w-20 h-[25px] bg-primary text-white rounded-[5px] text-[10px]"
+                    onClick={() => deleteFromCart(item)}
                   >
                     Remove
                   </button>
@@ -78,7 +102,7 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
               </div>
             ))}
         </div>
-        <div className="summaryTotals-details m-auto w-[90%] pl-[10px]">
+        <div className="summaryTotals-details font-outfit font-[400] m-auto w-[90%] pl-[10px]">
           <div className="summaryTotals-item flex items-center my-[10px] text-base p-0 w-[98%]">
             <div className="summarySub w-[70%] my-[5px] text-blue-800">
               Sub Total

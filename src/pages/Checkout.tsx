@@ -13,7 +13,7 @@ const Checkout = () => {
 
 
   const userData: any = useAuthUser()
-  const { data: cart, isLoading: load, isError: errorHere } = useGetCartQuery(userData.userId)
+  const { data: cart, isLoading: load, isError: errorHere,refetch } = useGetCartQuery(userData.userId)
   const [totall,setToatal] = useState<number>(0)
   const {
     cartItems,
@@ -44,7 +44,7 @@ const Checkout = () => {
       <Header />
       <div className="all w-[80%] mt-24 mx-auto">
         {load ? ("") : (
-        <div className="pay flex gap-[20px] justify-between m-auto ">
+        <div className=" flex gap-[20px] justify-between ">
           <Payment totalAmount={totall} />
           <OrderSummary
             cartItems={cart.cartitem}
@@ -53,6 +53,7 @@ const Checkout = () => {
             discountPercentage={2}
             total={totall}
             handleDelete={handleDelete}
+            refetch={refetch}
           />
         </div>
         )}
