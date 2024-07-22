@@ -2,6 +2,7 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const webpack = require("webpack");
+const CopyWebpackPlugin = require("copy-webpack-plugin");
 
 module.exports = (env) => {
   const isProduction = env.NODE_ENV === "production";
@@ -50,12 +51,15 @@ module.exports = (env) => {
       }),
       new Dotenv({
         path: dotenvFilename,
-
         systemvars: true,
-
       }),
       new webpack.DefinePlugin({
         "process.env.NODE_ENV": JSON.stringify(env.NODE_ENV),
+      }),
+      new CopyWebpackPlugin({
+        patterns: [
+          { from: "public", to: "" }, // Copies everything from `public` to `dist`
+        ],
       }),
     ],
     output: {
