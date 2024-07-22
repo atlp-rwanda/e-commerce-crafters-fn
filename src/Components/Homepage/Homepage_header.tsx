@@ -171,7 +171,7 @@ const Header: React.FC = () => {
                   <div
                     className="flex cursor-pointer flex-row gap-6 hover:scale-105 transition-transform duration-200"
                     onClick={() =>
-                      navigate(userData.role === "vendor" ? "/vendor" : "/user")
+                      navigate(userData.role === "vendor" ? "/user" : "/user")
                     }
                   >
                     <p className="font-outfit text-lg text-white flex gap-3">
@@ -182,7 +182,7 @@ const Header: React.FC = () => {
                   {userData.role === "vendor" && (
                     <div
                       className="flex flex-row gap-6 hover:scale-105 transition-transform duration-200"
-                      onClick={() => navigate("/sellerDashboard")}
+                      onClick={() => navigate("/vendor")}
                     >
                       <a className="font-outfit text-lg text-white flex gap-3">
                         <img src={Bag} alt="" />

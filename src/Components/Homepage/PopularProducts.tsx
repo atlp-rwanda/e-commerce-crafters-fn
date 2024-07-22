@@ -37,8 +37,8 @@ const PopularProducts: React.FC = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {displayProducts.map((product) => (
-          <div key={product.productId} className="rounded-t-[12px] shadow-md" onClick={() => handleCardClick(product.productId)}>
-            <img src={product.image} alt={product.name} className=" rounded-t-[12px] " />
+          <div key={product.productId} className=" cursor-pointer rounded-t-[12px] shadow-md" onClick={() => handleCardClick(product.productId)}>
+            <img src={product.image[0]} alt={product.name} className=" rounded-t-[12px] h-[30vh] " />
             <div className='flex flex-col p-2'>
 
               <p className="md:text-lg sm:text-sm text-gray-500">{product.category}</p>
