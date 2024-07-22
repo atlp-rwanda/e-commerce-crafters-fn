@@ -30,7 +30,7 @@ const Payment = (data: paymentProps) => {
   const validation = async(e: FormEvent)=>{
     
     e.preventDefault()
-    if(!district || !sector || !streetAddress){
+    if(!district || !cell || !streetAddress){
       setErrorMessage(t("Please fill all the fields"))
     }else{
       setErrorMessage(t(""))
@@ -46,7 +46,7 @@ const Payment = (data: paymentProps) => {
         userId: userData.userId,
         deliveryAddress:{
           district,
-          sector,
+          cell,
           streetAddress,
         },
         client: userData.name,
@@ -84,7 +84,7 @@ const Payment = (data: paymentProps) => {
               placeholder={t("District")}
             />
             <input
-            onChange={(e)=> setSector(e.target.value)}
+            onChange={(e)=> setCell(e.target.value)}
             value={cell}
 
               type="text"

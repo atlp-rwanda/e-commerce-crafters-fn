@@ -22,7 +22,7 @@ const Checkout = () => {
     total,
     discountPercentage,
     deliveryFeePercentage,
-  } = useFetch("http://localhost:5000/products");
+  } = useFetch(`${process.env.BACKEND_API_URL}/products`);
 
   const handleDelete = (id: number) => {
     setCartItems((products) => products.filter((item) => item.id !== id));

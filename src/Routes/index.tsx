@@ -39,6 +39,7 @@ import SalesPreview from "../Components/Analytics/SellerAnalytics/SalesPreview";
 import VendorAnalytics from '../pages/vendor/VendorAnalytics';
 import Chat from "../pages/chat/Chat";
 import OrderComponent from "../Components/orders";
+import Success from '../pages/Success';
 
 const AppRoutes: React.FC = () => (
   <div>
@@ -88,6 +89,7 @@ const AppRoutes: React.FC = () => (
         </Route>
         <Route path="/vendor-single-product/:id" element={<VendorSingleProduct />} />
       </Route>
+        <Route path="/success" element={<Success />} />
     </Routes>
 
   </div>
