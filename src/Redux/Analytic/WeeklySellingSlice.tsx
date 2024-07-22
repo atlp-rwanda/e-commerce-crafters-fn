@@ -23,7 +23,7 @@ export const fetchWeeklyReport = createAsyncThunk(
   "analytics/fetchWeeklyReport",
   async () => {
     const response = await axios.get(
-      "http://localhost:5000/OverallWeeklySellingReport/"
+      `${process.env.BACKEND_API_URL}/OverallWeeklySellingReport/`
     );
 
  

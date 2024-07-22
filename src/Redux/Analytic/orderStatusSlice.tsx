@@ -41,7 +41,7 @@ const initialState: OrderState = {
 };
 
 export const fetchOrders = createAsyncThunk("orders/fetchOrders", async () => {
-  const response = await fetch("http://localhost:5000/order/getAllOrder");
+  const response = await fetch(`${process.env.BACKEND_API_URL}/order/getAllOrder`);
   if (!response.ok) {
     throw new Error("Failed to fetch orders");
   }

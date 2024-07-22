@@ -63,7 +63,7 @@ export const fetchSellerOrderStatus = createAsyncThunk(
       const decodedToken = jwtDecode<TokenPayload>(token);
       const vendorId = decodedToken.vendor;
       const response = await axios.get(
-        `http://localhost:5000/order/getSellerOrder/${vendorId}`
+        `${process.env.BACKEND_API_URL}/order/getSellerOrder/${vendorId}`
       );
       return response.data;
     } catch (error) {

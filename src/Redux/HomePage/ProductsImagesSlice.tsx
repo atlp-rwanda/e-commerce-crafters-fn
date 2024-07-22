@@ -45,7 +45,7 @@ export const { fetchImagesRequest, fetchImagesSuccess, fetchImagesFailure } =
 export const fetchImages = (): AppThunk => async (dispatch) => {
   dispatch(fetchImagesRequest());
   try {
-    const response = await fetch("http://localhost:5000/readAllProducts");
+    const response = await fetch(`${process.env.BACKEND_API_URL}/readAllProducts`);
     if (!response.ok) {
       throw new Error("Failed to fetch images");
     }

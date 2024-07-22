@@ -9,31 +9,8 @@ const BestDeals: React.FC = () => {
   console.log(hotDeal)
 
 
-  const productId = "084bfddb-c87a-42b0-aa27-2f71f39e7671";
 
 
-  useEffect(() => {
-    const fetchImage = async () => {
-      try {
-        setLoading(true);
-        const response = await fetch(`http://localhost:5000/readProduct/${productId}`);
-
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        const imageUrl = data.image;
-        setImageUrl(imageUrl);
-      } catch (error: any) {
-        setError('Failed to load image');
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchImage();
-  }, [productId]);
 
   return (
     <section className="bg-primary text-white p-8 sm:p-16 md:pl-24 flex flex-col md:flex-row items-center  sm:items-center justify-center gap-10 sm:gap-0 md:gap-10 font-outfit text-lg md:text-xl sm:text-sm min=-h-screen">

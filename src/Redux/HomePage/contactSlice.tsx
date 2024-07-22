@@ -17,7 +17,7 @@ export const sendMessage = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const response = await fetch("http://localhost:5000/addMessage", {
+      const response = await fetch(`${process.env.BACKEND_API_URL}/addMessage`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

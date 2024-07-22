@@ -34,7 +34,7 @@ export const fetchSellingReport = createAsyncThunk(
   "sellingReport/fetchSellingReport",
   async () => {
     const response = await axios.get(
-      "http://localhost:5000/overallAnnualSellingReport/"
+      `${process.env.BACKEND_API_URL}/overallAnnualSellingReport/`
     );
     return response.data;
   }

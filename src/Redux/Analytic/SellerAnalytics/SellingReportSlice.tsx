@@ -51,7 +51,7 @@ export const fetchSellerSellingReport = createAsyncThunk(
     console.log(vendorId)
 
     const response = await axios.get(
-      `http://localhost:5000/annualSellingReport/${vendorId}`
+      `${process.env.BACKEND_API_URL}/annualSellingReport/${vendorId}`
     );
     return response.data;
   }

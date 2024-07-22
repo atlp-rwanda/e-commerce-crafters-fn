@@ -41,7 +41,7 @@ export const fetchSellerWeeklyReport = createAsyncThunk(
     const vendorId = decodedToken.vendor;
     console.log(vendorId);
     const response = await axios.get(
-      `http://localhost:5000/WeeklySellingReport/${vendorId}`
+      `${process.env.BACKEND_API_URL}/WeeklySellingReport/${vendorId}`
     );
 
     return response.data;

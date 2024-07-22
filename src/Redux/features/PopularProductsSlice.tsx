@@ -9,7 +9,7 @@ interface PopularProductsState {
 export const fetchPopularProducts = createAsyncThunk(
   'popularProducts/fetchPopularProducts',
   async () => {
-    const response = await fetch('http://localhost:5000/popular-product');
+    const response = await fetch(`${process.env.BACKEND_API_URL}/popular-product`);
     if (!response.ok) {
       throw new Error('Failed to fetch products');
     }

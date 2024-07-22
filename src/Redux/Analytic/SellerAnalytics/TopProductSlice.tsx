@@ -4,7 +4,7 @@ import axios from "axios";
 export const fetchingSellerPopularProduct = createAsyncThunk(
   "/product/popularity",
   async () => {
-    const response = await axios.get("http://localhost:5000/popular-product");
+    const response = await axios.get(`${process.env.BACKEND_API_URL}/popular-product`);
     return response.data;
   }
 );
