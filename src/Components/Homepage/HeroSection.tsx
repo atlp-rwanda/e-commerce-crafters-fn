@@ -35,20 +35,23 @@ const HeroSection: React.FC = () => {
           <span className="text-secondary">CRAFTERS</span> ONLINE SHOP
         </h1>
         <p className="text-[18px] font-poppins">
-          {t("Welcome to our online store! Whether you're a buyer looking for great")}
-          {t("deals or a seller wanting to showcase your products, our platform")}
-          {t("offers you the opportunity to connect and thrive. Explore our wide")}
-          {t("range of products and create an account")}
+          {t("Welcome")}
           <a href="/signup" className="text-secondary font-bold px-1">
-            {t(" here ")}
+            {t("here")}
           </a>
           {t("to get started")}
         </p>
         <div className="flex flex-col md:flex-row gap-8">
-          <a href="/products" className="bg-secondary max-w-7xl py-3 px-10 rounded-lg font-outfit text-center">
+          <a
+            href="/products"
+            className="bg-secondary max-w-7xl py-3 px-10 rounded-lg font-outfit text-center"
+          >
             {t("Shop Now")}
           </a>
-          <a href="/#ContactSection" className="bg-[#08447D] max-w-7xl py-3 px-10 rounded-lg font-outfit text-center">
+          <a
+            href="/#ContactSection"
+            className="bg-[#08447D] max-w-7xl py-3 px-10 rounded-lg font-outfit text-center"
+          >
             {t("Contact Us")}
           </a>
         </div>
