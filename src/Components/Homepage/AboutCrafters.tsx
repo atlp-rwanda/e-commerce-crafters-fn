@@ -11,7 +11,8 @@ const AboutCrafters: React.FC = () => {
     >
       <h2 className="text-2xl sm:text-3xl font-bold mb-12 mt-32">
         {" "}
-        ABOUT <span className="text-secondary"> CRAFTERS </span>
+        {t("ABOUT")}
+        <span className="text-secondary"> CRAFTERS </span>
       </h2>
       <div className="container flex flex-col md:flex-row gap-8 md:gap-20">
         <div className="flex-none w-full md:w-1/3 mb-8">
