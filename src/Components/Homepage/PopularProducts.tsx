@@ -1,14 +1,16 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchPopularProducts } from '../../Redux/features/PopularProductsSlice';
-import { RootState, AppDispatch } from '../../Redux/store';
-import { useNavigate } from 'react-router-dom';
-
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPopularProducts } from "../../Redux/features/PopularProductsSlice";
+import { RootState, AppDispatch } from "../../Redux/store";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 const PopularProducts: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { products, loading, error } = useSelector((state: RootState) => state.popularProducts);
+  const { products, loading, error } = useSelector(
+    (state: RootState) => state.popularProducts
+  );
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   useEffect(() => {
     dispatch(fetchPopularProducts());
   }, [dispatch]);
@@ -32,22 +34,35 @@ const PopularProducts: React.FC = () => {
       <div className="mb-8">
         <div className="flex items-center">
           <div className="w-24 h-2 bg-secondary mr-4"></div>
-          <h2 className="text-xl sm:text-2xl font-bold text-black">POPULAR PRODUCTS</h2>
+          <h2 className="text-xl sm:text-2xl font-bold text-black">
+            {t("POPULAR PRODUCTS")}
+          </h2>
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
         {displayProducts.map((product) => (
-          <div key={product.productId} className=" cursor-pointer rounded-t-[12px] shadow-md" onClick={() => handleCardClick(product.productId)}>
-            <img src={product.image[0]} alt={product.name} className=" rounded-t-[12px] h-[30vh] " />
-            <div className='flex flex-col p-2'>
-
-              <p className="md:text-lg sm:text-sm text-gray-500">{product.category}</p>
-              <h3 className="md:text-xl sm:text-lg text-secondary">{product.name}</h3>
+          <div
+            key={product.productId}
+            className=" cursor-pointer rounded-t-[12px] shadow-md"
+            onClick={() => handleCardClick(product.productId)}
+          >
+            <img
+              src={product.image[0]}
+              alt={product.name}
+              className=" rounded-t-[12px] h-[30vh] "
+            />
+            <div className="flex flex-col p-2">
+              <p className="md:text-lg sm:text-sm text-gray-500">
+                {product.category}
+              </p>
+              <h3 className="md:text-xl sm:text-lg text-secondary">
+                {product.name}
+              </h3>
               <div className="flex justify-between items-center mt-2">
-                <p className="md:text-xl sm:text-lg font-semibold text-gray-900">{product.price} Rwf</p>
-                <button
-                  className="text-secondary text-xl sm:text-xl"
-                >
+                <p className="md:text-xl sm:text-lg font-semibold text-gray-900">
+                  {product.price} Rwf
+                </p>
+                <button className="text-secondary text-xl sm:text-xl">
                   <svg
                     width="30"
                     height="34"

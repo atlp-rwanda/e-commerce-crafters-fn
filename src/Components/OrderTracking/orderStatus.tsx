@@ -9,7 +9,8 @@ import Pusher from "pusher-js";
 import { isVendor, getCookie, getToken } from "./authUtils";
 import { ThreeDots } from "react-loader-spinner";
 import { ToastContainer, toast } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
+import { useTranslation } from "react-i18next";
 
 const pusher = new Pusher(process.env.PUSHER_KEY as string, {
   cluster: process.env.PUSHER_CLUSTER as string,
@@ -33,11 +34,12 @@ const OrderStatus: React.FC<OrderStatusProps> = ({
 
   const { data, error, isLoading } = useGetOrderQuery({ orderId });
   const [orderStatus, setOrderStatus] = useState<string | null>(null);
-  const [updateMessage, setUpdateMessage] = useState('');
-  const [updateOrderStatus, { isLoading: isUpdating }] = useUpdateOrderStatusMutation();
-  
+  const [updateMessage, setUpdateMessage] = useState("");
+  const [updateOrderStatus, { isLoading: isUpdating }] =
+    useUpdateOrderStatusMutation();
+
   useEffect(() => {
-    if(data && data.status){
+    if (data && data.status) {
       setOrderStatus(data.status);
     }
   }, [data]);
@@ -49,11 +51,11 @@ const OrderStatus: React.FC<OrderStatusProps> = ({
         setOrderStatus(data.status);
       }
     });
-  
+
     channel.bind("pusher:error", (error: any) => {
       console.error("Pusher error:", error);
     });
-  
+
     return () => {
       channel.unbind_all();
       pusher.unsubscribe("order-channel");
@@ -64,7 +66,9 @@ const OrderStatus: React.FC<OrderStatusProps> = ({
 
   const getStatusClass = (status: string) => {
     const statusIndex = statuses.indexOf(status);
-    return statusIndex <= currentStatusIndex ? "bg-primary text-white" : "bg-gray-200";
+    return statusIndex <= currentStatusIndex
+      ? "bg-primary text-white"
+      : "bg-gray-200";
   };
 
   const getLineClass = (index: number) => {
@@ -72,11 +76,13 @@ const OrderStatus: React.FC<OrderStatusProps> = ({
   };
 
   const getNextStatus = (currentStatus: string | null) => {
-    if(!currentStatus) return statuses[0];
+    if (!currentStatus) return statuses[0];
     const currentIndex = statuses.indexOf(currentStatus);
-    return currentIndex < statuses.length - 1 ? statuses[currentIndex + 1] : null;
-  }
-
+    return currentIndex < statuses.length - 1
+      ? statuses[currentIndex + 1]
+      : null;
+  };
+  const { t } = useTranslation();
   const handleUpdateStatus = async () => {
     const nextStatus = getNextStatus(orderStatus);
     if (!nextStatus) {
@@ -88,7 +94,7 @@ const OrderStatus: React.FC<OrderStatusProps> = ({
       setUpdateMessage(`Updating status to ${nextStatus}...`);
       const token = getToken();
       if (!token) {
-        toast.error('No authentication token found');
+        toast.error("No authentication token found");
         return;
       }
 
@@ -102,24 +108,32 @@ const OrderStatus: React.FC<OrderStatusProps> = ({
       console.error(error);
       toast.error(`Failed to update status: ${error.message}`);
     }
-  }
+  };
 
   if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error loading order status</div>;
+  if (error) return <div>{t("Error loading order status")}</div>;
 
   return (
     <>
-      <ToastContainer/>
+      <ToastContainer />
       <div className="flex items-center justify-center mt-8 gap-14 font-outfit">
         {statuses.map((status, index) => (
           <div key={status} className="flex items-center">
             <div className="flex flex-col items-center relative">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${getStatusClass(status)} z-10`}>
+              <div
+                className={`w-8 h-8 rounded-full flex items-center justify-center ${getStatusClass(
+                  status
+                )} z-10`}
+              >
                 <FontAwesomeIcon icon={faCheck} className="text-white" />
               </div>
               <span className="mt-2 text-sm">{status}</span>
               {index < statuses.length - 1 && (
-                <div className={`absolute top-5 transform -translate-y-1/2 left-10 w-24 h-1 ${getLineClass(index)}`}></div>
+                <div
+                  className={`absolute top-5 transform -translate-y-1/2 left-10 w-24 h-1 ${getLineClass(
+                    index
+                  )}`}
+                ></div>
               )}
             </div>
           </div>
@@ -135,22 +149,23 @@ const OrderStatus: React.FC<OrderStatusProps> = ({
             >
               {isUpdating ? (
                 <ThreeDots
-                visible={true}
-                height="30"
-                width="50"
-                color="white"
-                radius="9"
-                ariaLabel="three-dots-loading"
+                  visible={true}
+                  height="30"
+                  width="50"
+                  color="white"
+                  radius="9"
+                  ariaLabel="three-dots-loading"
                 />
               ) : (
-                <span>Update to {getNextStatus(orderStatus)}</span>
+                <span>
+                  {t("Update to")} {getNextStatus(orderStatus)}
+                </span>
               )}
-              
             </button>
           ) : (
             <div className="flex gap-2 font-outfit text-primary font-semibold">
-            <p>Order Completed </p>
-            <span>&#x2713;</span>
+              <p>{t("Order Completed")} </p>
+              <span>&#x2713;</span>
             </div>
           )}
         </div>
@@ -158,6 +173,6 @@ const OrderStatus: React.FC<OrderStatusProps> = ({
       {/* {updateMessage && <p>{updateMessage}</p>} */}
     </>
   );
-}
+};
 
 export default OrderStatus;
