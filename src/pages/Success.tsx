@@ -14,7 +14,7 @@ const Success = () => {
 
             <h1 className='uppercase text-primary font-[600] text-[24px] font-outfit'>Thank you for your Order</h1>
             <span className='text-center font-outfit '>We appreciate your purchase and thank you for choosing our shop. Your order has been successfully placed and is now being processed. We’re excited to get your items ready for you!</span>
-            <a href="/products" className='px-[20px] bg-primary py-[10px] text-white rounded-[6px]'>Continue Shopping </a>
+            <a href="/products" className='px-[20px] bg-primary py-[10px] text-white rounded-[6px]'>Continue Shopping </a>  
             </div>
         </div>
     )

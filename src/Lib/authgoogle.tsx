@@ -30,7 +30,7 @@ const AuthGoogle: React.FC = () => {
         if (decodedToken.role === "vendor") {
           navigate("/vendor");
         } else if (decodedToken.role === "buyer") {
-          navigate("/buyer");
+          navigate("/products");
         } else {
           navigate("/admin");
         }

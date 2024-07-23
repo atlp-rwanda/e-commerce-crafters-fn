@@ -67,7 +67,7 @@ const HeroSection: React.FC = () => {
           )}
           {images && images.length > 0 && (
             <img
-              src={images[currentImageIndex]}
+              src={images[0]}
               alt="Home Images"
               className="w-full h-full object-contain rounded-lg sm:w-[250px] sm:h-[250px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[400px] mx-auto"
             />
