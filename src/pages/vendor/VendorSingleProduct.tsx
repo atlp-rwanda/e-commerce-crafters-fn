@@ -5,6 +5,8 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader'
 import { toast } from 'react-toastify'
 import UpdateProduct from '../../Components/vendor/UpdateProduct'
+import Skeleton from 'react-loading-skeleton'
+import Reviews from "../../Components/SingleProduct/reviews";
 
 const VendorSingleProduct = () => {
     const [isComplete,setIsComplete] = useState<boolean>(false)
@@ -28,9 +30,67 @@ const VendorSingleProduct = () => {
 
     if (isLoading) {
         return (
-            <div className='w-full h-screen flex items-center justify-center'>
-                <span className='text-[32px] font-[600]'>Loading...</span>
+           <div className='w-full flex flex-col gap-[20px] p-20'>
+             <div className='flex flex-row gap-[20px] '>
+                <div className='flex w-[60%] flex-col gap-[20px]'>
+                    <div className='w-full  h-[60vh] rounded-[12px]'>
+                       <Skeleton className='w-full h-full'/>
+                    </div>
+                    <div className='grid  grid-cols-4 gap-[20px]'>
+                        {Array.from({length: 4}).map((item:any,index:number)=>{
+                            return(
+
+                        <div onClick={()=> setOpenedImage(index)} key={index} className=' cursor-pointer w-full h-[20vh]'>
+                            <Skeleton className='w-full rounded-[12px] h-full object-cover' />
+                        </div>
+                            )
+                        })}
+                      
+                    
+                    </div>
+                </div>
+                <div className='w-[10%] flex flex-col gap-[10px]'>
+                    <div className='flex flex-col gap-[5px]'>
+                       <Skeleton height={30}/>
+                       <Skeleton height={30}/>
+                    </div>
+                    <div className='flex flex-col gap-[5px]'>
+                    <Skeleton height={30}/>
+                    <Skeleton height={30}/>
+                    </div>
+                    <div className='flex flex-col gap-[5px]'>
+                    <Skeleton height={30}/>
+                    <Skeleton height={30}/>
+                    </div>
+                    <div className='flex flex-col gap-[5px] font-outfit'>
+                    <Skeleton height={30}/>
+                        <div className='flex flex-row gap-[10px] items-center'>
+                        <Skeleton height={30}/>
+                        <Skeleton height={30}/>
+                        </div>
+                    </div>
+                    <div className='flex flex-col gap-[5px] font-outfit'>
+                    <Skeleton height={30}/>
+                        <div className='flex flex-row gap-[10px] items-center'>
+                           <Skeleton height={30}/>
+
+                        </div>
+                    </div>
+                    <div className='flex flex-col gap-[5px] font-outfit'>
+                        <div className='flex flex-row gap-[10px] items-center'>
+                        <Skeleton height={30}/>
+                        <Skeleton height={30}/>
+
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <div className='flex flex-row justify-between items-center w-full'>
+            <Skeleton height={50}/>
+            <Skeleton height={50}/>
+            </div>
+           </div>
         )
     }
     if (error) {
@@ -144,30 +204,6 @@ const VendorSingleProduct = () => {
             <UpdateProduct productData={singleProduct} setIsComplete={setIsComplete} setModal={setModal} />
 
         )}
-            <div className='flex felx-col gap-[20px] pt-10'>
-                <div className='flex flex-row items-center gap-[10px]'>
-                    <div>
-
-                        <div className='w-[40px] h-[40px] bg-gray-300 flex rounded-full items-center justify-center'>
-                            <span className='text-secondary font-outfit text-[14px]'>01</span>
-                        </div>
-                    </div>
-                    <div className='flex font-outfit flex-col gap-[5px]'>
-                        <span className='text-[18px] font-[600] text-black'>Lais Ikirezo</span>
-                        <div className='flex flex-row gap-[10px] items-center'>
-                            <svg width="20" height="21" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M27.2862 12.3562L21.6612 17.21L23.3749 24.4687C23.4695 24.8628 23.4451 25.276 23.3049 25.6562C23.1648 26.0364 22.9151 26.3666 22.5873 26.6049C22.2596 26.8433 21.8686 26.9792 21.4637 26.9954C21.0588 27.0117 20.6582 26.9076 20.3124 26.6962L13.9999 22.8112L7.68367 26.6962C7.33796 26.9064 6.9378 27.0095 6.5336 26.9926C6.12939 26.9758 5.7392 26.8397 5.41217 26.6016C5.08514 26.3634 4.83589 26.0338 4.6958 25.6543C4.55571 25.2748 4.53105 24.8623 4.62492 24.4687L6.34492 17.21L0.719922 12.3562C0.414045 12.0919 0.192828 11.7433 0.0839002 11.3539C-0.0250279 10.9646 -0.0168401 10.5518 0.107441 10.1671C0.231722 9.78237 0.466588 9.4428 0.782708 9.19077C1.09883 8.93875 1.48219 8.78544 1.88492 8.75L9.25992 8.15499L12.1049 1.27C12.2589 0.894767 12.521 0.573806 12.8579 0.347918C13.1948 0.12203 13.5912 0.00141907 13.9968 0.00141907C14.4024 0.00141907 14.7988 0.12203 15.1357 0.347918C15.4726 0.573806 15.7347 0.894767 15.8887 1.27L18.7324 8.15499L26.1074 8.75C26.511 8.78412 26.8954 8.93658 27.2127 9.18825C27.53 9.43993 27.7659 9.77964 27.891 10.1648C28.016 10.55 28.0246 10.9635 27.9157 11.3536C27.8068 11.7436 27.5852 12.0928 27.2787 12.3575L27.2862 12.3562Z" fill="#E4A951" />
-                            </svg>
-                            <svg width="20" height="21" viewBox="0 0 28 27" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M27.2862 12.3562L21.6612 17.21L23.3749 24.4687C23.4695 24.8628 23.4451 25.276 23.3049 25.6562C23.1648 26.0364 22.9151 26.3666 22.5873 26.6049C22.2596 26.8433 21.8686 26.9792 21.4637 26.9954C21.0588 27.0117 20.6582 26.9076 20.3124 26.6962L13.9999 22.8112L7.68367 26.6962C7.33796 26.9064 6.9378 27.0095 6.5336 26.9926C6.12939 26.9758 5.7392 26.8397 5.41217 26.6016C5.08514 26.3634 4.83589 26.0338 4.6958 25.6543C4.55571 25.2748 4.53105 24.8623 4.62492 24.4687L6.34492 17.21L0.719922 12.3562C0.414045 12.0919 0.192828 11.7433 0.0839002 11.3539C-0.0250279 10.9646 -0.0168401 10.5518 0.107441 10.1671C0.231722 9.78237 0.466588 9.4428 0.782708 9.19077C1.09883 8.93875 1.48219 8.78544 1.88492 8.75L9.25992 8.15499L12.1049 1.27C12.2589 0.894767 12.521 0.573806 12.8579 0.347918C13.1948 0.12203 13.5912 0.00141907 13.9968 0.00141907C14.4024 0.00141907 14.7988 0.12203 15.1357 0.347918C15.4726 0.573806 15.7347 0.894767 15.8887 1.27L18.7324 8.15499L26.1074 8.75C26.511 8.78412 26.8954 8.93658 27.2127 9.18825C27.53 9.43993 27.7659 9.77964 27.891 10.1648C28.016 10.55 28.0246 10.9635 27.9157 11.3536C27.8068 11.7436 27.5852 12.0928 27.2787 12.3575L27.2862 12.3562Z" fill="#E4A951" />
-                            </svg>
-
-                        </div>
-                        <span className='text-[14px] text-gray-500'>2nd June 2024</span>
-                        <span className='text-[14px] text-gray-500'>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classica</span>
-                    </div>
-                </div>
-            </div>
         </div>
   
         </>

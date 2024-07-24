@@ -96,11 +96,11 @@ const NewProduct = (property: productProps) => {
 
 
     return (
-        <div className='w-full h-full top-0 z-[400] bg-black/20 absolute flex items-center justify-center left-0'>
-            <div className='w-1/2 max-h-[95vh   ] flex flex-col gap-[10px] bg-white overflow-y-scroll p-4 rounded-[12px]'>
+        <div className='w-full h-full top-0 z-[400] backdrop-blur-sm bg-black/20 absolute flex items-center justify-center left-0'>
+            <div className='w-1/2 max-h-[95vh] flex flex-col gap-[10px] bg-white overflow-y-scroll p-4 rounded-[12px]'>
                 <div className='w-full flex flex-row font-outfit items-center justify-between'>
                     <h1 className='text-[18px] font-[600]'>New Products</h1>
-                    <div>X</div>
+                    <div className='text-[20px] font-[600] cursor-pointer' onClick={()=> property.setModal(false)}>X</div>
                 </div>
                 <form onSubmit={handleSubmit} className='flex flex-col gap-[10px] items-center'>
                     <div className='grid grid-cols-2 gap-[10px] w-full'>
@@ -112,6 +112,7 @@ const NewProduct = (property: productProps) => {
                         <div className='flex flex-col gap-[6px] w-full'>
                         <span className="text-[16px] font-[400] text-[#666666] font-outfit">Category</span>
                         <select name="category" onChange={(e)=> setCategory(e.target.value)}  className={`p-3 border ${error ? 'border-red-500/60' : 'border-border/50'}  rounded-[12px] font-outfit outline-none placeholder:font-[400] w-full`} id="">
+                        <option value="" >Please Select Category</option>
                         <option value="electronic">Electronics</option>
                         <option value="food">Food</option>
                         <option value="mechanism">Mechanism</option>

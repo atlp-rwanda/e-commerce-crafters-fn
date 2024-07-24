@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { addUnreadMessage, markMessagesAsRead } from '../../Redux/features/MessageSlice';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../Redux/store';
+import Skeleton from 'react-loading-skeleton';
 
 interface Vendor {
     userId: string;
@@ -85,7 +86,13 @@ const ChatList: React.FC<ChatListProps> = ({ vendors, isLoading, handelSelect, s
     return (
         <div className='w-full bg-white min-h-[45vh] p-2 rounded-[12px] rounded-tl-none flex flex-col gap-[10px]'>
 
-            {isLoading ? ("loading") : (
+            {isLoading ? (
+                <div className='flex flex-col gap-[10px]'>
+                    <Skeleton height={40}/>
+                    <Skeleton height={40}/>
+                    <Skeleton height={40}/>
+                </div>
+            ) : (
                 selectUsers.length == 0 && vendors.length === 0 ? (
                     <div className=' w-full h-full flex flex-col items-center justify-center'>
                         <svg width="50" height="50" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
