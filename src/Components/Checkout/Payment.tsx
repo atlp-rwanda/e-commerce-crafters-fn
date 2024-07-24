@@ -1,71 +1,71 @@
-
 import React, { FormEvent, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useCreateOrderMutation, useCreatePaymentMutation } from "../../Redux/features/checkoutSlice";
+import {
+  useCreateOrderMutation,
+  useCreatePaymentMutation,
+} from "../../Redux/features/checkoutSlice";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
-import useAuthHeader from 'react-auth-kit/hooks/useAuthHeader'
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 import LocationButton from "../../Lib/locationButton";
 
 interface paymentProps {
-  totalAmount: number
+  totalAmount: number;
 }
 
 const Payment = (data: paymentProps) => {
+  const userData: any = useAuthUser();
+  const [district, setDistrict] = useState<string>("");
+  const [sector, setSector] = useState<string>("");
+  const [cell, setCell] = useState<string>("");
+  const [city, setCity] = useState<string>("");
+  const [streetAddress, setStreetAddress] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState<string>("");
+  const [loadingPay, setLoadingPay] = useState<boolean>(false);
 
-  const userData:any = useAuthUser()
-  const [district,setDistrict] = useState<string>("")
-   const [sector,setSector] = useState<string>("")
-   const [cell,setCell] = useState<string>("")
-   const [city,setCity] = useState<string>("")
-   const [streetAddress,setStreetAddress] = useState<string>("")
-   const [errorMessage,setErrorMessage] = useState<string>("")
-   const [loadingPay,setLoadingPay] = useState<boolean>(false)
-
-   const [createOrder, {isLoading,isError}] = useCreateOrderMutation()
-   const [createPayment, {isLoading:payLoading,isError:payError}] = useCreatePaymentMutation()
-
+  const [createOrder, { isLoading, isError }] = useCreateOrderMutation();
+  const [createPayment, { isLoading: payLoading, isError: payError }] =
+    useCreatePaymentMutation();
 
   const { t } = useTranslation();
 
-  const validation = async(e: FormEvent)=>{
-    
-    e.preventDefault()
-    if(!district || !cell || !streetAddress){
-      setErrorMessage(t("Please fill all the fields"))
-    }else{
-      setErrorMessage(t(""))
-      handelSubmit()
+  const validation = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!district || !cell || !streetAddress) {
+      setErrorMessage(t("Please fill all the fields"));
+    } else {
+      setErrorMessage(t(""));
+      handelSubmit();
     }
-  }
-  const token = useAuthHeader()
+  };
+  const token = useAuthHeader();
 
-  const handelSubmit = async()=>{
-    setLoadingPay(true)
+  const handelSubmit = async () => {
+    setLoadingPay(true);
     try {
       const data = {
         userId: userData.userId,
-        deliveryAddress:{
+        deliveryAddress: {
           district,
           cell,
           streetAddress,
         },
         client: userData.name,
-        paymentMethod: "stripe"
-      }
+        paymentMethod: "stripe",
+      };
 
-
-      const response = await createOrder(data).unwrap()
-      if(response.message){
-        const paymentRes:any = await createPayment({data:response.order.orderId,token:token})
-        setLoadingPay(false)
+      const response = await createOrder(data).unwrap();
+      if (response.message) {
+        const paymentRes: any = await createPayment({
+          data: response.order.orderId,
+          token: token,
+        });
+        setLoadingPay(false);
         window.location.href = paymentRes.data.url;
       }
-      
     } catch (error) {
-
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
   return (
     <div className="payment-details w-[550px] rounded-[5px] hover:shadow-md ">
       <header className="bg-primary text-white text-center p-4 rounded-t-[5px]">
@@ -73,37 +73,48 @@ const Payment = (data: paymentProps) => {
       </header>
       <div className="payment-content px-[30px] py-[50px]">
         {errorMessage}
-        <form onSubmit={validation} action="" className="p-[5px] flex flex-col gap-[20px] w-[90%] m-auto">
-            <LocationButton setCell={setCell} setCity={setCity} setDistrict={setDistrict} setStreetAddress={setStreetAddress} />
+        <form
+          onSubmit={validation}
+          action=""
+          className="p-[5px] flex flex-col gap-[20px] w-[90%] m-auto"
+        >
+          <LocationButton
+            setCell={setCell}
+            setCity={setCity}
+            setDistrict={setDistrict}
+            setStreetAddress={setStreetAddress}
+          />
           <div className="contacts w-full gap-[10px] grid grid-cols-2 justify-between mb-5">
             <input
-              onChange={(e)=> setDistrict(e.target.value)}
+              id="district"
               value={district}
               type="text"
-              className="contact street  p-3 rounded-[7px] bg-gray-100 pl-[15px]"
+              className="contact street p-3 rounded-lg bg-gray-100 pl-4 cursor-not-allowed"
               placeholder={t("District")}
+              disabled={true}
             />
-            <input
-            onChange={(e)=> setCell(e.target.value)}
-            value={cell}
 
+            <input
+              value={cell}
               type="text"
-              className="contact street  p-3 rounded-[7px] bg-gray-100 pl-[15px]"
+              className="contact street  p-3 rounded-[7px] bg-gray-100 pl-[15px] cursor-not-allowed"
               placeholder={t("Sector")}
+              disabled={true}
             />
           </div>
-            <input
-            onChange={(e)=> setStreetAddress(e.target.value)}
+          <input
             value={streetAddress}
-
-              type="text"
-              className="contact street  p-3 w-full rounded-[7px] bg-gray-100 pl-[15px]"
-              placeholder={t("Street address")}
-            />
-          <div className="method w-full mb-4">
-          </div>
-          <button type="submit" className="payment bg-primary w-[96%] h-10 rounded-[7px] m-auto text-white hover:bg-blue-800">
-            {loadingPay ? ("Wait A moment" ) : (t("Continue To Payment"))}
+            type="text"
+            className="contact street  p-3 w-full rounded-[7px] bg-gray-100 pl-[15px] cursor-not-allowed"
+            placeholder={t("Street address")}
+            disabled={true}
+          />
+          <div className="method w-full mb-4"></div>
+          <button
+            type="submit"
+            className="payment bg-primary w-[96%] h-10 rounded-[7px] m-auto text-white hover:bg-blue-800"
+          >
+            {loadingPay ? "Wait A moment" : t("Continue To Payment")}
           </button>
         </form>
       </div>

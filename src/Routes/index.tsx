@@ -19,7 +19,6 @@ import Analytics from "../pages/Analytics";
 import AdminHome from "../pages/Admin/AdminHome";
 import Homepage from "../pages/Homepage";
 import Products from "../pages/ProductsPage";
-import Location from "../pages/location"
 
 
 
@@ -56,7 +55,6 @@ const AppRoutes: React.FC = () => (
       <Route path="/singleproduct" element={<Singlepage />} />
       <Route path="/products" element={<Products />} />
       <Route path="/forgot-password" element={<Forgotpassword />} />
-      <Route path="/geolocation" element={<Location />} />
       <Route path="/product/:id" element={<Singlepage />} />
       <Route path="/order-tracking" element={<OrderTrackingPage />} />
       <Route path="/forgot-password" element={<Forgotpassword />} />
