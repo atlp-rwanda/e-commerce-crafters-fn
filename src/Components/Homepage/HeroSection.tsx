@@ -7,9 +7,16 @@ import Skeleton from "react-loading-skeleton";
 
 const HeroSection: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
-  const { images, loading, error } = useSelector(
-    (state: RootState) => state.productsImages
-  );
+  // const { images, loading, error } = useSelector(
+  //   (state: RootState) => state.productsImages
+  // );
+
+  const images = [
+    "https://static.vecteezy.com/system/resources/thumbnails/024/841/285/small_2x/wireless-headphone-isolated-on-transparent-background-high-quality-bluetooth-headphone-for-advertising-and-product-catalogs-generative-ai-png.png",
+    "https://png.pngtree.com/png-vector/20231214/ourmid/pngtree-shoe-product-design-premium-sneakers-3d-png-image_11331792.png",
+    "https://purepng.com/public/uploads/large/purepng.com-macbookmacbooknotebookcomputersapple-inmacbook-familyapple-laptops-17015283608871xjab.png",
+    "https://www.pngall.com/wp-content/uploads/2016/03/Fruit-Free-Download-PNG.png",
+  ]
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -27,6 +34,7 @@ const HeroSection: React.FC = () => {
   }, [images]);
 
   const { t } = useTranslation();
+
 
   return (
     <section className=" bg-gradient-to-r from-primary to-primaryGradient text-white text-xl px-8 py-[20vh] h-[100vh] md:px-8 lg:px-16 flex flex-col lg:flex-row items-center gap-8 lg:gap-64 font-outfit justify-start items-start">
@@ -59,18 +67,10 @@ const HeroSection: React.FC = () => {
 
       <div className="w-full md:w-1/2 lg:w-1/2 flexb justify-start items-start">
         <div className="w-full max-w-md">
-          {loading && (
-            <div className="w-full h-[400px]">
-              <Skeleton height={400} />
-            </div>
-          )}
-          {error && <div>Error: {error}</div>}
-          {!loading && !error && (!images || images.length === 0) && (
-            <div>No images found.</div>
-          )}
+      
           {images && images.length > 0 && (
             <img
-              src={images[0]}
+              src={images[currentImageIndex]}
               alt="Home Images"
               className="w-full h-full object-contain rounded-lg sm:w-[250px] sm:h-[250px] md:w-[400px] md:h-[400px] lg:w-[500px] lg:h-[400px] mx-auto"
             />

@@ -66,6 +66,7 @@ const Payment = (data: paymentProps) => {
       console.log(error);
     }
   };
+  console.log(streetAddress)
   return (
     <div className="payment-details w-[550px] rounded-[5px] hover:shadow-md ">
       <header className="bg-primary text-white text-center p-4 rounded-t-[5px]">
@@ -89,7 +90,7 @@ const Payment = (data: paymentProps) => {
               id="district"
               value={district}
               type="text"
-              className="contact street p-3 rounded-lg bg-gray-100 pl-4 cursor-not-allowed"
+              className="contact street p-3 rounded-lg bg-gray-100 pl-4"
               placeholder={t("District")}
               disabled={true}
             />
@@ -97,7 +98,7 @@ const Payment = (data: paymentProps) => {
             <input
               value={cell}
               type="text"
-              className="contact street  p-3 rounded-[7px] bg-gray-100 pl-[15px] cursor-not-allowed"
+              className="contact street  p-3 rounded-[7px] bg-gray-100 pl-[15px]"
               placeholder={t("Sector")}
               disabled={true}
             />
@@ -105,7 +106,8 @@ const Payment = (data: paymentProps) => {
           <input
             value={streetAddress}
             type="text"
-            className="contact street  p-3 w-full rounded-[7px] bg-gray-100 pl-[15px] cursor-not-allowed"
+            onChange={(e)=> setStreetAddress(e.target.value)}
+            className="contact street  p-3 w-full rounded-[7px] bg-gray-100 pl-[15px]"
             placeholder={t("Street address")}
             disabled={true}
           />

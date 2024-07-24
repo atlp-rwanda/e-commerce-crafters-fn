@@ -4,6 +4,7 @@ import { fetchPopularProducts } from "../../Redux/features/PopularProductsSlice"
 import { RootState, AppDispatch } from "../../Redux/store";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import Skeleton from "react-loading-skeleton";
 const PopularProducts: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const { products, loading, error } = useSelector(
@@ -16,7 +17,30 @@ const PopularProducts: React.FC = () => {
   }, [dispatch]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-10">
+      {Array.from({length: 4}).map((product) => (
+        <div
+          className=" cursor-pointer rounded-t-[12px] shadow-md"
+        >
+         <Skeleton className="h-[30vh]"/>
+          <div className="flex flex-col p-2">
+            <p className="md:text-lg sm:text-sm text-gray-500">
+             <Skeleton height={14} />
+            </p>
+            <h3 className="md:text-xl sm:text-lg text-secondary">
+            <Skeleton height={14} />
+            </h3>
+            <div className="flex justify-between items-center mt-2">
+              <p className="md:text-xl sm:text-lg font-semibold text-gray-900">
+              <Skeleton height={14} />
+              </p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    );
   }
 
   if (error) {

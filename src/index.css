@@ -64,4 +64,6 @@
   --color-gray-200: #4B5563;
   --color-border: #4B5563;
 }
-
+html{
+  scroll-behavior: smooth;
+}

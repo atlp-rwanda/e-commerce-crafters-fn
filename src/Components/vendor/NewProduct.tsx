@@ -113,10 +113,13 @@ const NewProduct = (property: productProps) => {
                         <span className="text-[16px] font-[400] text-[#666666] font-outfit">Category</span>
                         <select name="category" onChange={(e)=> setCategory(e.target.value)}  className={`p-3 border ${error ? 'border-red-500/60' : 'border-border/50'}  rounded-[12px] font-outfit outline-none placeholder:font-[400] w-full`} id="">
                         <option value="" >Please Select Category</option>
-                        <option value="electronic">Electronics</option>
-                        <option value="food">Food</option>
-                        <option value="mechanism">Mechanism</option>
-                        <option value="sport-kit">Sport Kit</option>
+                        <option value="Electronics">Electronics</option>
+                        <option value="Food">Food</option>
+                        <option value="Mechanism">Mechanism</option>
+                        <option value="Sport Kit">Sport Kit</option>
+                        <option value="Clothing">Clothing</option>
+                        <option value="Furniture">Furniture</option>
+                        <option value="Shoes">Shoes</option>
                         </select>
                         </div>
                         <Input label='Expiring Date' type='date' value={expiringDate} placeholder='Enter Product Name' error={error} onChange={(value) => setExpiringDate(value)} />

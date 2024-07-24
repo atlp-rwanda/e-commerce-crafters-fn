@@ -63,7 +63,7 @@ function LocationButton(props: locationProps) {
         .then((data) => {
           console.log(data);
           if (data.results && data.results.length > 0) {
-            const { formatted_address, address_components } = data.results[2];
+            const { formatted_address, address_components } = data.results[1];
             const city = address_components.find((component: any) =>
               component.types.includes("locality")
             )?.long_name;

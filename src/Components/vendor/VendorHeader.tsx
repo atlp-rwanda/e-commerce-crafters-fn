@@ -16,6 +16,7 @@ const VendorHeader = () => {
     useEffect(() => {
         const interval = setInterval(() => {
             const date = new Date();
+            const datee = date.getMonth()
             const hours = date.getHours();
             const minutes = date.getMinutes();
             const period = hours >= 12 ? 'PM' : 'AM';
@@ -30,7 +31,7 @@ const VendorHeader = () => {
 
 
     const date = new Date();
-    const day = date.getDay();
+    const day = date.getDate();
     const month = date.getMonth();
     const year = date.getFullYear();
 
