@@ -18,10 +18,10 @@ const PopularProducts: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 p-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 p-10">
       {Array.from({length: 4}).map((product) => (
         <div
-          className=" cursor-pointer rounded-t-[12px] shadow-md"
+          className=" cursor-pointer rounded-t-[12px]"
         >
          <Skeleton className="h-[30vh]"/>
           <div className="flex flex-col p-2">
@@ -54,26 +54,26 @@ const PopularProducts: React.FC = () => {
   };
 
   return (
-    <section className="py-16 px-6 sm:px-12 md:px-24 font-outfit bg-white min-h-screen mb-0">
+    <section className="py-16 px-6 sm:px-12 md:px-24 font-outfit bg-bgwhite min-h-screen mb-0">
       <div className="mb-8">
         <div className="flex items-center">
           <div className="w-24 h-2 bg-secondary mr-4"></div>
-          <h2 className="text-xl sm:text-2xl font-bold text-black">
+          <h2 className="text-xl sm:text-2xl font-bold text-blackText">
             {t("POPULAR PRODUCTS")}
           </h2>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {displayProducts.map((product) => (
           <div
             key={product.productId}
-            className=" cursor-pointer rounded-t-[12px] shadow-md"
+            className=" cursor-pointer rounded-t-[12px] w-full "
             onClick={() => handleCardClick(product.productId)}
           >
             <img
               src={product.image[0]}
               alt={product.name}
-              className=" rounded-t-[12px] h-[30vh] "
+              className=" rounded-t-[12px] w-full h-[30vh] "
             />
             <div className="flex flex-col p-2">
               <p className="md:text-lg sm:text-sm text-gray-500">
@@ -83,10 +83,10 @@ const PopularProducts: React.FC = () => {
                 {product.name}
               </h3>
               <div className="flex justify-between items-center mt-2">
-                <p className="md:text-xl sm:text-lg font-semibold text-gray-900">
+                <p className="md:text-xl sm:text-lg font-semibold text-blackText">
                   {product.price} Rwf
                 </p>
-                <button className="text-secondary text-xl sm:text-xl">
+                <button className="text-secondary ">
                   <svg
                     width="30"
                     height="34"

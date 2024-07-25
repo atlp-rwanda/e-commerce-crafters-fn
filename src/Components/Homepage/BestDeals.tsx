@@ -10,12 +10,12 @@ const BestDeals: React.FC = () => {
   console.log(hotDeal);
   const { t } = useTranslation();
   return (
-    <section className="bg-primary text-white p-8 sm:p-16 md:pl-24 flex flex-col md:flex-row items-center  sm:items-center justify-center gap-10 sm:gap-0 md:gap-10 font-outfit text-lg md:text-xl sm:text-sm min=-h-screen">
+    <section className="bg-primary text-white p-8 sm:p-16 md:pl-24 flex flex-col xl:flex-row items-center  sm:items-center justify-center gap-10 sm:gap-0 md:gap-10 font-outfit text-lg md:text-xl sm:text-sm min=-h-screen">
       {isLoading ? (
         "locing..."
       ) : (
         <>
-          <div className="md:w-1/2 mb-8 md:mb-0 md:mr-8">
+          <div className="xl:w-1/2 text-center xl:text-start mb-8 md:mb-0 md:mr-8">
             <h2 className="text-2xl sm:text-xl md:text-3xl font-bold mb-4 md:mb-8">
               {t("Best Deals")}
             </h2>
@@ -26,7 +26,7 @@ const BestDeals: React.FC = () => {
               foresee the pain and trouble that are bound to ensue; and
             </p>
             <p className="text-base sm:text-sm md:text-xl font-semibold mb-4 md:mb-6">
-              From &nbsp;&nbsp; 678,453 &nbsp;
+              From &nbsp;&nbsp; {hotDeal[0].price} &nbsp;
               <span className="bg-sky-400 text-black p-1 px-3 text-xs sm:text-sm rounded-xl">
                 Rwf
               </span>
@@ -35,7 +35,7 @@ const BestDeals: React.FC = () => {
               {t("Shop Now")}
             </button>
           </div>
-          <div className="md:w-1/2 p-10">
+          <div className="xl:w-1/2 p-10">
             <img
               src={hotDeal[0].image[0]}
               alt="Samsung TV"

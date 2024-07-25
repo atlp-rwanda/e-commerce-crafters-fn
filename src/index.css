@@ -49,6 +49,8 @@
   --color-gray-200: #CACACA;
   --color-border: #666666;
   --color-textprimary: #013362;
+  --color-blacktext: #000000;
+  
 }
 
 
@@ -63,6 +65,7 @@
   --color-gray-100: #1F2937;
   --color-gray-200: #4B5563;
   --color-border: #4B5563;
+  --color-blacktext: #ffffff;
 }
 html{
   scroll-behavior: smooth;

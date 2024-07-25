@@ -68,29 +68,33 @@ const Payment = (data: paymentProps) => {
   };
   console.log(streetAddress)
   return (
-    <div className="payment-details w-[550px] rounded-[5px] hover:shadow-md ">
-      <header className="bg-primary text-white text-center p-4 rounded-t-[5px]">
+    <div className=" w-1/2  p-10">
+     
+      <div className="payment-content bg-white px-[30px] p-[20px]  flex flex-col gap-[10px]">
+      <header className=" text-blackText rounded-t-[5px]">
         {t("PAYMENT DETAILS")}
       </header>
-      <div className="payment-content px-[30px] py-[50px]">
         {errorMessage}
         <form
           onSubmit={validation}
           action=""
-          className="p-[5px] flex flex-col gap-[20px] w-[90%] m-auto"
+          className=" flex flex-col gap-[20px] w-full "
         >
+          <div className="w-[300px]">
+
           <LocationButton
             setCell={setCell}
             setCity={setCity}
             setDistrict={setDistrict}
             setStreetAddress={setStreetAddress}
-          />
+            />
+            </div>
           <div className="contacts w-full gap-[10px] grid grid-cols-2 justify-between mb-5">
             <input
               id="district"
               value={district}
               type="text"
-              className="contact street p-3 rounded-lg bg-gray-100 pl-4"
+              className="contact street p-3 rounded-lg  border bg-transparent"
               placeholder={t("District")}
               disabled={true}
             />
@@ -98,23 +102,23 @@ const Payment = (data: paymentProps) => {
             <input
               value={cell}
               type="text"
-              className="contact street  p-3 rounded-[7px] bg-gray-100 pl-[15px]"
+              className="contact street  p-3 rounded-[7px]  border bg-transparent"
               placeholder={t("Sector")}
               disabled={true}
             />
-          </div>
           <input
             value={streetAddress}
             type="text"
             onChange={(e)=> setStreetAddress(e.target.value)}
-            className="contact street  p-3 w-full rounded-[7px] bg-gray-100 pl-[15px]"
+            className="contact street  p-3 w-full rounded-[7px]  border bg-transparent"
             placeholder={t("Street address")}
             disabled={true}
           />
-          <div className="method w-full mb-4"></div>
+          </div>
+
           <button
             type="submit"
-            className="payment bg-primary w-[96%] h-10 rounded-[7px] m-auto text-white hover:bg-blue-800"
+            className="payment bg-primary p-4 rounded-[7px] w-full font-outfit m-auto text-white hover:bg-blue-800"
           >
             {loadingPay ? "Wait A moment" : t("Continue To Payment")}
           </button>

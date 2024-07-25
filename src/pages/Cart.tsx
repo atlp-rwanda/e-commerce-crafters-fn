@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import { useDeleteFromCartMutation, useGetCartQuery, useUpdateCartMutation } from "../Redux/features/checkoutSlice";
+import Skeleton from "react-loading-skeleton";
 
 const Cart = () => {
   const userData: any = useAuthUser()
@@ -96,8 +97,10 @@ const Cart = () => {
         <div className="flex py-4 gap-[10px]">
           <div className="w-[70%] flex flex-col gap-[10px] ">
             {load ? (
-              "Loading"
-
+              <div className="w-full flex flex-col gap-[10px]">
+                <Skeleton height={50}/>
+                <Skeleton height={50}/>
+              </div>
             ) : (
               cart?.cartitem?.map((item: any, index: number) => {
                 return (

@@ -37,8 +37,8 @@ const HeroSection: React.FC = () => {
 
 
   return (
-    <section className=" bg-gradient-to-r from-primary to-primaryGradient text-white text-xl px-8 py-[20vh] h-[100vh] md:px-8 lg:px-16 flex flex-col lg:flex-row items-center gap-8 lg:gap-64 font-outfit justify-start items-start">
-      <div className="w-full  flex flex-col gap-4 lg:gap-8">
+    <section className=" bg-gradient-to-r from-primary to-primaryGradient text-white text-xl px-8 py-[20vh]  md:px-8 lg:px-16 flex flex-col lg:flex-row items-center gap-8 lg:gap-64 font-outfit justify-start items-start">
+      <div className="w-full text-center items-center xl:text-start xl:items-start  flex flex-col gap-4 lg:gap-8">
         <h1 className="text-3xl font-bold">
           <span className="text-secondary">CRAFTERS</span> ONLINE SHOP
         </h1>

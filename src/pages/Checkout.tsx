@@ -7,6 +7,7 @@ import Header from "../Components/Homepage/Homepage_header";
 import { useTranslation } from "react-i18next";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import { useGetCartQuery } from "../Redux/features/checkoutSlice";
+import Skeleton from "react-loading-skeleton";
 
 const Checkout = () => {
    
@@ -42,9 +43,14 @@ const Checkout = () => {
   return (
     <>
       <Header />
-      <div className="all w-[80%] mt-24 mx-auto">
-        {load ? ("") : (
-        <div className=" flex gap-[20px] justify-between ">
+      <div className="all w-full h-full mt-20  bg-gray-50 ">
+        {load ? (
+          <div className="w-full flex flex-row gap-[40px]">
+            <Skeleton height={200}/>
+            <Skeleton height={200}/>
+          </div>
+        ) : (
+        <div className=" flex gap-[20px] justify-between  w-full">
           <Payment totalAmount={totall} />
           <OrderSummary
             cartItems={cart.cartitem}
@@ -57,11 +63,7 @@ const Checkout = () => {
           />
         </div>
         )}
-        <a href="/products">
-          <button className="bg-amber-600 px-32 py-3 rounded-lg text-2xl mx-[410px] my-20  text-white font-semibold hover:shadow-sm hover:shadow-black">
-            {t("BACK TO HOME")}
-          </button>
-        </a>
+        
       </div>
       <Footer />
     </>

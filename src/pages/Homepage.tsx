@@ -9,7 +9,7 @@ import PopularProducts from '../Components/Homepage/PopularProducts';
 import VoiceflowChatWidget from '../Components/ChatBot';
 const Homepage: React.FC = () => {
   return (
-    <div>
+    <div className=' bg-bgwhite'>
       <VoiceflowChatWidget/>
       <Header />
       <HeroSection />

@@ -34,12 +34,12 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
   const { t } = useTranslation();
   return (
     <section
-      className="px-20 py-20  flex flex-col md:flex-row justify-center font-outfit md:text-xl md:space-x-40 sm:h-auto md:h-screen "
+      className="xl:px-20   flex flex-col xl:flex-row gap-[40px] justify-center font-outfit xl:text-xl py-[20vh]  px-4 md:px-10 "
       id="contact-us"
     >
-      <div className="w-full md:w-1/2  md:mb-0 flex flex-col gap-[40px]">
+      <div className="w-full xl:w-1/2 text-center xl:text-start  md:mb-0 flex flex-col gap-[40px]">
         <div className="flex flex-col gap-[4px]">
-          <h2 className="text-primary text-[24px] md:text-4xl font-bold">
+          <h2 className="text-blackText text-[24px] xl:text-4xl font-bold">
             {t("Get In Touch With Us")}
           </h2>
           <h2 className="text-secondary text-[16px]">
@@ -65,7 +65,7 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
                 />
               </svg>
 
-              <p className="text-primary sm:text-sm md:text-[14px]">
+              <p className="text-blackText textsm:text-sm md:text-[14px]">
                 {t(
                   "If you have an urgent business concern please contact us at"
                 )}
@@ -94,14 +94,14 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
                 />
               </svg>
 
-              <p className="text-primary sm:text-sm md:text-[14px]">
+              <p className="text-blackText textsm:text-sm md:text-[14px]">
                 {t(
                   "If you have an urgent business concern please contact us at"
                 )}
                 07********0
               </p>
             </div>
-            <div className="bg-primary flex justify-center space-x-6 mt-4 p-4 text-white text-2xl md:text-3xl w-full max-w-md rounded-xl">
+            <div className="bg-primary flex justify-center space-x-6 mt-4 p-4 text-white text-2xl xl:text-3xl w-full max-w-md rounded-xl">
               <a href="#">
                 <i className="fab fa-facebook mr-4"></i>
               </a>
@@ -118,7 +118,7 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
           </div>
         </div>
       </div>
-      <div className="w-full md:w-1/2 text-base md:text-lg flex flex-col gap-[20px]">
+      <div className="w-full xl:w-1/2 text-center xl:text-start text-base xl:text-lg flex flex-col gap-[20px]">
         <h2 className="text-secondary text-4xl font-bold">
           {t("Send Us Message")}
         </h2>
@@ -127,7 +127,7 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
             <input
               type="text"
               placeholder={t("Your Name")}
-              className="w-full text-[14px] p-2 bg-gray-100 rounded-[6px]"
+              className="w-full text-[14px] p-2 bg-[lightgray] rounded-[6px]"
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
@@ -136,7 +136,7 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
             <input
               type="email"
               placeholder={t("Your Email")}
-              className="w-full text-[14px] p-2 bg-gray-100 rounded-[6px]"
+              className="w-full text-[14px] p-2 bg-[lightgray] rounded-[6px]"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -144,7 +144,7 @@ const ContactSection: React.FC<Props> = ({ status, error, sendMessage }) => {
           <div className="mb-4">
             <textarea
               placeholder={t("Your Message")}
-              className="w-full text-[14px] p-2 bg-gray-100 rounded-[6px]"
+              className="w-full text-[14px] p-2 bg-[lightgray] rounded-[6px]"
               value={content}
               onChange={(e) => setContent(e.target.value)}
             ></textarea>

@@ -54,38 +54,40 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
   }
 
   return (
-    <div className=" rounded-md  ">
-      <header className="bg-blue-900 text-black font-[600] text-center p-3 rounded-t-[5px]">
+    <div className=" rounded-md  p-10 w-1/2 ">
+      <div className=" p-5 font-semibold flex flex-col  w-full bg-white">
+      <header className="bg-blue-900  text-black font-[400] font-outfit  pb-3 rounded-t-[5px]">
         {t("ORDER SUMMARY")}
       </header>
-      <div className=" p-5 font-semibold">
         <div className="flex flex-col gap-[20px] ">
           {cartItems &&
             cartItems.map((item) => (
               <div
-                className=" flex flex-row gap-[20px] items-center"
+                className=" flex flex-row justify-between gap-[20px] items-center w-full"
                 key={item.id}
               >
+                <div className="flex flex-row items-center gap-[10px]">
+
                 <div className="w-[50px] h-[50px]">
-                  <img className="h-full w-full rounded-[12px]" src={item.Product.image[0]} alt={item.name} />
+                  <img className="h-full w-full rounded-[8px]" src={item.Product.image[0]} alt={item.name} />
                 </div>
                 <div className="flex flex-col gap-[2px] font-[300] font-outfit">
                   <div className=" flex items-center flex-row font-[300] gap-[10px]">
-                    <div className=" text-amber-600">Product:</div>
-                    <div className="text-center">{item.Product.name}</div>
+                    <div className="text-center font-outfit text-[12px] uppercase font-[500]">{item.Product.name}</div>
+                  </div>
+                  <div className=" flex items-center font-outfit">
+                    <div className=" text-amber-600 text-[14px] uppercase font-[500]">Quantity:</div>
+                    <div className="text-center uppercase text-[14px] font-[500]">{item.quantity}</div>
                   </div>
                   <div className=" flex items-center">
-                    <div className=" text-amber-600">Quantity:</div>
-                    <div className="text-center">{item.quantity}</div>
+            
+                    <div className="text-center uppercase text-[14px] font-[500]">{item.price} Rwf</div>
                   </div>
-                  <div className=" flex items-center">
-                    <div className=" text-amber-600">Price:</div>
-                    <div className="text-center">{item.price} Rwf</div>
-                  </div>
+                </div>
                 </div>
                 <div className="action h-full flex flex-col justify-between items-center">
                   <button
-                    className="w-20 h-[25px] bg-primary text-white rounded-[5px] text-[10px]"
+                    className="w-20 py-2 border border-red-500 text-red-500 rounded-[5px] text-[10px]"
                     onClick={() => deleteFromCart(item)}
                   >
                     Remove

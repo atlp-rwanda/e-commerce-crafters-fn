@@ -23,6 +23,7 @@ module.exports = {
         bgwhite: 'var(--color-bgwhite)',
         textprimary:'var(--color-textprimary)',
         blue: '#24ABE3',
+        blackText:'var(--color-blacktext)',
         
       },
       fontFamily:{
