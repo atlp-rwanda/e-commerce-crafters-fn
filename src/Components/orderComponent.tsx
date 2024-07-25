@@ -51,7 +51,13 @@ const Order: React.FC<OrderProps> = ({ orderId, orderDate, keyIndex, expectedDel
                 </div>
                 <div>
                     <div className="text-sm text-gray-400">Expected Delivery Date</div>
-                    <div>{formatDate(expectedDeliveryDate)}</div>
+                    <div>  {expectedDeliveryDate
+                ? new Date(expectedDeliveryDate).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })
+                : "N/A"}</div>
                 </div>
                 <div>
                 <div className="text-sm text-gray-400">Status</div>

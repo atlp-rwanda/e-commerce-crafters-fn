@@ -45,8 +45,17 @@ const OrderApiSlice = apiSlice.injectEndpoints({
         url: `/order/getAllOrder`,
       }),
     }),
+    getSellerOrder: builder.query({
+      query: ({ token,vendorId }) => ({
+        url: `/order/getSellerOrder/${vendorId}`,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useGetOrderStatusQuery, useGetOrderQuery, useUpdateOrderStatusMutation, useGetUserInfoQuery, useGetAllOrdersQuery, useAllOrdersQuery } = OrderApiSlice;
+export const { useGetOrderStatusQuery, useGetOrderQuery, useUpdateOrderStatusMutation, useGetUserInfoQuery, useGetAllOrdersQuery, useAllOrdersQuery,useGetSellerOrderQuery } = OrderApiSlice;
 export default OrderApiSlice;

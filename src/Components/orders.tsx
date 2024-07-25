@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import OrderTable from "./orderComponent";
-import { useGetAllOrdersQuery } from "../Redux/OrderSlice";
+import { useAllOrdersQuery, useGetAllOrdersQuery, useGetSellerOrderQuery } from "../Redux/OrderSlice";
 import Skeleton from "react-loading-skeleton";
 import 'react-loading-skeleton/dist/skeleton.css';
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
 interface Order {
     orderId: string;
@@ -12,6 +13,7 @@ interface Order {
 }
 
 const OrderComponent = () => {
+    const authData:any = useAuthUser()
     function getAuthCookie() {
         const cookies = document.cookie.split(';');
         for (let cookie of cookies) {
@@ -25,8 +27,10 @@ const OrderComponent = () => {
 
     const token = getAuthCookie();
     console.log('token ', token);
-    const { data: orders, isLoading, error } = useGetAllOrdersQuery({ token });
-
+    const vendorData:any = localStorage.getItem("vendorData")
+    const vendor = JSON.parse(vendorData) 
+    const { data: orders, isLoading, error } = useGetSellerOrderQuery({ token,vendorId:vendor?.vendorId });
+    const { data: buyerOrder, isLoading:buyerLoad, error:buyerError } =  useGetAllOrdersQuery({token});
     const LoadingSkeleton = () => {
         return (
             <div className="m-10">
@@ -66,10 +70,14 @@ const OrderComponent = () => {
                 <LoadingSkeleton/>
             ) : error ? (
                 <div>Error loading orders</div>
-            ) : !orders || orders.length === 0 ? (
-                <div>No orders available</div>
+            
             ) : (
-                <OrderTable orders={orders} />
+                authData.role == "vendor" ? (
+                    <OrderTable orders={orders} />
+
+                ):(
+                    <OrderTable orders={buyerOrder} />  
+                )
             )}
         </div>
     );
