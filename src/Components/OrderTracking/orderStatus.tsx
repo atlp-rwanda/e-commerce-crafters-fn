@@ -38,17 +38,19 @@ const OrderStatus: React.FC<OrderStatusProps> = ({
   const [updateOrderStatus, { isLoading: isUpdating }] =
     useUpdateOrderStatusMutation();
 
-  useEffect(() => {
-    if (data && data.status) {
-      setOrderStatus(data.status);
-    }
-  }, [data]);
+    useEffect(() => {
+      if (data && data.status) {
+        const translatedStatus = data.status.toLowerCase() === 'paid' ? 'pending': data.status
+        setOrderStatus(translatedStatus);
+      }
+    }, [data]);
 
   useEffect(() => {
     const channel = pusher.subscribe("order-channel");
     channel.bind("order-updated", (data: OrderUpdateEvent) => {
       if (data.orderId === orderId) {
-        setOrderStatus(data.status);
+        const translatedStatus = data.status.toLowerCase() === 'paid' ? 'pending' : data.status;
+        setOrderStatus(translatedStatus);
       }
     });
 
