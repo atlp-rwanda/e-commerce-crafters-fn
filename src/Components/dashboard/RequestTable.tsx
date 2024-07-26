@@ -11,8 +11,10 @@ interface SellerData {
   storeName: string;
   address: {
     city: string;
+    sector: string
   };
   TIN: string;
+
 }
 
 interface SellerTableProps {
@@ -164,11 +166,15 @@ const RequestsTable: React.FC<SellerTableProps> = ({
             <div className="z-80 fixed top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-50">
               <div className="bg-white rounded-lg shadow-lg p-4 max-w-sm w-full">
                 <h2 className="text-lg font-semibold mb-4">Seller Details</h2>
+                
                 <p>
-                  <strong>Store Name:</strong> {selectedSeller.storeName}
+                  <strong>Store name:</strong> {selectedSeller.storeName}
                 </p>
                 <p>
                   <strong>City:</strong> {selectedSeller.address.city}
+                </p>
+                <p>
+                  <strong>District:</strong> {selectedSeller.address.sector}
                 </p>
                 <p>
                   <strong>TIN:</strong> {selectedSeller.TIN}

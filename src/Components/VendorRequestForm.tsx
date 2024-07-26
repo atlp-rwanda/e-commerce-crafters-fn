@@ -40,7 +40,11 @@ const VendorRequestForm = ({
   const toastId = toast.loading("Sending Request");
 
   try {
-   const res = await requestFn(formData);
+   const [city, sector] = formData.address.split(",").map((part) => part.trim());
+
+   const newAddress = { city, sector };
+   const updatedFormData = { ...formData, address: newAddress };
+   const res = await requestFn({ ...formData, address: newAddress  });
    if (res.error) {
     throw new Error(res?.error?.data?.message as string);
    }
