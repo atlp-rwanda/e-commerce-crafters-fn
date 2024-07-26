@@ -170,7 +170,7 @@ const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
                                             <div className={`p-2 mb-2 min-w-[100px] flex flex-col max-w-[500px] rounded-[6px] ${message.sender === myId ? "ml-auto bg-primary" : "mr-auto bg-gray-50"}`}>
 
                                                 <span className={`text-[14px] font-outfit ${message.sender === myId ? "text-white" : ""}`}>{message?.content}</span>
-                                                <span className={`text-[12px] font-outfit ${message.sender === myId ? "text-end text-white/40" : " opacity-70"}`}>{new Date(message.createdAt).getHours() + ":" + new Date(message.createdAt).getMinutes()}</span>
+                                                <span className={`text-[12px] font-outfit ${message.sender === myId ? "text-end text-white" : " opacity-70"}`}>{new Date(message.createdAt).getHours() + ":" + new Date(message.createdAt).getMinutes()}</span>
 
                                             </div>
                                         ) : (
@@ -179,7 +179,7 @@ const ChatPlace = ({ selectedUser }: { selectedUser: any }) => {
                                                     <LazyLoadImage src={message.imageUrl[0]} className='w-full h-full object-cover rounded-[4px]' />
                                                 </div>
                                                 <span className={` p-1 text-[14px] font-outfit ${message.sender === myId ? "text-black" : ""}`}>{message?.content}</span>
-                                                <span className={` px-1 text-[12px] font-outfit ${message.sender === myId ? "text-end text-primary" : " opacity-70"}`}>{new Date(message.createdAt).getHours() + ":" + new Date(message.createdAt).getMinutes()}</span>
+                                                <span className={` px-1 text-[12px] font-outfit ${message.sender === myId ? "text-end text-white" : " opacity-70"}`}>{new Date(message.createdAt).getHours() + ":" + new Date(message.createdAt).getMinutes()}</span>
 
                                             </div>
                                         )}
