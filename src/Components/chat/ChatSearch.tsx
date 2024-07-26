@@ -10,7 +10,7 @@ const ChatSearch = ({ handelSelect }: { handelSelect: any }) => {
     return (
         <>
             <div className='p-4 bg-white rounded-[12px] flex flex-col gap-[20px] w-full relative'>
-                <div className={`w-full flex flex-col gap-[4px] ${isVendorOpen ? 'h-[60vh] py-2 px-4' : 'h-[0vh]'} transition-all duration-300 overflow-hidden shadow-md  bg-gray-50 absolute top-16 left-0 rounded-[6px] `}>
+                <div className={`w-full flex flex-col gap-[4px] ${isVendorOpen ? 'h-[60vh] py-2 px-4' : 'h-[0vh]'} listvendor transition-all duration-300 overflow-y-scroll shadow-md  bg-gray-50 absolute top-16 left-0 rounded-[6px] `}>
                     {isLoading ? ('loading..') : (
                         vendors.map((vendor: any, index: number) => {
                             return (
