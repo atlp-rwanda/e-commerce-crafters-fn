@@ -282,7 +282,7 @@ const Sidebar = () => {
 
   return (
     <div className="hidden lg:flex fixed flex-col gap-[40px] bg-primary p-4 lg:w-[22%] h-full xl:w-[18%]">
-      <div>
+      <a href='/'>
         <svg
           width="150"
           height="49"
@@ -318,7 +318,7 @@ const Sidebar = () => {
             </clipPath>
           </defs>
         </svg>
-      </div>
+      </a>
       <div className="flex flex-col lg:gap[50px] gap-[20px]">
         {Navlinks.map((item, index) => {
           return (
